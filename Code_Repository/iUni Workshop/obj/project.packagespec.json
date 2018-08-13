@@ -1,0 +1,65 @@
+﻿{
+  "version": "1.0.0",
+  "restore": {
+    "projectUniqueName": "C:\\Users\\kzmai\\Dropbox\\_COSC_2408_Project_1\\Repository\\Code_Repository\\iUni Workshop\\iUni Workshop.csproj",
+    "projectName": "iUni Workshop",
+    "projectPath": "C:\\Users\\kzmai\\Dropbox\\_COSC_2408_Project_1\\Repository\\Code_Repository\\iUni Workshop\\iUni Workshop.csproj",
+    "outputPath": "C:\\Users\\kzmai\\Dropbox\\_COSC_2408_Project_1\\Repository\\Code_Repository\\iUni Workshop\\obj\\",
+    "projectStyle": "PackageReference",
+    "fallbackFolders": [
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+    ],
+    "originalTargetFrameworks": [
+      "netcoreapp2.0"
+    ],
+    "frameworks": {
+      "netcoreapp2.0": {
+        "projectReferences": {}
+      }
+    },
+    "warningProperties": {
+      "warnAsError": [
+        "NU1605"
+      ]
+    }
+  },
+  "frameworks": {
+    "netcoreapp2.0": {
+      "dependencies": {
+        "Microsoft.AspNetCore.All": {
+          "target": "Package",
+          "version": "[2.0.9, )"
+        },
+        "Microsoft.EntityFrameworkCore.Tools": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.0.3, )"
+        },
+        "Microsoft.NETCore.App": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.0.0, )",
+          "autoReferenced": true
+        },
+        "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+          "suppressParent": "All",
+          "target": "Package",
+          "version": "[2.0.4, )"
+        },
+        "Pomelo.EntityFrameworkCore.MySql": {
+          "target": "Package",
+          "version": "[2.1.1, )"
+        },
+        "Pomelo.EntityFrameworkCore.MySql.Design": {
+          "target": "Package",
+          "version": "[1.1.2, )"
+        }
+      },
+      "imports": [
+        "net461"
+      ],
+      "assetTargetFallback": true,
+      "warn": true
+    }
+  }
+}
