@@ -1,32 +1,39 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using iUni_Workshop.Models.AdministratorModels;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
 namespace iUni_Workshop.Models.EmployerModels
 {
     public class Employer
     {
-        public Employer(String userId, String companyName, String companyLocation, String phoneNumber,
-            String contactEmail, String photo, String briefDescription, String abn, bool certificated)
-        {
-            UserId = userId;
-            CompanyName = companyName;
-            CompanyLocation = companyLocation;
-            PhoneNumber = phoneNumber;
-            ContactEmail = contactEmail;
-            Photo = photo;
-            BriefDescription = briefDescription;
-            ABN = abn;
-            Certificated = certificated;
-        }
+        
+        [Key]
+        public string EmployerId { get; set; }
+        [ForeignKey(("EmployerId"))]
+        public virtual ApplicationUser ApplicationUser { get; set; }
 
-        public String UserId;
-        public String CompanyName;
-        public String CompanyLocation;
-        public String PhoneNumber;
-        public String ContactEmail;
-        public String Photo;
-        public String BriefDescription;
-        public String ABN;
-        public bool Certificated;
+        [Required] public String CompanyName { get; set; }
+
+        [Required] public String CompanyLocation { get; set; }
+
+        [Required] public String PhoneNumber { get; set; }
+
+        [Required]
+        public String ContactEmail { get; set; }
+
+        [Required] public String Photo { get; set; }
+
+        [Required] public String BriefDescription { get; set; }
+
+        [Required] public String ABN { get; set; }
+
+        [Required]
+        public bool Certificated { get; set; }
+        
+        public string CertificaedBy { get; set; }
+        [ForeignKey(("CertificaedBy"))]
+        public virtual Administraotr Administraotr { get; set; }
     }
 }

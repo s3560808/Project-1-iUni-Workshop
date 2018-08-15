@@ -29,8 +29,8 @@ namespace iUni_Workshop
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<SystemDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+//            services.AddDbContext<SystemDbContext>(options =>
+//                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

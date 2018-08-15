@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using iUni_Workshop.Data;
 using iUni_Workshop.Models;
+using iUni_Workshop.Models.EmployeeModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +18,16 @@ namespace iUni_Workshop.Controllers
     {
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _context;
 
-        public DashboardController(UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager) {
+        public DashboardController(
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext context
+            ) {
             _roleManager = roleManager;
             _userManager = userManager;
+            _context = context;
         }
 
         public async Task<IActionResult> Index()
@@ -61,6 +68,8 @@ namespace iUni_Workshop.Controllers
                         break;
                     case Roles.EmployeeId:
                         await _userManager.AddToRoleAsync(user,Roles.Employee);
+                        _context.Employees.Add(new Employee((await _userManager.GetUserAsync(User)).Id));
+                        _context.SaveChanges();
                         break;
                     case Roles.EmployerId:
                         await _userManager.AddToRoleAsync(user,Roles.Employer);

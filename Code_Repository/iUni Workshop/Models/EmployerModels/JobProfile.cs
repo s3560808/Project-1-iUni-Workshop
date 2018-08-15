@@ -1,50 +1,39 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using iUni_Workshop.Models.EmployeeModels;
+using iUni_Workshop.Models.InvatationModel;
+using iUni_Workshop.Models.JobRelatedModels;
 using Microsoft.AspNetCore.Server.Kestrel.Internal.System.Collections.Sequences;
 
 namespace iUni_Workshop.Models.EmployerModels
 {
     public class JobProfile
     {
-        public JobProfile(int jobProfileId, String employerId, String jobTitle, String jobDescription,
-            ArrayList<int> requredSkill, 
-            ArrayList<int> optionalSkill, 
-            Boolean requireJobExperience, 
-            int maxDayForAWeek,
-            int minDayForAWeek,
-            ArrayList<int> complusoryWorkingDays,
-            Double salary,
-            String salaryUnit
-            )
-        {
-            JobProfileId = jobProfileId;
-            EmployerId = employerId;
-            JobTitle = jobTitle;
-            JobDescription = jobDescription;
-            RequredSkill = requredSkill;
-            OptionalSkill = optionalSkill;
-            RequireJobExperience = requireJobExperience;
-            MaxDayForAWeek = maxDayForAWeek;
-            MinDayForAWeek = minDayForAWeek;
-            ComplusoryWorkingDays = complusoryWorkingDays;
-            Salary = salary;
-            SalaryUnit = salaryUnit;
-        }
 
-        public JobProfile()
-        {
-        }
 
-        public int JobProfileId;
-        public String EmployerId;
-        public String JobTitle;
-        public String JobDescription;
-        public ArrayList<int> RequredSkill;
-        public ArrayList<int> OptionalSkill;
-        public Boolean RequireJobExperience;
-        public int MaxDayForAWeek;
-        public int MinDayForAWeek;
-        public ArrayList<int> ComplusoryWorkingDays;
-        public Double Salary;
-        public String SalaryUnit;
+        public int JobProfileId { get; set; }
+        [Required] 
+        public string EmployerId { get; set; }
+        [ForeignKey("EmployerId")] 
+        public virtual Employer Employer { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime EstablishDateTime { get; set; }
+        [Required]
+        public String JobTitleP { get; set; }
+
+        [Required] public String JobDescription { get; set; }
+        public Boolean RequireJobExperience { get; set; }
+        public int MaxDayForAWeek { get; set; }
+        public int MinDayForAWeek { get; set; }
+        [Required] 
+        public Double Salary { get; set; }
+        [Required] 
+        public String SalaryUnit { get; set; }
+
+        public virtual ICollection<SkillForJob_Employer> SkillForJobEmployers { get; set; }
+        public virtual ICollection<ComplusoryWorkingDay> ComplusoryWorkingDay { get; set; }
     }
 }

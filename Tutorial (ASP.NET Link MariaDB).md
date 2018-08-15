@@ -21,7 +21,5 @@
 	cd "C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\iUni Workshop"
 7.Migrate and update your database, enter command:
 	dotnet ef migrations add Initial --context ApplicationDbContext
-	dotnet ef migrations add Initial --context SystemDbContext
 	dotnet ef database update --context ApplicationDbContext
-	dotnet ef database update --context SystemDbContext
 8. Use HeidiSQL (already installed with Mariadb) to login your MariaDB System, if you can see "project 1" database and corresponding Database it means you already connect ASP.NET Core with MySQL!

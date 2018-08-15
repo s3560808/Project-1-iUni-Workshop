@@ -2,31 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using iUni_Workshop.Data;
 
 namespace iUniWorkshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180815035837_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("iUni_Workshop.Models.AdministratorModels.Administraotr", b =>
-                {
-                    b.Property<string>("AdministratorId");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("AdministratorId");
-
-                    b.ToTable("Administraotrs");
-                });
 
             modelBuilder.Entity("iUni_Workshop.Models.ApplicationUser", b =>
                 {
@@ -454,14 +445,6 @@ namespace iUniWorkshop.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("iUni_Workshop.Models.AdministratorModels.Administraotr", b =>
-                {
-                    b.HasOne("iUni_Workshop.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("AdministratorId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("iUni_Workshop.Models.EmployeeModels.CV", b =>

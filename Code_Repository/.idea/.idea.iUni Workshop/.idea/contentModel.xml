@@ -27,16 +27,11 @@
         </e>
         <e p="iUni Workshop.csproj" t="IncludeRecursive" />
         <e p="Migrations" t="Include">
-          <e p="20180813154612_Initial.cs" t="Include" />
-          <e p="20180813154612_Initial.Designer.cs" t="Include" />
-          <e p="20180813155323_InitialCreate.cs" t="Include" />
-          <e p="20180813155323_InitialCreate.Designer.cs" t="Include" />
-          <e p="20180813155416_InitialCreate1.cs" t="Include" />
-          <e p="20180813155416_InitialCreate1.Designer.cs" t="Include" />
-          <e p="20180813155552_InitialCreate1.cs" t="Include" />
-          <e p="20180813155552_InitialCreate1.Designer.cs" t="Include" />
+          <e p="20180815035837_Initial.cs" t="Include" />
+          <e p="20180815035837_Initial.Designer.cs" t="Include" />
+          <e p="20180815040359_Initiadl.cs" t="Include" />
+          <e p="20180815040359_Initiadl.Designer.cs" t="Include" />
           <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
-          <e p="SystemDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
           <e p="AccountViewModels" t="Include">
@@ -48,22 +43,30 @@
             <e p="RegisterViewModel.cs" t="Include" />
             <e p="ResetPasswordViewModel.cs" t="Include" />
           </e>
-          <e p="AdministratorModels" t="Include" />
+          <e p="AdministratorModels" t="Include">
+            <e p="Administraotr.cs" t="Include" />
+          </e>
           <e p="ApplicationUser.cs" t="Include" />
           <e p="EmployeeModels" t="Include">
             <e p="CV.cs" t="Include" />
             <e p="Employee.cs" t="Include" />
             <e p="ExternalMeterial.cs" t="Include" />
-            <e p="JobHisotry.cs" t="Include" />
-            <e p="SkillCertification.cs" t="Include" />
+            <e p="JobHistory.cs" t="Include" />
+            <e p="SkillForJob_Employee.cs" t="Include" />
           </e>
           <e p="EmployerModels" t="Include">
+            <e p="ComplusoryWorkingDay.cs" t="Include" />
             <e p="Employer.cs" t="Include" />
             <e p="JobProfile.cs" t="Include" />
+            <e p="SkillForJob_Employer.cs" t="Include" />
           </e>
           <e p="ErrorViewModel.cs" t="Include" />
-          <e p="InvatationModel" t="Include">
+          <e p="InvatationModels" t="Include">
             <e p="Invatation.cs" t="Include" />
+          </e>
+          <e p="JobRelatedModels" t="Include">
+            <e p="Field.cs" t="Include" />
+            <e p="Skill.cs" t="Include" />
           </e>
           <e p="ManageViewModels" t="Include">
             <e p="ChangePasswordViewModel.cs" t="Include" />
@@ -75,10 +78,10 @@
             <e p="ShowRecoveryCodesViewModel.cs" t="Include" />
             <e p="TwoFactorAuthenticationViewModel.cs" t="Include" />
           </e>
-          <e p="Roles.cs" t="Include" />
-          <e p="Skill" t="Include">
-            <e p="Skill.cs" t="Include" />
+          <e p="MessageModels" t="Include">
+            <e p="Message.cs" t="Include" />
           </e>
+          <e p="Roles.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
