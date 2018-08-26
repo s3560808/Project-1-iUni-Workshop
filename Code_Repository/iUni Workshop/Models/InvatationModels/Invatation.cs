@@ -1,29 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using iUni_Workshop.Models.EmployeeModels;
 using iUni_Workshop.Models.EmployerModels;
+using iUni_Workshop.Models.MessageModels;
 
 namespace iUni_Workshop.Models.InvatationModel
 {
     public class Invatation
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public string EmployerId { get; set; }
-        [ForeignKey(("EmployerId"))]
-        public virtual Employer Employer { get; set; }
+        public int Id { get; set; }
         
-        [Key]
-        public string EmployeeId { get; set; }
-        [ForeignKey(("EmployeeId"))]
-        public virtual Employee Employee { get; set; }
+        public int EmployeeCvId { get; set; }
+        [ForeignKey(("EmployeeCvId"))]
+        public virtual EmployeeCV EmployeeCV { get; set; }
 
-        [Key] 
-        public string JobProfileId { get; set; }
-        [ForeignKey(("JobFrofileId"))]
-        public virtual JobProfile JobProfile { get; set; }
+        public int EmployerJobProfileId { get; set; }
+        [ForeignKey(("EmployerJobProfileId"))]
+        public virtual EmployerJobProfile EmployerJobProfile { get; set; }
         
-        [DataType(DataType.Date)]
-        public DateTime SentDate { get; set; }
+        [Required]
+        public int status { get; set; }
+
+        [Required]
+        public DateTime SentTime { get; set; }
+
+        private ICollection<Message> Messages { get; set; }
     }
 }

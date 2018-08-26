@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ApplicationUser>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+<form method="post" asp-action="SetUserTypeAction">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        <form asp-controller="Administrator" asp-action="SetUserTypeAction">
+                            <button type = "submit" name = "email" value="@item.Email" >Set As Administrator</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+        
+        </tbody>
+
+    </table>
+    
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+

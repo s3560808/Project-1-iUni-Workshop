@@ -1,35 +1,42 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using iUni_Workshop.Models.EmployeeModels;
-using iUni_Workshop.Models.EmployerModels;
+using iUni_Workshop.Models.InvatationModel;
 
 namespace iUni_Workshop.Models.MessageModels
 {
     public class Message
     {
-        [Key]
-        public string MessageId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity),Key]
+        public string Id { get; set; }
 
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity),Key]
+        public string ConversationId { get; set; }
+
+        [Required, Key] 
         public string SenderId { get; set; }
-        [ForeignKey(("SenderId"))]
+        [ForeignKey(("SenderId"))] 
         public virtual ApplicationUser Sender { get; set; }
-        
-        [Key]
-        public string ReciverId { get; set; }
-        [ForeignKey(("ReciverId"))]
-        public virtual ApplicationUser Receiver { get; set; }
-        
-        [Key]
-        public int JobProfileId { get; set; }
-        [ForeignKey(("JobProfileId"))]
-        public virtual JobProfile JobProfile { get; set; }
 
-        [DataType(DataType.DateTime)]
+        [Required, Key] 
+        public string ReciverId { get; set; }
+        [ForeignKey(("ReciverId"))] 
+        public virtual ApplicationUser Receiver { get; set; }
+
+        public int? InvatationId { get; set; }
+        [ForeignKey(("InvatationId"))] 
+        public virtual Invatation Invatation { get; set; }
+
+        [DataType(DataType.Time)] 
         public DateTime SentTime { get; set; }
 
+        [Required] 
+        public bool Read { get; set; }
+
         [Required]
-        public bool read { get; set; }
+        public string Title { get; set; }
+        
+        [Required]
+        public string MessageDetail { get; set; }
     }
 }

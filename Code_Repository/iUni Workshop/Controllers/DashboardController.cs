@@ -4,10 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using iUni_Workshop.Data;
 using iUni_Workshop.Models;
+using iUni_Workshop.Models.AdministratorModels;
 using iUni_Workshop.Models.EmployeeModels;
+using iUni_Workshop.Models.EmployerModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures.Internal;
 
 
 namespace iUni_Workshop.Controllers
@@ -16,7 +19,6 @@ namespace iUni_Workshop.Controllers
     [Route("[controller]/[action]")]
     public class DashboardController : Controller
     {
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
@@ -25,7 +27,6 @@ namespace iUni_Workshop.Controllers
             RoleManager<IdentityRole> roleManager,
             ApplicationDbContext context
             ) {
-            _roleManager = roleManager;
             _userManager = userManager;
             _context = context;
         }
@@ -65,14 +66,18 @@ namespace iUni_Workshop.Controllers
             {
                     case Roles.AdministratorId:
                         await _userManager.AddToRoleAsync(user,Roles.Administrator);
+                        _context.Administraotrs.Add(new Administraotr{Id=user.Id,Name=user.UserName});
+                        await _context.SaveChangesAsync();
                         break;
                     case Roles.EmployeeId:
                         await _userManager.AddToRoleAsync(user,Roles.Employee);
-                        _context.Employees.Add(new Employee((await _userManager.GetUserAsync(User)).Id));
+                        _context.Employees.Add(new Employee{Id = user.Id, Name = user.UserName});
                         _context.SaveChanges();
                         break;
                     case Roles.EmployerId:
                         await _userManager.AddToRoleAsync(user,Roles.Employer);
+                        _context.Employers.Add(new Employer{Id = user.Id, Name = user.UserName});
+                        _context.SaveChanges();
                         break;
                     default:
                         break;

@@ -1,36 +1,12 @@
-C:\Users\kzmai\Desktop\iUni Workshop\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.deps.json
-C:\Users\kzmai\Desktop\iUni Workshop\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.runtimeconfig.json
-C:\Users\kzmai\Desktop\iUni Workshop\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.runtimeconfig.dev.json
-C:\Users\kzmai\Desktop\iUni Workshop\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.dll
-C:\Users\kzmai\Desktop\iUni Workshop\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.pdb
-C:\Users\kzmai\Desktop\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.csprojAssemblyReference.cache
-C:\Users\kzmai\Desktop\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.csproj.CoreCompileInputs.cache
-C:\Users\kzmai\Desktop\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.AssemblyInfoInputs.cache
-C:\Users\kzmai\Desktop\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.AssemblyInfo.cs
-C:\Users\kzmai\Desktop\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.dll
-C:\Users\kzmai\Desktop\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.pdb
-C:\Users\kzmai\Desktop\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\iUni Workshop\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.deps.json
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\iUni Workshop\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.runtimeconfig.json
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\iUni Workshop\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.runtimeconfig.dev.json
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\iUni Workshop\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.dll
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\iUni Workshop\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.pdb
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.csprojAssemblyReference.cache
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.csproj.CoreCompileInputs.cache
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.AssemblyInfoInputs.cache
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.AssemblyInfo.cs
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.dll
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\iUni Workshop\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.pdb
+C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.csproj.CoreCompileInputs.cache
+C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.AssemblyInfoInputs.cache
+C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.AssemblyInfo.cs
+C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.csprojAssemblyReference.cache
+C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
 C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.deps.json
 C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.runtimeconfig.json
 C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.runtimeconfig.dev.json
 C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.dll
 C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.pdb
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.csprojAssemblyReference.cache
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.csproj.CoreCompileInputs.cache
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.AssemblyInfoInputs.cache
-C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.AssemblyInfo.cs
 C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.dll
 C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.pdb

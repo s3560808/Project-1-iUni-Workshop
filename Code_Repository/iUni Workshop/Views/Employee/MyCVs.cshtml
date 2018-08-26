@@ -1,0 +1,71 @@
+﻿@model IEnumerable<iUni_Workshop.Models.EmployeeModels.MyCvs>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+
+<h2>title</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CvId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CvTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FieldName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FindJobStatus)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CvId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CvTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FieldName)
+                    </td>
+                    <td>
+                        @{
+                               if (item.FindJobStatus)
+                               {
+                                   <p>Finding job</p>
+                               }
+                               else
+                               {
+                                   <p>Pause</p>
+                               }
+                           }
+                    </td>
+                    <td>
+                        <form asp-controller="Employee" asp-action="EditCV" asp-route-CvId="@item.CvId" method="get" >
+                            <button name="CvId" type="submit" value = "@item.CvId" class="btn btn-sm btn-success" >Read</button>
+                        </form>
+                        
+                    </td>
+                </tr>
+            }
+        }
+        
+        </tbody>
+
+    </table>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

@@ -16,10 +16,14 @@
           <e p="EmployerController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
           <e p="ManageController.cs" t="Include" />
+          <e p="SuburbController.cs" t="Include" />
         </e>
         <e p="Data" t="Include">
           <e p="ApplicationDbContext.cs" t="Include" />
-          <e p="SystemDbContext.cs" t="Include" />
+          <e p="Seeds" t="Include">
+            <e p="StateSeed.cs" t="Include" />
+            <e p="UserSeed.cs" t="Include" />
+          </e>
         </e>
         <e p="Extensions" t="Include">
           <e p="EmailSenderExtensions.cs" t="Include" />
@@ -27,10 +31,8 @@
         </e>
         <e p="iUni Workshop.csproj" t="IncludeRecursive" />
         <e p="Migrations" t="Include">
-          <e p="20180815035837_Initial.cs" t="Include" />
-          <e p="20180815035837_Initial.Designer.cs" t="Include" />
-          <e p="20180815040359_Initiadl.cs" t="Include" />
-          <e p="20180815040359_Initiadl.Designer.cs" t="Include" />
+          <e p="20180824154033_Inkkitialhjhd.cs" t="Include" />
+          <e p="20180824154033_Inkkitialhjhd.Designer.cs" t="Include" />
           <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
@@ -44,21 +46,45 @@
             <e p="ResetPasswordViewModel.cs" t="Include" />
           </e>
           <e p="AdministratorModels" t="Include">
+            <e p="AddField.cs" t="Include" />
+            <e p="AddSchool.cs" t="Include" />
+            <e p="AddSkill.cs" t="Include" />
             <e p="Administraotr.cs" t="Include" />
+            <e p="MessageDetail.cs" t="Include" />
+            <e p="MyMessages.cs" t="Include" />
+            <e p="NewMessage.cs" t="Include" />
+            <e p="ReplyMyMessage.cs" t="Include" />
+            <e p="SetUserType.cs" t="Include" />
           </e>
           <e p="ApplicationUser.cs" t="Include" />
           <e p="EmployeeModels" t="Include">
-            <e p="CV.cs" t="Include" />
+            <e p="AddSchoolAction.cs" t="Include" />
+            <e p="EditCV.cs" t="Include" />
+            <e p="EditCVAction.cs" t="Include" />
+            <e p="EditCVEmployeeSkill.cs" t="Include" />
+            <e p="EditCVExternalMeterial.cs" t="Include" />
+            <e p="EditCVJobHistory.cs" t="Include" />
+            <e p="EditCvWorkDay.cs" t="Include" />
+            <e p="EditPersonalInfo.cs" t="Include" />
             <e p="Employee.cs" t="Include" />
-            <e p="ExternalMeterial.cs" t="Include" />
-            <e p="JobHistory.cs" t="Include" />
-            <e p="SkillForJob_Employee.cs" t="Include" />
+            <e p="EmployeeCV.cs" t="Include" />
+            <e p="EmployeeExternalMeterial.cs" t="Include" />
+            <e p="EmployeeJobHistory.cs" t="Include" />
+            <e p="EmployeeSkill.cs" t="Include" />
+            <e p="EmployeeWorkDay.cs" t="Include" />
+            <e p="MessageDetail.cs" t="Include" />
+            <e p="MyCvs.cs" t="Include" />
+            <e p="MyMessages.cs" t="Include" />
+            <e p="RequestToAddField.cs" t="Include" />
+            <e p="RequestToAddSkill.cs" t="Include" />
           </e>
           <e p="EmployerModels" t="Include">
-            <e p="ComplusoryWorkingDay.cs" t="Include" />
+            <e p="EditCompanyInfo.cs" t="Include" />
             <e p="Employer.cs" t="Include" />
-            <e p="JobProfile.cs" t="Include" />
-            <e p="SkillForJob_Employer.cs" t="Include" />
+            <e p="EmployerComplusoryWorkDay.cs" t="Include" />
+            <e p="EmployerJobProfile.cs" t="Include" />
+            <e p="EmployerRequiredSchool.cs" t="Include" />
+            <e p="EmployerSkill.cs" t="Include" />
           </e>
           <e p="ErrorViewModel.cs" t="Include" />
           <e p="InvatationModels" t="Include">
@@ -82,6 +108,15 @@
             <e p="Message.cs" t="Include" />
           </e>
           <e p="Roles.cs" t="Include" />
+          <e p="SchoolModels" t="Include">
+            <e p="School.cs" t="Include" />
+          </e>
+          <e p="StateModels" t="Include">
+            <e p="State.cs" t="Include" />
+          </e>
+          <e p="SuburbModels" t="Include">
+            <e p="Suburb.cs" t="Include" />
+          </e>
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -118,16 +153,32 @@
             <e p="SignedOut.cshtml" t="Include" />
           </e>
           <e p="Administrator" t="Include">
+            <e p="AddField.cshtml" t="Include" />
             <e p="AddSchool.cshtml" t="Include" />
+            <e p="AddSkill.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
+            <e p="MessageDetail.cshtml" t="Include" />
+            <e p="MyMessages.cshtml" t="Include" />
+            <e p="NewMessage.cshtml" t="Include" />
+            <e p="SetUserType.cshtml" t="Include" />
           </e>
           <e p="Dashboard" t="Include">
             <e p="Index.cshtml" t="Include" />
           </e>
           <e p="Employee" t="Include">
+            <e p="EditCV.cshtml" t="Include" />
+            <e p="EditPersonalInfo.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
+            <e p="MessageDetail.cshtml" t="Include" />
+            <e p="MyCVs.cshtml" t="Include" />
+            <e p="MyMessages.cshtml" t="Include" />
+            <e p="RequestToAddField.cshtml" t="Include" />
+            <e p="RequestToAddSchool.cs" t="Include" />
+            <e p="RequestToAddSchool.cshtml" t="Include" />
+            <e p="RequestToAddSkill.cshtml" t="Include" />
           </e>
           <e p="Employer" t="Include">
+            <e p="EditCompanyInfo.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
           </e>
           <e p="Home" t="Include">

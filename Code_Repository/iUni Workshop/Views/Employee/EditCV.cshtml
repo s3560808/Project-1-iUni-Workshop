@@ -1,0 +1,310 @@
+﻿@model iUni_Workshop.Models.EmployeeModels.EditCV
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+
+<form asp-action="EditCvAction" method="post">
+    @{
+        
+        if (@Model != null)
+        {
+            <input type="text" hidden="true" name = "CvId" id="CvId" value="@Model.CvId">
+        }
+    }
+    
+    @{
+        string title="";
+        if (@Model != null)
+        {
+            title = Model.Title;
+        }
+    }
+    Title<input type="text" name="Title" value="@title">
+    <hr/>
+    UpdateStatus?<input type="checkbox" name="UpdateStatus" value="true" > 
+   
+    
+    <hr/>
+    @{
+        bool primary = false;
+        if (@Model != null)
+        {
+            primary = Model.Primary;
+        }
+    }
+    PrimaryCv? <input type="checkbox" name="PrimaryCv" value="true" checked="@primary">
+    
+    
+    <hr/>
+    @{
+        string field = "";
+        if (@Model != null)
+        {
+            field = Model.FieldName;
+        }
+    }
+    FieldName <input type="text" name="FieldName" value="@field"> 
+    
+    <hr/>
+    @{
+        string description = "";
+        if (@Model != null)
+        {
+            description = Model.Details;
+        }
+    }
+    <textarea name = "Description"> @description </textarea>
+    
+    <script>
+        function AddSkillController() {
+            var suburbselectbox = document.getElementsByClassName("SkillClass");
+            var boxNumber = suburbselectbox.length;
+            var divBox = document.createElement("div");
+            divBox.className = "SkillClass";
+            var inputSkillName = document.createElement("input");
+            inputSkillName.setAttribute("type","text");
+            inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".SkillName");
+            var inputSkillLink = document.createElement("input");
+            inputSkillLink.setAttribute("type","text");
+            inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".CertificationLink");
+            var inputSkillNameLable = document.createElement("p");
+            inputSkillNameLable.innerText = "Skill Name "+boxNumber;
+            var inputSkillLinkLable = document.createElement("p");
+            inputSkillLinkLable.innerText = "Skill Certification Link "+boxNumber;
+            divBox.appendChild(inputSkillNameLable);
+            divBox.appendChild(inputSkillName);
+            divBox.appendChild(inputSkillLinkLable);
+            divBox.appendChild(inputSkillLink);
+            var last = suburbselectbox[boxNumber-1];
+            last.append(divBox);
+        }
+        
+        function AddMeterialController() {
+            var suburbselectbox = document.getElementsByClassName("MaterialClass");
+            var boxNumber = suburbselectbox.length;
+            var divBox = document.createElement("div");
+            divBox.className = "MaterialClass";
+            var inputSkillName = document.createElement("input");
+            inputSkillName.setAttribute("type","text");
+            inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".ExternalMeterialName");
+            var inputSkillLink = document.createElement("input");
+            inputSkillLink.setAttribute("type","text");
+            inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".ExternalMeterialLink");
+            var inputSkillNameLable = document.createElement("p");
+            inputSkillNameLable.innerText = "External Meterial Name "+boxNumber;
+            var inputSkillLinkLable = document.createElement("p");
+            inputSkillLinkLable.innerText = "External Meterial Link "+boxNumber;
+            divBox.appendChild(inputSkillNameLable);
+            divBox.appendChild(inputSkillName);
+            divBox.appendChild(inputSkillLinkLable);
+            divBox.appendChild(inputSkillLink);
+            var last = suburbselectbox[boxNumber-1];
+            last.append(divBox);
+        }
+        
+        function AddJobHisotryController() {
+            var suburbselectbox = document.getElementsByClassName("HistoryClass");
+            var boxNumber = suburbselectbox.length;
+            var divBox = document.createElement("div");
+            divBox.className = "HistoryClass";
+            var inputSkillName = document.createElement("input");
+            inputSkillName.setAttribute("type","text");
+            inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".JobHistoryName");
+            var inputSkillLink = document.createElement("input");
+            inputSkillLink.setAttribute("type","text");
+            inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".JobHistoryShortDescription");
+            var inputSkillNameLable = document.createElement("p");
+            inputSkillNameLable.innerText = "Job History Name "+boxNumber;
+            var inputSkillLinkLable = document.createElement("p");
+            inputSkillLinkLable.innerText = "Job History Short Description "+boxNumber;
+            divBox.appendChild(inputSkillNameLable);
+            divBox.appendChild(inputSkillName);
+            divBox.appendChild(inputSkillLinkLable);
+            divBox.appendChild(inputSkillLink);
+            var last = suburbselectbox[boxNumber-1];
+            last.append(divBox);
+        }
+//            var xmlhttp = new XMLHttpRequest();
+//            xmlhttp.onreadystatechange = function () {
+//                if (this.readyState == 4 && this.status == 200) {
+//                    var suburbs = JSON.parse(this.responseText);
+//                    suburbselectbox.innerHTML="";
+//                    for (var i = 0; i < suburbs.length; i++) {
+//                        var btn = document.createElement("OPTION");
+//                        btn.value = suburbs[i];
+//                        if (str == suburbs[i]) {
+//                            getPostCode(str);
+//                        }
+//                        suburbselectbox.appendChild(btn);
+//                    }
+//                }
+//            };
+//            xmlhttp.open("GET", "/Suburb/GetSuburb/" + str, true);
+//            xmlhttp.send();
+    </script>
+    <hr/>
+    @{
+        if (@Model == null || @Model.Skills == null)
+        {
+            int i = 0;
+            string skillName = "[" + 0 + "]" + ".SkillName";
+            string link = "[" + 0 + "]" + ".CertificationLink";
+            <div class="SkillClass">
+                <p>Skill Name @i</p>                    <input type="text" name="@skillName">
+                <p>Skill Certification Link @i</p>      <input type="text" name="@link">
+            </div> 
+        }
+        else
+        {
+            for (int i = 0; i < @Model.Skills.Count; i++)
+            {
+                
+                {
+                    string skillName = "[" + i + "]" + ".SkillName";
+                    string link = "[" + i + "]" + ".CertificationLink";
+                    <div class="SkillClass">
+                    <p>Skill Name @i</p>                    <input type="text" name="@skillName" value="@Model.Skills[i].SkillName">
+                    <p>Skill Certification Link @i</p>      <input type="text" name="@link" value="@Model.Skills[i].CertificationLink">
+                    </div>    
+                }
+                
+                <hr/>
+            }
+        }
+        <button type="button" onclick="AddSkillController()">Add Skill</button>
+    }
+    
+    <hr/>
+    @{
+        if (@Model==null || @Model.ExternalMeterials == null)
+        {
+            int i = 0;
+            string materialName = "[" + i + "]" + ".ExternalMeterialName";
+            string materialLink = "[" + i + "]" + ".ExternalMeterialLink";
+            <div class="MaterialClass">
+                <p>External Meterial Name @i</p>      <input type="text" name="@materialName">
+                <p>External Meterial Link @i</p>      <input type="text" name="@materialLink">
+            </div>
+        }
+        else
+        {
+            for (int i = 0; i < @Model.ExternalMeterials.Count; i++)
+            {
+                {
+                    string materialName = "[" + i + "]" + ".ExternalMeterialName";
+                    string materialLink = "[" + i + "]" + ".ExternalMeterialLink";
+                    <div class="MaterialClass">
+                    <p>External Meterial Name @i</p>      <input type="text" name="@materialName" value="@Model.ExternalMeterials[i].Name">
+                    <p>External Meterial Link @i</p>      <input type="text" name="@materialLink" value="@Model.ExternalMeterials[i].Link">
+                    </div>
+                    
+    }
+                
+                <hr/>
+            }
+            
+        }
+        <button type="button" onclick="AddMeterialController()">More External Meteral</button>
+    }
+
+    <hr/>
+    @{
+        if (@Model==null || @Model.JobHistories == null)
+        {
+            int i = 0;
+            string jobHistoryName = "[" + i + "]" + ".JobHistoryName";
+            string jobHisotryDescription = "[" + i + "]" + ".JobHistoryShortDescription";
+            <div class="HistoryClass">
+                <p>Job History Name @i</p>      <input type="text" name="@jobHistoryName">
+                <p>Job History Short Description @i</p>      <input type="text" name="@jobHisotryDescription">
+            </div>
+        }
+        else
+        {
+            for (int i = 0; i < @Model.JobHistories.Count; i++)
+            {
+                {
+                    string jobHistoryName = "[" + i + "]" + ".JobHistoryName";
+                    string jobHisotryDescription = "[" + i + "]" + ".JobHistoryShortDescription";
+                    <div class="HistoryClass">
+                    <p>Job History Name @i</p>      <input type="text" name="@jobHistoryName" value="@Model.JobHistories[i].Name">
+    <p>Job History Short Description @i</p>      <input type="text" name="@jobHisotryDescription" value="@Model.JobHistories[i].ShortDescription">
+    </div>
+                }
+                
+                <hr/>
+            }
+            
+        }
+        <button type="button" onclick="AddJobHisotryController()">More Job History</button>
+    }
+    
+    <hr/>
+    @{
+        bool Mon = false;
+        bool Tue = false;
+        bool Wed = false;
+        bool Thu = false;
+        bool Fri = false;
+        bool Sat = false;
+        bool Sun = false;
+
+        if (Model==null||Model.WorkDays==null)
+        {
+        }
+        else
+        {
+            for (int i = 0; i < @Model.WorkDays.Count; i++)
+            {
+                switch (@Model.WorkDays[i].Day)
+                {
+                    case 1:
+                        Mon = true;
+                        break;
+                    case 2:
+                        Tue = true;
+                        break;
+                    case 3:
+                        Wed = true;
+                        break;
+                    case 4:
+                        Thu = true;
+                        break;
+                    case 5:
+                        Fri = true;
+                        break;
+                    case 6:
+                        Sat = true;
+                        break;
+                    case 7:
+                        Sun = true;
+                        break;
+                }
+            }
+        }
+    }
+    Monday         <input type="checkbox" name="[0].Day" value = "1" checked="@Mon">  
+    Tuesday        <input type="checkbox" name="[1].Day" value = "2" checked="@Tue"> 
+    Wednesday      <input type="checkbox" name="[2].Day" value = "3" checked="@Wed"> 
+    Thursday       <input type="checkbox" name="[3].Day" value = "4" checked="@Thu">
+    Friday         <input type="checkbox" name="[4].Day" value = "5" checked="@Fri">
+    Saturday       <input type="checkbox" name="[5].Day" value = "6" checked="@Sat">
+    Sunday         <input type="checkbox" name="[6].Day" value = "7" checked="@Sun">
+    <hr/>
+    
+    @{
+        float salary = 0;
+        if (Model != null)
+        {
+            salary = @Model.MinSaraly;   
+        }
+        
+    }
+    Min Salary<input type="number" name="MinSalary" min="0" step="0.01" value="@salary"> 
+    <hr/>
+    <button type="submit">Submit</button>
+</form>

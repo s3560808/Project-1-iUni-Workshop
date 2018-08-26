@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using iUni_Workshop.Data;
+using iUni_Workshop.Data.Seeds;
 using iUni_Workshop.Models;
 using iUni_Workshop.Services;
 
@@ -29,8 +30,6 @@ namespace iUni_Workshop
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
-//            services.AddDbContext<SystemDbContext>(options =>
-//                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -38,7 +37,6 @@ namespace iUni_Workshop
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-
             services.AddMvc();
         }
 
@@ -60,6 +58,8 @@ namespace iUni_Workshop
 
             app.UseAuthentication();
 
+            
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

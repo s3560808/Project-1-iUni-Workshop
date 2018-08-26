@@ -1,0 +1,152 @@
+﻿@model iUni_Workshop.Models.EmployeeModels.Employee
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<script>
+    function GetSuburbName(str) {
+        var suburbselectbox = document.getElementById("SurburbNameList");
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var suburbs = JSON.parse(this.responseText);
+                suburbselectbox.innerHTML="";
+                for (var i = 0; i < suburbs.length; i++) {
+                    var btn = document.createElement("OPTION");
+                    btn.value = suburbs[i];
+                    if (str == suburbs[i]) {
+                        getPostCode(str);
+                    }
+                    suburbselectbox.appendChild(btn);
+                }
+            }
+        };
+        xmlhttp.open("GET", "/Suburb/GetSuburb/" + str, true);
+        xmlhttp.send();
+    }
+    
+    function getPostCode(suburbName) {
+        var postcodeselectbox = document.getElementById("PostCodeList");
+        postcodeselectbox.innerHTML = "";
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var postCodes = JSON.parse(this.responseText);
+                for (var i = 0; i < postCodes.length; i++) {
+                    var postcode = document.createElement("OPTION");
+                    postcode.value = postCodes[i];
+                    postcodeselectbox.appendChild(postcode);
+                }
+            }
+        };
+        xmlhttp.open("GET", "/Suburb/GetPostCode/" + suburbName, true);
+        xmlhttp.send();
+    }
+
+</script>
+
+<h2>title</h2>
+<form method="post" asp-action="EditPersonalInfoAction" >
+@Html.DisplayNameFor(model => model.Name)
+    @{
+        string name = "";
+        if (Model.Name != null)
+        {
+            name = @Model.Name;
+        }
+        <input type="text" name="Name" value="@name">
+    }
+
+
+<br />
+
+@Html.DisplayNameFor(model => model.PhoneNumber)
+    @{
+        string phoneNumber = "";
+        if (Model.PhoneNumber != null)
+        {
+            phoneNumber = @Model.PhoneNumber;
+        }
+        <input type="text" name="PhoneNumber" value="@phoneNumber">
+    }
+
+
+<br />
+
+@Html.DisplayNameFor(model => model.ContactEmail)
+    @{
+        string email = "";
+        if (Model.ContactEmail != null)
+        {
+            email = @Model.ContactEmail;
+        }
+        <input type="text" name="ContactEmail" value="@email">
+    }
+
+<br />
+
+@Html.DisplayNameFor(model => model.SchoolId)
+@{
+    string schoolName = "";
+    string campus = "";
+    if (Model.SchoolId != null)
+    {
+        schoolName = @Model.School.SchoolName;
+        campus = @Model.School.Suburb.Name;
+    }
+    <input type="text" name="SchoolName" value="@schoolName">
+    <datalist></datalist>
+    <input type="text" name="Campus" value="@campus">
+    <datalist></datalist>
+}  
+    
+
+
+
+<br />
+
+@Html.DisplayNameFor(model => model.SuburbId)
+    @{
+        string LivingDistrict = "";
+        int postCode = 0;
+        if (Model.SchoolId != null)
+        {
+            LivingDistrict = @Model.Suburb.Name;
+            postCode = @Model.Suburb.PostCode;
+        }
+        
+        <input type="text" name="LivingDistrict" id = "LivingDistrict" list="SurburbNameList" onkeyup="GetSuburbName(this.value)" value="@LivingDistrict">
+        <datalist id="SurburbNameList">
+        </datalist>
+        
+        <input type="text" name="PostCode" id = "PostCode" list="PostCodeList" value="@postCode">
+        <datalist id="PostCodeList">
+        </datalist>
+    }  
+
+
+
+
+
+<br />
+
+@Html.DisplayNameFor(model => model.ShortDescription)
+    @{
+        string description = "";
+        if (Model.ShortDescription != null)
+        {
+            description = @Model.ShortDescription;
+        }
+        
+        <input type="text" name="ShortDescription" value="@description">
+    }
+    
+    
+    <button type="submit">Submit</button>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

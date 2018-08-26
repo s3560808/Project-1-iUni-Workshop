@@ -1,20 +1,21 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using iUni_Workshop.Models.JobRelatedModels;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace iUni_Workshop.Models.EmployeeModels
 {
-    public class SkillForJob_Employee
+    public class EmployeeSkill
     {
         [Key]
         public int SkillId { get; set; }
         [ForeignKey("SkillId")]
-        public virtual Skill.Skill Skill { get; set; }
+        public virtual Skill Skill { get; set; }
         
         [Key]
-        public int CVId { get; set; }
-        [ForeignKey("CVId")]
-        public virtual CV CV { get; set; }
+        public int EmployeeCvId { get; set; }
+        [ForeignKey("EmployeeCvId")]
+        public virtual EmployeeCV EmployeeCV { get; set; }
 
         [Required]
         public string CertificationLink { get; set; }

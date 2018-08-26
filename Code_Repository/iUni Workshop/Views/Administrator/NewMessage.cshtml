@@ -1,0 +1,64 @@
+﻿@model object
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<script>
+    function GetReviverEmail(str) {
+        var reciverList = document.getElementById("ReciverEmailList");
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var recivers = JSON.parse(this.responseText);
+                reciverList.innerHTML="";
+                for (var i = 0; i < recivers.length; i++) {
+                    var btn = document.createElement("OPTION");
+                    btn.value = recivers[i].email;
+                    reciverList.appendChild(btn);
+                }
+            }
+        };
+        xmlhttp.open("GET", "/Administrator/GetUsers/" + str, true);
+        xmlhttp.send();
+    }
+</script>
+
+<h2>title</h2>
+<form method="post" asp-action="NewMessageAction">
+    <table class="table">
+        <thead>
+            <tr>
+                @* <th> *@
+                @*     @Html.DisplayNameFor(model => model.SchoolName) *@
+                @* </th> *@
+                @* <th> *@
+                @*     @Html.DisplayNameFor(model => model.DomainExtension) *@
+                @* </th> *@
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input type="text" name="Email" id="userName" list="ReciverEmailList" onkeyup="GetReviverEmail(this.value)">
+                    <datalist id="ReciverEmailList"></datalist>
+                </td>
+            </tr>
+            <tr>
+                <input type ="text" name="Title" value="This is a title">
+            </tr>
+            <tr>
+                <textarea rows="4" cols="50" name="MessageDetail">This is a example</textarea>
+            </tr>
+        </tbody>
+
+    </table>
+    <button type="submit" class="btn btn-sm btn-success">Confirm</button>
+</form>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
