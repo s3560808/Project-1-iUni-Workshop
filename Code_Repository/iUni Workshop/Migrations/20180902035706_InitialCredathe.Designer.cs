@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using iUni_Workshop.Data;
 
 namespace iUniWorkshop.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180902035706_InitialCredathe")]
+    partial class InitialCredathe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -179,16 +181,22 @@ namespace iUniWorkshop.Migrations
 
             modelBuilder.Entity("iUni_Workshop.Models.EmployeeModels.EmployeeSkill", b =>
                 {
-                    b.Property<int>("EmployeeCvId");
-
-                    b.Property<int>("SkillId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("CertificationLink")
                         .IsRequired();
 
-                    b.HasKey("EmployeeCvId", "SkillId");
+                    b.Property<int>("EmployeeCvId");
+
+                    b.Property<int>("SkillId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("SkillId");
+
+                    b.HasIndex("EmployeeCvId", "SkillId")
+                        .IsUnique();
 
                     b.ToTable("EmployeeSkills");
                 });
@@ -270,15 +278,15 @@ namespace iUniWorkshop.Migrations
 
                     b.Property<DateTime>("LastUpdateDateTime");
 
-                    b.Property<int>("MaxDayForAWeek");
+                    b.Property<int?>("MaxDayForAWeek");
 
-                    b.Property<int>("MinDayForAWeek");
+                    b.Property<int?>("MinDayForAWeek");
 
                     b.Property<bool>("RequireJobExperience");
 
                     b.Property<float>("Salary");
 
-                    b.Property<int>("SuburbId");
+                    b.Property<int?>("SuburbId");
 
                     b.Property<string>("Title")
                         .IsRequired();
@@ -309,15 +317,21 @@ namespace iUniWorkshop.Migrations
 
             modelBuilder.Entity("iUni_Workshop.Models.EmployerModels.EmployerSkill", b =>
                 {
-                    b.Property<int>("EmployerJobProfileId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<int>("SkillId");
+                    b.Property<int>("EmployerJobProfileId");
 
                     b.Property<bool>("Required");
 
-                    b.HasKey("EmployerJobProfileId", "SkillId");
+                    b.Property<int>("SkillId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("SkillId");
+
+                    b.HasIndex("EmployerJobProfileId", "SkillId")
+                        .IsUnique();
 
                     b.ToTable("EmployerSkills");
                 });
@@ -355,8 +369,6 @@ namespace iUniWorkshop.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<bool>("NewRequest");
-
                     b.Property<string>("NormalizedName");
 
                     b.Property<string>("RequestedBy");
@@ -374,6 +386,69 @@ namespace iUniWorkshop.Migrations
                     b.HasIndex("RequestedBy");
 
                     b.ToTable("Fields");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Accounting", NormalizedName = "ACCOUNTING", Status = 1 },
+                        new { Id = 2, Name = "Administration & Office Support", NormalizedName = "ADMINISTRATION & OFFICE SUPPORT", Status = 1 },
+                        new { Id = 3, Name = "Advertising, Arts &  Media", NormalizedName = "ADVERTISING, ARTS &  MEDIA", Status = 1 },
+                        new { Id = 4, Name = "Banking & Financial Services", NormalizedName = "BANKING & FINANCIAL SERVICES", Status = 1 },
+                        new { Id = 5, Name = "Call Centre & Customer Service", NormalizedName = "ALL CENTRE & CUSTOMER SERVICE", Status = 1 },
+                        new { Id = 6, Name = "CEO & General Management", NormalizedName = "CEO & GENERAL MANAGEMENT", Status = 1 },
+                        new { Id = 7, Name = "Community Services & Development", NormalizedName = "COMMUNITY SERVICES & DEVELOPMENT", Status = 1 },
+                        new { Id = 8, Name = "Construction", NormalizedName = "CONSTRUCTION", Status = 1 },
+                        new { Id = 9, Name = "Consulting & Strategy", NormalizedName = "CONSULTING & STRATEGY", Status = 1 },
+                        new { Id = 10, Name = "Design & Architecture", NormalizedName = "DESIGN & ARCHITECTURE", Status = 1 },
+                        new { Id = 11, Name = "Education & Training", NormalizedName = "EDUCATION & TRAINING", Status = 1 },
+                        new { Id = 12, Name = "Engineering", NormalizedName = "ENGINEERING", Status = 1 },
+                        new { Id = 13, Name = "Farming, Animals & Conservation", NormalizedName = "FARMING, ANIMALS & CONSERVATION", Status = 1 },
+                        new { Id = 14, Name = "Government & Defence", NormalizedName = "GOVERNMENT & DEFENCE", Status = 1 },
+                        new { Id = 15, Name = "Healthcare & Medical", NormalizedName = "HEALTHCARE & MEDICAL", Status = 1 },
+                        new { Id = 16, Name = "Hospitality & Tourism", NormalizedName = "HOSPITALITY & TOURISM", Status = 1 },
+                        new { Id = 17, Name = "Human Resources & Recruitment", NormalizedName = "HUMAN RESOURCES & RECRUITMENT", Status = 1 },
+                        new { Id = 18, Name = "Information & Communication Technology", NormalizedName = "INFORMATION & COMMUNICATION TECHNOLOGY", Status = 1 },
+                        new { Id = 19, Name = "Insurance & Superannuation", NormalizedName = "INSURANCE & SUPERANNUATION", Status = 1 },
+                        new { Id = 20, Name = "Legal", NormalizedName = "LEGAL", Status = 1 },
+                        new { Id = 21, Name = "Manufacturing, Transport & Logistics", NormalizedName = "MANUFACTURING, TRANSPORT & LOGISTICS", Status = 1 },
+                        new { Id = 22, Name = "Marketing & Communications", NormalizedName = "MARKETING & COMMUNICATIONS", Status = 1 },
+                        new { Id = 23, Name = "Mining, Resources & Energy", NormalizedName = "MINING, RESOURCES & ENERGY", Status = 1 },
+                        new { Id = 24, Name = "Real Estate & Property", NormalizedName = "REAL ESTATE & PROPERTY", Status = 1 },
+                        new { Id = 25, Name = "Retail & Consumer Products", NormalizedName = "RETAIL & CONSUMER PRODUCTS", Status = 1 },
+                        new { Id = 26, Name = "Sales", NormalizedName = "SALES", Status = 1 },
+                        new { Id = 27, Name = "Science & Technology", NormalizedName = "SCIENCE & TECHNOLOGY", Status = 1 },
+                        new { Id = 28, Name = "Self Employment", NormalizedName = "SELF EMPLOYMENT", Status = 1 },
+                        new { Id = 29, Name = "Sport & Recreation", NormalizedName = "SPORT & RECREATION", Status = 1 },
+                        new { Id = 30, Name = "Trades & Services", NormalizedName = "TRADES & SERVICES", Status = 1 },
+                        new { Id = 31, Name = "InRequest1", NormalizedName = "INREQUEST1", Status = 2 },
+                        new { Id = 32, Name = "InRequest2", NormalizedName = "INREQUEST2", Status = 2 },
+                        new { Id = 33, Name = "NoLongerUsed1", NormalizedName = "NOLONGERUSED1", Status = 3 }
+                    );
+                });
+
+            modelBuilder.Entity("iUni_Workshop.Models.JobRelatedModels.FieldHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("FieldId");
+
+                    b.Property<string>("FormerFieldName")
+                        .IsRequired();
+
+                    b.Property<int>("Operation");
+
+                    b.Property<string>("OperationAdmin");
+
+                    b.Property<DateTime>("OperationDate");
+
+                    b.Property<int?>("SkillId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OperationAdmin");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("FieldHistories");
                 });
 
             modelBuilder.Entity("iUni_Workshop.Models.JobRelatedModels.Skill", b =>
@@ -385,8 +460,6 @@ namespace iUniWorkshop.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired();
-
-                    b.Property<bool>("NewRequest");
 
                     b.Property<string>("NormalizedName")
                         .IsRequired();
@@ -406,6 +479,49 @@ namespace iUniWorkshop.Migrations
                     b.HasIndex("RequestedByUserId");
 
                     b.ToTable("Skills");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Java", NormalizedName = "JAVA", Status = 1 },
+                        new { Id = 2, Name = "JavaScript", NormalizedName = "JAVASCRIPT", Status = 1 },
+                        new { Id = 3, Name = "C", NormalizedName = "C", Status = 1 },
+                        new { Id = 4, Name = "C++", NormalizedName = "C++", Status = 1 },
+                        new { Id = 5, Name = "C#", NormalizedName = "C#", Status = 1 },
+                        new { Id = 6, Name = "SQL", NormalizedName = "SQL", Status = 1 },
+                        new { Id = 7, Name = "PHP", NormalizedName = "PHP", Status = 1 },
+                        new { Id = 8, Name = "CSS", NormalizedName = "CSS", Status = 1 },
+                        new { Id = 9, Name = "HTML", NormalizedName = "HTML", Status = 1 },
+                        new { Id = 10, Name = "Asp.Net", NormalizedName = "ASP.NET", Status = 1 },
+                        new { Id = 11, Name = "Laravel", NormalizedName = "LARAVEL", Status = 1 },
+                        new { Id = 12, Name = "Request1", NormalizedName = "REQUEST1", Status = 2 },
+                        new { Id = 13, Name = "Request2", NormalizedName = "REQUEST2", Status = 2 },
+                        new { Id = 14, Name = "NoLonger1", NormalizedName = "NOLONGER1", Status = 3 },
+                        new { Id = 15, Name = "NoLonger2", NormalizedName = "NOLONGER2", Status = 3 }
+                    );
+                });
+
+            modelBuilder.Entity("iUni_Workshop.Models.JobRelatedModels.SkillHistory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FormerSkillName")
+                        .IsRequired();
+
+                    b.Property<int>("Operation");
+
+                    b.Property<string>("OperationAdmin");
+
+                    b.Property<DateTime>("OperationDate");
+
+                    b.Property<int>("SkillId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OperationAdmin");
+
+                    b.HasIndex("SkillId");
+
+                    b.ToTable("SkillHistories");
                 });
 
             modelBuilder.Entity("iUni_Workshop.Models.MessageModels.Message", b =>
@@ -416,10 +532,6 @@ namespace iUniWorkshop.Migrations
                     b.Property<string>("ConversationId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("SenderId");
-
-                    b.Property<string>("ReciverId");
-
                     b.Property<int?>("InvatationId");
 
                     b.Property<string>("MessageDetail")
@@ -427,14 +539,18 @@ namespace iUniWorkshop.Migrations
 
                     b.Property<bool>("Read");
 
+                    b.Property<string>("ReciverId")
+                        .IsRequired();
+
+                    b.Property<string>("SenderId")
+                        .IsRequired();
+
                     b.Property<DateTime>("SentTime");
 
                     b.Property<string>("Title")
                         .IsRequired();
 
-                    b.HasKey("Id", "ConversationId", "SenderId", "ReciverId");
-
-                    b.HasAlternateKey("ConversationId", "Id", "ReciverId", "SenderId");
+                    b.HasKey("Id");
 
                     b.HasIndex("InvatationId");
 
@@ -447,7 +563,7 @@ namespace iUniWorkshop.Migrations
 
             modelBuilder.Entity("iUni_Workshop.Models.SchoolModels.School", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("AddedBy");
@@ -481,6 +597,14 @@ namespace iUniWorkshop.Migrations
                         .IsUnique();
 
                     b.ToTable("Schools");
+
+                    b.HasData(
+                        new { Id = 1, DomainExtension = "rmit.edu.au", NewRequest = false, NormalizedName = "RMIT", SchoolName = "RMIT", Status = 1, SuburbId = 1 },
+                        new { Id = 2, DomainExtension = "rmit.edu.au", NewRequest = false, NormalizedName = "RMIT", SchoolName = "RMIT", Status = 1, SuburbId = 2 },
+                        new { Id = 3, DomainExtension = "unimelb.edu.au", NewRequest = false, NormalizedName = "MELBOURNE UNIVERSITY", SchoolName = "Melbourne University", Status = 1, SuburbId = 3 },
+                        new { Id = 4, DomainExtension = "unimelb.edu.au", NewRequest = false, NormalizedName = "MELBOURNE UNIVERSITY", SchoolName = "Melbourne University", Status = 2, SuburbId = 5 },
+                        new { Id = 5, DomainExtension = "unimelb.edu.au", NewRequest = false, NormalizedName = "MELBOURNE UNIVERSITY", SchoolName = "Melbourne University", Status = 3, SuburbId = 6 }
+                    );
                 });
 
             modelBuilder.Entity("iUni_Workshop.Models.StateModels.State", b =>
@@ -16201,6 +16325,19 @@ namespace iUniWorkshop.Migrations
                     );
                 });
 
+            modelBuilder.Entity("iUniWorkshop.Models.EmployerModels.EmployerRequiredWorkLocation", b =>
+                {
+                    b.Property<int>("EmployerJobProfileId");
+
+                    b.Property<int>("SuburbId");
+
+                    b.HasKey("EmployerJobProfileId", "SuburbId");
+
+                    b.HasIndex("SuburbId");
+
+                    b.ToTable("EmployerWorkLocations");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -16418,10 +16555,9 @@ namespace iUniWorkshop.Migrations
                         .HasForeignKey("FieldId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("iUni_Workshop.Models.SuburbModels.Suburb", "Suburb")
+                    b.HasOne("iUni_Workshop.Models.SuburbModels.Suburb")
                         .WithMany("EmployerJobProfile")
-                        .HasForeignKey("SuburbId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("SuburbId");
                 });
 
             modelBuilder.Entity("iUni_Workshop.Models.EmployerModels.EmployerRequiredSchool", b =>
@@ -16474,6 +16610,17 @@ namespace iUniWorkshop.Migrations
                         .HasForeignKey("RequestedBy");
                 });
 
+            modelBuilder.Entity("iUni_Workshop.Models.JobRelatedModels.FieldHistory", b =>
+                {
+                    b.HasOne("iUni_Workshop.Models.AdministratorModels.Administraotr", "Administraotr")
+                        .WithMany()
+                        .HasForeignKey("OperationAdmin");
+
+                    b.HasOne("iUni_Workshop.Models.JobRelatedModels.Skill", "Skill")
+                        .WithMany()
+                        .HasForeignKey("SkillId");
+                });
+
             modelBuilder.Entity("iUni_Workshop.Models.JobRelatedModels.Skill", b =>
                 {
                     b.HasOne("iUni_Workshop.Models.AdministratorModels.Administraotr", "Administraotr")
@@ -16483,6 +16630,18 @@ namespace iUniWorkshop.Migrations
                     b.HasOne("iUni_Workshop.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("RequestedByUserId");
+                });
+
+            modelBuilder.Entity("iUni_Workshop.Models.JobRelatedModels.SkillHistory", b =>
+                {
+                    b.HasOne("iUni_Workshop.Models.AdministratorModels.Administraotr", "Administraotr")
+                        .WithMany("SkillHistories")
+                        .HasForeignKey("OperationAdmin");
+
+                    b.HasOne("iUni_Workshop.Models.JobRelatedModels.Skill", "Skill")
+                        .WithMany("SkillHistories")
+                        .HasForeignKey("SkillId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("iUni_Workshop.Models.MessageModels.Message", b =>
@@ -16523,6 +16682,19 @@ namespace iUniWorkshop.Migrations
                     b.HasOne("iUni_Workshop.Models.StateModels.State", "State")
                         .WithMany("Suburbs")
                         .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("iUniWorkshop.Models.EmployerModels.EmployerRequiredWorkLocation", b =>
+                {
+                    b.HasOne("iUni_Workshop.Models.EmployerModels.EmployerJobProfile", "EmployerJobProfile")
+                        .WithMany("EmployerRequiredWorkLocations")
+                        .HasForeignKey("EmployerJobProfileId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("iUni_Workshop.Models.SuburbModels.Suburb", "Suburb")
+                        .WithMany("EmployerRequiredWorkLocations")
+                        .HasForeignKey("SuburbId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
