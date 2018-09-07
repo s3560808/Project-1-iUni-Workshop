@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace iUni_Workshop.Models.EmployeeModels
+namespace iUni_Workshop.Models.AdministratorModels
 {
     public class AddSchoolAction
     {
@@ -15,5 +15,6 @@ namespace iUni_Workshop.Models.EmployeeModels
         
         [Required]
         public int PostCode { get; set; }
+
     }
 }

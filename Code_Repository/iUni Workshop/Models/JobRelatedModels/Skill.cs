@@ -27,8 +27,6 @@ namespace iUni_Workshop.Models.JobRelatedModels
         [ForeignKey(("AddedBy"))]
         public virtual Administraotr Administraotr { get; set; }
         
-        public bool NewRequest { get; set; }
-        
         public string RequestedByUserId { get; set; }
         [ForeignKey(("RequestedByUserId"))]
         public virtual ApplicationUser ApplicationUser { get; set; }
@@ -37,5 +35,6 @@ namespace iUni_Workshop.Models.JobRelatedModels
         
         public virtual ICollection<EmployeeSkill> EmployeeSkills { get; set; }
         public virtual ICollection<EmployerSkill> EmployerSkills { get; set; }
+        public virtual ICollection<SkillHistory> SkillHistories { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using iUni_Workshop.Data.Seeds;
+using iUniWorkshop.Data.Seeds;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,8 +25,19 @@ namespace iUni_Workshop
                 try
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-//                    UserSeed.Initialize(services, logger).Wait();
-//                    StateSeed.Initialize(services);
+                    //                    
+                    //                    StateSeed.Initialize(services);
+                    RoleSeed.Initialize(services, logger).Wait();
+                    UserSeed.Initialize(services, logger).Wait();
+                    
+                    EmployeeCvSeed.Initialize(services, logger).Wait();
+                    EmployeeCvExternalMaterialSeed.Initialize(services, logger).Wait();
+                    EmployeeCvJobHisotriesSeed.Initialize(services, logger).Wait();
+                    EmployeeCvSkillSeed.Initialize(services, logger).Wait();
+                    EmployeeCvWorkDaySeed.Initialize(services, logger).Wait();
+
+                    EmployerJobProfileSeed.Initialize(services, logger).Wait();
+                    EmployerJobSkillSeed.Initialize(services, logger).Wait();
                 }
                 catch (Exception ex) {
                     services.GetRequiredService<ILogger<Program>>().LogError(ex, "An error occurred while seeding the database");

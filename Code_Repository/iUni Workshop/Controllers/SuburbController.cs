@@ -12,7 +12,7 @@ namespace iUni_Workshop.Controllers
     [Authorize]
     public class SuburbController : Controller
     {
-        private ApplicationDbContext _context;
+        private  ApplicationDbContext _context;
 
         public SuburbController(ApplicationDbContext context)
         {
@@ -54,5 +54,16 @@ namespace iUni_Workshop.Controllers
             var result = _context.Suburbs.Where(a =>a.Name == surburbName).Select(b => b.PostCode).ToList();
             return Json(result);
         }
+
+        public int hasSuburb(string SuburbName, int PostCode)
+        {
+            var suburb = _context.Suburbs.First(a => a.Name == SuburbName && a.PostCode == PostCode);
+            if (suburb == null)
+            {
+                return -1;
+            }
+            return suburb.Id;
+        }
+
     }
 }

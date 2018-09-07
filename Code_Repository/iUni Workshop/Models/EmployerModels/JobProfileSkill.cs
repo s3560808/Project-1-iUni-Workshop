@@ -3,8 +3,7 @@ namespace iUniWorkshop.Models.EmployerModels
 {
     public class JobProfileSkill
     {
-        public JobProfileSkill()
-        {
-        }
+        public string SkillName { get; set; }
+        public bool SkillRequired { get; set; }
     }
 }

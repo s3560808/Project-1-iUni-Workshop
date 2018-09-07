@@ -12,6 +12,7 @@ using iUni_Workshop.Data;
 using iUni_Workshop.Data.Seeds;
 using iUni_Workshop.Models;
 using iUni_Workshop.Services;
+using iUniWorkshop.Data;
 
 namespace iUni_Workshop
 {
@@ -30,7 +31,7 @@ namespace iUni_Workshop
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
 
-            
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();

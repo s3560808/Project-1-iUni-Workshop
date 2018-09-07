@@ -1,8 +1,44 @@
-@model System.Linq.IQueryable<iUni_Workshop.Models.EmployerModels.EmployerInvitation>
+@model IEnumerable<iUni_Workshop.Models.EmployerModels.EmployerInvitation>
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
+
 <h2>title</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.InvitationId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvitationId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+            </tr>
+        }
+    }
+        
+    </tbody>
+
+</table>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

@@ -5,6 +5,7 @@ using iUni_Workshop.Models.EmployeeModels;
 using iUni_Workshop.Models.EmployerModels;
 using iUni_Workshop.Models.SchoolModels;
 using iUni_Workshop.Models.StateModels;
+using iUniWorkshop.Models.EmployerModels;
 
 namespace iUni_Workshop.Models.SuburbModels
 {
@@ -28,7 +29,9 @@ namespace iUni_Workshop.Models.SuburbModels
 
         public virtual ICollection<School> Schools { get; set; }
         public virtual ICollection<EmployerJobProfile> EmployerJobProfile { get; set; }
+        public virtual ICollection<EmployerRequiredWorkLocation> EmployerRequiredWorkLocations { get; set; }
         public virtual ICollection<Employer> Employers { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
+
     }
 }

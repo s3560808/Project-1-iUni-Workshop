@@ -22,6 +22,8 @@
 7.Migrate and update your database, enter command:
 	dotnet ef migrations add Initial --context ApplicationDbContext
 	dotnet ef database update --context ApplicationDbContext
+	dotnet ef migrations add Initial --context FieldDbContext
+	dotnet ef database update --context FieldDbContext
 8. Use HeidiSQL (already installed with Mariadb) to login your MariaDB System, if you can see "project 1" database and corresponding Database it means you already connect ASP.NET Core with MySQL!
 
 

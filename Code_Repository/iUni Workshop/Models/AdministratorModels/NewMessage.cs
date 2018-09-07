@@ -12,5 +12,9 @@ namespace iUni_Workshop.Models.AdministratorModels
 
         [Required]
         public string Title { get; set; }
+
+
+        [Required] 
+        public int Status { get; set; }
     }
 }

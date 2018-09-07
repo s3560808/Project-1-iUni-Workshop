@@ -1,36 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using iUni_Workshop.Models;
 using iUni_Workshop.Models.StateModels;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
-//namespace iUni_Workshop.Data.Seeds
-//{
-//    public class StateSeed
-//    {
-//        
-//        public static void Initialize(IServiceProvider serviceProvider)
-//        {
-//            var _context = serviceProvider.GetRequiredService<ApplicationDbContext>();
-//
-//            if (!_context.States.Any())
-//            {
-//                var states = new List<State>
-//                {
-//
-//                };
-//                _context.AddRange(states);
-//
-//                _context.SaveChanges();
-//            }
-//
-//            
-//        }
-//    }
-//
-//
-//}
+namespace iUni_Workshop.Data.Seeds
+{
+    public class StateSeed
+    {
+        public static State[] states = new State[]{
+            new State {Id = 1, Name = "ACT"},
+            new State {Id = 2, Name = "NSW"},
+            new State {Id = 3, Name = "NT"},
+            new State {Id = 4, Name = "QLD"},
+            new State {Id = 5, Name = "SA"},
+            new State {Id = 6, Name = "TAS"},
+            new State {Id = 7, Name = "VIC"},
+            new State {Id = 8, Name = "WA"},
+            new State {Id = 9, Name = "JBT"}
+        };
+    }
+}

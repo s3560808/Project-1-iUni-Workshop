@@ -19,4 +19,8 @@
     <Folder Include="Migrations" />
     <Folder Include="Migrations\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Controllers\Validator.cs" />
+    <Compile Remove="Data\FieldDbContext.cs" />
+  </ItemGroup>
 </Project>

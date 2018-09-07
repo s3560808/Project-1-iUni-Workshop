@@ -21,6 +21,7 @@ namespace iUni_Workshop.Models.AdministratorModels
 
         public virtual Employer Employer { get; set; }
         public virtual ICollection<School> Schools { get; set; }
+        public virtual ICollection<SkillHistory> SkillHistories { get; set; }
         public virtual Field Field { get; set; }
         public virtual Skill Skill { get; set; }
     }

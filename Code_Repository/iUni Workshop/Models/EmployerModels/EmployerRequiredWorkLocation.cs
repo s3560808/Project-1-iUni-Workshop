@@ -6,7 +6,7 @@ using iUni_Workshop.Models.SuburbModels;
 
 namespace iUniWorkshop.Models.EmployerModels
 {
-    public class EmployerWorkLocation
+    public class EmployerRequiredWorkLocation
     {
 
         [Display(Name = "Suburb"),Key]

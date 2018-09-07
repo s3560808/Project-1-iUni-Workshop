@@ -1,4 +1,6 @@
-﻿@model iUni_Workshop.Models.SchoolModels.School
+﻿@using iUni_Workshop.Models.AdministratorModels
+@using iUni_Workshop.Models.SchoolModels
+@model IEnumerable<iUni_Workshop.Models.AdministratorModels.AddSchool>
 
 @{
     ViewBag.Title = "title";
@@ -7,44 +9,87 @@
 
 <script>
     function GetSuburbName(str) {
-        var suburbselectbox = document.getElementById("SurburbNameList");
-        var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    var suburbs = JSON.parse(this.responseText);
-                    suburbselectbox.innerHTML="";
-                    for (var i = 0; i < suburbs.length; i++) {
-                        var btn = document.createElement("OPTION");
-                        btn.value = suburbs[i];
-                        if (str == suburbs[i]) {
-                            getPostCode(str);
-                        }
-                        suburbselectbox.appendChild(btn);
-                    }
-                }
-            };
-        xmlhttp.open("GET", "/Suburb/GetSuburb/" + str, true);
-        xmlhttp.send();
-    }
-    
-    function getPostCode(suburbName) {
-        var postcodeselectbox = document.getElementById("PostCodeList");
-        postcodeselectbox.innerHTML = "";
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function () {
+        var suburbSelectBox = document.getElementById("SuburbNameList");
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                var postCodes = JSON.parse(this.responseText);
-                for (var i = 0; i < postCodes.length; i++) {
-                        var postcode = document.createElement("OPTION");
-                        postcode.value = postCodes[i];
-                        postcodeselectbox.appendChild(postcode);
+                var suburbs = JSON.parse(this.responseText);
+                suburbSelectBox.innerHTML = "";
+                for (var i = 0; i < suburbs.length; i++) {
+                    var btn = document.createElement("OPTION");
+                    btn.value = suburbs[i];
+                    if (str == suburbs[i]) {
+                        GetPostCode(str);
+                    }
+                    suburbSelectBox.appendChild(btn);
                 }
             }
         };
-        xmlhttp.open("GET", "/Suburb/GetPostCode/" + suburbName, true);
-        xmlhttp.send();
+        xmlHttp.open("GET", "/Suburb/GetSuburb/" + str, true);
+        xmlHttp.send();
     }
 
+    function GetPostCode(suburbName) {
+        var postCodeSelectBox = document.getElementById("PostCodeList");
+        postCodeSelectBox.innerHTML = "";
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                var postCodes = JSON.parse(this.responseText);
+                for (var i = 0; i < postCodes.length; i++) {
+                    var postcode = document.createElement("OPTION");
+                    postcode.value = postCodes[i];
+                    postCodeSelectBox.appendChild(postcode);
+                }
+            }
+        };
+        xmlHttp.open("GET", "/Suburb/GetPostCode/" + suburbName, true);
+        xmlHttp.send();
+    }
+
+    function GetSchoolName(schoolName) {
+        var schoolSelectBox = document.getElementById("SchoolNameList");
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                var names = JSON.parse(this.responseText);
+                schoolSelectBox.innerHTML = "";
+                for (var i = 0; i < names.length; i++) {
+                    var btn = document.createElement("OPTION");
+                    btn.value = names[i];
+                    if (schoolName == names[i]) {
+                        GetSchoolDomainExtension(schoolName);
+                    }
+                    schoolSelectBox.appendChild(btn);
+                }
+            }
+        };
+        xmlHttp.open("GET", "/School/GetSchoolName/" + schoolName, true);
+        xmlHttp.send();
+    }
+
+    function GetSchoolDomainExtension(schoolName) {
+        var schoolSelectBox = document.getElementById("DomainList");
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function() {
+            if (this.readyState === 4 && this.status === 200) {
+                var extensions = JSON.parse(this.responseText);
+                schoolSelectBox.innerHTML = "";
+                for (var i = 0; i < extensions.length; i++) {
+                    var btn = document.createElement("OPTION");
+                    btn.value = extensions[i];
+                    schoolSelectBox.appendChild(btn);
+                }
+            }
+        };
+        xmlHttp.open("GET", "/School/GetSchoolDomainExtension/" + schoolName, true);
+        xmlHttp.send();
+    }
+
+    function CleanValue(e) {
+        e.value = "";
+    }
+    
 </script>
 
 <h2>title</h2>
@@ -64,14 +109,16 @@
         <tbody>
             <tr>
                 <td>
-                    <input type="text" name="SchoolName">
+                    <input type="text" name="SchoolName" list = "SchoolNameList" onkeyup="GetSchoolName(this.value)" >
+                    <datalist id = "SchoolNameList"></datalist>
                 </td>
                 <td>
-                    <input type="text" name="DomainExtension">
+                    <input type="text" name="DomainExtension" list="DomainList">
+                    <datalist id = "DomainList"></datalist>
                 </td>
                 <td>
-                    <input type="text" name="SurburbName" id = "SuburbId" list="SurburbNameList" onkeyup="GetSuburbName(this.value)">
-                    <datalist id="SurburbNameList">
+                    <input type="text" name="SurburbName" id = "SuburbId" list="SuburbNameList" onkeyup="GetSuburbName(this.value)">
+                    <datalist id="SuburbNameList">
                     </datalist>
                 </td>
                 <td>
@@ -85,6 +132,124 @@
     </table>
     <button type="submit" class="btn btn-sm btn-success">Confirm</button>
 </form>
+@{
+       List<AddSchool> inUse = new List<AddSchool>();
+       List<AddSchool> inRequest = new List<AddSchool>();
+       List<AddSchool> baned = new List<AddSchool>();
+    foreach (var school in Model)
+    {
+        switch (school.Status)
+        {
+            case SchoolStatus.InUse:
+                inUse.Add(school);
+                break;
+            case SchoolStatus.InRequest:
+                inRequest.Add(school);
+                break;
+            case SchoolStatus.NoLongerUsed:
+                baned.Add(school);
+                break;
+        }
+    }
+}
+<p>In Database School</p>
+@{
+    foreach (var school in inUse)
+    {
+        <form asp-action="UpdateSchoolAction">
+            <tr>
+                <td>
+                    <input type="text" name="SchoolName" value = "@school.SchoolName">
+                </td>
+                <td>
+                    <input type="text" name="DomainExtension" value = "@school.DomainExtension">
+                </td>
+                <td>
+                    <input type="text" name="SurburbName" id = "SuburbId" list="SurburbNameList" onkeyup="GetSuburbName(this.value)" value="@school.SurburbName">
+                    <datalist id="SuburbNameList">
+                    </datalist>
+                </td>
+                <td>
+                    <input type="text" name="PostCode" id = "PostCode" list="PostCodeList" value="@school.PostCode">
+                    <datalist id="PostCodeList">
+                    </datalist>
+                </td>
+            </tr>
+            <select name="Status">
+                <option value=@SchoolStatus.InUse selected="selected">In Use</option>
+                <option value=@SchoolStatus.InRequest>In Request</option>
+                <option value=@SchoolStatus.NoLongerUsed>No Longer Used</option>
+            </select>
+            <button type="submit" name="Id" value="@school.Id">Submit</button>
+        </form>
+    }
+}
+<p>In Request School</p>
+@{
+    foreach (var school in inRequest)
+    {
+        <form asp-action="UpdateSchoolAction">
+            <tr>
+                <td>
+                    <input type="text" name="SchoolName" value = "@school.SchoolName">
+                </td>
+                <td>
+                    <input type="text" name="DomainExtension" value = "@school.DomainExtension">
+                </td>
+                <td>
+                    <input type="text" name="SurburbName" id = "SuburbId" list="SurburbNameList" onkeyup="GetSuburbName(this.value)" value="@school.SurburbName">
+                    <datalist id="SuburbNameList">
+                    </datalist>
+                </td>
+                <td>
+                    <input type="text" name="PostCode" id = "PostCode" list="PostCodeList" value="@school.PostCode">
+                    <datalist id="PostCodeList">
+                    </datalist>
+                </td>
+            </tr>
+            <select name="Status">
+                <option value=@SchoolStatus.InUse>In Use</option>
+                <option value=@SchoolStatus.InRequest  selected="selected">In Request</option>
+                <option value=@SchoolStatus.NoLongerUsed>No Longer Used</option>
+            </select>
+            <button type="submit" name="Id" value="@school.Id">Submit</button>
+        </form>
+    }
+}
+<p>No Longer Used School</p>
+@{
+    foreach (var school in baned)
+    {
+        <form asp-action="UpdateSchoolAction">
+            <tr>
+                <td>
+                    <input type="text" name="SchoolName" value = "@school.SchoolName">
+                </td>
+                <td>
+                    <input type="text" name="DomainExtension" value = "@school.DomainExtension">
+                </td>
+                <td>
+                    <input type="text" name="SurburbName" id = "SuburbId" list="SurburbNameList" onkeyup="GetSuburbName(this.value)" value="@school.SurburbName">
+                    <datalist id="SuburbNameList">
+                    </datalist>
+                </td>
+                <td>
+                    <input type="text" name="PostCode" id = "PostCode" list="PostCodeList" value="@school.PostCode">
+                    <datalist id="PostCodeList">
+                    </datalist>
+                </td>
+            </tr>
+            <select name="Status">
+                <option value=@SchoolStatus.InUse>In Use</option>
+                <option value=@SchoolStatus.InRequest >In Request</option>
+                <option value=@SchoolStatus.NoLongerUsed  selected="selected">No Longer Used</option>
+            </select>
+            <button type="submit" name="Id" value="@school.Id">Submit</button>
+        </form>
+    }
+}
+
+
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

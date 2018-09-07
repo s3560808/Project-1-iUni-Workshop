@@ -1,8 +1,8 @@
 ﻿@model iUni_Workshop.Models.EmployeeModels.Employee
 
 @{
-    ViewBag.Title = "title";
-    Layout = "_Layout";
+ViewBag.Title = "title";
+Layout = "_Layout";
 }
 
 <script>
@@ -51,12 +51,12 @@
 <form method="post" asp-action="EditPersonalInfoAction" >
 @Html.DisplayNameFor(model => model.Name)
     @{
-        string name = "";
-        if (Model.Name != null)
-        {
-            name = @Model.Name;
-        }
-        <input type="text" name="Name" value="@name">
+string name = "";
+if (Model.Name != null)
+{
+name = @Model.Name;
+}
+        <input type="text" name="Name" value="@name" @{}>
     }
 
 

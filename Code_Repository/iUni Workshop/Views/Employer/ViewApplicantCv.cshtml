@@ -1,4 +1,4 @@
-@model iUni_Workshop.Models.EmployerModels.SearchApplicant
+@model iUni_Workshop.Models.EmployerModels.ViewApplicantCv
 
 @{
     ViewBag.Title = "title";
@@ -6,3 +6,12 @@
 }
 
 <h2>title</h2>
+@Html.DisplayNameFor(model => model.Title) 
+@Html.DisplayFor(model =>model.Title)
+@Html.DisplayNameFor(model => model.Description)
+@Html.DisplayFor(model => model.Description)
+@Html.DisplayNameFor(model => model.EmployeeName)
+@Html.DisplayFor(model => model.EmployeeName)
+<form method="post" asp-action="SendInvitation">
+    <button type="submit"></button>
+</form>

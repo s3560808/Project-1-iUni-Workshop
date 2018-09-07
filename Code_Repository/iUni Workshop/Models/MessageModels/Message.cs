@@ -10,15 +10,15 @@ namespace iUni_Workshop.Models.MessageModels
         [DatabaseGenerated(DatabaseGeneratedOption.Identity),Key]
         public string Id { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity),Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string ConversationId { get; set; }
 
-        [Required, Key] 
+        [Required] 
         public string SenderId { get; set; }
         [ForeignKey(("SenderId"))] 
         public virtual ApplicationUser Sender { get; set; }
 
-        [Required, Key] 
+        [Required] 
         public string ReciverId { get; set; }
         [ForeignKey(("ReciverId"))] 
         public virtual ApplicationUser Receiver { get; set; }
@@ -37,6 +37,10 @@ namespace iUni_Workshop.Models.MessageModels
         public string Title { get; set; }
         
         [Required]
+        [DataType(DataType.Text)]
         public string MessageDetail { get; set; }
+
+        [Required] 
+        public int Type { get; set; }
     }
 }

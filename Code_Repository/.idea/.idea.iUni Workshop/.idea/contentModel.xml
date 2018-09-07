@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\kzmai\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_iUni Workshop.1468005403.00" t="ExcludeRecursive" />
-    <e p="C:\Users\kzmai\Dropbox\_COSC_2408_Project_1\Repository\Code_Repository" t="IncludeFlat">
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="iUni Workshop" t="IncludeRecursive">
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
@@ -16,12 +15,25 @@
           <e p="EmployerController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
           <e p="ManageController.cs" t="Include" />
+          <e p="SchoolController.cs" t="Include" />
           <e p="SuburbController.cs" t="Include" />
         </e>
         <e p="Data" t="Include">
           <e p="ApplicationDbContext.cs" t="Include" />
           <e p="Seeds" t="Include">
+            <e p="EmployeeCvExternalMaterialSeed.cs" t="Include" />
+            <e p="EmployeeCvJobHisotriesSeed.cs" t="Include" />
+            <e p="EmployeeCvSeed.cs" t="Include" />
+            <e p="EmployeeCvSkillSeed.cs" t="Include" />
+            <e p="EmployeeCvWorkDaySeed.cs" t="Include" />
+            <e p="EmployerJobProfileSeed.cs" t="Include" />
+            <e p="EmployerJobSkillSeed.cs" t="Include" />
+            <e p="FieldSeed.cs" t="Include" />
+            <e p="RoleSeed.cs" t="Include" />
+            <e p="SchoolSeed.cs" t="Include" />
+            <e p="SkillSeed.cs" t="Include" />
             <e p="StateSeed.cs" t="Include" />
+            <e p="SuburbSeed.cs" t="Include" />
             <e p="UserSeed.cs" t="Include" />
           </e>
         </e>
@@ -31,8 +43,8 @@
         </e>
         <e p="iUni Workshop.csproj" t="IncludeRecursive" />
         <e p="Migrations" t="Include">
-          <e p="20180824154033_Inkkitialhjhd.cs" t="Include" />
-          <e p="20180824154033_Inkkitialhjhd.Designer.cs" t="Include" />
+          <e p="20180907021215_InitialCredathe.cs" t="Include" />
+          <e p="20180907021215_InitialCredathe.Designer.cs" t="Include" />
           <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
@@ -48,6 +60,7 @@
           <e p="AdministratorModels" t="Include">
             <e p="AddField.cs" t="Include" />
             <e p="AddSchool.cs" t="Include" />
+            <e p="AddSchoolAction.cs" t="Include" />
             <e p="AddSkill.cs" t="Include" />
             <e p="Administraotr.cs" t="Include" />
             <e p="MessageDetail.cs" t="Include" />
@@ -55,10 +68,10 @@
             <e p="NewMessage.cs" t="Include" />
             <e p="ReplyMyMessage.cs" t="Include" />
             <e p="SetUserType.cs" t="Include" />
+            <e p="UpdateSchool.cs" t="Include" />
           </e>
           <e p="ApplicationUser.cs" t="Include" />
           <e p="EmployeeModels" t="Include">
-            <e p="AddSchoolAction.cs" t="Include" />
             <e p="EditCV.cs" t="Include" />
             <e p="EditCVAction.cs" t="Include" />
             <e p="EditCVEmployeeSkill.cs" t="Include" />
@@ -82,17 +95,35 @@
             <e p="EditCompanyInfo.cs" t="Include" />
             <e p="Employer.cs" t="Include" />
             <e p="EmployerComplusoryWorkDay.cs" t="Include" />
+            <e p="EmployerInvitation.cs" t="Include" />
             <e p="EmployerJobProfile.cs" t="Include" />
             <e p="EmployerRequiredSchool.cs" t="Include" />
+            <e p="EmployerRequiredWorkLocation.cs" t="Include" />
             <e p="EmployerSkill.cs" t="Include" />
+            <e p="JobProfile.cs" t="Include" />
+            <e p="JobProfileComplusoryWorkDay.cs" t="Include" />
+            <e p="JobProfileRequiredLocation.cs" t="Include" />
+            <e p="JobProfileRequiredSchool.cs" t="Include" />
+            <e p="JobProfiles.cs" t="Include" />
+            <e p="JobProfileSkill.cs" t="Include" />
+            <e p="RequestToCertificateMyCompany.cs" t="Include" />
+            <e p="SearchApplicant.cs" t="Include" />
+            <e p="ViewApplicantCv.cs" t="Include" />
           </e>
           <e p="ErrorViewModel.cs" t="Include" />
           <e p="InvatationModels" t="Include">
             <e p="Invatation.cs" t="Include" />
+            <e p="InvitationStatus.cs" t="Include" />
           </e>
           <e p="JobRelatedModels" t="Include">
             <e p="Field.cs" t="Include" />
+            <e p="FieldHistory.cs" t="Include" />
+            <e p="FieldHistoryOperation.cs" t="Include" />
+            <e p="FieldStatus.cs" t="Include" />
             <e p="Skill.cs" t="Include" />
+            <e p="SkillHistory.cs" t="Include" />
+            <e p="SkillHistoryOperations.cs" t="Include" />
+            <e p="SkillStatus.cs" t="Include" />
           </e>
           <e p="ManageViewModels" t="Include">
             <e p="ChangePasswordViewModel.cs" t="Include" />
@@ -106,16 +137,19 @@
           </e>
           <e p="MessageModels" t="Include">
             <e p="Message.cs" t="Include" />
+            <e p="MessageType.cs" t="Include" />
           </e>
           <e p="Roles.cs" t="Include" />
           <e p="SchoolModels" t="Include">
             <e p="School.cs" t="Include" />
+            <e p="SchoolStatus.cs" t="Include" />
           </e>
           <e p="StateModels" t="Include">
             <e p="State.cs" t="Include" />
           </e>
           <e p="SuburbModels" t="Include">
             <e p="Suburb.cs" t="Include" />
+            <e p="SuburbStatus.cs" t="Include" />
           </e>
         </e>
         <e p="obj" t="ExcludeRecursive">
@@ -179,7 +213,15 @@
           </e>
           <e p="Employer" t="Include">
             <e p="EditCompanyInfo.cshtml" t="Include" />
+            <e p="EditJobProfile.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
+            <e p="Invitations.cshtml" t="Include" />
+            <e p="JobProfiles.cshtml" t="Include" />
+            <e p="RequestToCertificateMyCompany.cshtml" t="Include" />
+            <e p="RequestToUnCertificateMyCompany.cshtml" t="Include" />
+            <e p="SearchApplicants.cshtml" t="Include" />
+            <e p="SendInvitation.cshtml" t="Include" />
+            <e p="ViewApplicantCv.cshtml" t="Include" />
           </e>
           <e p="Home" t="Include">
             <e p="About.cshtml" t="Include" />
@@ -285,5 +327,7 @@
       <e p="iUni Workshop.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
     </e>
+    <e p="$USER_HOME$/Library/Caches/Rider2018.2/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_iUni Workshop.-439165151.00" t="ExcludeRecursive" />
   </component>
 </project>

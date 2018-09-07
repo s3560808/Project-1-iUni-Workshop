@@ -43,13 +43,10 @@ namespace iUni_Workshop.Controllers
                 {
                     case Roles.Administrator:
                         return RedirectToAction("Index","Administrator");
-                        break;
                     case Roles.Employee:
                         return RedirectToAction("Index","Employee");
-                        break;
                     case Roles.Employer:
                         return RedirectToAction("Index","Employer");
-                        break;
                     default:
                         break;
                 }
@@ -76,7 +73,7 @@ namespace iUni_Workshop.Controllers
                         break;
                     case Roles.EmployerId:
                         await _userManager.AddToRoleAsync(user,Roles.Employer);
-                        _context.Employers.Add(new Employer{Id = user.Id, Name = user.UserName});
+                    _context.Employers.Add(new Employer{Id = user.Id, Name = user.UserName});
                         _context.SaveChanges();
                         break;
                     default:
@@ -84,5 +81,6 @@ namespace iUni_Workshop.Controllers
             }
             return RedirectToAction("Index");
         }
+
     }
 }

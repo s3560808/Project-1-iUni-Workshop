@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using iUni_Workshop.Models.JobRelatedModels;
 using iUni_Workshop.Models.SuburbModels;
+using iUniWorkshop.Models.EmployerModels;
 
 namespace iUni_Workshop.Models.EmployerModels
 {
@@ -39,20 +40,17 @@ namespace iUni_Workshop.Models.EmployerModels
         [Required] 
         public Boolean RequireJobExperience { get; set; }
         
-        public int MaxDayForAWeek { get; set; }
+        public int? MaxDayForAWeek { get; set; }
         
-        public int MinDayForAWeek { get; set; }
+        public int? MinDayForAWeek { get; set; }
         
         [Required] 
         public float Salary { get; set; }
-        
-        [Display(Name = "SuburbId")]
-        public int SuburbId { get; set; }
-        [ForeignKey(("SuburbId"))]
-        public virtual Suburb Suburb { get; set; }
+
 
         public virtual ICollection<EmployerSkill> EmployerSkills { get; set; }
         public virtual ICollection<EmployerComplusoryWorkDay> EmployerComplusoryWorkDays { get; set; }
         public virtual ICollection<EmployerRequiredSchool> EmployerRequiredSchools { get; set; }
+        public virtual ICollection<EmployerRequiredWorkLocation> EmployerRequiredWorkLocations { get; set; }
     }
 }

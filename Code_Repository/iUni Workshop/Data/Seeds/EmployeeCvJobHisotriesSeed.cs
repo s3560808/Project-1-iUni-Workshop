@@ -2,12 +2,14 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using iUni_Workshop.Models.EmployeeModels;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MySql.Data.MySqlClient;
 
 namespace iUni_Workshop.Data.Seeds
 {
-    public class EmployeeCvJobHisotries
+    public class EmployeeCvJobHisotriesSeed
     {
         public static async Task Initialize(IServiceProvider serviceProvider, ILogger<Program> logger)
         {
@@ -20,10 +22,18 @@ namespace iUni_Workshop.Data.Seeds
         private static void CreateEmployeeCvJobHistory(int id, string historyName, string shortDescription, int employerCvId, ApplicationDbContext _context)
         {
             
-            var newHistory = new EmployeeJobHistory()
+            var newHistory = new EmployeeJobHistory
                 { Id = id, Name = historyName, ShortDescription = shortDescription, EmployeeCvId = employerCvId};
-            _context.EmployeeJobHistories.Add(newHistory);
-            _context.SaveChanges();
+            try
+            {
+                _context.EmployeeJobHistories.Add(newHistory);
+                _context.SaveChanges();
+            }
+            catch (NullReferenceException ex)
+            {
+            }
+            
+            
         }
     }
 }

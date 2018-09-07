@@ -7,12 +7,13 @@ namespace iUni_Workshop.Models.EmployeeModels
 {
     public class EmployeeSkill
     {
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity), Key]
+        public int Id { get; set; }
+
         public int SkillId { get; set; }
         [ForeignKey("SkillId")]
         public virtual Skill Skill { get; set; }
         
-        [Key]
         public int EmployeeCvId { get; set; }
         [ForeignKey("EmployeeCvId")]
         public virtual EmployeeCV EmployeeCV { get; set; }

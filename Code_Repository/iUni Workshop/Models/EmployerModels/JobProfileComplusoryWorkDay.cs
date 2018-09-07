@@ -3,8 +3,6 @@ namespace iUniWorkshop.Models.EmployerModels
 {
     public class JobProfileComplusoryWorkDay
     {
-        public JobProfileComplusoryWorkDay()
-        {
-        }
+        public int Day { get; set; }
     }
 }

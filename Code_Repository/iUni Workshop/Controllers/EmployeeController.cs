@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using iUni_Workshop.Data;
 using iUni_Workshop.Models;
+using iUni_Workshop.Models.AdministratorModels;
 using iUni_Workshop.Models.EmployeeModels;
 using iUni_Workshop.Models.JobRelatedModels;
 using iUni_Workshop.Models.SchoolModels;
@@ -14,6 +15,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Differencing;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using MessageDetail = iUni_Workshop.Models.EmployeeModels.MessageDetail;
+using MyMessages = iUni_Workshop.Models.EmployeeModels.MyMessages;
 
 namespace iUni_Workshop.Controllers
 {
@@ -31,12 +34,13 @@ namespace iUni_Workshop.Controllers
             _context = context;
         }
         
-        // GET
+        // Index of page
         public IActionResult Index()
         {
             return View();
         }
   
+        //
         public async Task<IActionResult> EditPersonalInfo()
         {
             var user = await _userManager.GetUserAsync(User);

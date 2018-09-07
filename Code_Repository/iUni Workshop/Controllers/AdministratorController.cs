@@ -5,12 +5,17 @@ using System.Threading.Tasks;
 using iUni_Workshop.Data;
 using iUni_Workshop.Models;
 using iUni_Workshop.Models.AdministratorModels;
+using iUni_Workshop.Models.EmployeeModels;
 using iUni_Workshop.Models.JobRelatedModels;
 using iUni_Workshop.Models.MessageModels;
 using iUni_Workshop.Models.SchoolModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using MessageDetail = iUni_Workshop.Models.AdministratorModels.MessageDetail;
+using MyMessages = iUni_Workshop.Models.AdministratorModels.MyMessages;
 
 namespace iUni_Workshop.Controllers
 {
@@ -39,32 +44,149 @@ namespace iUni_Workshop.Controllers
         [HttpGet]
         public async Task<IActionResult> AddSchool()
         {
-            return View();
+            var result = _context.Schools
+                .Select(a => new AddSchool
+                {
+                    DomainExtension = a.DomainExtension, 
+                    Status = a.Status, 
+                    PostCode = a.Suburb.PostCode,
+                    SchoolName = a.SchoolName,
+                    SurburbName = a.Suburb.Name,
+                    Id = a.Id
+                }).OrderBy(a => a.DomainExtension);
+            return View(result);
         }
         
         [HttpPost]
-        public async Task<IActionResult> AddSchoolAction(AddSchool school)
+        public async Task<IActionResult> AddSchoolAction(AddSchoolAction school)
         {
+            var schoolStatus = SchoolStatus.InUse;
+
             if (!ModelState.IsValid)
             {
-            }
-            var suburbId = _context.Suburbs.First(a => a.Name == school.SurburbName && a.PostCode == school.PostCode).Id;
-            var newSchool = new School
+                //ToDo
+                //If model is not valid
+            }       
+            var suburbs = _context.Suburbs.Where(a => a.Name == school.SurburbName && a.PostCode == school.PostCode);
+            if (suburbs.Any())
             {
-                DomainExtension = school.DomainExtension,
-                SchoolName = school.SchoolName,
-                NormalizedName = school.SchoolName.ToUpper(),
-                SuburbId = suburbId,
-                AddedBy = (await _userManager.GetUserAsync(User)).Id
-            };
-            _context.Schools.Add(newSchool);
+                //Todo 
+                //If cannot find suburb
+            }
+
+            var checkWhetherUpdate = _context.Schools.Where(a => 
+                    (a.SchoolName == school.SchoolName && a.SuburbId == suburbs.First().Id) ||
+                    (a.DomainExtension == school.DomainExtension  && a.SuburbId == suburbs.First().Id)
+                );
+
+            School newSchool;
+            if (checkWhetherUpdate.Any())
+            {
+                newSchool = checkWhetherUpdate.First();
+                newSchool.SchoolName = school.SchoolName;
+                newSchool.DomainExtension = school.DomainExtension;
+                newSchool.Status = schoolStatus;
+                //ToDo
+                //Need to infom administrator it is a update was no longer use or in request
+            }
+            else
+            {
+                newSchool = new School
+                {
+                    DomainExtension = school.DomainExtension.ToLower(),
+                    SchoolName = school.SchoolName,
+                    NormalizedName = school.SchoolName.ToUpper(),
+                    SuburbId = suburbs.First().Id,
+                    AddedBy = (await _userManager.GetUserAsync(User)).Id,
+                    Status = SchoolStatus.InUse
+                };
+            }
+            //To update school name if school name changes
+            
+            _context.Schools.Update(newSchool);
             await _context.SaveChangesAsync();
+            await UpdateRelatedInfo(newSchool.SchoolName, newSchool.DomainExtension);
             return RedirectToAction("AddSchool");
+        }
+
+        public async Task<IActionResult> UpdateSchoolAction(UpdateSchool school)
+        {
+            var suburbs = _context.Suburbs.Where(a => a.Name == school.SurburbName && a.PostCode == school.PostCode);
+            var update = _context.Schools.First(a => a.Id == school.Id);
+            //TODO validate id
+            if (suburbs.Any())
+            {
+                //Todo 
+                //If cannot find suburb
+            }
+            
+            //Can log in database
+            if (school.SchoolName != update.SchoolName)
+            {
+                update.SchoolName = school.SchoolName;
+                update.NormalizedName = school.SchoolName.ToUpper();
+                _context.Update(update);
+                _context.SaveChanges();
+                await UpdateRelatedInfo(update.SchoolName, update.DomainExtension);
+            }
+            
+            //Can log in database
+            if (school.DomainExtension != update.DomainExtension)
+            {
+                update.DomainExtension = school.DomainExtension.ToLower();
+                _context.Update(update);
+                _context.SaveChanges();
+                await UpdateRelatedInfo(update.SchoolName, update.DomainExtension);
+            }
+            
+            //Can log in database
+            if (suburbs.First().Id != update.SuburbId)
+            {
+                update.SuburbId = suburbs.First().Id;
+                _context.Update(update);
+                _context.SaveChanges();
+            }
+
+            //Can log in database
+            if (school.Status != update.Status)
+            {
+                update.Status = school.Status;
+                _context.Update(update);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("AddSchool");
+        }
+
+        private async Task UpdateRelatedInfo(string schoolName, string domainExtension)
+        {
+            var schools = _context.Schools.Where(a => 
+                a.NormalizedName == schoolName.ToUpper() ||
+                a.DomainExtension == domainExtension.ToLower()
+            );
+            
+            
+            foreach (var ischool in schools)
+            {
+                ischool.SchoolName = schoolName;
+                ischool.NormalizedName = schoolName.ToUpper();
+                ischool.DomainExtension = domainExtension.ToLower();
+            }
+            _context.Schools.UpdateRange(schools);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<IActionResult> AddField()
         {
-            return View();
+            var result = _context.Fields
+                .Select(a => 
+                    new AddField
+                    {
+                        Id = a.Id, 
+                        Name = a.Name, 
+                        Status = a.Status
+                    })
+                .AsEnumerable();
+            return View(result);
         }
 
         [HttpPost]
@@ -73,20 +195,75 @@ namespace iUni_Workshop.Controllers
             if (!ModelState.IsValid)
             {
             }
-            var newField = new Field
+
+            var checkInDatabase = _context.Fields.Where(a => a.NormalizedName == field.Name.ToUpper());
+
+            Field newField;
+            
+            if (checkInDatabase.Any())
             {
-                Name = field.Name,
-                NormalizedName = field.Name.ToUpper(),
-                AddedBy = (await _userManager.GetUserAsync(User)).Id
-            };
-            _context.Fields.Add(newField);
+                //TODO Need to infrom administrator it is a update. Already in database.
+                newField = checkInDatabase.First();
+                newField.Status = FieldStatus.InUse;
+            }
+            else
+            {
+                newField = new Field
+                {
+                    Name = field.Name,
+                    NormalizedName = field.Name.ToUpper(),
+                    Status = FieldStatus.InUse,
+                    AddedBy = (await _userManager.GetUserAsync(User)).Id
+                };
+            }
+            _context.Fields.Update(newField);
             await _context.SaveChangesAsync();
             return RedirectToAction("AddField");
         }
 
+        public async void UpdateFieldAction(AddField field)
+        {
+            if (!ModelState.IsValid)
+            {
+            }
+            
+            var checkInDatabase = _context.Fields.Where(a => a.Id == field.Id);
+
+            if (!checkInDatabase.Any()) return;//Todo error not in database
+
+            var oldField = checkInDatabase.First();
+
+            //Prepare to log
+            if (oldField.Status != field.Status)
+            {
+                oldField.Status = field.Status;
+                _context.Fields.Update(oldField);
+                _context.SaveChanges();
+            }
+            //Prepare to log
+            if (oldField.Name != field.Name)
+            {
+                oldField.Name = field.Name;
+                oldField.NormalizedName = field.Name.ToUpper();
+                _context.Fields.Update(oldField);
+                _context.SaveChanges();
+            }
+            
+            return;
+        }
+
         public async Task<IActionResult> AddSkill()
         {
-            return View();
+            var result = _context.Skills
+                .Select(a => 
+                    new AddSkill
+                    {
+                        Id = a.Id, 
+                        Name = a.Name, 
+                        Status = a.Status
+                    })
+                .AsEnumerable();
+            return View(result);
         }
 
         [HttpPost]
@@ -95,16 +272,63 @@ namespace iUni_Workshop.Controllers
             if (!ModelState.IsValid)
             {
             }
-            var newSkill = new Skill
-            {
-                Name = skill.Name,
-                NormalizedName = skill.Name.ToUpper(),
-                AddedBy = (await _userManager.GetUserAsync(User)).Id
-            };
             
-            _context.Skills.Add(newSkill);
+            var checkInDatabase = _context.Skills.Where(a => a.NormalizedName == skill.Name.ToUpper());
+
+            Skill newSkill;
+
+            if (checkInDatabase.Any())
+            {
+                //TODO Need to infrom administrator it is a update. Already in database.
+                newSkill = checkInDatabase.First();
+                newSkill.Status = SkillStatus.InUse;
+            }
+            else
+            {
+                newSkill = new Skill
+                {
+                    Name = skill.Name,
+                    NormalizedName = skill.Name.ToUpper(),
+                    AddedBy = (await _userManager.GetUserAsync(User)).Id,
+                    Status = SkillStatus.InUse
+                };
+            }
+
+            _context.Skills.Update(newSkill);
             await _context.SaveChangesAsync();
+
             return RedirectToAction("AddSkill");
+        }
+
+        public void UpdateSkillAction(AddSkill skill)
+        {
+            if (!ModelState.IsValid)
+            {
+            }
+            
+            var checkInDatabase = _context.Skills.Where(a => a.Id == skill.Id);
+
+            if (!checkInDatabase.Any()) return;//Todo error not in database
+
+            var oldField = checkInDatabase.First();
+
+            //Prepare to log
+            if (oldField.Status != skill.Status)
+            {
+                oldField.Status = skill.Status;
+                _context.Skills.Update(oldField);
+                _context.SaveChanges();
+            }
+            //Prepare to log
+            if (oldField.Name != skill.Name)
+            {
+                oldField.Name = skill.Name;
+                oldField.NormalizedName = skill.Name.ToUpper();
+                _context.Skills.Update(oldField);
+                _context.SaveChanges();
+            }
+            
+            return;
         }
 
         public async Task<IActionResult> SetUserType()
@@ -206,10 +430,5 @@ namespace iUni_Workshop.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("MyMessages");
     }
-
-        //        public async Task<IActionResult> SystemStatus()
-        //        {
-        //            return View();
-        //        }
     }
 }

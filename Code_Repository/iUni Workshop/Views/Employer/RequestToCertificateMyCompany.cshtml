@@ -5,4 +5,98 @@
     Layout = "_Layout";
 }
 
-<h2>title</h2>
+<form method="post" asp-action="RequestToCertificateMyCompanyAction">
+    @Html.DisplayNameFor(model => model.Name)
+    @{
+        string name = "";
+        bool readOnlyFlag = Model.Certificated;
+        if (Model.Name != null)
+        {
+            name = @Model.Name;
+        }
+        <input type="text" name="Name" value="@name" class="CoreInfo">
+    }
+
+    <br />
+    @Html.DisplayNameFor(model => model.PhoneNumber)
+    @{
+        string phoneNumber = "";
+        if (Model.PhoneNumber != null)
+        {
+            phoneNumber = @Model.PhoneNumber;
+        }
+        <input type="text" name="PhoneNumber" value="@phoneNumber">
+    }
+
+    <br />
+    @Html.DisplayNameFor(model => model.ContactEmail)
+    @{
+        string email = "";
+        if (Model.ContactEmail != null)
+        {
+            email = @Model.ContactEmail;
+        }
+        <input type="text" name="ContactEmail" value="@email">
+    }
+    <br />
+
+    @Html.DisplayNameFor(model => model.Address)
+    @{
+        string address = "";
+        if (Model.Address != null)
+        {
+            address = @Model.Address;
+        }
+        <input type="text" name="Address" value="@address">
+    }
+    <br />
+
+    @Html.DisplayNameFor(model => model.BriefDescription)
+    @{
+        string briefDescription = "";
+        if (Model.BriefDescription != null)
+        {
+            briefDescription = @Model.BriefDescription;
+        }
+        <textarea name="BriefDescription">@briefDescription</textarea>
+    }
+    <br />
+
+    @Html.DisplayNameFor(model => model.PostCode)
+    @{
+        string postcode = "";
+        if (Model.PostCode != null)
+        {
+            postcode = @Model.PostCode.ToString();
+        }
+        <input type="text" name="PostCode" value="@postcode" list="PostCodeList">
+        <datalist id="PostCodeList"></datalist>
+    }
+    <br />
+
+    @Html.DisplayNameFor(model => model.SuburbName)
+    @{
+        string suburbName = "";
+        if (Model.SuburbName != null)
+        {
+            suburbName = @Model.SuburbName;
+        }
+        <input type="text" name="SuburbName" value="@suburbName" list="SurburbNameList" onkeyup="GetSuburbName(this.value)">
+        <datalist id="SurburbNameList"></datalist>
+    }
+    <br />
+
+    @Html.DisplayNameFor(model => model.ABN)
+    @{
+        string abn = "";
+        if (Model.ABN != null)
+        {
+            abn = @Model.ABN;
+        }
+        <input type="text" name="ABN" value="@abn" class="CoreInfo">
+    }
+    <br />
+
+    <button type="submit">Submit</button>
+</form>
+

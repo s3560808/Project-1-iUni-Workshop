@@ -1,4 +1,4 @@
-@model System.Collections.Generic.List<iUni_Workshop.Models.EmployerModels.SearchApplicant>
+@model IEnumerable<iUni_Workshop.Models.EmployerModels.SearchApplicant>
 
 @{
     ViewBag.Title = "title";
@@ -6,3 +6,44 @@
 }
 
 <h2>title</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CvId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApplicantName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Score)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CvId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicantName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Score)
+                </td>
+            </tr>
+        }
+    }
+        
+    </tbody>
+
+</table>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

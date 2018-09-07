@@ -1,7 +1,8 @@
-namespace iUni Workshop.Models.EmployerModels
+namespace iUni_Workshop.Models.EmployerModels
 {
-    public class EmployerInvatations
+    public class EmployerInvitation
     {
-        
+        public int InvitationId { get; set; }
+        public int Status { get; set; }
     }
 }

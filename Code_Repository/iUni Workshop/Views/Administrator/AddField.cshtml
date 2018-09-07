@@ -1,4 +1,6 @@
-﻿@model iUni_Workshop.Models.AdministratorModels.AddField
+﻿@using iUni_Workshop.Models.AdministratorModels
+@using iUni_Workshop.Models.JobRelatedModels
+@model IEnumerable<iUni_Workshop.Models.AdministratorModels.AddField>
 
 @{
     ViewBag.Title = "title";
@@ -10,25 +12,95 @@
 <form method="post" asp-action="AddFieldAction">
     <table class="table">
         <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+        </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <input type="text" name="Name">
-                </td>
-            </tr>
+        <tr>
+            <td>
+                <input type="text" name="Name">
+            </td>
+        </tr>
         </tbody>
 
     </table>
     <button type="submit" class="btn btn-sm btn-success">Confirm</button>
 </form>
+@{
+    var inUse = new List<AddField>();
+    var inReq = new List<AddField>();
+    var baned = new List<AddField>();
+    foreach (var model in Model)
+    {
+        switch (model.Status)
+        {
+            case FieldStatus.InUse:
+                inUse.Add(model);
+                break;
+            case FieldStatus.InRequest:
+                inReq.Add(model);
+                break;
+            case FieldStatus.NoLongerUsed:
+                baned.Add(model);
+                break;
+        }
+    }
+}
 
+<p>In use field</p>
+@{
+    foreach (var use in inUse)
+    {
+        <form asp-action="UpdateFieldAction" method="post">
+            <input type="text" name="Name" value="@use.Name">
+            <select name="Status">
+                <option value="@FieldStatus.InUse" selected="selected">In Use</option>
+                <option value="@FieldStatus.InRequest">In Request</option>
+                <option value="@FieldStatus.NoLongerUsed">No Longer Used</option>
+            </select>
+            <button type="submit" name = "Id" value="@use.Id"></button>
+        </form>
+    }
+}
+<p>In request</p>
+@{
+    foreach (var use in inReq)
+    {
+        <form asp-action="UpdateFieldAction" method="post">
+            <input type="text" name="Name" value="@use.Name">
+            <select name="Status">
+                <option value="@FieldStatus.InUse">In Use</option>
+                <option value="@FieldStatus.InRequest"  selected="selected">In Request</option>
+                <option value="@FieldStatus.NoLongerUsed">No Longer Used</option>
+            </select>
+            <button type="submit" name = "Id" value="@use.Id"></button>
+        </form>
+    }
+}
+<p>No longer used</p>
+@{
+    foreach (var use in baned)
+    {
+        <form asp-action="UpdateFieldAction" method="post">
+            <input type="text" name="Name" value="@use.Name">
+            <select name="Status">
+                <option value="@FieldStatus.InUse">In Use</option>
+                <option value="@FieldStatus.InRequest" >In Request</option>
+                <option value="@FieldStatus.NoLongerUsed" selected="selected">No Longer Used</option>
+            </select>
+            <button type="submit" name = "Id" value="@use.Id"></button>
+        </form>
+    }
+}
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }

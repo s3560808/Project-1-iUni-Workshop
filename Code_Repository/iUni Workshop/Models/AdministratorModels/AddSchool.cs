@@ -17,5 +17,9 @@ namespace iUni_Workshop.Models.AdministratorModels
         
         [Required] 
         public int PostCode { get; set; }
+
+        public int Status { get; set; }
+
+        public int Id { get; set; }
     }
 }

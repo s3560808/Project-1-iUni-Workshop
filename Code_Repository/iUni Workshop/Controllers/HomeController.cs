@@ -19,29 +19,8 @@ namespace iUni_Workshop.Controllers
             _roleManager = roleManager;
             _userManager = userManager;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            bool exitAdmin = await _roleManager.RoleExistsAsync("Administrator");
-            bool exitEmployer = await _roleManager.RoleExistsAsync("Employer");
-            bool exitEmployee = await _roleManager.RoleExistsAsync("Employee");
-            if (!exitAdmin)
-            {
-                var role = new IdentityRole();
-                role.Name = "Administrator";
-                await _roleManager.CreateAsync(role);
-            }
-            if (!exitEmployer)
-            {
-                var role = new IdentityRole();
-                role.Name = "Employer";
-                await _roleManager.CreateAsync(role);
-            }
-            if (!exitEmployee)
-            {
-                var role = new IdentityRole();
-                role.Name = "Employee";
-                await _roleManager.CreateAsync(role);
-            }
             return View();
         }
 
