@@ -1,13 +1,13 @@
 ﻿{
   "version": "1.0.0",
   "restore": {
-    "projectUniqueName": "/Users/kzmain/Documents/GitHub/iUni-Workshop/Code_Repository/iUni Workshop/iUni Workshop.csproj",
+    "projectUniqueName": "C:\\Users\\Winston\\Desktop\\Project\\Project-1-iUni-Workshop\\Project-1-iUni-Workshop\\Code_Repository\\iUni Workshop\\iUni Workshop.csproj",
     "projectName": "iUni Workshop",
-    "projectPath": "/Users/kzmain/Documents/GitHub/iUni-Workshop/Code_Repository/iUni Workshop/iUni Workshop.csproj",
-    "outputPath": "/Users/kzmain/Documents/GitHub/iUni-Workshop/Code_Repository/iUni Workshop/obj/",
+    "projectPath": "C:\\Users\\Winston\\Desktop\\Project\\Project-1-iUni-Workshop\\Project-1-iUni-Workshop\\Code_Repository\\iUni Workshop\\iUni Workshop.csproj",
+    "outputPath": "C:\\Users\\Winston\\Desktop\\Project\\Project-1-iUni-Workshop\\Project-1-iUni-Workshop\\Code_Repository\\iUni Workshop\\obj\\",
     "projectStyle": "PackageReference",
     "fallbackFolders": [
-      "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
     ],
     "originalTargetFrameworks": [
       "netcoreapp2.0"
