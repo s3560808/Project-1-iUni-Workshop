@@ -13490,23 +13490,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Winston\\.nuget\\packages\\": {},
+    "C:\\Users\\Winston Lam\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Winston\\Desktop\\Project\\Project-1-iUni-Workshop\\Project-1-iUni-Workshop\\Code_Repository\\iUni Workshop\\iUni Workshop.csproj",
+      "projectUniqueName": "C:\\Users\\Winston Lam\\Documents\\GitHub\\Project-1-iUni-Workshop\\Code_Repository\\iUni Workshop\\iUni Workshop.csproj",
       "projectName": "iUni Workshop",
-      "projectPath": "C:\\Users\\Winston\\Desktop\\Project\\Project-1-iUni-Workshop\\Project-1-iUni-Workshop\\Code_Repository\\iUni Workshop\\iUni Workshop.csproj",
-      "packagesPath": "C:\\Users\\Winston\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Winston\\Desktop\\Project\\Project-1-iUni-Workshop\\Project-1-iUni-Workshop\\Code_Repository\\iUni Workshop\\obj\\",
+      "projectPath": "C:\\Users\\Winston Lam\\Documents\\GitHub\\Project-1-iUni-Workshop\\Code_Repository\\iUni Workshop\\iUni Workshop.csproj",
+      "packagesPath": "C:\\Users\\Winston Lam\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Winston Lam\\Documents\\GitHub\\Project-1-iUni-Workshop\\Code_Repository\\iUni Workshop\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Winston\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Winston Lam\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
@@ -13538,6 +13538,7 @@
             "version": "[2.0.3, )"
           },
           "Microsoft.NETCore.App": {
+            "suppressParent": "All",
             "target": "Package",
             "version": "[2.0.0, )",
             "autoReferenced": true

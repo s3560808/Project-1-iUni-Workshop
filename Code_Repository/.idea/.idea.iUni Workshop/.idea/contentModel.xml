@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Winston\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_iUni Workshop.1115935616.00" t="ExcludeRecursive" />
-    <e p="C:\Users\Winston\Desktop\Project\Project-1-iUni-Workshop\Project-1-iUni-Workshop\Code_Repository" t="IncludeFlat">
+    <e p="C:\Users\Winston Lam\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Winston Lam\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_iUni Workshop.2095775489.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository" t="IncludeFlat">
       <e p="iUni Workshop" t="IncludeRecursive">
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
@@ -43,11 +44,7 @@
           <e p="UrlHelperExtensions.cs" t="Include" />
         </e>
         <e p="iUni Workshop.csproj" t="IncludeRecursive" />
-        <e p="Migrations" t="Include">
-          <e p="20180909130125_Initial.cs" t="Include" />
-          <e p="20180909130125_Initial.Designer.cs" t="Include" />
-          <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
-        </e>
+        <e p="Migrations" t="Include" />
         <e p="Models" t="Include">
           <e p="AccountViewModels" t="Include">
             <e p="ExternalLoginViewModel.cs" t="Include" />

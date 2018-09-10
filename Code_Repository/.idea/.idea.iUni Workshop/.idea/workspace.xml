@@ -22,7 +22,6 @@
       <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/project.packagespec.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -77,61 +76,55 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="1903205189">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Index.cshtml" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/Index.cshtml">
           <provider selected="true" editor-type-id="text-editor">
             <state>
               <caret selection-end-line="8" />
-              <folding>
-                <marker date="1535080653302" expanded="true" signature="15:88" ph="@..." />
-              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MyInvitations.cshtml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MyInvitations.cshtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-              <folding>
-                <marker date="1536499230011" expanded="true" signature="15:93" ph="@..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MyCVs.cshtml" pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MyCVs.cshtml">
           <provider selected="true" editor-type-id="text-editor">
             <state>
               <caret column="18" selection-start-column="7" selection-end-column="18" />
               <folding>
-                <marker date="1536041090048" expanded="true" signature="63:120" ph="@..." />
-                <marker date="1536041090048" expanded="true" signature="142:2026" ph="&lt;table.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="172:694" ph="&lt;thead.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="192:677" ph="&lt;tr.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="213:301" ph="&lt;th.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="318:409" ph="&lt;th.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="426:519" ph="&lt;th.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="536:633" ph="&lt;th.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="703:2012" ph="&lt;tbody.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="719:1986" ph="@..." />
-                <marker date="1536041090048" expanded="true" signature="761:1976" ph="{...}" />
-                <marker date="1536041090048" expanded="true" signature="792:1962" ph="&lt;tr.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="817:912" ph="&lt;td.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="933:1031" ph="&lt;td.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="1052:1152" ph="&lt;td.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="1173:1584" ph="&lt;td.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="1202:1558" ph="@..." />
-                <marker date="1536041090048" expanded="true" signature="1259:1379" ph="{...}" />
-                <marker date="1536041090048" expanded="true" signature="1415:1529" ph="{...}" />
-                <marker date="1536041090048" expanded="true" signature="1605:1940" ph="&lt;td.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="1634:1889" ph="&lt;form.../&gt;" />
-                <marker date="1536041090048" expanded="true" signature="2028:2106" ph="@{...}" />
+                <marker date="1536511568955" expanded="true" signature="63:120" ph="@..." />
+                <marker date="1536511568955" expanded="true" signature="142:2026" ph="&lt;table.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="172:694" ph="&lt;thead.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="192:677" ph="&lt;tr.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="213:301" ph="&lt;th.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="318:409" ph="&lt;th.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="426:519" ph="&lt;th.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="536:633" ph="&lt;th.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="703:2012" ph="&lt;tbody.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="719:1986" ph="@..." />
+                <marker date="1536511568955" expanded="true" signature="761:1976" ph="{...}" />
+                <marker date="1536511568955" expanded="true" signature="792:1962" ph="&lt;tr.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="817:912" ph="&lt;td.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="933:1031" ph="&lt;td.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="1052:1152" ph="&lt;td.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="1173:1584" ph="&lt;td.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="1202:1558" ph="@..." />
+                <marker date="1536511568955" expanded="true" signature="1259:1379" ph="{...}" />
+                <marker date="1536511568955" expanded="true" signature="1415:1529" ph="{...}" />
+                <marker date="1536511568955" expanded="true" signature="1605:1940" ph="&lt;td.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="1634:1889" ph="&lt;form.../&gt;" />
+                <marker date="1536511568955" expanded="true" signature="2028:2106" ph="@{...}" />
               </folding>
             </state>
           </provider>
@@ -170,131 +163,130 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/SuburbController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/SchoolController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/HomeController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/ManageController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/DashboardController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/AccountController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Extensions/EmailSenderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Extensions/UrlHelperExtensions.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Services/EmailSender.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Services/IEmailSender.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Program.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Startup.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MyInvitations.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/EmployerController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/AdministratorController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/UpdateSchool.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/SetUserType.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/AddSchool.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/NewMessage.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/MyMessages.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/Administraotr.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/ReplyMyMessage.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/MessageDetail.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/AddSkill.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/AddSchoolAction.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/AddField.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/FieldHistory.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/Field.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/SkillHistoryOperations.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/FieldHistoryOperation.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/SkillStatus.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/SkillHistory.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/FieldStatus.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/Skill.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/InvatationModels/Invatation.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/InvatationModels/InvitationStatus.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/JobProfileRequiredLocation.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/EmployerRequiredSchool.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/ViewApplicantCv.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/EmployerInvitation.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/EditCompanyInfo.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/JobProfiles.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/Employer.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/SearchApplicant.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/EmployerJobProfile.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/EmployerSkill.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/EmployerComplusoryWorkDay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/MyCvs.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditCV.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/MessageDetail.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditCVExternalMeterial.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/RequestToAddField.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/Employee.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditPersonalInfo.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditCvWorkDay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/MyMessages.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EmployeeWorkDay.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EmployeeSkill.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EmployeeJobHistory.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditCVEmployeeSkill.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditCVAction.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/RequestToAddSkill.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EmployeeExternalMeterial.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EmployeeCV.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditCVJobHistory.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/MessageModels/MessageType.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/MessageModels/Message.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/SuburbModels/Suburb.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/SuburbModels/SuburbStatus.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/SchoolModels/School.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/SchoolModels/SchoolStatus.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/StateModels/State.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/ApplicationUser.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/Roles.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/AddSkill.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/SetUserType.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/AddSchool.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/MessageDetail.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/AddField.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/NewMessage.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/MyMessages.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/EditJobProfile.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/SearchApplicants.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/JobProfiles.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/EditCompanyInfo.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/SendInvitation.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/RequestToUnCertificateMyCompany.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/RequestToCertificateMyCompany.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/ViewApplicantCv.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/Invitations.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/RequestToAddSchool.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/RequestToAddSkill.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MyCVs.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/EditPersonalInfo.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MessageDetail.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/RequestToAddField.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/RequestToAddSchool.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MyMessages.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/EditCV.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Shared/_LoginPartial.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Shared/_ValidationScriptsPartial.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Manage/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Manage/_ManageNav.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Manage/_StatusMessage.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Manage/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Home/About.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Home/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Home/Contact.cshtml" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/StateSeed.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/RoleSeed.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/SuburbSeed.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/FieldSeed.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/SkillSeed.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvSeed.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/UserSeed.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/SchoolSeed.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvExternalMaterialSeed.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployerJobSkillSeed.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployerJobProfileSeed.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvWorkDaySeed.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvJobHisotriesSeed.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvSkillSeed.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/AddSchoolAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/AddSkill.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/MessageDetail.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/ReplyMyMessage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/Administraotr.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/MyMessages.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/NewMessage.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/AddSchool.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/SetUserType.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/UpdateSchool.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/AdministratorController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/EmployerController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Startup.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Program.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Services/IEmailSender.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Services/EmailSender.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Extensions/UrlHelperExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Extensions/EmailSenderExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/AccountController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/DashboardController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/ManageController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/HomeController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/SchoolController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/SuburbController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvSkillSeed.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvJobHisotriesSeed.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvWorkDaySeed.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployerJobProfileSeed.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployerJobSkillSeed.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvExternalMaterialSeed.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/SchoolSeed.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/UserSeed.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvSeed.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/SkillSeed.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/FieldSeed.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/SuburbSeed.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/RoleSeed.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/StateSeed.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Home/Contact.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Home/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Home/About.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Manage/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Manage/_StatusMessage.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Manage/_ManageNav.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Manage/_Layout.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Shared/_ValidationScriptsPartial.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Shared/_LoginPartial.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/EditCV.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MyMessages.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/RequestToAddSchool.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/RequestToAddField.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MessageDetail.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/Index.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/EditPersonalInfo.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MyCVs.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/RequestToAddSkill.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/RequestToAddSchool.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/Invitations.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/ViewApplicantCv.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/RequestToCertificateMyCompany.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/RequestToUnCertificateMyCompany.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/SendInvitation.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/EditCompanyInfo.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/JobProfiles.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/SearchApplicants.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/EditJobProfile.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/MyMessages.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/NewMessage.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/AddField.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/MessageDetail.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/AddSchool.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/SetUserType.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/AddSkill.cshtml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/Roles.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/ApplicationUser.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/StateModels/State.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/SchoolModels/SchoolStatus.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/SchoolModels/School.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/SuburbModels/SuburbStatus.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/SuburbModels/Suburb.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/MessageModels/Message.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/MessageModels/MessageType.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditCVJobHistory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EmployeeCV.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EmployeeExternalMeterial.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/RequestToAddSkill.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditCVAction.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditCVEmployeeSkill.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EmployeeJobHistory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EmployeeSkill.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EmployeeWorkDay.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/MyMessages.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditCvWorkDay.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditPersonalInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/Employee.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/RequestToAddField.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditCVExternalMeterial.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/MessageDetail.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/EditCV.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployeeModels/MyCvs.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/EmployerComplusoryWorkDay.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/EmployerSkill.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/EmployerJobProfile.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/SearchApplicant.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/Employer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/JobProfiles.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/EditCompanyInfo.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/EmployerInvitation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/ViewApplicantCv.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/EmployerRequiredSchool.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/EmployerModels/JobProfileRequiredLocation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/InvatationModels/InvitationStatus.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/InvatationModels/Invatation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/Skill.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/FieldStatus.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/SkillHistory.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/SkillStatus.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/FieldHistoryOperation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/SkillHistoryOperations.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/Field.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/JobRelatedModels/FieldHistory.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -359,13 +351,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
+    <option name="y" value="248" />
     <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="height" value="799" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -401,8 +391,8 @@
           </expand>
           <select />
         </subPane>
+        <option name="show-all-files" value="false" />
       </pane>
-      <pane id="Scratches" />
       <pane id="FileSystemExplorer" />
     </panes>
   </component>
@@ -416,7 +406,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="D:/OneDrive/Documents/AU_Melbourne_RMIT_Course/COSC_2277_Web Development_Technologies/Assignment_2/Assignment_2/Csharp/CSharp.sln" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.deploy.options" />
+    <property name="settings.editor.selected.configurable" value="project.propDebugger" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -442,6 +432,7 @@
       </envs>
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/iUni Workshop/iUni Workshop.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
@@ -449,6 +440,9 @@
       <option name="PROJECT_KIND" value="DotNetCore" />
       <option name="PROJECT_TFM" value=".NETCoreApp,Version=v2.0" />
       <browser start="true" url="http://iuni.ml" />
+      <method v="2">
+        <option name="Build" enabled="true" />
+      </method>
     </configuration>
     <configuration name="Unnamed" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.dll" />
@@ -461,6 +455,7 @@
       </envs>
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/iUni Workshop/iUni Workshop.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
@@ -468,6 +463,9 @@
       <option name="PROJECT_KIND" value="DotNetCore" />
       <option name="PROJECT_TFM" value=".NETCoreApp,Version=v2.0" />
       <browser start="true" url="http://localhost:52547/" />
+      <method v="2">
+        <option name="Build" enabled="true" />
+      </method>
     </configuration>
     <list>
       <item itemvalue=".NET Project.Default" />
@@ -522,6 +520,7 @@
       <workItem from="1536489083308" duration="2009000" />
       <workItem from="1536491440931" duration="2984000" />
       <workItem from="1536495603721" duration="4180000" />
+      <workItem from="1536511799037" duration="310000" />
     </task>
     <task id="LOCAL-00001" summary="Added MyInvitations">
       <created>1536499388370</created>
@@ -534,7 +533,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="265047000" />
+    <option name="totallyTimeSpent" value="265357000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -546,33 +545,33 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="248" width="974" height="799" extended-state="0" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4957265" weight="0.3278867" />
-      <window_info anchor="right" id="Errors In Solution" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.26172706" side_tool="true" weight="0.6383442" />
-      <window_info anchor="bottom" id="Unit Tests" order="10" weight="0.32897604" />
-      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="REST Client" order="11" weight="0.32897604" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7382729" visible="true" weight="0.3148148" />
-      <window_info anchor="bottom" id="Version Control" order="14" weight="0.3278867" />
-      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4969475" weight="0.40849674" />
-      <window_info anchor="bottom" id="NuGet" order="7" sideWeight="0.4993895" weight="0.32570806" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.87599367" visible="true" weight="0.22441365" />
-      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Build" order="15" sideWeight="0.495116" weight="0.32413793" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info id="Structure" order="1" sideWeight="0.12400636" side_tool="true" visible="true" weight="0.22441365" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.23856209" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8736842" visible="true" weight="0.46498907" />
+      <window_info id="Structure" order="1" sideWeight="0.12631579" side_tool="true" visible="true" weight="0.46498907" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7382729" visible="true" weight="0.3148148" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.23856209" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4957265" weight="0.3278867" />
+      <window_info anchor="bottom" id="NuGet" order="7" sideWeight="0.4993895" weight="0.32570806" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Unit Tests" order="10" weight="0.32897604" />
+      <window_info anchor="bottom" id="REST Client" order="11" weight="0.32897604" />
+      <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4969475" weight="0.40849674" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.26172706" side_tool="true" weight="0.6383442" />
+      <window_info anchor="bottom" id="Version Control" order="14" weight="0.3278867" />
+      <window_info anchor="bottom" id="Build" order="15" sideWeight="0.495116" weight="0.32413793" />
+      <window_info anchor="right" id="Unit Tests Coverage" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Errors In Solution" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -595,10 +594,10 @@
           <line>36</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/AdministratorController.cs" initialLine="36">
             <startOffsets>
-              <startOffset value="1432" />
+              <option value="1432" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="1469" />
+              <option value="1469" />
             </endOffsets>
           </properties>
         </line-breakpoint>
@@ -607,10 +606,10 @@
           <line>71</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="39">
             <startOffsets>
-              <startOffset value="2524" />
+              <option value="2524" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="2525" />
+              <option value="2525" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="4" />
@@ -620,10 +619,10 @@
           <line>327</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="113">
             <startOffsets>
-              <startOffset value="12496" />
+              <option value="12496" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="12497" />
+              <option value="12497" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="13" />
@@ -633,10 +632,10 @@
           <line>304</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="170">
             <startOffsets>
-              <startOffset value="11483" />
+              <option value="11483" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="11523" />
+              <option value="11523" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="24" />
@@ -646,10 +645,10 @@
           <line>316</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="182">
             <startOffsets>
-              <startOffset value="12041" />
+              <option value="12041" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="12066" />
+              <option value="12066" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="25" />
@@ -659,10 +658,10 @@
           <line>326</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="192">
             <startOffsets>
-              <startOffset value="12480" />
+              <option value="12480" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="12481" />
+              <option value="12481" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="26" />
@@ -672,10 +671,10 @@
           <line>308</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="174">
             <startOffsets>
-              <startOffset value="11792" />
+              <option value="11792" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="11815" />
+              <option value="11815" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="27" />
@@ -685,10 +684,10 @@
           <line>276</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="158">
             <startOffsets>
-              <startOffset value="10381" />
+              <option value="10381" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="10424" />
+              <option value="10424" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="28" />
@@ -698,10 +697,10 @@
           <line>289</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="168">
             <startOffsets>
-              <startOffset value="10944" />
+              <option value="10944" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="10989" />
+              <option value="10989" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="29" />
@@ -711,10 +710,10 @@
           <line>286</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="168">
             <startOffsets>
-              <startOffset value="10814" />
+              <option value="10814" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="10854" />
+              <option value="10854" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="30" />
@@ -724,10 +723,10 @@
           <line>52</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="48">
             <startOffsets>
-              <startOffset value="1756" />
+              <option value="1756" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="1805" />
+              <option value="1805" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="34" />
@@ -737,10 +736,10 @@
           <line>58</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="54">
             <startOffsets>
-              <startOffset value="2016" />
+              <option value="2016" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="2035" />
+              <option value="2035" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="35" />
@@ -750,10 +749,10 @@
           <line>53</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="49">
             <startOffsets>
-              <startOffset value="1818" />
+              <option value="1818" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="1842" />
+              <option value="1842" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="36" />
@@ -763,10 +762,10 @@
           <line>196</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="144">
             <startOffsets>
-              <startOffset value="-1" />
+              <option value="-1" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="-1" />
+              <option value="-1" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="38" />
@@ -776,10 +775,10 @@
           <line>216</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="186">
             <startOffsets>
-              <startOffset value="8045" />
+              <option value="8045" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="8052" />
+              <option value="8052" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="39" />
@@ -789,10 +788,10 @@
           <line>128</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="136">
             <startOffsets>
-              <startOffset value="5144" />
+              <option value="5144" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="5168" />
+              <option value="5168" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="40" />
@@ -802,10 +801,10 @@
           <line>239</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="246">
             <startOffsets>
-              <startOffset value="8846" />
+              <option value="8846" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="8878" />
+              <option value="8878" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="41" />
@@ -815,10 +814,10 @@
           <line>260</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" initialLine="267">
             <startOffsets>
-              <startOffset value="9636" />
+              <option value="9636" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="9659" />
+              <option value="9659" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="42" />
@@ -828,10 +827,10 @@
           <line>466</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployerController.cs" initialLine="562">
             <startOffsets>
-              <startOffset value="17900" />
+              <option value="17900" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="17954" />
+              <option value="17954" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="65" />
@@ -841,10 +840,10 @@
           <line>167</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/AdministratorController.cs" initialLine="167">
             <startOffsets>
-              <startOffset value="6222" />
+              <option value="6222" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="6254" />
+              <option value="6254" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="66" />
@@ -854,10 +853,10 @@
           <line>225</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/AdministratorController.cs" initialLine="225">
             <startOffsets>
-              <startOffset value="8126" />
+              <option value="8126" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="8150" />
+              <option value="8150" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="67" />
@@ -867,10 +866,10 @@
           <line>175</line>
           <properties documentPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployerController.cs" initialLine="175">
             <startOffsets>
-              <startOffset value="6602" />
+              <option value="6602" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="6620" />
+              <option value="6620" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="68" />
@@ -1073,70 +1072,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="400">
           <caret line="345" column="69" selection-start-line="345" selection-start-column="69" selection-end-line="345" selection-end-column="69" />
-          <folding>
-            <marker date="1536476931822" expanded="false" signature="6:713" ph="..." />
-            <marker date="1536476931822" expanded="true" signature="847:16013" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="1222:1345" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="1404:1451" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="1531:2013" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="1643:1936" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="2122:4089" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="2221:2312" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="2252:2298" ph="/* ToDo ... */" />
-            <marker date="1536476931822" expanded="true" signature="2468:2560" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="2499:2546" ph="/* Todo ... */" />
-            <marker date="1536476931822" expanded="true" signature="2917:3292" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="3179:3278" ph="/* ToDo ... */" />
-            <marker date="1536476931822" expanded="true" signature="3309:3776" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="3379:3761" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="4171:5891" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="4434:4526" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="4465:4512" ph="/* Todo ... */" />
-            <marker date="1536476931822" expanded="true" signature="4629:4946" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="5059:5327" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="5429:5592" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="5675:5831" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="5980:6571" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="6254:6463" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="6624:6977" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="6759:6900" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="7069:8042" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="7116:7144" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="7330:7552" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="7569:7890" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="7637:7875" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="8103:8989" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="8150:8178" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="8480:8646" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="8720:8946" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="9042:9395" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="9177:9318" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="9487:10462" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="9534:9562" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="9748:9970" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="9987:10308" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="10055:10293" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="10517:11403" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="10564:10592" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="10894:11060" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="11134:11360" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="11459:11564" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="11676:12122" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="11733:11761" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="12177:12224" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="12322:12998" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="12369:12397" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="12542:12831" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="13104:13251" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="13306:14068" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="13642:14023" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="14147:15030" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="14458:14879" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="14799:14865" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="15118:16007" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="15165:15193" ph="{...}" />
-            <marker date="1536476931822" expanded="true" signature="15494:15564" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1189,117 +1124,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="85" column="66" lean-forward="true" selection-start-line="85" selection-start-column="66" selection-end-line="85" selection-end-column="66" />
-          <folding>
-            <marker date="1536476931826" expanded="false" signature="6:766" ph="..." />
-            <marker date="1536476931826" expanded="true" signature="894:25583" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="1264:1420" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="1472:1520" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="1601:2282" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="1788:2231" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="2401:3407" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="2448:2476" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="2596:2624" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="2853:2973" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="3502:4663" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="3697:4140" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="4193:4297" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="4351:4465" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="4516:4619" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="4743:5580" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="4928:5045" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="5100:5214" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="5273:5389" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="5590:5621" ph="/* Send email ... */" />
-            <marker date="1536476931826" expanded="true" signature="5697:5736" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="5818:6191" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="6249:6630" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="6815:8902" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="6938:7581" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="7114:7557" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="7630:7689" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="8912:8971" ph="/* 如果有邀请则不可更改 ... */" />
-            <marker date="1536476931826" expanded="true" signature="9374:17625" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="9500:9582" ph="/* 0. Validate input data ... */" />
-            <marker date="1536476931826" expanded="true" signature="9675:10290" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="9709:9899" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="9959:10079" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="10177:10276" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="10303:10346" ph="/* 0.2 ... */" />
-            <marker date="1536476931826" expanded="true" signature="10452:10881" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="10486:10748" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="10801:10867" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="10915:11002" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="11019:11053" ph="/* 0.3 ... */" />
-            <marker date="1536476931826" expanded="true" signature="11069:11181" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="11230:11317" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="11330:11513" ph="/* 0.4 ... */" />
-            <marker date="1536476931826" expanded="true" signature="11575:12102" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="12116:12166" ph="/* 1.2.1 ... */" />
-            <marker date="1536476931826" expanded="true" signature="12202:12347" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="12360:12401" ph="/* 1.2.2. ... */" />
-            <marker date="1536476931826" expanded="true" signature="12418:13002" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="13064:13151" ph="/* 2. Update Skills ... */" />
-            <marker date="1536476931826" expanded="true" signature="13167:13424" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="13480:13525" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="13538:13575" ph="/* 2.2 ... */" />
-            <marker date="1536476931826" expanded="true" signature="13620:13708" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="13827:13940" ph="/* 3. Update Compulsory work Day ... */" />
-            <marker date="1536476931826" expanded="true" signature="13956:14233" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="14289:14334" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="14347:14394" ph="/* 3.2 ... */" />
-            <marker date="1536476931826" expanded="true" signature="14520:14660" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="14691:14830" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="14856:14947" ph="/* 4. Update Location ... */" />
-            <marker date="1536476931826" expanded="true" signature="14963:15238" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="15294:15339" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="15352:15388" ph="/* 4.2 ... */" />
-            <marker date="1536476931826" expanded="true" signature="15526:16018" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="15560:15915" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="15967:16003" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="16054:16193" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="16219:16306" ph="/* 5. Update School ... */" />
-            <marker date="1536476931826" expanded="true" signature="16322:16599" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="16655:16700" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="16713:16747" ph="/* 5.2 ... */" />
-            <marker date="1536476931826" expanded="true" signature="16873:17359" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="16907:17256" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="17308:17344" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="17395:17534" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="17635:17737" ph="/* 检查本人操作 ... */" />
-            <marker date="1536476931826" expanded="true" signature="17877:17964" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="18120:18822" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="18356:18434" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="18590:18778" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="18964:19825" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="19200:19278" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="19294:19617" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="19384:19561" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="19666:19695" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="19743:19788" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="19916:24740" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="20135:20263" ph="/* 1.  Filter first ... */" />
-            <marker date="1536476931826" expanded="true" signature="20792:21228" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="20852:21123" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="21016:21105" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="21468:22297" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="21528:22194" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="22087:22176" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="22473:23304" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="22533:23201" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="23094:23183" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="23317:23417" ph="/* @TODO Filter School ... */" />
-            <marker date="1536476931826" expanded="true" signature="23519:23755" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="23993:24697" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="24060:24683" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="24281:24665" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="24374:24643" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="24488:24617" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="24796:25126" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="25187:25234" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="25311:25358" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="25416:25463" ph="{...}" />
-            <marker date="1536476931826" expanded="true" signature="25528:25575" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1341,56 +1165,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/SearchApplicants.cshtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <marker date="1536476931930" expanded="true" signature="73:130" ph="@..." />
-            <marker date="1536476931930" expanded="true" signature="147:953" ph="&lt;table.../&gt;" />
-            <marker date="1536476931930" expanded="true" signature="173:483" ph="&lt;thead.../&gt;" />
-            <marker date="1536476931930" expanded="true" signature="185:470" ph="&lt;tr.../&gt;" />
-            <marker date="1536476931930" expanded="true" signature="198:270" ph="&lt;th.../&gt;" />
-            <marker date="1536476931930" expanded="true" signature="279:360" ph="&lt;th.../&gt;" />
-            <marker date="1536476931930" expanded="true" signature="369:442" ph="&lt;th.../&gt;" />
-            <marker date="1536476931930" expanded="true" signature="488:943" ph="&lt;tbody.../&gt;" />
-            <marker date="1536476931930" expanded="true" signature="500:921" ph="@..." />
-            <marker date="1536476931930" expanded="true" signature="538:915" ph="{...}" />
-            <marker date="1536476931930" expanded="true" signature="561:905" ph="&lt;tr.../&gt;" />
-            <marker date="1536476931930" expanded="true" signature="582:669" ph="&lt;td.../&gt;" />
-            <marker date="1536476931930" expanded="true" signature="686:782" ph="&lt;td.../&gt;" />
-            <marker date="1536476931930" expanded="true" signature="799:887" ph="&lt;td.../&gt;" />
-            <marker date="1536476931930" expanded="true" signature="955:1033" ph="@{...}" />
-          </folding>
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/EditPersonalInfo.cshtml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1995">
           <caret line="133" selection-start-line="133" selection-end-line="133" />
-          <folding>
-            <marker date="1536476931922" expanded="true" signature="53:102" ph="@..." />
-            <marker date="1536476931922" expanded="true" signature="104:1727" ph="&lt;script.../&gt;" />
-            <marker date="1536476931922" expanded="true" signature="145:950" ph="{...}" />
-            <marker date="1536476931922" expanded="true" signature="314:856" ph="{...}" />
-            <marker date="1536476931922" expanded="true" signature="993:1716" ph="{...}" />
-            <marker date="1536476931922" expanded="true" signature="1203:1613" ph="{...}" />
-            <marker date="1536476931922" expanded="true" signature="1744:3988" ph="&lt;form.../&gt;" />
-            <marker date="1536476931922" expanded="true" signature="1848:1980" ph="@..." />
-            <marker date="1536476931922" expanded="true" signature="1892:1916" ph="{...}" />
-            <marker date="1536476931922" expanded="true" signature="2044:2258" ph="@..." />
-            <marker date="1536476931922" expanded="true" signature="2118:2184" ph="{...}" />
-            <marker date="1536476931922" expanded="true" signature="2323:2522" ph="@..." />
-            <marker date="1536476931922" expanded="true" signature="2392:2453" ph="{...}" />
-            <marker date="1536476931922" expanded="true" signature="2578:2937" ph="@..." />
-            <marker date="1536476931922" expanded="true" signature="2664:2767" ph="{...}" />
-            <marker date="1536476931922" expanded="true" signature="3006:3616" ph="@..." />
-            <marker date="1536476931922" expanded="true" signature="3106:3222" ph="{...}" />
-            <marker date="1536476931922" expanded="true" signature="3395:3446" ph="&lt;datalist.../&gt;" />
-            <marker date="1536476931922" expanded="true" signature="3562:3610" ph="&lt;datalist.../&gt;" />
-            <marker date="1536476931922" expanded="true" signature="3690:3928" ph="@..." />
-            <marker date="1536476931922" expanded="true" signature="3769:3840" ph="{...}" />
-            <marker date="1536476931922" expanded="true" signature="3990:4068" ph="@{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1398,50 +1178,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
           <caret line="57" column="9" selection-start-line="57" selection-start-column="9" selection-end-line="57" selection-end-column="9" />
-          <folding>
-            <marker date="1536041090045" expanded="true" signature="51:108" ph="@..." />
-            <marker date="1536041090045" expanded="true" signature="126:12064" ph="&lt;form.../&gt;" />
-            <marker date="1536041090045" expanded="true" signature="177:332" ph="@..." />
-            <marker date="1536041090045" expanded="true" signature="216:326" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="342:456" ph="@..." />
-            <marker date="1536041090045" expanded="true" signature="397:450" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="623:746" ph="@..." />
-            <marker date="1536041090045" expanded="true" signature="683:740" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="859:979" ph="@..." />
-            <marker date="1536041090045" expanded="true" signature="916:973" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="1066:1196" ph="@..." />
-            <marker date="1536041090045" expanded="true" signature="1129:1190" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="1267:6016" ph="&lt;script.../&gt;" />
-            <marker date="1536041090045" expanded="true" signature="1314:2547" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="2598:3861" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="3914:5176" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="5177:6002" ph="/* var xmlhttp = new XMLHttpRequest(); ... */" />
-            <marker date="1536041090045" expanded="true" signature="6031:7277" ph="@..." />
-            <marker date="1536041090045" expanded="true" signature="6086:6494" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="6257:6483" ph="&lt;div.../&gt;" />
-            <marker date="1536041090045" expanded="true" signature="6507:7191" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="6575:7181" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="6786:7106" ph="&lt;div.../&gt;" />
-            <marker date="1536041090045" expanded="true" signature="7297:8652" ph="@..." />
-            <marker date="1536041090045" expanded="true" signature="7361:7803" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="7557:7793" ph="&lt;div.../&gt;" />
-            <marker date="1536041090045" expanded="true" signature="7816:8551" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="7895:8528" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="8114:8448" ph="&lt;div.../&gt;" />
-            <marker date="1536041090045" expanded="true" signature="8668:10015" ph="@..." />
-            <marker date="1536041090045" expanded="true" signature="8727:9191" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="8934:9181" ph="&lt;div.../&gt;" />
-            <marker date="1536041090045" expanded="true" signature="9204:9917" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="9278:9894" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="9508:9823" ph="&lt;div.../&gt;" />
-            <marker date="1536041090045" expanded="true" signature="10035:11163" ph="@..." />
-            <marker date="1536041090045" expanded="true" signature="10267:10287" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="10300:11157" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="10370:11147" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="10432:11133" ph="{...}" />
-            <marker date="1536041090045" expanded="true" signature="11782:11914" ph="@..." />
-            <marker date="1536041090045" expanded="true" signature="11837:11899" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1452,23 +1188,11 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MyInvitations.cshtml" />
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/Index.cshtml">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret selection-end-line="8" />
-          <folding>
-            <marker date="1535080653302" expanded="true" signature="15:88" ph="@..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MyInvitations.cshtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <marker date="1536499230011" expanded="true" signature="15:93" ph="@..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1477,28 +1201,28 @@
         <state>
           <caret column="18" selection-start-column="7" selection-end-column="18" />
           <folding>
-            <marker date="1536041090048" expanded="true" signature="63:120" ph="@..." />
-            <marker date="1536041090048" expanded="true" signature="142:2026" ph="&lt;table.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="172:694" ph="&lt;thead.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="192:677" ph="&lt;tr.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="213:301" ph="&lt;th.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="318:409" ph="&lt;th.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="426:519" ph="&lt;th.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="536:633" ph="&lt;th.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="703:2012" ph="&lt;tbody.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="719:1986" ph="@..." />
-            <marker date="1536041090048" expanded="true" signature="761:1976" ph="{...}" />
-            <marker date="1536041090048" expanded="true" signature="792:1962" ph="&lt;tr.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="817:912" ph="&lt;td.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="933:1031" ph="&lt;td.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="1052:1152" ph="&lt;td.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="1173:1584" ph="&lt;td.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="1202:1558" ph="@..." />
-            <marker date="1536041090048" expanded="true" signature="1259:1379" ph="{...}" />
-            <marker date="1536041090048" expanded="true" signature="1415:1529" ph="{...}" />
-            <marker date="1536041090048" expanded="true" signature="1605:1940" ph="&lt;td.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="1634:1889" ph="&lt;form.../&gt;" />
-            <marker date="1536041090048" expanded="true" signature="2028:2106" ph="@{...}" />
+            <marker date="1536511568955" expanded="true" signature="63:120" ph="@..." />
+            <marker date="1536511568955" expanded="true" signature="142:2026" ph="&lt;table.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="172:694" ph="&lt;thead.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="192:677" ph="&lt;tr.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="213:301" ph="&lt;th.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="318:409" ph="&lt;th.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="426:519" ph="&lt;th.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="536:633" ph="&lt;th.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="703:2012" ph="&lt;tbody.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="719:1986" ph="@..." />
+            <marker date="1536511568955" expanded="true" signature="761:1976" ph="{...}" />
+            <marker date="1536511568955" expanded="true" signature="792:1962" ph="&lt;tr.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="817:912" ph="&lt;td.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="933:1031" ph="&lt;td.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="1052:1152" ph="&lt;td.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="1173:1584" ph="&lt;td.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="1202:1558" ph="@..." />
+            <marker date="1536511568955" expanded="true" signature="1259:1379" ph="{...}" />
+            <marker date="1536511568955" expanded="true" signature="1415:1529" ph="{...}" />
+            <marker date="1536511568955" expanded="true" signature="1605:1940" ph="&lt;td.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="1634:1889" ph="&lt;form.../&gt;" />
+            <marker date="1536511568955" expanded="true" signature="2028:2106" ph="@{...}" />
           </folding>
         </state>
       </provider>
