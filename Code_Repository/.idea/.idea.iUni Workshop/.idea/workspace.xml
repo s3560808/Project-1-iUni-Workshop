@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0da503e4-6db3-43a6-ad56-9c4666bd93d3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.iUni Workshop/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.iUni Workshop/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.dll" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.runtimeconfig.dev.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.dll" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyInvitation/MyInvitation.html" beforeDir="false" afterPath="$PROJECT_DIR$/../MyInvitation/MyInvitation.html" afterDir="false" />
-    </list>
+    <list default="true" id="0da503e4-6db3-43a6-ad56-9c4666bd93d3" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,8 +83,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MyCVs.cshtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+            <state relative-caret-position="296">
+              <caret line="49" column="47" lean-forward="true" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
               <folding>
                 <marker date="1536511568955" expanded="true" signature="63:120" ph="@..." />
                 <marker date="1536511568955" expanded="true" signature="142:2026" ph="&lt;table.../&gt;" />
@@ -345,8 +335,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="917" />
-    <option name="y" value="44" />
+    <option name="x" value="275" />
+    <option name="y" value="122" />
     <option name="width" value="974" />
     <option name="height" value="799" />
   </component>
@@ -460,6 +450,25 @@
         <option name="Build" enabled="true" />
       </method>
     </configuration>
+    <configuration default="true" type="DotNetProject" factoryName=".NET Project">
+      <option name="EXE_PATH" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PASS_PARENT_ENVS" value="1" />
+      <option name="USE_EXTERNAL_CONSOLE" value="0" />
+      <option name="USE_MONO" value="0" />
+      <option name="RUNTIME_ARGUMENTS" value="" />
+      <option name="PROJECT_PATH" value="" />
+      <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
+      <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
+      <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
+      <option name="PROJECT_KIND" value="None" />
+      <option name="PROJECT_TFM" value="" />
+      <browser start="true" url="http://localhost:52547/" />
+      <method v="2">
+        <option name="Build" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue=".NET Project.Default" />
       <item itemvalue=".NET Project.Unnamed" />
@@ -516,7 +525,7 @@
       <workItem from="1536511799037" duration="310000" />
       <workItem from="1536649437585" duration="2000" />
       <workItem from="1536663216309" duration="111000" />
-      <workItem from="1536664035201" duration="525000" />
+      <workItem from="1536664035201" duration="1756000" />
     </task>
     <task id="LOCAL-00001" summary="Added MyInvitations">
       <created>1536499388370</created>
@@ -529,7 +538,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="265995000" />
+    <option name="totallyTimeSpent" value="267226000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -541,19 +550,20 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="917" y="44" width="974" height="799" extended-state="1" />
+    <frame x="953" y="0" width="974" height="1047" extended-state="1" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.83964366" visible="true" weight="0.34792122" />
-      <window_info id="Structure" order="1" sideWeight="0.16035634" side_tool="true" visible="true" weight="0.34792122" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8688742" visible="true" weight="0.34792122" />
+      <window_info id="Structure" order="1" sideWeight="0.13112582" side_tool="true" visible="true" weight="0.34792122" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7382729" weight="0.3148148" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.7382729" visible="true" weight="0.17305586" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.23856209" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4957265" weight="0.3278867" />
-      <window_info active="true" anchor="bottom" id="NuGet" order="7" sideWeight="0.4993895" visible="true" weight="0.32481202" />
+      <window_info anchor="bottom" id="NuGet" order="7" sideWeight="0.4993895" weight="0.32481202" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Unit Tests" order="10" weight="0.32897604" />
@@ -561,7 +571,7 @@
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4969475" weight="0.40849674" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.26172706" side_tool="true" weight="0.6383442" />
       <window_info anchor="bottom" id="Version Control" order="14" weight="0.3278867" />
-      <window_info anchor="bottom" id="Build" order="15" sideWeight="0.495116" weight="0.32321042" />
+      <window_info anchor="bottom" id="Build" order="15" sideWeight="0.495116" weight="0.32092005" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -1194,8 +1204,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MyCVs.cshtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+        <state relative-caret-position="296">
+          <caret line="49" column="47" lean-forward="true" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
           <folding>
             <marker date="1536511568955" expanded="true" signature="63:120" ph="@..." />
             <marker date="1536511568955" expanded="true" signature="142:2026" ph="&lt;table.../&gt;" />
