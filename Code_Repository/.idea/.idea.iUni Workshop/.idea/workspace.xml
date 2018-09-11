@@ -2,24 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0da503e4-6db3-43a6-ad56-9c4666bd93d3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.iUni Workshop/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.iUni Workshop/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.iUni Workshop/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.iUni Workshop/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.iUni Workshop/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.iUni Workshop/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/appsettings.Development.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.deps.json" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.deps.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.dll" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.runtimeconfig.dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/bin/Debug/netcoreapp2.0/iUni Workshop.runtimeconfig.dev.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csproj.CoreCompileInputs.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csproj.FileListAbsolute.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.dll" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/iUni Workshop.csproj.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/iUni Workshop.csproj.nuget.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/iUni Workshop.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/iUni Workshop.csproj.nuget.g.props" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/iUni Workshop.csproj.nuget.g.targets" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/iUni Workshop.csproj.nuget.g.targets" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyInvitation/MyInvitation.html" beforeDir="false" afterPath="$PROJECT_DIR$/../MyInvitation/MyInvitation.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,9 +70,11 @@
     <session id="1903205189">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.4" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.open.time.5" value="2" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -100,8 +93,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MyCVs.cshtml">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="18" selection-start-column="7" selection-end-column="18" />
+            <state relative-caret-position="210">
+              <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
               <folding>
                 <marker date="1536511568955" expanded="true" signature="63:120" ph="@..." />
                 <marker date="1536511568955" expanded="true" signature="142:2026" ph="&lt;table.../&gt;" />
@@ -352,8 +345,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="y" value="248" />
+    <option name="x" value="917" />
+    <option name="y" value="44" />
     <option name="width" value="974" />
     <option name="height" value="799" />
   </component>
@@ -363,37 +356,37 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="FileSystemExplorer" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
             <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="iUni Workshop (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="iUni Workshop" type="24d0babc:SolutionExplorerModelNode" />
             </path>
             <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="iUni Workshop (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="iUni Workshop" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="iUni Workshop" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="iUni Workshop" type="24d0babc:SolutionExplorerModelNode" />
             </path>
             <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="iUni Workshop (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="iUni Workshop" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Views" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="iUni Workshop" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="iUni Workshop" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Views" type="24d0babc:SolutionExplorerModelNode" />
             </path>
             <path>
-              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
-              <item name="iUni Workshop (1 project)" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="iUni Workshop" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Views" type="977d5f41:SolutionExplorerNodeRider" />
-              <item name="Employee" type="977d5f41:SolutionExplorerNodeRider" />
+              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
+              <item name="iUni Workshop" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="iUni Workshop" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Views" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Employee" type="24d0babc:SolutionExplorerModelNode" />
             </path>
           </expand>
           <select />
         </subPane>
         <option name="show-all-files" value="false" />
       </pane>
-      <pane id="FileSystemExplorer" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -521,6 +514,9 @@
       <workItem from="1536491440931" duration="2984000" />
       <workItem from="1536495603721" duration="4180000" />
       <workItem from="1536511799037" duration="310000" />
+      <workItem from="1536649437585" duration="2000" />
+      <workItem from="1536663216309" duration="111000" />
+      <workItem from="1536664035201" duration="525000" />
     </task>
     <task id="LOCAL-00001" summary="Added MyInvitations">
       <created>1536499388370</created>
@@ -533,7 +529,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="265357000" />
+    <option name="totallyTimeSpent" value="265995000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -545,19 +541,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="248" width="974" height="799" extended-state="0" />
+    <frame x="917" y="44" width="974" height="799" extended-state="1" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.8736842" visible="true" weight="0.46498907" />
-      <window_info id="Structure" order="1" sideWeight="0.12631579" side_tool="true" visible="true" weight="0.46498907" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.83964366" visible="true" weight="0.34792122" />
+      <window_info id="Structure" order="1" sideWeight="0.16035634" side_tool="true" visible="true" weight="0.34792122" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7382729" visible="true" weight="0.3148148" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7382729" weight="0.3148148" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.23856209" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4957265" weight="0.3278867" />
-      <window_info anchor="bottom" id="NuGet" order="7" sideWeight="0.4993895" weight="0.32570806" />
+      <window_info active="true" anchor="bottom" id="NuGet" order="7" sideWeight="0.4993895" visible="true" weight="0.32481202" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Unit Tests" order="10" weight="0.32897604" />
@@ -565,13 +561,13 @@
       <window_info anchor="bottom" id="Terminal" order="12" sideWeight="0.4969475" weight="0.40849674" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.26172706" side_tool="true" weight="0.6383442" />
       <window_info anchor="bottom" id="Version Control" order="14" weight="0.3278867" />
-      <window_info anchor="bottom" id="Build" order="15" sideWeight="0.495116" weight="0.32413793" />
-      <window_info anchor="right" id="Unit Tests Coverage" />
+      <window_info anchor="bottom" id="Build" order="15" sideWeight="0.495116" weight="0.32321042" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Errors In Solution" order="3" />
       <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Unit Tests Coverage" order="5" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1198,8 +1194,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Employee/MyCVs.cshtml">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="18" selection-start-column="7" selection-end-column="18" />
+        <state relative-caret-position="210">
+          <caret line="14" column="21" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
           <folding>
             <marker date="1536511568955" expanded="true" signature="63:120" ph="@..." />
             <marker date="1536511568955" expanded="true" signature="142:2026" ph="&lt;table.../&gt;" />

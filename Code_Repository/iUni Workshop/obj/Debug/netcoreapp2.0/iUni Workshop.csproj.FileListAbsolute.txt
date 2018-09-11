@@ -34,3 +34,15 @@ C:\Users\Winston\Desktop\Project\Project-1-iUni-Workshop\Project-1-iUni-Workshop
 C:\Users\Winston\Desktop\Project\Project-1-iUni-Workshop\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.AssemblyInfo.cs
 C:\Users\Winston\Desktop\Project\Project-1-iUni-Workshop\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.dll
 C:\Users\Winston\Desktop\Project\Project-1-iUni-Workshop\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.pdb
+C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.deps.json
+C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.runtimeconfig.json
+C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.runtimeconfig.dev.json
+C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.dll
+C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\bin\Debug\netcoreapp2.0\iUni Workshop.pdb
+C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.csprojAssemblyReference.cache
+C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.csproj.CoreCompileInputs.cache
+C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.AssemblyInfoInputs.cache
+C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.AssemblyInfo.cs
+C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.dll
+C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository\iUni Workshop\obj\Debug\netcoreapp2.0\iUni Workshop.pdb
