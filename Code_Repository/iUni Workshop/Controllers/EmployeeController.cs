@@ -380,36 +380,36 @@ namespace iUni_Workshop.Controllers
             return View();
         }
 
-        public async Task<IActionResult> MyMessages()
-        {
-            var _user = await _userManager.GetUserAsync(User);
-            var conversations = _context.Messages.Where(a => a.ReciverId == _user.Id).Select(b => b.ConversationId).AsEnumerable().Distinct();
-            List<MyMessages> messages = new List<MyMessages>();
-            foreach (var conversation in conversations)
-            {
-                var message = _context.Messages.Where(a => a.ConversationId == conversation && a.ReciverId == _user.Id).OrderByDescending(a => a.SentTime).First();
-
-                messages.Add(new MyMessages { ConversationId = message.ConversationId, Read = message.Read, SenderName = _user.Email, SentTime = message.SentTime, Title = message.Title});
-            }
-            return View(messages);
-        }
-
-        public async Task<IActionResult> MessageDetail(string conversationId)
-        {
-            var updateMessages = _context.Messages.Where(a => a.ConversationId == conversationId).ToList();
-            List<MessageDetail> messages = new List<MessageDetail> { };
-            var user = await _userManager.GetUserAsync(User);
-            foreach (var updateMessage in updateMessages) {
-                var Email = _context.Users.First(a => a.Id == updateMessage.SenderId).Email;
-                messages.Add(new MessageDetail {SenderName = Email, ConversationId = updateMessage.ConversationId, Detail = updateMessage.MessageDetail, SentTime = updateMessage.SentTime});
-                if (updateMessage.ReciverId == user.Id) {
-                    updateMessage.Read = true;
-                }
-            }
-            _context.Messages.UpdateRange(updateMessages);
-            await _context.SaveChangesAsync();
-            return View(messages);
-        }
+//        public async Task<IActionResult> MyMessages()
+//        {
+//            var _user = await _userManager.GetUserAsync(User);
+//            var conversations = _context.Messages.Where(a => a.ReciverId == _user.Id).Select(b => b.ConversationId).AsEnumerable().Distinct();
+//            List<MyMessages> messages = new List<MyMessages>();
+//            foreach (var conversation in conversations)
+//            {
+//                var message = _context.Messages.Where(a => a.ConversationId == conversation && a.ReciverId == _user.Id).OrderByDescending(a => a.SentTime).First();
+//
+//                messages.Add(new MyMessages { ConversationId = message.ConversationId, Read = message.Read, SenderName = _user.Email, SentTime = message.SentTime, Title = message.Title});
+//            }
+//            return View(messages);
+//        }
+//
+//        public async Task<IActionResult> MessageDetail(string conversationId)
+//        {
+//            var updateMessages = _context.Messages.Where(a => a.ConversationId == conversationId).ToList();
+//            List<MessageDetail> messages = new List<MessageDetail> { };
+//            var user = await _userManager.GetUserAsync(User);
+//            foreach (var updateMessage in updateMessages) {
+//                var Email = _context.Users.First(a => a.Id == updateMessage.SenderId).Email;
+//                messages.Add(new MessageDetail {SenderName = Email, ConversationId = updateMessage.ConversationId, Detail = updateMessage.MessageDetail, SentTime = updateMessage.SentTime});
+//                if (updateMessage.ReciverId == user.Id) {
+//                    updateMessage.Read = true;
+//                }
+//            }
+//            _context.Messages.UpdateRange(updateMessages);
+//            await _context.SaveChangesAsync();
+//            return View(messages);
+//        }
 
         
     }

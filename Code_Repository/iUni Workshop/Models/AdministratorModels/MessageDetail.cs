@@ -11,5 +11,6 @@ namespace iUni_Workshop.Models.AdministratorModels
         public DateTime SentTime { get; set; }
         public string Detail { get; set; }
         public string ConversationId { get; set; }
+        public int Type { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿@model object
+﻿@using iUni_Workshop.Models.MessageModels
+@model object
 
 @{
     ViewBag.Title = "title";
@@ -29,29 +30,36 @@
 <form method="post" asp-action="NewMessageAction">
     <table class="table">
         <thead>
-            <tr>
-                @* <th> *@
-                @*     @Html.DisplayNameFor(model => model.SchoolName) *@
-                @* </th> *@
-                @* <th> *@
-                @*     @Html.DisplayNameFor(model => model.DomainExtension) *@
-                @* </th> *@
-                <th></th>
-            </tr>
+        <tr>
+            @* <th> *@
+            @*     @Html.DisplayNameFor(model => model.SchoolName) *@
+            @* </th> *@
+            @* <th> *@
+            @*     @Html.DisplayNameFor(model => model.DomainExtension) *@
+            @* </th> *@
+            <th></th>
+        </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <input type="text" name="Email" id="userName" list="ReciverEmailList" onkeyup="GetReviverEmail(this.value)">
-                    <datalist id="ReciverEmailList"></datalist>
-                </td>
-            </tr>
-            <tr>
-                <input type ="text" name="Title" value="This is a title">
-            </tr>
-            <tr>
-                <textarea rows="4" cols="50" name="MessageDetail">This is a example</textarea>
-            </tr>
+        <tr>
+            <td>
+                <input type="text" name="Email" id="userName" list="ReciverEmailList" onkeyup="GetReviverEmail(this.value)">
+                <datalist id="ReciverEmailList"></datalist>
+            </td>
+        </tr>
+        <tr>
+            <input type ="text" name="Title" value="This is a title">
+        </tr>
+        <tr>
+            <textarea rows="4" cols="50" name="MessageDetail">This is a example</textarea>
+        </tr>
+        <tr>
+            <select name="Type">
+                <option>Please select message type</option>
+                <option value="@MessageType.System">System info message</option>
+                <option value="@MessageType.UserMessage">Conversation Message</option>
+            </select>
+        </tr>
         </tbody>
 
     </table>

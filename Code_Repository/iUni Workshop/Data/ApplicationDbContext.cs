@@ -47,6 +47,7 @@ namespace iUni_Workshop.Data
 
         public DbSet<Invatation> Invatations { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
 
         public DbSet<FieldHistory> FieldHistories { get; set; }
         public DbSet<Field> Fields { get; set; }

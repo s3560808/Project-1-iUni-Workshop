@@ -23,17 +23,22 @@ namespace iUni_Workshop.Data.Seeds
             CreateEmployeeCv("employee@example.com", 2, "Detail of Job 2", "Title of Job 2", (float) 9.8, true, DateTime.Now, 1, false, context);
         }
 
-        private static void CreateEmployeeCv(string userName, int id, string detail, string title, float salary, bool findJobStatus, DateTime startFindJobDate, int fieldId, bool primary, ApplicationDbContext _context)
+        private static async Task CreateEmployeeCv(string userName, int id, string detail, string title, float salary, bool findJobStatus, DateTime startFindJobDate, int fieldId, bool primary, ApplicationDbContext _context)
         {
             var user = _context.Users.First(a => a.Email == userName);
             var newCv = new EmployeeCV
             { Id = id, Details = detail, Title = title, EmployeeId = user.Id, MinSaraly = salary, FindJobStatus = findJobStatus, StartFindJobDate = startFindJobDate, FieldId = fieldId,Primary = primary};
+            var check = _context.EmployeeCvs.Where(a => a.Id == id);
+            if (check.Any())
+            {
+                return;
+            }
             try
             {
-                _context.EmployeeCvs.Add(newCv);
-                _context.SaveChanges();
+                await _context.EmployeeCvs.AddAsync(newCv);
+                await _context.SaveChangesAsync();
             }
-            catch (System.NullReferenceException  ex)
+            catch (Exception  ex)
             {
             }
             
