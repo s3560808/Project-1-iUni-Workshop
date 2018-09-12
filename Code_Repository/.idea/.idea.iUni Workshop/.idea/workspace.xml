@@ -5,6 +5,10 @@
       <change afterPath="$PROJECT_DIR$/iUni Workshop/Models/MessageModels/Conversation.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.iUni Workshop/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.iUni Workshop/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.iUni Workshop/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.iUni Workshop/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/iUni Workshop/appsettings.Development.json" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/appsettings.Development.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csprojAssemblyReference.cache" afterDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/iUni Workshop/Controllers/AdministratorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/Controllers/AdministratorController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/Controllers/EmployerController.cs" afterDir="false" />
@@ -29,6 +33,7 @@
       <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.csprojAssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.dll" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.dll" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/Debug/netcoreapp2.0/iUni Workshop.pdb" afterDir="false" />
+>>>>>>> Dev
       <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/iUni Workshop.csproj.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/iUni Workshop.csproj.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/iUni Workshop.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/iUni Workshop.csproj.nuget.g.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/iUni Workshop/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/iUni Workshop/obj/project.assets.json" afterDir="false" />
@@ -98,6 +103,13 @@
           <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
+<<<<<<< HEAD
+      <usages-collector id="statistics.file.extensions.edit" />
+      <usages-collector id="statistics.file.types.edit" />
+      <usages-collector id="statistics.js.language.service.starts" />
+      <usages-collector id="statistics.file.types.open" />
+      <usages-collector id="statistics.file.extensions.open" />
+=======
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="cs" value="42" />
@@ -123,6 +135,7 @@
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
+>>>>>>> Dev
     </session>
   </component>
   <component name="FileEditorManager">
@@ -130,6 +143,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/iUni Workshop/Controllers/AdministratorController.cs">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="5175">
+              <caret line="345" column="69" selection-start-line="345" selection-start-column="69" selection-end-line="345" selection-end-column="69" />
+=======
             <state relative-caret-position="229">
               <caret line="452" column="13" lean-forward="true" selection-start-line="452" selection-start-column="13" selection-end-line="452" selection-end-column="13" />
               <folding>
@@ -202,6 +219,7 @@
                 <marker date="1536771422855" expanded="true" signature="17047:17130" ph="{...}" />
                 <marker date="1536771422855" expanded="true" signature="17185:17441" ph="{...}" />
               </folding>
+>>>>>>> Dev
             </state>
           </provider>
         </entry>
@@ -209,6 +227,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/MessageDetail.cshtml">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="375">
+              <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+=======
             <state relative-caret-position="319">
               <caret line="44" column="67" selection-start-line="44" selection-start-column="67" selection-end-line="44" selection-end-column="67" />
               <folding>
@@ -233,6 +255,7 @@
                 <marker date="1536771049079" expanded="true" signature="1716:1765" ph="&lt;tr.../&gt;" />
                 <marker date="1536771049079" expanded="true" signature="1799:1877" ph="@{...}" />
               </folding>
+>>>>>>> Dev
             </state>
           </provider>
         </entry>
@@ -240,6 +263,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/MessageDetail.cs">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="285">
+              <caret line="19" column="113" selection-start-line="19" selection-start-column="113" selection-end-line="19" selection-end-column="113" />
+=======
             <state relative-caret-position="120">
               <caret line="11" column="42" selection-start-line="11" selection-start-column="42" selection-end-line="11" selection-end-column="42" />
               <folding>
@@ -247,6 +274,7 @@
                 <marker date="1536771119920" expanded="true" signature="148:421" ph="{...}" />
                 <marker date="1536771119920" expanded="true" signature="181:419" ph="{...}" />
               </folding>
+>>>>>>> Dev
             </state>
           </provider>
         </entry>
@@ -254,6 +282,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="375">
+              <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="50" />
+=======
             <state relative-caret-position="466">
               <caret line="411" column="11" selection-start-line="395" selection-end-line="411" selection-end-column="11" />
               <folding>
@@ -319,6 +351,7 @@
                 <marker date="1536766500488" expanded="true" signature="13983:14030" ph="{...}" />
                 <marker date="1536766500488" expanded="true" signature="14032:15869" ph="/* public async Task&lt;IActionResult&gt; MyMessages() ... */" />
               </folding>
+>>>>>>> Dev
             </state>
           </provider>
         </entry>
@@ -326,6 +359,163 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/iUni Workshop/Models/MessageModels/Conversation.cs">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+            <state relative-caret-position="180">
+              <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/SkillSeed.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="78" selection-start-line="22" selection-start-column="78" selection-end-line="22" selection-end-column="78" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/SuburbSeed.cs">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/UserSeed.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="72" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/iUni Workshop/Controllers/EmployerController.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4422">
+              <caret line="512" lean-forward="true" selection-start-line="512" selection-end-line="512" />
+              <folding>
+                <marker date="1536645155275" expanded="false" signature="6:766" ph="..." />
+                <marker date="1536645155275" expanded="true" signature="803:25585" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="894:25583" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="1264:1420" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="1472:1520" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="1601:2282" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="1788:2231" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="2401:3407" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="2448:2476" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="2596:2624" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="2853:2973" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="3502:4663" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="3697:4140" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="4193:4297" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="4351:4465" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="4516:4619" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="4743:5580" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="4928:5045" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="5100:5214" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="5273:5389" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="5590:5621" ph="/* Send email ... */" />
+                <marker date="1536645155275" expanded="true" signature="5697:5736" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="5818:6191" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="6249:6630" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="6815:8902" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="6938:7581" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="7114:7557" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="7630:7689" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="8912:8971" ph="/* 如果有邀请则不可更改 ... */" />
+                <marker date="1536645155275" expanded="true" signature="9374:17625" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="9500:9582" ph="/* 0. Validate input data ... */" />
+                <marker date="1536645155275" expanded="true" signature="9675:10290" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="9709:9899" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="9959:10079" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="10177:10276" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="10303:10346" ph="/* 0.2 ... */" />
+                <marker date="1536645155275" expanded="true" signature="10452:10881" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="10486:10748" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="10801:10867" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="10915:11002" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="11019:11053" ph="/* 0.3 ... */" />
+                <marker date="1536645155275" expanded="true" signature="11069:11181" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="11230:11317" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="11330:11513" ph="/* 0.4 ... */" />
+                <marker date="1536645155275" expanded="true" signature="11575:12102" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="12116:12166" ph="/* 1.2.1 ... */" />
+                <marker date="1536645155275" expanded="true" signature="12202:12347" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="12360:12401" ph="/* 1.2.2. ... */" />
+                <marker date="1536645155275" expanded="true" signature="12418:13002" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="13064:13151" ph="/* 2. Update Skills ... */" />
+                <marker date="1536645155275" expanded="true" signature="13167:13424" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="13480:13525" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="13538:13575" ph="/* 2.2 ... */" />
+                <marker date="1536645155275" expanded="true" signature="13620:13708" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="13827:13940" ph="/* 3. Update Compulsory work Day ... */" />
+                <marker date="1536645155275" expanded="true" signature="13956:14233" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="14289:14334" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="14347:14394" ph="/* 3.2 ... */" />
+                <marker date="1536645155275" expanded="true" signature="14520:14660" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="14691:14830" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="14856:14947" ph="/* 4. Update Location ... */" />
+                <marker date="1536645155275" expanded="true" signature="14963:15238" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="15294:15339" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="15352:15388" ph="/* 4.2 ... */" />
+                <marker date="1536645155275" expanded="true" signature="15526:16018" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="15560:15915" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="15967:16003" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="16054:16193" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="16219:16306" ph="/* 5. Update School ... */" />
+                <marker date="1536645155275" expanded="true" signature="16322:16599" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="16655:16700" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="16713:16747" ph="/* 5.2 ... */" />
+                <marker date="1536645155275" expanded="true" signature="16873:17359" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="16907:17256" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="17308:17344" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="17395:17534" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="17635:17737" ph="/* 检查本人操作 ... */" />
+                <marker date="1536645155275" expanded="true" signature="17877:17964" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="18120:18822" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="18356:18434" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="18590:18778" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="18964:19825" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="19200:19278" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="19294:19617" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="19384:19561" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="19666:19695" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="19743:19788" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="19916:24740" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="20135:20263" ph="/* 1.  Filter first ... */" />
+                <marker date="1536645155275" expanded="true" signature="20792:21228" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="20852:21123" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="21016:21105" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="21468:22297" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="21528:22194" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="22087:22176" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="22473:23304" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="22533:23201" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="23094:23183" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="23317:23417" ph="/* @TODO Filter School ... */" />
+                <marker date="1536645155275" expanded="true" signature="23519:23755" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="23993:24697" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="24060:24683" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="24281:24665" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="24374:24643" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="24488:24617" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="24796:25126" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="25187:25234" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="25311:25358" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="25416:25463" ph="{...}" />
+                <marker date="1536645155275" expanded="true" signature="25528:25575" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployerJobProfileSeed.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+=======
             <state relative-caret-position="195">
               <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
               <folding>
@@ -333,6 +523,7 @@
                 <marker date="1536767438145" expanded="true" signature="220:1075" ph="{...}" />
                 <marker date="1536767438145" expanded="true" signature="252:1073" ph="{...}" />
               </folding>
+>>>>>>> Dev
             </state>
           </provider>
         </entry>
@@ -408,7 +599,10 @@
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/SendInvitation.cshtml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/RequestToCertificateMyCompany.cshtml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/EditCompanyInfo.cshtml" root0="FORCE_HIGHLIGHTING" />
+<<<<<<< HEAD
+=======
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/MessageModels/Conversation.cs" root0="FORCE_HIGHLIGHTING" />
+>>>>>>> Dev
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/JobProfiles.cshtml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/SearchApplicants.cshtml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Employer/EditJobProfile.cshtml" root0="FORCE_HIGHLIGHTING" />
@@ -422,10 +616,15 @@
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/AdministratorController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/AddSkill.cshtml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs" root0="FORCE_HIGHLIGHTING" />
+<<<<<<< HEAD
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/EmployerController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/Roles.cs" root0="FORCE_HIGHLIGHTING" />
+=======
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/50E855B7-120D-4149-AA46-DA62F04CC07A/c5/c3a4021a/TimerQueueTimer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Controllers/EmployerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/Roles.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/50E855B7-120D-4149-AA46-DA62F04CC07A/b1/0815f042/TimerQueue.cs" root0="SKIP_HIGHLIGHTING" />
+>>>>>>> Dev
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/ApplicationUser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/StateModels/State.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/iUni Workshop/Models/SchoolModels/SchoolStatus.cs" root0="FORCE_HIGHLIGHTING" />
@@ -562,10 +761,16 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
+<<<<<<< HEAD
+    <option name="y" value="23" />
+    <option name="width" value="1680" />
+    <option name="height" value="962" />
+=======
     <option name="x" value="156" />
     <option name="y" value="85" />
     <option name="width" value="1367" />
     <option name="height" value="901" />
+>>>>>>> Dev
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -573,6 +778,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="FileSystemExplorer" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
@@ -585,6 +791,8 @@
               <item name="iUni Workshop" type="24d0babc:SolutionExplorerModelNode" />
               <item name="iUni Workshop" type="24d0babc:SolutionExplorerModelNode" />
             </path>
+<<<<<<< HEAD
+=======
             <path>
               <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
               <item name="iUni Workshop" type="24d0babc:SolutionExplorerModelNode" />
@@ -631,12 +839,12 @@
               <item name="Views" type="24d0babc:SolutionExplorerModelNode" />
               <item name="Administrator" type="24d0babc:SolutionExplorerModelNode" />
             </path>
+>>>>>>> Dev
           </expand>
           <select />
         </subPane>
         <option name="show-all-files" value="false" />
       </pane>
-      <pane id="FileSystemExplorer" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -648,7 +856,7 @@
     <property name="RiderNuGetCacheManager.AutoClear.temp" value="1" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="D:/OneDrive/Documents/AU_Melbourne_RMIT_Course/COSC_2277_Web Development_Technologies/Assignment_2/Assignment_2/Csharp/CSharp.sln" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.deploy.options" />
+    <property name="settings.editor.selected.configurable" value="SolutionBuilderGeneralOptionsPageId" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -702,7 +910,7 @@
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
-      <option name="PROJECT_KIND" value="DotNetCore" />
+      <option name="PROJECT_KIND" value="Unloaded" />
       <option name="PROJECT_TFM" value=".NETCoreApp,Version=v2.0" />
       <browser start="true" url="http://localhost:52547/" />
       <method v="2">
@@ -759,13 +967,22 @@
       <workItem from="1535891097200" duration="5280000" />
       <workItem from="1535974242908" duration="3654000" />
       <workItem from="1536285924420" duration="1989000" />
+<<<<<<< HEAD
+      <workItem from="1536671193700" duration="617000" />
+      <workItem from="1536672720825" duration="681000" />
+=======
       <workItem from="1536674620521" duration="1030000" />
       <workItem from="1536710507812" duration="10970000" />
+>>>>>>> Dev
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
+    <option name="totallyTimeSpent" value="257172000" />
+=======
     <option name="totallyTimeSpent" value="267874000" />
+>>>>>>> Dev
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -777,6 +994,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
+    <frame x="0" y="23" width="1680" height="962" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49655172" visible="true" weight="0.24420024" />
+      <window_info id="Structure" order="1" sideWeight="0.50344825" side_tool="true" visible="true" weight="0.24420024" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.73903966" weight="0.2850575" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.23908046" />
+=======
     <frame x="156" y="85" width="1367" height="901" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49567366" visible="true" weight="0.3018868" />
@@ -786,6 +1014,7 @@
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.73903966" weight="0.30160692" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.23809524" />
+>>>>>>> Dev
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.4957265" weight="0.328" />
@@ -1234,11 +1463,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/NewMessage.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="318">
+          <caret line="374" column="26" lean-forward="true" selection-start-line="374" selection-start-column="26" selection-end-line="374" selection-end-column="26" />
+=======
         <state relative-caret-position="285">
           <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
           <folding>
             <marker date="1536674890469" expanded="true" signature="126:453" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
@@ -1423,6 +1657,13 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/50E855B7-120D-4149-AA46-DA62F04CC07A/20/681aa85b/Thread.cs" />
+    <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/AddSkill.cshtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="47" column="21" selection-start-line="47" selection-start-column="21" selection-end-line="47" selection-end-column="21" />
+=======
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Controllers/DashboardController.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -1455,11 +1696,16 @@
             <marker date="1536733488609" expanded="true" signature="1378:1531" ph="{...}" />
             <marker date="1536733488609" expanded="true" signature="1564:1619" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvJobHisotriesSeed.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="450">
+          <caret line="34" column="101" selection-start-line="34" selection-start-column="101" selection-end-line="34" selection-end-column="101" />
+=======
         <state relative-caret-position="465">
           <caret line="38" column="26" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="26" />
           <folding>
@@ -1472,11 +1718,16 @@
             <marker date="1536733488613" expanded="true" signature="1292:1445" ph="{...}" />
             <marker date="1536733488613" expanded="true" signature="1478:1533" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvSeed.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="240">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+=======
         <state relative-caret-position="285">
           <caret line="30" selection-start-line="30" selection-end-line="34" selection-end-column="13" />
           <folding>
@@ -1489,11 +1740,16 @@
             <marker date="1536733488607" expanded="true" signature="1699:1838" ph="{...}" />
             <marker date="1536733488607" expanded="true" signature="1872:1900" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployerJobProfileSeed.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="75">
+          <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
+=======
         <state relative-caret-position="480">
           <caret line="38" column="26" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="26" />
           <folding>
@@ -1506,11 +1762,16 @@
             <marker date="1536733715751" expanded="true" signature="1670:1825" ph="{...}" />
             <marker date="1536733715751" expanded="true" signature="1858:1913" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvWorkDaySeed.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="545">
+          <caret line="242" column="56" selection-start-line="242" selection-start-column="56" selection-end-line="242" selection-end-column="56" />
+=======
         <state relative-caret-position="345">
           <caret line="30" column="107" selection-start-line="30" selection-start-column="107" selection-end-line="30" selection-end-column="107" />
           <folding>
@@ -1523,11 +1784,16 @@
             <marker date="1536733625791" expanded="true" signature="1314:1448" ph="{...}" />
             <marker date="1536733625791" expanded="true" signature="1481:1509" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployeeCvSkillSeed.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="360">
+          <caret line="33" column="25" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="25" />
+=======
         <state relative-caret-position="540">
           <caret line="43" column="26" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="26" />
           <folding>
@@ -1540,11 +1806,16 @@
             <marker date="1536733625787" expanded="true" signature="1492:1650" ph="{...}" />
             <marker date="1536733625787" expanded="true" signature="1683:1738" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/FieldSeed.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="206">
+          <caret line="52" column="21" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
+=======
         <state relative-caret-position="285">
           <caret line="19" column="113" selection-start-line="19" selection-start-column="113" selection-end-line="19" selection-end-column="113" />
           <folding>
@@ -1552,11 +1823,16 @@
             <marker date="1536645155277" expanded="true" signature="109:5090" ph="{...}" />
             <marker date="1536645155277" expanded="true" signature="166:5083" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Models/AdministratorModels/MyMessages.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="525">
+          <caret line="38" column="18" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
+=======
         <state relative-caret-position="60">
           <caret line="5" column="27" lean-forward="true" selection-start-line="5" selection-start-column="27" selection-end-line="5" selection-end-column="27" />
           <folding>
@@ -1564,11 +1840,16 @@
             <marker date="1536764587574" expanded="true" signature="110:479" ph="{...}" />
             <marker date="1536764587574" expanded="true" signature="140:477" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployerJobSkillSeed.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="255">
+          <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+=======
         <state relative-caret-position="270">
           <caret line="23" column="47" selection-start-line="23" selection-start-column="47" selection-end-line="23" selection-end-column="47" />
           <folding>
@@ -1581,11 +1862,16 @@
             <marker date="1536733715747" expanded="true" signature="1072:1230" ph="{...}" />
             <marker date="1536733715747" expanded="true" signature="1263:1291" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/NewMessage.cshtml">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="330">
+          <caret line="29" column="55" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
+=======
         <state relative-caret-position="131">
           <caret line="27" selection-start-line="27" selection-end-line="27" />
           <folding>
@@ -1607,11 +1893,16 @@
             <marker date="1536710773192" expanded="true" signature="1787:2057" ph="&lt;select.../&gt;" />
             <marker date="1536710773192" expanded="true" signature="2186:2264" ph="@{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/UserSeed.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="315">
+          <caret line="28" column="50" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
+=======
         <state relative-caret-position="139">
           <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="72" />
           <folding>
@@ -1623,11 +1914,16 @@
             <marker date="1536645155283" expanded="true" signature="1561:2672" ph="{...}" />
             <marker date="1536645155283" expanded="true" signature="1604:2658" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Models/SchoolModels/School.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="315">
+          <caret line="32" column="41" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
+=======
         <state relative-caret-position="457">
           <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="67" />
           <folding>
@@ -1635,11 +1931,16 @@
             <marker date="1536645155293" expanded="true" signature="390:1564" ph="{...}" />
             <marker date="1536645155293" expanded="true" signature="416:1562" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Models/ApplicationUser.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="375">
+          <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
+=======
         <state>
           <folding>
             <marker date="1536645155286" expanded="false" signature="6:402" ph="..." />
@@ -1647,11 +1948,23 @@
             <marker date="1536645155286" expanded="true" signature="580:882" ph="{...}" />
             <marker date="1536645155286" expanded="true" signature="595:876" ph="/* public virtual ICollection&lt;Employee&gt; Employees { get; set; } ... */" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/50E855B7-120D-4149-AA46-DA62F04CC07A/38/e5d6f158/ExecutionContext.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="375">
+          <caret line="31" column="46" selection-start-line="31" selection-start-column="46" selection-end-line="31" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iUni Workshop/Controllers/AdministratorController.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5175">
+          <caret line="345" column="69" selection-start-line="345" selection-start-column="69" selection-end-line="345" selection-end-column="69" />
+=======
         <state relative-caret-position="210">
           <caret line="134" column="6" selection-start-line="134" selection-start-column="6" selection-end-line="134" selection-end-column="6" />
         </state>
@@ -1661,18 +1974,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="201">
           <caret line="141" column="6" selection-start-line="141" selection-start-column="6" selection-end-line="141" selection-end-column="6" />
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/50E855B7-120D-4149-AA46-DA62F04CC07A/b1/0815f042/TimerQueue.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="375">
+          <caret line="25" column="44" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
+=======
         <state relative-caret-position="210">
           <caret line="78" column="6" selection-start-line="78" selection-start-column="6" selection-end-line="78" selection-end-column="6" />
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/ApplicationDbContext.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="285">
+          <caret line="19" column="113" selection-start-line="19" selection-start-column="113" selection-end-line="19" selection-end-column="113" />
+=======
         <state relative-caret-position="193">
           <caret line="49" column="60" selection-start-line="49" selection-start-column="60" selection-end-line="49" selection-end-column="60" />
           <folding>
@@ -1682,11 +2005,16 @@
             <marker date="1536766139744" expanded="true" signature="935:955" ph="{...}" />
             <marker date="1536766139744" expanded="true" signature="2523:4425" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Controllers/EmployeeController.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="375">
+          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="50" />
+=======
         <state relative-caret-position="466">
           <caret line="411" column="11" selection-start-line="395" selection-end-line="411" selection-end-column="11" />
           <folding>
@@ -1752,11 +2080,16 @@
             <marker date="1536766500488" expanded="true" signature="13983:14030" ph="{...}" />
             <marker date="1536766500488" expanded="true" signature="14032:15869" ph="/* public async Task&lt;IActionResult&gt; MyMessages() ... */" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Models/MessageModels/Conversation.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="180">
+          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
+=======
         <state relative-caret-position="195">
           <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
           <folding>
@@ -1764,11 +2097,16 @@
             <marker date="1536767438145" expanded="true" signature="220:1075" ph="{...}" />
             <marker date="1536767438145" expanded="true" signature="252:1073" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Models/MessageModels/Message.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="330">
+          <caret line="22" column="78" selection-start-line="22" selection-start-column="78" selection-end-line="22" selection-end-column="78" />
+=======
         <state relative-caret-position="150">
           <caret line="13" column="27" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="27" />
           <folding>
@@ -1776,11 +2114,23 @@
             <marker date="1536767438147" expanded="true" signature="200:949" ph="{...}" />
             <marker date="1536767438147" expanded="true" signature="227:947" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Views/Administrator/MessageDetail.cshtml">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="405">
+          <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/iUni Workshop/Data/Seeds/EmployerJobProfileSeed.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
+=======
         <state relative-caret-position="319">
           <caret line="44" column="67" selection-start-line="44" selection-start-column="67" selection-end-line="44" selection-end-column="67" />
           <folding>
@@ -1817,11 +2167,127 @@
             <marker date="1536771119920" expanded="true" signature="148:421" ph="{...}" />
             <marker date="1536771119920" expanded="true" signature="181:419" ph="{...}" />
           </folding>
+>>>>>>> Dev
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/iUni Workshop/Controllers/AdministratorController.cs">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="4422">
+          <caret line="512" lean-forward="true" selection-start-line="512" selection-end-line="512" />
+          <folding>
+            <marker date="1536645155275" expanded="false" signature="6:766" ph="..." />
+            <marker date="1536645155275" expanded="true" signature="803:25585" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="894:25583" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="1264:1420" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="1472:1520" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="1601:2282" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="1788:2231" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="2401:3407" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="2448:2476" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="2596:2624" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="2853:2973" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="3502:4663" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="3697:4140" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="4193:4297" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="4351:4465" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="4516:4619" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="4743:5580" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="4928:5045" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="5100:5214" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="5273:5389" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="5590:5621" ph="/* Send email ... */" />
+            <marker date="1536645155275" expanded="true" signature="5697:5736" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="5818:6191" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="6249:6630" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="6815:8902" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="6938:7581" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="7114:7557" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="7630:7689" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="8912:8971" ph="/* 如果有邀请则不可更改 ... */" />
+            <marker date="1536645155275" expanded="true" signature="9374:17625" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="9500:9582" ph="/* 0. Validate input data ... */" />
+            <marker date="1536645155275" expanded="true" signature="9675:10290" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="9709:9899" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="9959:10079" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="10177:10276" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="10303:10346" ph="/* 0.2 ... */" />
+            <marker date="1536645155275" expanded="true" signature="10452:10881" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="10486:10748" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="10801:10867" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="10915:11002" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="11019:11053" ph="/* 0.3 ... */" />
+            <marker date="1536645155275" expanded="true" signature="11069:11181" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="11230:11317" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="11330:11513" ph="/* 0.4 ... */" />
+            <marker date="1536645155275" expanded="true" signature="11575:12102" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="12116:12166" ph="/* 1.2.1 ... */" />
+            <marker date="1536645155275" expanded="true" signature="12202:12347" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="12360:12401" ph="/* 1.2.2. ... */" />
+            <marker date="1536645155275" expanded="true" signature="12418:13002" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="13064:13151" ph="/* 2. Update Skills ... */" />
+            <marker date="1536645155275" expanded="true" signature="13167:13424" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="13480:13525" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="13538:13575" ph="/* 2.2 ... */" />
+            <marker date="1536645155275" expanded="true" signature="13620:13708" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="13827:13940" ph="/* 3. Update Compulsory work Day ... */" />
+            <marker date="1536645155275" expanded="true" signature="13956:14233" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="14289:14334" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="14347:14394" ph="/* 3.2 ... */" />
+            <marker date="1536645155275" expanded="true" signature="14520:14660" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="14691:14830" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="14856:14947" ph="/* 4. Update Location ... */" />
+            <marker date="1536645155275" expanded="true" signature="14963:15238" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="15294:15339" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="15352:15388" ph="/* 4.2 ... */" />
+            <marker date="1536645155275" expanded="true" signature="15526:16018" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="15560:15915" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="15967:16003" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="16054:16193" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="16219:16306" ph="/* 5. Update School ... */" />
+            <marker date="1536645155275" expanded="true" signature="16322:16599" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="16655:16700" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="16713:16747" ph="/* 5.2 ... */" />
+            <marker date="1536645155275" expanded="true" signature="16873:17359" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="16907:17256" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="17308:17344" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="17395:17534" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="17635:17737" ph="/* 检查本人操作 ... */" />
+            <marker date="1536645155275" expanded="true" signature="17877:17964" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="18120:18822" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="18356:18434" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="18590:18778" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="18964:19825" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="19200:19278" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="19294:19617" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="19384:19561" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="19666:19695" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="19743:19788" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="19916:24740" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="20135:20263" ph="/* 1.  Filter first ... */" />
+            <marker date="1536645155275" expanded="true" signature="20792:21228" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="20852:21123" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="21016:21105" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="21468:22297" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="21528:22194" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="22087:22176" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="22473:23304" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="22533:23201" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="23094:23183" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="23317:23417" ph="/* @TODO Filter School ... */" />
+            <marker date="1536645155275" expanded="true" signature="23519:23755" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="23993:24697" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="24060:24683" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="24281:24665" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="24374:24643" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="24488:24617" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="24796:25126" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="25187:25234" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="25311:25358" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="25416:25463" ph="{...}" />
+            <marker date="1536645155275" expanded="true" signature="25528:25575" ph="{...}" />
+=======
         <state relative-caret-position="229">
           <caret line="452" column="13" lean-forward="true" selection-start-line="452" selection-start-column="13" selection-end-line="452" selection-end-column="13" />
           <folding>
@@ -1893,6 +2359,7 @@
             <marker date="1536771422855" expanded="true" signature="16919:16989" ph="{...}" />
             <marker date="1536771422855" expanded="true" signature="17047:17130" ph="{...}" />
             <marker date="1536771422855" expanded="true" signature="17185:17441" ph="{...}" />
+>>>>>>> Dev
           </folding>
         </state>
       </provider>
