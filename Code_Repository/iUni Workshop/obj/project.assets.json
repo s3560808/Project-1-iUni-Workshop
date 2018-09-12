@@ -13490,23 +13490,23 @@
     ]
   },
   "packageFolders": {
-    "/Users/kzmain/.nuget/packages/": {},
+    "/Users/kai/.nuget/packages/": {},
     "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/kzmain/Documents/GitHub/iUni-Workshop/Code_Repository/iUni Workshop/iUni Workshop.csproj",
+      "projectUniqueName": "/Users/kai/Documents/GitHub/Project-1-iUni-Workshop/Code_Repository/iUni Workshop/iUni Workshop.csproj",
       "projectName": "iUni Workshop",
-      "projectPath": "/Users/kzmain/Documents/GitHub/iUni-Workshop/Code_Repository/iUni Workshop/iUni Workshop.csproj",
-      "packagesPath": "/Users/kzmain/.nuget/packages/",
-      "outputPath": "/Users/kzmain/Documents/GitHub/iUni-Workshop/Code_Repository/iUni Workshop/obj/",
+      "projectPath": "/Users/kai/Documents/GitHub/Project-1-iUni-Workshop/Code_Repository/iUni Workshop/iUni Workshop.csproj",
+      "packagesPath": "/Users/kai/.nuget/packages/",
+      "outputPath": "/Users/kai/Documents/GitHub/Project-1-iUni-Workshop/Code_Repository/iUni Workshop/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "/Users/kzmain/.nuget/NuGet/NuGet.Config"
+        "/Users/kai/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"

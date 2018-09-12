@@ -19,21 +19,25 @@ namespace iUni_Workshop.Data.Seeds
             CreateEmployeeCvJobHistory(2, "History 1 of Job 1", "Description 2 of Job 1", 1, context);
         }
 
-        private static void CreateEmployeeCvJobHistory(int id, string historyName, string shortDescription, int employerCvId, ApplicationDbContext _context)
+        private static async Task CreateEmployeeCvJobHistory(int id, string historyName, string shortDescription, int employerCvId, ApplicationDbContext _context)
         {
             
             var newHistory = new EmployeeJobHistory
                 { Id = id, Name = historyName, ShortDescription = shortDescription, EmployeeCvId = employerCvId};
+            var check = _context.EmployeeJobHistories.Where(a => a.Id == id);
+            if (check.Any())
+            {
+                return;
+            }
             try
             {
-                _context.EmployeeJobHistories.Add(newHistory);
-                _context.SaveChanges();
+                await _context.EmployeeJobHistories.AddAsync(newHistory);
+                await _context.SaveChangesAsync();
             }
-            catch (NullReferenceException ex)
+            catch (Exception ex)
             {
+                // ignored
             }
-            
-            
         }
     }
 }
