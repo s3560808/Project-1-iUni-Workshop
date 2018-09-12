@@ -164,8 +164,6 @@ namespace iUni_Workshop.Controllers
             return RedirectToAction("Index");
         }
 
-
-
         public async Task<IActionResult> JobProfiles()
         {
             var user = await _userManager.GetUserAsync(User);

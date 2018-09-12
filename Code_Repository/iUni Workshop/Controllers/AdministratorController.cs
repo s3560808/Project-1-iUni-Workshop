@@ -362,21 +362,31 @@ namespace iUni_Workshop.Controllers
             {
             }
             string reciverId = _context.Users.First(a => a.Email == message.Email).Id;
+            //Create Conversation
+            Conversation newConversation = new Conversation
+            {
+                User1Id = (await _userManager.GetUserAsync(User)).Id,
+                User2Id = reciverId,
+                Title = message.Title,
+                Type = message.Type
+            };
+            //Create Message
+            _context.Conversations.Add(newConversation);
+            _context.SaveChanges();
             Message newMessage = new Message
             {
-                SenderId = (await _userManager.GetUserAsync(User)).Id,
-                ReciverId = reciverId,
+                ConversationId = newConversation.Id,
+                receiverId = reciverId,
                 SentTime = DateTime.Now,
-                Title = message.Title,
+                Read = false,
                 MessageDetail = message.MessageDetail,
-                Read = false
             };
             await _context.Messages.AddAsync(newMessage);
             await _context.SaveChangesAsync();
             return RedirectToAction("NewMessage");
         }
 
-        [Route("[Controller]/GetUsers/{email}/")]
+        [Route("[Controller]/GetUsers/{userName}/")]
         public IActionResult GetUsers(string userName)
         {
             var reciver = _context.Users.Where(a => a.UserName.Contains(userName)).ToList();
@@ -386,13 +396,23 @@ namespace iUni_Workshop.Controllers
         public async Task<IActionResult> MyMessages()
         {
             var _user = await _userManager.GetUserAsync(User);
-            var conversations = _context.Messages.Where(a => a.ReciverId == _user.Id).Select(b => b.ConversationId).AsEnumerable().Distinct();
+            var conversations = _context.Conversations
+                .Where(a => a.User1Id == _user.Id ||
+                            a.User2Id == _user.Id)
+                .AsEnumerable()
+                .Distinct();
             List<MyMessages> messages = new List<MyMessages>();
             foreach (var conversation in conversations)
             {
-                var message = _context.Messages.Where(a => a.ConversationId == conversation && a.ReciverId == _user.Id).OrderByDescending(a => a.SentTime).First();
+                var message = _context.Messages
+                    .Where(a => a.ConversationId == conversation.Id && a.receiverId == _user.Id)
+                    .OrderByDescending(a => a.SentTime).First();
+                string sender;
+                sender = conversation.User1Id == _user.Id ? 
+                    _context.Users.First(a => a.Id == conversation.User2Id).UserName : 
+                    _context.Users.First(a => a.Id == conversation.User1Id).UserName;
 
-                messages.Add(new MyMessages { ConversationId = message.ConversationId, Read = message.Read, SenderName = _user.Email, SentTime = message.SentTime, Title = message.Title});
+                messages.Add(new MyMessages { ConversationId = message.ConversationId, Read = message.Read, SenderName = sender, SentTime = message.SentTime, Title = conversation.Title});
             }
             return View(messages);
         }
@@ -400,12 +420,25 @@ namespace iUni_Workshop.Controllers
         public async Task<IActionResult> MessageDetail(string conversationId)
         {
             var updateMessages = _context.Messages.Where(a => a.ConversationId == conversationId).ToList();
+            
             List<MessageDetail> messages = new List<MessageDetail> { };
             var user = await _userManager.GetUserAsync(User);
+            var conversation = _context.Conversations.First(a => a.Id == conversationId);
+            
             foreach (var updateMessage in updateMessages) {
-                var Email = _context.Users.First(a => a.Id == updateMessage.SenderId).Email;
-                messages.Add(new MessageDetail {SenderName = Email, ConversationId = updateMessage.ConversationId, Detail = updateMessage.MessageDetail, SentTime = updateMessage.SentTime});
-                if (updateMessage.ReciverId == user.Id) {
+                var receiver = _context.Users.First(a => a.Id == updateMessage.receiverId);
+                string senderEmail;
+                if (conversation.User1Id == receiver.Id)
+                {
+                    senderEmail = _context.Users.First(a => a.Id == conversation.User2Id).Email;
+                }
+                else
+                {
+                    senderEmail = _context.Users.First(a => a.Id == conversation.User1Id).Email;
+                }
+
+                messages.Add(new MessageDetail {SenderName = senderEmail, ConversationId = updateMessage.ConversationId, Detail = updateMessage.MessageDetail, SentTime = updateMessage.SentTime, Type = conversation.Type});
+                if (updateMessage.receiverId == user.Id) {
                     updateMessage.Read = true;
                 }
             }
@@ -420,15 +453,32 @@ namespace iUni_Workshop.Controllers
             {
             }
             var user = await _userManager.GetUserAsync(User);
-            var previousMessage = _context.Messages.Where(a => a.ConversationId == replyMyMessage.ConversationId && a.ReciverId == user.Id);
-            //Check sender, writer, conversationid
-            if (previousMessage.Count() == 0) {
+            var previousMessages = _context.Messages
+                .Where(a => a.ConversationId == replyMyMessage.ConversationId && a.receiverId == user.Id);
+            var conversation = _context.Conversations
+                .First(a => a.Id == replyMyMessage.ConversationId);
+        //Check sender, writer, conversationid
+            if (!previousMessages.Any()) {
                 return RedirectToAction("MyMessages");
             }
-            var newMessage = new Message {ConversationId = previousMessage.First().ConversationId, SenderId = user.Id, ReciverId = previousMessage.First().SenderId, SentTime = DateTime.Now, Read = false, Title = previousMessage.First().Title, MessageDetail = replyMyMessage.MessageDetail};
+
+            if (conversation.Type == MessageType.System)
+            {
+                return RedirectToAction("MyMessages");
+            }
+
+            var newMessage = new Message
+            {
+                receiverId = user.Id,
+                ConversationId = conversation.Id, 
+                SentTime = DateTime.Now, 
+                Read = false, 
+                MessageDetail = replyMyMessage.MessageDetail,
+                
+            };
             await _context.AddAsync(newMessage);
             await _context.SaveChangesAsync();
             return RedirectToAction("MyMessages");
-    }
+        }
     }
 }

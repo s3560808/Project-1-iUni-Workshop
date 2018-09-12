@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using iUni_Workshop.Models.EmployeeModels;
 using Microsoft.EntityFrameworkCore;
@@ -22,17 +23,22 @@ namespace iUni_Workshop.Data.Seeds
             CreateEmployeeWorkDay(6, 2, context);   
         }
 
-        private static void CreateEmployeeWorkDay(int day, int employeeCvId, ApplicationDbContext _context)
+        private static async Task CreateEmployeeWorkDay(int day, int employeeCvId, ApplicationDbContext _context)
         {
             
             var newDay = new EmployeeWorkDay
                 { Day = day, EmployeeCvId = employeeCvId};
+            var check = _context.EmployeeWorkDays.Where(a => a.Day == day && a.EmployeeCvId == employeeCvId);
+            if (check.Any())
+            {
+                return;
+            }
             try
             {
-                _context.EmployeeWorkDays.Add(newDay);
+                await _context.EmployeeWorkDays.AddAsync(newDay);
                 _context.SaveChanges();
             }
-            catch (System.NullReferenceException ex)
+            catch (Exception ex)
             {
             }
         }

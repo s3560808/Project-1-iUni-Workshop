@@ -13506,7 +13506,11 @@
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
+<<<<<<< HEAD
         "/Users/kai/.config/NuGet/NuGet.Config"
+=======
+        "/Users/kai/.nuget/NuGet/NuGet.Config"
+>>>>>>> Dev
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
