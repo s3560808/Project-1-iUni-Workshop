@@ -13,9 +13,11 @@
           <e p="DashboardController.cs" t="Include" />
           <e p="EmployeeController.cs" t="Include" />
           <e p="EmployerController.cs" t="Include" />
+          <e p="FieldController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
           <e p="ManageController.cs" t="Include" />
           <e p="SchoolController.cs" t="Include" />
+          <e p="SkillController.cs" t="Include" />
           <e p="SuburbController.cs" t="Include" />
         </e>
         <e p="Data" t="Include">
@@ -87,6 +89,7 @@
             <e p="EmployeeWorkDay.cs" t="Include" />
             <e p="MessageDetail.cs" t="Include" />
             <e p="MyCvs.cs" t="Include" />
+            <e p="MyInvitations.cs" t="Include" />
             <e p="MyMessages.cs" t="Include" />
             <e p="RequestToAddField.cs" t="Include" />
             <e p="RequestToAddSkill.cs" t="Include" />
@@ -106,8 +109,11 @@
             <e p="JobProfileRequiredSchool.cs" t="Include" />
             <e p="JobProfiles.cs" t="Include" />
             <e p="JobProfileSkill.cs" t="Include" />
+            <e p="MessageDetail.cs" t="Include" />
+            <e p="MessageDetailMessageInfo.cs" t="Include" />
             <e p="RequestToCertificateMyCompany.cs" t="Include" />
             <e p="SearchApplicant.cs" t="Include" />
+            <e p="SendMessage.cs" t="Include" />
             <e p="ViewApplicantCv.cs" t="Include" />
           </e>
           <e p="ErrorViewModel.cs" t="Include" />
@@ -219,6 +225,7 @@
             <e p="Index.cshtml" t="Include" />
             <e p="Invitations.cshtml" t="Include" />
             <e p="JobProfiles.cshtml" t="Include" />
+            <e p="MessageDetail.cshtml" t="Include" />
             <e p="RequestToCertificateMyCompany.cshtml" t="Include" />
             <e p="RequestToUnCertificateMyCompany.cshtml" t="Include" />
             <e p="SearchApplicants.cshtml" t="Include" />

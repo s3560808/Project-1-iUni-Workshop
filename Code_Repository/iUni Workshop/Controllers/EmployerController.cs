@@ -11,6 +11,7 @@ using iUniWorkshop.Models.EmployerModels;
 using iUni_Workshop.Models.EmployeeModels;
 using iUni_Workshop.Models.InvatationModel;
 using iUni_Workshop.Models.JobRelatedModels;
+using iUni_Workshop.Models.MessageModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using MySql.Data.MySqlClient;
 using Remotion.Linq.Parsing.Structure.IntermediateModel;
+using MessageDetail = iUni_Workshop.Models.EmployerModels.MessageDetail;
 
 namespace iUni_Workshop.Controllers
 {
@@ -458,7 +460,7 @@ namespace iUni_Workshop.Controllers
         //检查本人操作
         //return if profileId is not right
         //Filter primary id
-        //去除invatation
+        //去除已发送invatation
         [Route("[Controller]/SearchApplicants/{jobProfileId}")]
         public async Task<IActionResult> SearchApplicants(int jobProfileId)
         {
@@ -525,7 +527,6 @@ namespace iUni_Workshop.Controllers
             //1.1 Filter field
             //1.2 && Filter salary
             //1.3 && Filter Find Job Status
-            var test = DateTime.Parse("2018-08-09 00:00:00.000000").AddDays(14).Day >= DateTime.Today.Day;
             rawData = _context.EmployeeCvs
                 .Where(a => a.FieldId == jobProfile.FieldId 
                             && a.MinSaraly <= jobProfile.Salary 
@@ -642,12 +643,114 @@ namespace iUni_Workshop.Controllers
         //To employee
         public async Task<IActionResult> MyMessages()
         {
+            
             return View();
         }
 
-        public async Task<IActionResult> MessageDetail()
+        //一旦reject不可发送
+        //验证发送者和接收者
+        [Route("[Controller]/MessageDetail/{invitationId}")]
+        public async Task<IActionResult> MessageDetail(int invitationId)
         {
-            return View();
+            var updateConversations= _context.Conversations.Where(a => a.InvatationId == invitationId);
+            //New conversation
+            MessageDetail result;
+            if (!updateConversations.Any())
+            {
+                result = new MessageDetail { Type = MessageType.UserMessage, InvitationId = invitationId};
+                return View(result);
+            }
+
+            var updateMessages = _context.Messages.Where(a => a.ConversationId == updateConversations.First().Id);
+            
+            List<MessageDetailMessageInfo> messages = new List<MessageDetailMessageInfo> { };
+            var user = await _userManager.GetUserAsync(User);
+            var conversation = _context.Conversations.First(a => a.InvatationId == invitationId);
+            
+            foreach (var updateMessage in updateMessages) {
+                var receiver = _context.Users.First(a => a.Id == updateMessage.receiverId);
+                string senderEmail;
+                if (conversation.User1Id == receiver.Id)
+                {
+                    senderEmail = _context.Users.First(a => a.Id == conversation.User2Id).Email;
+                }
+                else
+                {
+                    senderEmail = _context.Users.First(a => a.Id == conversation.User1Id).Email;
+                }
+
+                messages.Add(new MessageDetailMessageInfo {SenderName = senderEmail, Detail = updateMessage.MessageDetail, SentTime = updateMessage.SentTime});
+                if (updateMessage.receiverId == user.Id) {
+                    updateMessage.Read = true;
+                }
+            }
+
+            result  = new MessageDetail { Type = MessageType.UserMessage, InvitationId = invitationId, Messages = messages.AsEnumerable()};
+            _context.Messages.UpdateRange(updateMessages);
+            await _context.SaveChangesAsync();
+            return View(result);
+        }
+
+        public async Task SendMessage(SendMessage sendMessage)
+        {
+            if (!ModelState.IsValid)
+            {
+            }
+            var user = await _userManager.GetUserAsync(User);
+            Conversation conversation = null;
+            try
+            {
+                conversation = _context.Conversations
+                    .First(a => a.InvatationId == sendMessage.InvitationId);
+            }
+            catch (InvalidOperationException ex)
+            {
+            }
+            var invitation = _context.Invatations
+                .First(a => a.Id == sendMessage.InvitationId);
+            string receiverId;
+            
+            if (conversation != null)
+            {
+                if (conversation.User1Id == user.Id)
+                {
+                    receiverId = conversation.User2Id;
+                }
+                else
+                {
+                    receiverId = conversation.User1Id;
+                }
+
+            }
+            else
+            {
+                conversation = new Conversation();
+
+                conversation.InvatationId = sendMessage.InvitationId;
+                conversation.Title = "";
+                conversation.Type = MessageType.UserMessage;
+                var employerId = _context.EmployerJobProfiles.First(a => a.Id == invitation.EmployerJobProfileId).EmployerId; 
+                conversation.User1Id = employerId;
+                var employeeId = _context.EmployeeCvs.First(a => a.Id == invitation.EmployeeCvId).EmployeeId;
+                conversation.User2Id = employeeId;
+                
+                receiverId = conversation.User1Id;
+                _context.Conversations.Add(conversation);
+                _context.SaveChanges();
+            }
+
+            var message = new Message
+            {
+                Read = false, 
+                receiverId = receiverId,
+                ConversationId = conversation.Id,
+                MessageDetail = sendMessage.MessageDetail,
+                SentTime = DateTime.Now
+            };
+
+            _context.Messages.Add(message);
+            _context.SaveChanges();
+            
         }
 
         public async Task<IActionResult> CertificateMyCompany()

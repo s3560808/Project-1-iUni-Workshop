@@ -24,7 +24,7 @@ namespace iUni_Workshop.Controllers
     public class EmployeeController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public EmployeeController(UserManager<ApplicationUser> userManager,
             ApplicationDbContext context,
@@ -325,16 +325,10 @@ namespace iUni_Workshop.Controllers
                         continue;
                     }
                 }
-//            }
-
-
-            
-            
-
         }
 
 
-        public async Task<IActionResult> RequestToAddField()
+        public ViewResult RequestToAddField()
         {
             return View();
         }
@@ -344,7 +338,7 @@ namespace iUni_Workshop.Controllers
             return RedirectToAction("RequestToAddField");
         }
 
-        public async Task<IActionResult> RequestToAddSkill()
+        public ViewResult RequestToAddSkill()
         {
             return View();
         }
@@ -354,7 +348,7 @@ namespace iUni_Workshop.Controllers
             return RedirectToAction("RequestToAddSkill");
         }
 
-        public async Task<IActionResult> RequestToAddSchool()
+        public ViewResult RequestToAddSchool()
         {
             return View();
         }
@@ -370,48 +364,76 @@ namespace iUni_Workshop.Controllers
         }
 
         
-        public async Task<IActionResult> MyInvatations()
+        public async Task<IActionResult> MyInvitations()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var invitations = _context.Invatations.Where(a => a.EmployeeCV.EmployeeId == user.Id).AsEnumerable();
+            var results = new List<MyInvitations>();
+            results.AddRange(
+                invitations.Select(
+                    invitation => new MyInvitations
+                    {
+                        Id = invitation.Id, 
+                        EmployeeCvTitle = _context.EmployeeCvs.First(a => a.Id == invitation.EmployeeCvId).Title, 
+                        EmployerJobProfileTitle = _context.EmployerJobProfiles
+                            .First(a => a.Id == invitation.EmployerJobProfileId).Title
+                    }
+                )
+            );
+            return View(results.AsEnumerable());
+        }
+
+        public Task<IActionResult> InvitationDetail()
         {
             return View();
         }
 
-        public async Task<IActionResult> InvatationDetail()
+        public async Task<IActionResult> MyMessages()
         {
-            return View();
+            var user = await _userManager.GetUserAsync(User);
+            var conversations = _context.Conversations
+                .Where(a => a.User1Id == user.Id || a.User2Id == user.Id)
+                .AsEnumerable().ToList();
+            var messages = new List<MyMessages>();
+            foreach (var conversation in conversations)
+            {
+                var receiverId = conversation.User1Id == user.Id ? conversation.User2Id : conversation.User1Id;
+                var message = _context.Messages
+                    .Where(a => a.ConversationId == conversation.Id && a.receiverId == receiverId)
+                    .OrderByDescending(a => a.SentTime).First();
+                var senderEmail = _context.Users.First(a => a.Id == receiverId).Email;
+                messages.Add(new MyMessages
+                {
+                    ConversationId = message.ConversationId, 
+                    Read = message.Read, 
+                    SenderName = senderEmail, 
+                    SentTime = message.SentTime, 
+                    Title = conversation.Title,
+                    Type = conversation.Type
+                });
+            }
+            return View(messages);
         }
 
-//        public async Task<IActionResult> MyMessages()
-//        {
-//            var _user = await _userManager.GetUserAsync(User);
-//            var conversations = _context.Messages.Where(a => a.ReciverId == _user.Id).Select(b => b.ConversationId).AsEnumerable().Distinct();
-//            List<MyMessages> messages = new List<MyMessages>();
-//            foreach (var conversation in conversations)
-//            {
-//                var message = _context.Messages.Where(a => a.ConversationId == conversation && a.ReciverId == _user.Id).OrderByDescending(a => a.SentTime).First();
-//
-//                messages.Add(new MyMessages { ConversationId = message.ConversationId, Read = message.Read, SenderName = _user.Email, SentTime = message.SentTime, Title = message.Title});
-//            }
-//            return View(messages);
-//        }
-//
-//        public async Task<IActionResult> MessageDetail(string conversationId)
-//        {
-//            var updateMessages = _context.Messages.Where(a => a.ConversationId == conversationId).ToList();
-//            List<MessageDetail> messages = new List<MessageDetail> { };
-//            var user = await _userManager.GetUserAsync(User);
-//            foreach (var updateMessage in updateMessages) {
-//                var Email = _context.Users.First(a => a.Id == updateMessage.SenderId).Email;
-//                messages.Add(new MessageDetail {SenderName = Email, ConversationId = updateMessage.ConversationId, Detail = updateMessage.MessageDetail, SentTime = updateMessage.SentTime});
-//                if (updateMessage.ReciverId == user.Id) {
-//                    updateMessage.Read = true;
-//                }
-//            }
-//            _context.Messages.UpdateRange(updateMessages);
-//            await _context.SaveChangesAsync();
-//            return View(messages);
-//        }
 
-        
-    }
-    
+        public async Task<IActionResult> MessageDetail(string conversationId)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var updateMessages = _context.Messages.Where(a => a.ConversationId == conversationId).ToList();
+            var conversation = _context.Conversations.First(a => a.Id == conversationId);
+            var messages = new List<MessageDetail>();
+            foreach (var updateMessage in updateMessages)
+            {
+                var senderId = user.Id == conversation.User1Id ? conversation.User2Id : conversation.User1Id;
+                var email = _context.Users.First(a => a.Id == senderId).Email;
+                messages.Add(new MessageDetail {SenderName = email, ConversationId = updateMessage.ConversationId, Detail = updateMessage.MessageDetail, SentTime = updateMessage.SentTime});
+                if (updateMessage.receiverId == user.Id) {
+                    updateMessage.Read = true;
+                }
+            }
+            _context.Messages.UpdateRange(updateMessages);
+            await _context.SaveChangesAsync();
+            return View(messages);
+        }
+    }    
 }
