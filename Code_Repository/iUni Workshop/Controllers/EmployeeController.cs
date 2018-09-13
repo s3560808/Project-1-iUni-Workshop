@@ -383,57 +383,29 @@ namespace iUni_Workshop.Controllers
             return View(results.AsEnumerable());
         }
 
-        public Task<IActionResult> InvitationDetail()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> MyMessages()
+        //验证是否是这个人的invitation
+        public async Task<IActionResult> InvitationDetail(int invitationId)
         {
             var user = await _userManager.GetUserAsync(User);
-            var conversations = _context.Conversations
-                .Where(a => a.User1Id == user.Id || a.User2Id == user.Id)
-                .AsEnumerable().ToList();
-            var messages = new List<MyMessages>();
-            foreach (var conversation in conversations)
+            var invitation = _context.Invatations.First(a => a.Id == invitationId);
+            var jobProfile = _context.EmployerJobProfiles.First(a => a.Id == invitation.EmployerJobProfileId);
+            var employer = _context.Employers.First(a => a.Id == jobProfile.EmployerId);
+            var result = new InvitationDetail
             {
-                var receiverId = conversation.User1Id == user.Id ? conversation.User2Id : conversation.User1Id;
-                var message = _context.Messages
-                    .Where(a => a.ConversationId == conversation.Id && a.receiverId == receiverId)
-                    .OrderByDescending(a => a.SentTime).First();
-                var senderEmail = _context.Users.First(a => a.Id == receiverId).Email;
-                messages.Add(new MyMessages
-                {
-                    ConversationId = message.ConversationId, 
-                    Read = message.Read, 
-                    SenderName = senderEmail, 
-                    SentTime = message.SentTime, 
-                    Title = conversation.Title,
-                    Type = conversation.Type
-                });
-            }
-            return View(messages);
+                SentDate = invitation.SentTime, 
+                CompanyDescription = employer.BriefDescription, 
+                JobDescription = jobProfile.Description,
+                Title = jobProfile.Title,
+                InvitationId = invitation.Id
+            };
+            
+            return View(result);
         }
 
-
-        public async Task<IActionResult> MessageDetail(string conversationId)
+        //Validation 是否是自己
+        public IActionResult AcceptOrReject(bool accept)
         {
-            var user = await _userManager.GetUserAsync(User);
-            var updateMessages = _context.Messages.Where(a => a.ConversationId == conversationId).ToList();
-            var conversation = _context.Conversations.First(a => a.Id == conversationId);
-            var messages = new List<MessageDetail>();
-            foreach (var updateMessage in updateMessages)
-            {
-                var senderId = user.Id == conversation.User1Id ? conversation.User2Id : conversation.User1Id;
-                var email = _context.Users.First(a => a.Id == senderId).Email;
-                messages.Add(new MessageDetail {SenderName = email, ConversationId = updateMessage.ConversationId, Detail = updateMessage.MessageDetail, SentTime = updateMessage.SentTime});
-                if (updateMessage.receiverId == user.Id) {
-                    updateMessage.Read = true;
-                }
-            }
-            _context.Messages.UpdateRange(updateMessages);
-            await _context.SaveChangesAsync();
-            return View(messages);
+            return RedirectToAction("MyInvitations");
         }
     }    
 }

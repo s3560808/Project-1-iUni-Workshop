@@ -16,6 +16,7 @@
           <e p="FieldController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
           <e p="ManageController.cs" t="Include" />
+          <e p="MessageController.cs" t="Include" />
           <e p="SchoolController.cs" t="Include" />
           <e p="SkillController.cs" t="Include" />
           <e p="SuburbController.cs" t="Include" />
@@ -87,6 +88,7 @@
             <e p="EmployeeJobHistory.cs" t="Include" />
             <e p="EmployeeSkill.cs" t="Include" />
             <e p="EmployeeWorkDay.cs" t="Include" />
+            <e p="InvitationDetail.cs" t="Include" />
             <e p="MessageDetail.cs" t="Include" />
             <e p="MyCvs.cs" t="Include" />
             <e p="MyInvitations.cs" t="Include" />
@@ -111,6 +113,7 @@
             <e p="JobProfileSkill.cs" t="Include" />
             <e p="MessageDetail.cs" t="Include" />
             <e p="MessageDetailMessageInfo.cs" t="Include" />
+            <e p="MyMessages.cs" t="Include" />
             <e p="RequestToCertificateMyCompany.cs" t="Include" />
             <e p="SearchApplicant.cs" t="Include" />
             <e p="SendMessage.cs" t="Include" />
@@ -166,6 +169,7 @@
             </e>
           </e>
         </e>
+        <e p="Pages" t="Include" />
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
@@ -210,10 +214,10 @@
             <e p="EditCV.cshtml" t="Include" />
             <e p="EditPersonalInfo.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
+            <e p="InvitationDetail.cshtml" t="Include" />
             <e p="MessageDetail.cshtml" t="Include" />
             <e p="MyCVs.cshtml" t="Include" />
             <e p="MyInvitations.cshtml" t="Include" />
-            <e p="MyMessages.cshtml" t="Include" />
             <e p="RequestToAddField.cshtml" t="Include" />
             <e p="RequestToAddSchool.cs" t="Include" />
             <e p="RequestToAddSchool.cshtml" t="Include" />
@@ -225,7 +229,6 @@
             <e p="Index.cshtml" t="Include" />
             <e p="Invitations.cshtml" t="Include" />
             <e p="JobProfiles.cshtml" t="Include" />
-            <e p="MessageDetail.cshtml" t="Include" />
             <e p="RequestToCertificateMyCompany.cshtml" t="Include" />
             <e p="RequestToUnCertificateMyCompany.cshtml" t="Include" />
             <e p="SearchApplicants.cshtml" t="Include" />
@@ -253,6 +256,10 @@
             <e p="SetPassword.cshtml" t="Include" />
             <e p="ShowRecoveryCodes.cshtml" t="Include" />
             <e p="TwoFactorAuthentication.cshtml" t="Include" />
+          </e>
+          <e p="Message" t="Include">
+            <e p="MessageDetail.cshtml" t="Include" />
+            <e p="MyMessages.cshtml" t="Include" />
           </e>
           <e p="Shared" t="Include">
             <e p="_Layout.cshtml" t="Include" />

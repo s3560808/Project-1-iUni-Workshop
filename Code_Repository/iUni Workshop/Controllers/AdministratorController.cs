@@ -23,7 +23,7 @@ namespace iUni_Workshop.Controllers
     public class AdministratorController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public AdministratorController(UserManager<ApplicationUser> userManager,
@@ -165,11 +165,11 @@ namespace iUni_Workshop.Controllers
             );
             
             
-            foreach (var ischool in schools)
+            foreach (var school in schools)
             {
-                ischool.SchoolName = schoolName;
-                ischool.NormalizedName = schoolName.ToUpper();
-                ischool.DomainExtension = domainExtension.ToLower();
+                school.SchoolName = schoolName;
+                school.NormalizedName = schoolName.ToUpper();
+                school.DomainExtension = domainExtension.ToLower();
             }
             _context.Schools.UpdateRange(schools);
             await _context.SaveChangesAsync();
@@ -221,7 +221,7 @@ namespace iUni_Workshop.Controllers
             return RedirectToAction("AddField");
         }
 
-        public async void UpdateFieldAction(AddField field)
+        public void UpdateFieldAction(AddField field)
         {
             if (!ModelState.IsValid)
             {
