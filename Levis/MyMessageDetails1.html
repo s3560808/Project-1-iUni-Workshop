@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width-device-width, intial-scale=1">
+	<title>My Messages</title>
+	<link rel="stylesheet" type="text/css" href="css/MyMessagesDetails1.css">
+	<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+	<style>
+	
+legend{
+font-size: 26px;
+}
+
+#mystyle table{
+	width: 1000px;
+	margin: auto;
+	text-align: center;
+	table-layout: fixed;
+	
+}
+
+#mystyle table, tr, td, th{
+	padding: 20px;
+	color: black;
+	border: 0.5px solid #080808;
+	border-collapse: collapse;
+	font-size: 16px;
+	font-weight: bold;
+	width: 1280px;
+}
+
+#mystyle td:hover{
+	background: grey;
+}
+
+tr.link123{
+background-color: white;
+}
+
+tr.link123:hover{
+background-color:#ff4000;
+}
+
+li a.active{
+background-color: #eaeae1
+}
+
+.form123 input{
+width: 1280;
+}
+
+#righty a{
+text-align: right;
+}
+
+textarea{
+resize: none;
+}
+
+	
+	/* Javascript Upload Button 
+	.inpfile{
+		width: 0.1px;
+		height: 0.1px;
+		opacity: 0;
+		overflow: hidden;
+		position: absolute;
+		z-index: -1;
+	}
+	
+	.inpfile + label{
+		font-size: 1.00em;
+		font-weight: 700;
+		color: #f56a6a;
+		background-color: white;
+		display: inline-block;
+		border: 2px solid;
+		border-color: #f56a6a;
+		border-radius: 5px;
+		width: 175px;
+		padding: 10px;
+		
+	}
+	
+	.inpfile + label{
+		cursor: pointer;
+	}
+	
+	.inpfile:focus + label{
+		outline: 1px dotted #000;
+		outline: -webkit-focus-ring-color auto 5px;
+	}
+	
+	.inpfile + label *{
+		pointer-events: none;
+	}
+	*/
+	
+
+	</style>
+	
+</head>
+
+	<body class="is-preload">
+	
+		<!-- Wrapper -->
+		<div id="wrapper">
+	
+			
+			<!-- Main -->
+				<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<h2>Messages</h2>									
+								</header>
+
+							<!-- Form Send Message -->
+								<section id="banner">
+									<div class="content">																	
+										<section id="send" class="alt">
+											<form >
+												<fieldset>
+												<legend>Message</legend><br>
+													<textarea name="message" rows="12" cols="120" placeholder="Max words 300 per message" maxlength="300"></textarea><br >																							 												
+												</fieldset>
+											</form>
+											
+											<form action="upload.php" method="post" enctype="multipart/form-data">
+												<input type="file" name="file" id="file" class="inpfile" data-multiple-caption="{count files selected" multiple />
+												<label for="file" >File Upload / Attach (script not working)</label>
+												
+												<?php
+												$target_dir = "*/";
+												$target_file = $target_dir . basename($_FILES["file"]["name"]);
+												$uploadOk = 1;
+												$fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+												
+												if(isset($_POST["submit"]))
+												{
+													$check = getfile($_FILES["file"]["tmp_name");
+													if($check !== false)
+													{
+														echo "File accepted - " . $check["mime"] . ".";
+														$uploadOk = 1;
+													}
+													else
+													{
+														echo "File not accepted.";
+														$uploadOk = 0;													
+													}
+												}
+												
+												//Check if file already exists
+												if(file_exists($target_file))
+												{
+													echo "Sorry file already exists.";
+													$uploadOk = 0;
+												}
+												
+												if ($uploadOk == 0)
+												{
+													echo "Sorry, your file was not uploaded";
+												}
+												else
+												{
+													if(move_uploaded_file($_FILES["file"]["tmp_name"],$target_file))
+													{
+														echo "The file " . basename($_FILES["file"]["name"]). " has been uploaded.";
+													}
+													else
+													{
+														echo "Sorry, there was an error uploading your file.";
+													}
+												}
+												
+												
+												?>
+											</form>
+											
+											<p><a href="#" class="button big">Send</a></p>
+										</section>					
+									</div>									
+								</section>
+
+						</div>
+				</div>
+			
+				<!-- Navbar-->
+				<div id="navbar">
+					<div class="inner">
+					
+					
+						<!-- Search -->
+						<section id="search" class="alt">
+							<form method="post" action="#DoesNothing">
+								<input type="text" name="query" id="query" placeholder="Search">
+							</form>
+						</section>
+					
+						<!--Main Section Nav -->
+						<nav id="menu">
+							<header class="major">
+								<h2>Menu</h2>
+							</header>
+							
+							<ul>
+								<li><a href="#Homepage.html">Home</a></li>
+								<li><a href="#MyInvitations.html">Invitations</a></li>
+								<li><a class="active" href="MyMessages.html">My Messages</a></li>
+								<li><a href="#PersonalInfo.html">Personal Info</a></li>
+								<li><a href="#Contact.html">Contact Us</a></li>
+								<li></li>
+								<br><br>
+							</ul>
+						</nav>
+						
+						<!--Section 2 -->
+						<section>
+							<header class="major">
+								<h2>Get in Touch</h2>
+							</header>
+							
+							<p>We can fill this in later</p>
+							
+							<ul class="contact">
+								<li class="fa-envelope-o"><a href="#">Email: test@test.com</a></li>
+								<li class="fa-phone">(ph:) 12341234</li>
+							</ul>
+						</section>
+						
+						
+                         
+						
+						<!--Footer-->
+						<footer id="footer">
+							<p class="copyright">&copy Untilted. Rights Reserved</p>
+						</footer>
+							
+						
+					</div>
+				</div>
+		</div>
+		
+		<!-- Scripts -->
+		<script src="js/breakpoints.min"</script>
+		<script src="js/browser.min"</script>
+		<script src="js/jquey.min"</script>
+		<script src="js/main.js"</script>
+		<script src="js/util.js"</script>
+		<script src="js/no-javascript.js"</script>
+		<script src="js/label-has-javascript.js"</script>
+
+	</body>	
+
+
+</html>
