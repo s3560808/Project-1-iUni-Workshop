@@ -23,7 +23,7 @@ namespace iUni_Workshop.Controllers
     public class AdministratorController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public AdministratorController(UserManager<ApplicationUser> userManager,
@@ -36,13 +36,13 @@ namespace iUni_Workshop.Controllers
         }
 
         
-        public async Task<IActionResult> Index()
+        public ViewResult Index()
         {
             return View();
         }
         
         [HttpGet]
-        public async Task<IActionResult> AddSchool()
+        public ViewResult AddSchool()
         {
             var result = _context.Schools
                 .Select(a => new AddSchool
@@ -165,11 +165,11 @@ namespace iUni_Workshop.Controllers
             );
             
             
-            foreach (var ischool in schools)
+            foreach (var school in schools)
             {
-                ischool.SchoolName = schoolName;
-                ischool.NormalizedName = schoolName.ToUpper();
-                ischool.DomainExtension = domainExtension.ToLower();
+                school.SchoolName = schoolName;
+                school.NormalizedName = schoolName.ToUpper();
+                school.DomainExtension = domainExtension.ToLower();
             }
             _context.Schools.UpdateRange(schools);
             await _context.SaveChangesAsync();
@@ -221,7 +221,7 @@ namespace iUni_Workshop.Controllers
             return RedirectToAction("AddField");
         }
 
-        public async void UpdateFieldAction(AddField field)
+        public void UpdateFieldAction(AddField field)
         {
             if (!ModelState.IsValid)
             {
@@ -457,19 +457,30 @@ namespace iUni_Workshop.Controllers
                 .Where(a => a.ConversationId == replyMyMessage.ConversationId && a.receiverId == user.Id);
             var conversation = _context.Conversations
                 .First(a => a.Id == replyMyMessage.ConversationId);
+            
         //Check sender, writer, conversationid
+            //If no previous message it not reply
             if (!previousMessages.Any()) {
                 return RedirectToAction("MyMessages");
             }
-
+            //System conversation cannot reply
             if (conversation.Type == MessageType.System)
             {
                 return RedirectToAction("MyMessages");
             }
+            string receiverId;
+            if (conversation.User1Id == user.Id)
+            {
+                receiverId = conversation.User2Id;
+            }
+            else
+            {
+                receiverId = conversation.User1Id;
+            }
 
             var newMessage = new Message
             {
-                receiverId = user.Id,
+                receiverId = receiverId,
                 ConversationId = conversation.Id, 
                 SentTime = DateTime.Now, 
                 Read = false, 

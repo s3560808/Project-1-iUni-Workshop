@@ -1,0 +1,62 @@
+@using Microsoft.EntityFrameworkCore
+@model iUni_Workshop.Models.EmployeeModels.InvitationDetail
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+
+<h2>title</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobDescription)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Title)
+                </td>
+                <td>
+                    @Model.SentDate.ToString("dd/MM h:mm tt")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.CompanyDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.JobDescription)
+                </td>
+                <form asp-controller="Employee" asp-action="AcceptOrReject" method="post">
+                    <button name="accept" type="submit" value = "true" class="btn btn-sm btn-success">Accept</button>
+                    <button name="accept" type="submit" value = "false" class="btn btn-sm btn-success">Reject</button>
+                </form>
+                <form asp-controller="Message" asp-action="MessageDetail" method="post">
+                    <button name="invitationId" type="submit" value = "@Model.InvitationId" class="btn btn-sm btn-success">Send Info</button>
+                </form>
+            </tr>
+    }
+        
+    </tbody>
+
+</table>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
