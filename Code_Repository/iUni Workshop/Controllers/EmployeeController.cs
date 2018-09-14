@@ -358,7 +358,7 @@ namespace iUni_Workshop.Controllers
         public async Task<IActionResult> AddSchoolAction(AddSchoolAction school)
         {
             var user = await _userManager.GetUserAsync(User);
-            var suburbId = _context.Suburbs.First(a => a.Name == school.SurburbName && a.PostCode == school.PostCode).Id;
+            var suburbId = _context.Suburbs.First(a => a.Name == school.SuburbName && a.PostCode == school.PostCode).Id;
             var newSchool = new School {DomainExtension =  school.DomainExtension, SchoolName = school.SchoolName, NormalizedName = school.SchoolName.ToUpper(), SuburbId = suburbId, NewRequest = true, RequestedBy = user.Id};
             _context.Schools.Add(newSchool);
             _context.SaveChanges();

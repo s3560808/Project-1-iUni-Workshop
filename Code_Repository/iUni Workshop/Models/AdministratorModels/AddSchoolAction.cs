@@ -4,16 +4,17 @@ namespace iUni_Workshop.Models.AdministratorModels
 {
     public class AddSchoolAction
     {
-        [Required]
+        [Required(ErrorMessage = "Correct school name is required")]
         public string SchoolName { get; set; }
         
-        [Required]
+        [Display(Name = "Domain Extension of school")]
+        [Required(ErrorMessage = "Correct domain extension is required")]
         public string DomainExtension { get; set; }
         
-        [Required]
-        public string SurburbName { get; set; }
+        [Required(ErrorMessage = "Correct suburb name is required")]
+        public string SuburbName { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Correct postcode is required")]
         public int PostCode { get; set; }
 
     }
