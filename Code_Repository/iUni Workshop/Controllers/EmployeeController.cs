@@ -352,6 +352,8 @@ namespace iUni_Workshop.Controllers
         {
             return View();
         }
+        
+        //要避免重复加入
 
         public async Task<IActionResult> AddSchoolAction(AddSchoolAction school)
         {

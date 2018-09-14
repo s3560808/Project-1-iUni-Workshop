@@ -36,13 +36,13 @@ namespace iUni_Workshop.Controllers
         }
 
         
-        public async Task<IActionResult> Index()
+        public ViewResult Index()
         {
             return View();
         }
         
         [HttpGet]
-        public async Task<IActionResult> AddSchool()
+        public ViewResult AddSchool()
         {
             var result = _context.Schools
                 .Select(a => new AddSchool

@@ -518,7 +518,7 @@ namespace iUni_Workshop.Controllers
             }
             return View();
         }
-        
+        //TODO Filter sent application
         public List<SearchApplicant> SearchApplicantsCoreRanker(int jobProfileId)
         {
             var jobProfile = _context.EmployerJobProfiles.First(a => a.Id == jobProfileId);
