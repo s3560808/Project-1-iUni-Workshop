@@ -5,15 +5,12 @@ using System.Threading.Tasks;
 using iUni_Workshop.Data;
 using iUni_Workshop.Models;
 using iUni_Workshop.Models.AdministratorModels;
-using iUni_Workshop.Models.EmployeeModels;
 using iUni_Workshop.Models.JobRelatedModels;
 using iUni_Workshop.Models.MessageModels;
 using iUni_Workshop.Models.SchoolModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using MessageDetail = iUni_Workshop.Models.AdministratorModels.MessageDetail;
 using MyMessages = iUni_Workshop.Models.AdministratorModels.MyMessages;
 
@@ -24,7 +21,6 @@ namespace iUni_Workshop.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
-        private readonly RoleManager<IdentityRole> _roleManager;
 
         public AdministratorController(UserManager<ApplicationUser> userManager,
             ApplicationDbContext context,
@@ -32,7 +28,6 @@ namespace iUni_Workshop.Controllers
             ) {
             _userManager = userManager;
             _context = context;
-            _roleManager = roleManager;
         }
 
         
@@ -44,6 +39,7 @@ namespace iUni_Workshop.Controllers
         [HttpGet]
         public ViewResult AddSchool()
         {
+            ProcessSystemInfo();
             var result = _context.Schools
                 .Select(a => new AddSchool
                 {
@@ -56,39 +52,103 @@ namespace iUni_Workshop.Controllers
                 }).OrderBy(a => a.DomainExtension);
             return View(result);
         }
-        
+
+        private void ProcessSystemInfo()
+        {
+            if ((string) TempData["Error"] != "")
+            {
+                ViewBag.Error = TempData["Error"];
+            }
+            if ((string) TempData["Inform"] != "")
+            {
+                ViewBag.Inform = TempData["Inform"];
+            }
+            if ((string) TempData["Success"] != "")
+            {
+                ViewBag.Success = TempData["Success"];
+            }
+        }
+
+        private void InitialSystemInfo()
+        {
+            TempData["Error"] = "";
+            TempData["Inform"] = "";
+            TempData["Success"] = "";
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddSchoolAction(AddSchoolAction school)
         {
-            var schoolStatus = SchoolStatus.InUse;
-
+            const int schoolStatus = SchoolStatus.InUse;
+            InitialSystemInfo();
+            //1. Check if correct input from front-end
             if (!ModelState.IsValid)
             {
-                //ToDo
-                //If model is not valid
+                foreach (var model in ModelState)
+                {
+                    if (model.Value.Errors.Count == 0) continue;
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    if (model.Key == "PostCode")
+                    {
+                        TempData["Error"]  += "Correct postcode is required";
+                    }
+                    else
+                    {
+                        foreach (var error in model.Value.Errors)
+                        {
+                            TempData["Error"]  += error.ErrorMessage;
+                        }
+                    }
+                }
+                return RedirectToAction("AddSchool");
             }       
-            var suburbs = _context.Suburbs.Where(a => a.Name == school.SurburbName && a.PostCode == school.PostCode);
-            if (suburbs.Any())
+            //2. Check if user entered correct suburb
+            var suburbs = _context.Suburbs
+                .Where(a => a.Name == school.SuburbName.ToUpper() && a.PostCode == school.PostCode);
+            if (!suburbs.Any())
             {
-                //Todo 
-                //If cannot find suburb
+                TempData["Error"] = "Cannot find your Suburb, Please select correct one";
+                return RedirectToAction("AddSchool");
             }
-
             var checkWhetherUpdate = _context.Schools.Where(a => 
-                    (a.SchoolName == school.SchoolName && a.SuburbId == suburbs.First().Id) ||
-                    (a.DomainExtension == school.DomainExtension  && a.SuburbId == suburbs.First().Id)
+                    (a.SchoolName == school.SchoolName && a.SuburbId == suburbs.First().Id) &&
+                    (a.DomainExtension == school.DomainExtension)
                 );
-
             School newSchool;
+            //2.Check if new a school or already in database 
+            //2.1Update a school
             if (checkWhetherUpdate.Any())
             {
+                var oldStatus = checkWhetherUpdate.First().Status;
+                var oldLocationName = _context.Suburbs
+                    .First(a => a.Id == checkWhetherUpdate.First().SuburbId).Name;
                 newSchool = checkWhetherUpdate.First();
                 newSchool.SchoolName = school.SchoolName;
                 newSchool.DomainExtension = school.DomainExtension;
                 newSchool.Status = schoolStatus;
-                //ToDo
-                //Need to infom administrator it is a update was no longer use or in request
+                if ((string) TempData["Inform"] != "")
+                {
+                    TempData["Inform"] += "\n";
+                }
+                TempData["Inform"] += "It is not a new school. " 
+                                      + newSchool.SchoolName + " in " 
+                                      + oldLocationName+" campus was in ";
+                if (oldStatus == SchoolStatus.InUse)
+                {
+                    TempData["Inform"]  += "\"In Use\"";
+                }else if (oldStatus == SchoolStatus.InRequest)
+                {
+                    TempData["Inform"]  += "\"In Request\"";
+                }
+                else
+                {
+                    TempData["Inform"]  += "\"No Longer Used\"";
+                }
             }
+            //2.2Insert a new school
             else
             {
                 newSchool = new School
@@ -101,59 +161,177 @@ namespace iUni_Workshop.Controllers
                     Status = SchoolStatus.InUse
                 };
             }
-            //To update school name if school name changes
-            
+            //3. Update user required school
             _context.Schools.Update(newSchool);
             await _context.SaveChangesAsync();
+            //4. To update school name if school name changes
             await UpdateRelatedInfo(newSchool.SchoolName, newSchool.DomainExtension);
+            TempData["Success"] = "School inserted successfully";
             return RedirectToAction("AddSchool");
         }
 
+        [HttpPost]
         public async Task<IActionResult> UpdateSchoolAction(UpdateSchool school)
         {
-            var suburbs = _context.Suburbs.Where(a => a.Name == school.SurburbName && a.PostCode == school.PostCode);
-            var update = _context.Schools.First(a => a.Id == school.Id);
-            //TODO validate id
-            if (suburbs.Any())
+            InitialSystemInfo();
+            //1. Check if have required model
+            if (!ModelState.IsValid)
             {
-                //Todo 
-                //If cannot find suburb
-            }
+                foreach (var model in ModelState)
+                {
+                    if (model.Value.Errors.Count == 0) continue;
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    if (model.Key == "PostCode")
+                    {
+                        TempData["Error"]  += "Correct postcode is required";
+                    }
+                    else
+                    {
+                        foreach (var error in model.Value.Errors)
+                        {
+                            TempData["Error"]  += error.ErrorMessage;
+                        }
+                    }
+                }
+                return RedirectToAction("AddSchool");
+            }  
             
-            //Can log in database
+            var suburbs = _context.Suburbs
+                .Where(a => a.Name == school.SuburbName && a.PostCode == school.PostCode);
+            var updateRaw = _context.Schools
+                .Where(a => a.Id == school.Id);
+            //2. Check if correct suburb
+            if (!suburbs.Any())
+            {
+                TempData["Error"] = "Cannot find your suburb. Please select correct one.";
+                return RedirectToAction("AddSchool");
+            }
+            //3. Check if correct school id
+            if (!updateRaw.Any())
+            {
+                TempData["Error"] = "Cannot find your school. Pleas enter correct one.";
+                return RedirectToAction("AddSchool");
+            }
+
+            var duplication = _context.Schools.Where(a =>
+                a.SuburbId == suburbs.First().Id &&
+                a.DomainExtension == updateRaw.First().DomainExtension &&
+                a.NormalizedName == updateRaw.First().NormalizedName
+                );
+            //4. Check duplicate entry for school & campus
+            if (duplication.Any())
+            {
+                if (duplication.First().Id != school.Id)
+                {
+                    TempData["Error"] = "School "+ duplication.First().SchoolName
+                                                 + " & Campus " +suburbs.First().Name + " " + suburbs.First().PostCode
+                                                 +" already in database.";
+                    return RedirectToAction("AddSchool");
+                }
+            }
+            var update = updateRaw.First();
+            //5. Update school Name
+            //TODO Can make a log in database in later version
             if (school.SchoolName != update.SchoolName)
             {
+                if ((string) TempData["Inform"] != "")
+                {
+                    TempData["Inform"] += "\n";
+                }
+                TempData["Inform"] += "School " + update.SchoolName +"'s Name updated"
+                                      +" from " + update.SchoolName
+                                      +" to " + school.SchoolName;
                 update.SchoolName = school.SchoolName;
                 update.NormalizedName = school.SchoolName.ToUpper();
                 _context.Update(update);
                 _context.SaveChanges();
                 await UpdateRelatedInfo(update.SchoolName, update.DomainExtension);
             }
-            
-            //Can log in database
+            var finalSchoolName = school.SchoolName;
+            //6. Update domain extension
             if (school.DomainExtension != update.DomainExtension)
             {
+                if ((string) TempData["Inform"] != "")
+                {
+                    TempData["Inform"] += "\n";
+                }
+                TempData["Inform"] += "School "+finalSchoolName+"'s Domain Extension updated" 
+                                      +" from " + update.DomainExtension 
+                                      +" to "+ school.DomainExtension;
                 update.DomainExtension = school.DomainExtension.ToLower();
                 _context.Update(update);
                 _context.SaveChanges();
                 await UpdateRelatedInfo(update.SchoolName, update.DomainExtension);
             }
             
-            //Can log in database
+            //7. Update school suburb
             if (suburbs.First().Id != update.SuburbId)
             {
-                update.SuburbId = suburbs.First().Id;
+                if ((string) TempData["Inform"] != "")
+                {
+                    TempData["Inform"] += "\n";
+                }
+
+                var oldSuburbId = update.SuburbId;
+                var newSuburbId = suburbs.First().Id;
+                var oldSuburbName = _context.Suburbs.First(a => a.Id == oldSuburbId).Name;
+                var oldSuburbPostCode = _context.Suburbs.First(a => a.Id == oldSuburbId).PostCode;
+                var newSuburbName = _context.Suburbs.First(a => a.Id == newSuburbId).Name;
+                var newSuburbPostCode = _context.Suburbs.First(a => a.Id == newSuburbId).PostCode;
+                TempData["Inform"] += "School " + finalSchoolName+ "'s suburb updated"
+                                                +" from "+ oldSuburbName + " "+ oldSuburbPostCode
+                                                +" to "+ newSuburbName + " "+ newSuburbPostCode;
+                update.SuburbId = newSuburbId;
                 _context.Update(update);
                 _context.SaveChanges();
             }
 
-            //Can log in database
+            //8. Update school status
             if (school.Status != update.Status)
             {
+                if ((string) TempData["Inform"] != "")
+                {
+                    TempData["Inform"] += "\n";
+                }
+                string oldStatus;
+                string newStatus;
+                switch (update.Status)
+                {
+                    case SchoolStatus.InUse:
+                        oldStatus = "In Use";
+                        break;
+                    case SchoolStatus.InRequest:
+                        oldStatus = "In Request";
+                        break;
+                    default:
+                        oldStatus = "No longer used";
+                        break;
+                }
+
+                switch (school.Status)
+                {
+                    case SchoolStatus.InUse:
+                        newStatus = "In Use";
+                        break;
+                    case SchoolStatus.InRequest:
+                        newStatus = "In Request";
+                        break;
+                    default:
+                        newStatus = "No longer used";
+                        break;
+                }
+                TempData["Inform"] += "School " + finalSchoolName + "'s status updated"
+                                      +" from "+ oldStatus
+                                      +" to "+ newStatus;
+                
                 update.Status = school.Status;
                 _context.Update(update);
                 _context.SaveChanges();
             }
+            TempData["Success"] = "School updated successfully";
             return RedirectToAction("AddSchool");
         }
 
@@ -163,7 +341,6 @@ namespace iUni_Workshop.Controllers
                 a.NormalizedName == schoolName.ToUpper() ||
                 a.DomainExtension == domainExtension.ToLower()
             );
-            
             
             foreach (var school in schools)
             {
@@ -175,8 +352,9 @@ namespace iUni_Workshop.Controllers
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IActionResult> AddField()
+        public ViewResult AddField()
         {
+            ProcessSystemInfo();
             var result = _context.Fields
                 .Select(a => 
                     new AddField
@@ -221,6 +399,7 @@ namespace iUni_Workshop.Controllers
             return RedirectToAction("AddField");
         }
 
+        [HttpPost]
         public void UpdateFieldAction(AddField field)
         {
             if (!ModelState.IsValid)
