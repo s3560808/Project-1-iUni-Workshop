@@ -45,11 +45,15 @@
           <e p="UrlHelperExtensions.cs" t="Include" />
         </e>
         <e p="iUni Workshop.csproj" t="IncludeRecursive" />
+<<<<<<< HEAD
+        <e p="Migrations" t="Include" />
+=======
         <e p="Migrations" t="Include">
           <e p="20180912155301_Initikdal.cs" t="Include" />
           <e p="20180912155301_Initikdal.Designer.cs" t="Include" />
           <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
         </e>
+>>>>>>> Dev
         <e p="Models" t="Include">
           <e p="AccountViewModels" t="Include">
             <e p="ExternalLoginViewModel.cs" t="Include" />
