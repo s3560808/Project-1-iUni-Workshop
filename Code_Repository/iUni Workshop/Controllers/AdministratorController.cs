@@ -76,6 +76,24 @@ namespace iUni_Workshop.Controllers
             TempData["Success"] = "";
         }
 
+        private void ProcessModelState()
+        {
+            foreach (var model in ModelState)
+            {
+                if (model.Value.Errors.Count == 0) continue;
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }
+                
+                    foreach (var error in model.Value.Errors)
+                    {
+                        TempData["Error"]  += error.ErrorMessage;
+                    }
+                
+            }
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddSchoolAction(AddSchoolAction school)
         {
@@ -357,7 +375,7 @@ namespace iUni_Workshop.Controllers
             ProcessSystemInfo();
             var result = _context.Fields
                 .Select(a => 
-                    new AddField
+                    new UpdateField
                     {
                         Id = a.Id, 
                         Name = a.Name, 
@@ -370,20 +388,38 @@ namespace iUni_Workshop.Controllers
         [HttpPost]
         public async Task<IActionResult> AddFieldAction(AddField field)
         {
+            InitialSystemInfo();
+            //Check if front end input is valid
             if (!ModelState.IsValid)
             {
+                ProcessModelState();
+                return RedirectToAction("AddField");
             }
-
-            var checkInDatabase = _context.Fields.Where(a => a.NormalizedName == field.Name.ToUpper());
-
+            //2. Check if already in database
+            var checkInDatabase = _context.Fields
+                .Where(a => a.NormalizedName == field.Name.ToUpper());
             Field newField;
-            
+            //2.1 Already in database
             if (checkInDatabase.Any())
             {
-                //TODO Need to infrom administrator it is a update. Already in database.
+                string status;
+                switch (checkInDatabase.First().Status)
+                {
+                    case FieldStatus.InUse:
+                        status = "\"In Use\"";
+                        break;
+                    case FieldStatus.InRequest:
+                        status = "\"In Request\"";
+                        break;
+                    default:
+                        status = "\"No Longer Used\"";
+                        break;
+                }
+                TempData["Inform"] = "Field \"" + field.Name + "\" is already in database. It was in " + status + ".";
                 newField = checkInDatabase.First();
                 newField.Status = FieldStatus.InUse;
             }
+            //2.2 Not in database
             else
             {
                 newField = new Field
@@ -394,45 +430,111 @@ namespace iUni_Workshop.Controllers
                     AddedBy = (await _userManager.GetUserAsync(User)).Id
                 };
             }
+            
             _context.Fields.Update(newField);
             await _context.SaveChangesAsync();
+            TempData["Success"] = "Field \"" + field.Name + "\" added!";
             return RedirectToAction("AddField");
         }
 
         [HttpPost]
-        public void UpdateFieldAction(AddField field)
+        public RedirectToActionResult UpdateFieldAction(UpdateField field)
         {
+            InitialSystemInfo();
             if (!ModelState.IsValid)
             {
-            }
-            
+                ProcessModelState();
+                return RedirectToAction("AddField");
+            }    
             var checkInDatabase = _context.Fields.Where(a => a.Id == field.Id);
+            //Check if field id is not in database
+            if (!checkInDatabase.Any())
+            {
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }
 
-            if (!checkInDatabase.Any()) return;//Todo error not in database
-
+                TempData["Error"] += "Please enter correct field id!";
+                return RedirectToAction("AddField");
+            }
+            //Check if duplicate field name with other field name
+            var checkDuplication = _context.Fields
+                .Where(a => a.NormalizedName == field.Name.ToUpper());
+            if (checkDuplication.First().Id != field.Id)
+            {
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }
+                TempData["Error"] += "Entered duplicate field name "+ "\""+field.Name+"\" "+"!";
+                return RedirectToAction("AddField");
+            }
             var oldField = checkInDatabase.First();
-
-            //Prepare to log
+            //Prepare to change status
             if (oldField.Status != field.Status)
             {
+                string oldStatus;
+                string newStatus;
+                switch (oldField.Status)
+                {
+                    case FieldStatus.InUse:
+                        oldStatus = "\"In Use\"";
+                        break;
+                    case FieldStatus.InRequest:
+                        oldStatus = "\"In Request\"";
+                        break;
+                    default:
+                        oldStatus = "\"No Longer Used\"";
+                        break;
+                }
+                switch (field.Status)
+                {
+                    case FieldStatus.InUse:
+                        newStatus = "\"In Use\"";
+                        break;
+                    case FieldStatus.InRequest:
+                        newStatus = "\"In Request\"";
+                        break;
+                    default:
+                        newStatus = "\"No Longer Used\"";
+                        break;
+                }
                 oldField.Status = field.Status;
                 _context.Fields.Update(oldField);
                 _context.SaveChanges();
+                if ((string) TempData["Inform"] != "")
+                {
+                    TempData["Inform"] += "\n";
+                }
+                TempData["Inform"] += "Field "+ "\""+field.Name+"\" "+"'s status changed from "
+                                     + oldStatus + " to " 
+                                     + newStatus;
             }
-            //Prepare to log
+            //Prepare to change field name
             if (oldField.Name != field.Name)
             {
+                var newName = field.Name;
+                var oldName = oldField.Name;
                 oldField.Name = field.Name;
                 oldField.NormalizedName = field.Name.ToUpper();
                 _context.Fields.Update(oldField);
                 _context.SaveChanges();
+                if ((string) TempData["Inform"] != "")
+                {
+                    TempData["Inform"] += "\n";
+                }
+                TempData["Inform"] += "Field"+ "\""+field.Name+"\" "+"'s name changed from "
+                                     + oldName + " to " 
+                                     + newName;
             }
             
-            return;
+            return RedirectToAction("AddField");
         }
 
-        public async Task<IActionResult> AddSkill()
+        public ViewResult AddSkill()
         {
+            ProcessSystemInfo();
             var result = _context.Skills
                 .Select(a => 
                     new AddSkill
@@ -516,6 +618,7 @@ namespace iUni_Workshop.Controllers
             return View(users);
         }
         
+        //检查是否已经是admin
         [HttpPost]
         public async Task<IActionResult> SetUserTypeAction(SetUserType setUserType)
         {          

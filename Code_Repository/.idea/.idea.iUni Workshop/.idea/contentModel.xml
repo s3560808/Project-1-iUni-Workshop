@@ -72,6 +72,7 @@
             <e p="NewMessage.cs" t="Include" />
             <e p="ReplyMyMessage.cs" t="Include" />
             <e p="SetUserType.cs" t="Include" />
+            <e p="UpdateField.cs" t="Include" />
             <e p="UpdateSchool.cs" t="Include" />
           </e>
           <e p="ApplicationUser.cs" t="Include" />
