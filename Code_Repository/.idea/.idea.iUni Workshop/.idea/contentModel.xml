@@ -3,6 +3,7 @@
   <component name="ContentModelStore">
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="iUni Workshop" t="IncludeRecursive">
+        <e p=".gitignore" t="Include" />
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
@@ -13,9 +14,12 @@
           <e p="DashboardController.cs" t="Include" />
           <e p="EmployeeController.cs" t="Include" />
           <e p="EmployerController.cs" t="Include" />
+          <e p="FieldController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
           <e p="ManageController.cs" t="Include" />
+          <e p="MessageController.cs" t="Include" />
           <e p="SchoolController.cs" t="Include" />
+          <e p="SkillController.cs" t="Include" />
           <e p="SuburbController.cs" t="Include" />
         </e>
         <e p="Data" t="Include">
@@ -43,8 +47,8 @@
         </e>
         <e p="iUni Workshop.csproj" t="IncludeRecursive" />
         <e p="Migrations" t="Include">
-          <e p="20180907021215_InitialCredathe.cs" t="Include" />
-          <e p="20180907021215_InitialCredathe.Designer.cs" t="Include" />
+          <e p="20180912155301_Initikdal.cs" t="Include" />
+          <e p="20180912155301_Initikdal.Designer.cs" t="Include" />
           <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
@@ -68,6 +72,7 @@
             <e p="NewMessage.cs" t="Include" />
             <e p="ReplyMyMessage.cs" t="Include" />
             <e p="SetUserType.cs" t="Include" />
+            <e p="UpdateField.cs" t="Include" />
             <e p="UpdateSchool.cs" t="Include" />
           </e>
           <e p="ApplicationUser.cs" t="Include" />
@@ -85,8 +90,10 @@
             <e p="EmployeeJobHistory.cs" t="Include" />
             <e p="EmployeeSkill.cs" t="Include" />
             <e p="EmployeeWorkDay.cs" t="Include" />
+            <e p="InvitationDetail.cs" t="Include" />
             <e p="MessageDetail.cs" t="Include" />
             <e p="MyCvs.cs" t="Include" />
+            <e p="MyInvitations.cs" t="Include" />
             <e p="MyMessages.cs" t="Include" />
             <e p="RequestToAddField.cs" t="Include" />
             <e p="RequestToAddSkill.cs" t="Include" />
@@ -106,8 +113,12 @@
             <e p="JobProfileRequiredSchool.cs" t="Include" />
             <e p="JobProfiles.cs" t="Include" />
             <e p="JobProfileSkill.cs" t="Include" />
+            <e p="MessageDetail.cs" t="Include" />
+            <e p="MessageDetailMessageInfo.cs" t="Include" />
+            <e p="MyMessages.cs" t="Include" />
             <e p="RequestToCertificateMyCompany.cs" t="Include" />
             <e p="SearchApplicant.cs" t="Include" />
+            <e p="SendMessage.cs" t="Include" />
             <e p="ViewApplicantCv.cs" t="Include" />
           </e>
           <e p="ErrorViewModel.cs" t="Include" />
@@ -136,6 +147,7 @@
             <e p="TwoFactorAuthenticationViewModel.cs" t="Include" />
           </e>
           <e p="MessageModels" t="Include">
+            <e p="Conversation.cs" t="Include" />
             <e p="Message.cs" t="Include" />
             <e p="MessageType.cs" t="Include" />
           </e>
@@ -159,6 +171,7 @@
             </e>
           </e>
         </e>
+        <e p="Pages" t="Include" />
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
@@ -195,6 +208,10 @@
             <e p="MyMessages.cshtml" t="Include" />
             <e p="NewMessage.cshtml" t="Include" />
             <e p="SetUserType.cshtml" t="Include" />
+            <e p="Shared" t="Include">
+              <e p="_AddSchool.cshtml" t="Include" />
+              <e p="_Validation_Area_From_Backend.cshtml" t="Include" />
+            </e>
           </e>
           <e p="Dashboard" t="Include">
             <e p="Index.cshtml" t="Include" />
@@ -203,9 +220,10 @@
             <e p="EditCV.cshtml" t="Include" />
             <e p="EditPersonalInfo.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
+            <e p="InvitationDetail.cshtml" t="Include" />
             <e p="MessageDetail.cshtml" t="Include" />
             <e p="MyCVs.cshtml" t="Include" />
-            <e p="MyMessages.cshtml" t="Include" />
+            <e p="MyInvitations.cshtml" t="Include" />
             <e p="RequestToAddField.cshtml" t="Include" />
             <e p="RequestToAddSchool.cs" t="Include" />
             <e p="RequestToAddSchool.cshtml" t="Include" />
@@ -245,6 +263,10 @@
             <e p="ShowRecoveryCodes.cshtml" t="Include" />
             <e p="TwoFactorAuthentication.cshtml" t="Include" />
           </e>
+          <e p="Message" t="Include">
+            <e p="MessageDetail.cshtml" t="Include" />
+            <e p="MyMessages.cshtml" t="Include" />
+          </e>
           <e p="Shared" t="Include">
             <e p="_Layout.cshtml" t="Include" />
             <e p="_LoginPartial.cshtml" t="Include" />
@@ -265,6 +287,7 @@
             <e p="banner4.svg" t="Include" />
           </e>
           <e p="js" t="Include">
+            <e p="_AddSchool.js" t="Include" />
             <e p="site.js" t="Include" />
             <e p="site.min.js" t="Include" />
           </e>
@@ -328,6 +351,6 @@
       <e p="packages" t="ExcludeRecursive" />
     </e>
     <e p="$USER_HOME$/Library/Caches/Rider2018.2/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_iUni Workshop.-439165151.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_iUni Workshop.274702252.00" t="ExcludeRecursive" />
   </component>
 </project>

@@ -6,8 +6,121 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
+
+
+
 @*UPdate date*@
 <h2>title</h2>
+
+
+<script>
+            function AddSkillController() {
+                var suburbselectbox = document.getElementsByClassName("SkillClass");
+                var boxNumber = suburbselectbox.length;
+                var divBox = document.createElement("div");
+                divBox.className = "SkillClass";
+                var inputSkillName = document.createElement("input");
+                inputSkillName.setAttribute("type","text");
+                inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".SkillName");
+                var inputSkillLink = document.createElement("input");
+                inputSkillLink.setAttribute("type","text");
+                inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".CertificationLink");
+                var inputSkillNameLable = document.createElement("p");
+                inputSkillNameLable.innerText = "Skill Name "+boxNumber;
+                var inputSkillLinkLable = document.createElement("p");
+                inputSkillLinkLable.innerText = "Skill Certification Link "+boxNumber;
+                divBox.appendChild(inputSkillNameLable);
+                divBox.appendChild(inputSkillName);
+                divBox.appendChild(inputSkillLinkLable);
+                divBox.appendChild(inputSkillLink);
+                var last = suburbselectbox[boxNumber-1];
+                last.append(divBox);
+            }
+
+            function AddMeterialController() {
+                var suburbselectbox = document.getElementsByClassName("MaterialClass");
+                var boxNumber = suburbselectbox.length;
+                var divBox = document.createElement("div");
+                divBox.className = "MaterialClass";
+                var inputSkillName = document.createElement("input");
+                inputSkillName.setAttribute("type","text");
+                inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".ExternalMeterialName");
+                var inputSkillLink = document.createElement("input");
+                inputSkillLink.setAttribute("type","text");
+                inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".ExternalMeterialLink");
+                var inputSkillNameLable = document.createElement("p");
+                inputSkillNameLable.innerText = "External Meterial Name "+boxNumber;
+                var inputSkillLinkLable = document.createElement("p");
+                inputSkillLinkLable.innerText = "External Meterial Link "+boxNumber;
+                divBox.appendChild(inputSkillNameLable);
+                divBox.appendChild(inputSkillName);
+                divBox.appendChild(inputSkillLinkLable);
+                divBox.appendChild(inputSkillLink);
+                var last = suburbselectbox[boxNumber-1];
+                last.append(divBox);
+            }
+
+            function AddJobHisotryController() {
+                var suburbselectbox = document.getElementsByClassName("HistoryClass");
+                var boxNumber = suburbselectbox.length;
+                var divBox = document.createElement("div");
+                divBox.className = "HistoryClass";
+                var inputSkillName = document.createElement("input");
+                inputSkillName.setAttribute("type","text");
+                inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".JobHistoryName");
+                var inputSkillLink = document.createElement("input");
+                inputSkillLink.setAttribute("type","text");
+                inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".JobHistoryShortDescription");
+                var inputSkillNameLable = document.createElement("p");
+                inputSkillNameLable.innerText = "Job History Name "+boxNumber;
+                var inputSkillLinkLable = document.createElement("p");
+                inputSkillLinkLable.innerText = "Job History Short Description "+boxNumber;
+                divBox.appendChild(inputSkillNameLable);
+                divBox.appendChild(inputSkillName);
+                divBox.appendChild(inputSkillLinkLable);
+                divBox.appendChild(inputSkillLink);
+                var last = suburbselectbox[boxNumber-1];
+                last.append(divBox);
+                
+            }
+            
+            function getSkillName(skillName) {
+                var postCodeSelectBox = document.getElementById("skillList");
+                postCodeSelectBox.innerHTML = "";
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() {
+                    if (this.readyState === 4 && this.status === 200) {
+                        var skills = JSON.parse(this.responseText);
+                        for (var i = 0; i < skills.length; i++) {
+                            var skill = document.createElement("OPTION");
+                            skill.value = skills[i];
+                            postCodeSelectBox.appendChild(skill);
+                        }
+                    }
+                };
+                xmlHttp.open("GET", "/Skill/GetSkillName/" + skillName, true);
+                xmlHttp.send();
+            }
+            
+            window.onload = function getFieldName() {
+                var postCodeSelectBox = document.getElementById("fieldList");
+                postCodeSelectBox.innerHTML = "";
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() {
+                    if (this.readyState === 4 && this.status === 200) {
+                        var fields = JSON.parse(this.responseText);
+                        for (var i = 0; i < fields.length; i++) {
+                            var field = document.createElement("OPTION");
+                            field.value = fields[i];
+                            field.innerText = fields[i];
+                            postCodeSelectBox.appendChild(field);
+                        }
+                    }
+                };
+                xmlHttp.open("GET", "/Field/GetAllFields/", true);
+                xmlHttp.send();
+            }
+    </script>
 
 <form asp-action="EditJobProfileAction" method="post">
     @*Profiled id(if not a new profield)*@
@@ -29,7 +142,8 @@
                 FieldName = Model.FieldName;
             }
         }
-        <input type="text" name="FieldName" value="@FieldName">
+        <select name="FieldName" value="@FieldName" id="fieldList">
+        </select>
         <hr />
     </div>
 
@@ -123,7 +237,8 @@
                 string skillRequired = "[" + 0 + "]" + ".SkillRequired";
                 <div class="SkillClass">
                     <p>Skill Name @i</p>
-                    <input type="text" name="@skillName">
+                    <input type="text" name="@skillName" list="skillList" onkeyup="getSkillName(this.value)">
+                    <datalist id="skillList"></datalist>
                     <p>Required @i</p>
                     <input type="checkbox" name="@skillRequired" value="true">
                 </div>
@@ -281,76 +396,7 @@
         Sunday         <input type="checkbox" name="[6].Day" value="7" checked="@Sun">
         <hr />
     </div>
-    <script>
-            function AddSkillController() {
-                var suburbselectbox = document.getElementsByClassName("SkillClass");
-                var boxNumber = suburbselectbox.length;
-                var divBox = document.createElement("div");
-                divBox.className = "SkillClass";
-                var inputSkillName = document.createElement("input");
-                inputSkillName.setAttribute("type","text");
-                inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".SkillName");
-                var inputSkillLink = document.createElement("input");
-                inputSkillLink.setAttribute("type","text");
-                inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".CertificationLink");
-                var inputSkillNameLable = document.createElement("p");
-                inputSkillNameLable.innerText = "Skill Name "+boxNumber;
-                var inputSkillLinkLable = document.createElement("p");
-                inputSkillLinkLable.innerText = "Skill Certification Link "+boxNumber;
-                divBox.appendChild(inputSkillNameLable);
-                divBox.appendChild(inputSkillName);
-                divBox.appendChild(inputSkillLinkLable);
-                divBox.appendChild(inputSkillLink);
-                var last = suburbselectbox[boxNumber-1];
-                last.append(divBox);
-            }
-
-            function AddMeterialController() {
-                var suburbselectbox = document.getElementsByClassName("MaterialClass");
-                var boxNumber = suburbselectbox.length;
-                var divBox = document.createElement("div");
-                divBox.className = "MaterialClass";
-                var inputSkillName = document.createElement("input");
-                inputSkillName.setAttribute("type","text");
-                inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".ExternalMeterialName");
-                var inputSkillLink = document.createElement("input");
-                inputSkillLink.setAttribute("type","text");
-                inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".ExternalMeterialLink");
-                var inputSkillNameLable = document.createElement("p");
-                inputSkillNameLable.innerText = "External Meterial Name "+boxNumber;
-                var inputSkillLinkLable = document.createElement("p");
-                inputSkillLinkLable.innerText = "External Meterial Link "+boxNumber;
-                divBox.appendChild(inputSkillNameLable);
-                divBox.appendChild(inputSkillName);
-                divBox.appendChild(inputSkillLinkLable);
-                divBox.appendChild(inputSkillLink);
-                var last = suburbselectbox[boxNumber-1];
-                last.append(divBox);
-            }
-
-            function AddJobHisotryController() {
-                var suburbselectbox = document.getElementsByClassName("HistoryClass");
-                var boxNumber = suburbselectbox.length;
-                var divBox = document.createElement("div");
-                divBox.className = "HistoryClass";
-                var inputSkillName = document.createElement("input");
-                inputSkillName.setAttribute("type","text");
-                inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".JobHistoryName");
-                var inputSkillLink = document.createElement("input");
-                inputSkillLink.setAttribute("type","text");
-                inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".JobHistoryShortDescription");
-                var inputSkillNameLable = document.createElement("p");
-                inputSkillNameLable.innerText = "Job History Name "+boxNumber;
-                var inputSkillLinkLable = document.createElement("p");
-                inputSkillLinkLable.innerText = "Job History Short Description "+boxNumber;
-                divBox.appendChild(inputSkillNameLable);
-                divBox.appendChild(inputSkillName);
-                divBox.appendChild(inputSkillLinkLable);
-                divBox.appendChild(inputSkillLink);
-                var last = suburbselectbox[boxNumber-1];
-                last.append(divBox);
-            }
-    </script>
+    
     <button type="submit">Submit</button>
 </form>
 

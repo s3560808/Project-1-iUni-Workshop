@@ -11,6 +11,7 @@ using iUniWorkshop.Models.EmployerModels;
 using iUni_Workshop.Models.EmployeeModels;
 using iUni_Workshop.Models.InvatationModel;
 using iUni_Workshop.Models.JobRelatedModels;
+using iUni_Workshop.Models.MessageModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +20,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using MySql.Data.MySqlClient;
 using Remotion.Linq.Parsing.Structure.IntermediateModel;
+using MessageDetail = iUni_Workshop.Models.EmployerModels.MessageDetail;
+using MyMessages = iUni_Workshop.Models.EmployerModels.MyMessages;
 
 namespace iUni_Workshop.Controllers
 {
@@ -163,8 +166,6 @@ namespace iUni_Workshop.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-
-
 
         public async Task<IActionResult> JobProfiles()
         {
@@ -460,7 +461,7 @@ namespace iUni_Workshop.Controllers
         //检查本人操作
         //return if profileId is not right
         //Filter primary id
-        //去除invatation
+        //去除已发送invatation
         [Route("[Controller]/SearchApplicants/{jobProfileId}")]
         public async Task<IActionResult> SearchApplicants(int jobProfileId)
         {
@@ -517,7 +518,7 @@ namespace iUni_Workshop.Controllers
             }
             return View();
         }
-        
+        //TODO Filter sent application
         public List<SearchApplicant> SearchApplicantsCoreRanker(int jobProfileId)
         {
             var jobProfile = _context.EmployerJobProfiles.First(a => a.Id == jobProfileId);
@@ -527,7 +528,6 @@ namespace iUni_Workshop.Controllers
             //1.1 Filter field
             //1.2 && Filter salary
             //1.3 && Filter Find Job Status
-            var test = DateTime.Parse("2018-08-09 00:00:00.000000").AddDays(14).Day >= DateTime.Today.Day;
             rawData = _context.EmployeeCvs
                 .Where(a => a.FieldId == jobProfile.FieldId 
                             && a.MinSaraly <= jobProfile.Salary 
@@ -638,19 +638,11 @@ namespace iUni_Workshop.Controllers
 
         public async Task<IActionResult> InvitationDetail()
         {
+            
             return View();
         }
 
         //To employee
-        public async Task<IActionResult> MyMessages()
-        {
-            return View();
-        }
-
-        public async Task<IActionResult> MessageDetail()
-        {
-            return View();
-        }
 
         public async Task<IActionResult> CertificateMyCompany()
         {

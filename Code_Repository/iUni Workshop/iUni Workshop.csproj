@@ -18,6 +18,7 @@
   <ItemGroup>
     <Folder Include="Migrations" />
     <Folder Include="Migrations\" />
+    <Folder Include="Pages" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Controllers\Validator.cs" />

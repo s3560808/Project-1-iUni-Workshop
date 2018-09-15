@@ -20,5 +20,6 @@ namespace iUni_Workshop.Models.EmployeeModels
             [Required]
             public string Title { get; set; }
 
+        public int Type { get; set; }
     }
 }

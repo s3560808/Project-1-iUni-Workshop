@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using iUni_Workshop.Models.EmployeeModels;
 using Microsoft.EntityFrameworkCore;
@@ -22,20 +23,26 @@ namespace iUni_Workshop.Data.Seeds
             CreateEmployeeCvSkill(6, 6, 2, "Certification 3", context);   
         }
 
-        private static void CreateEmployeeCvSkill(int id, int skillId, int employeeCvId, string certification, ApplicationDbContext _context)
+        private static async Task CreateEmployeeCvSkill(int id, int skillId, int employeeCvId, string certification, ApplicationDbContext _context)
         {
             
             var newSkill = new EmployeeSkill
                 { Id = id, SkillId = skillId, EmployeeCvId = employeeCvId, CertificationLink = certification};
+            var check = _context.EmployeeSkills.Where(a => a.Id == id);
+            if (check.Any())
+            {
+                return;
+            }
             try
             {
-                _context.EmployeeSkills.Add(newSkill);
-                _context.SaveChanges();
-            }
-            catch (NullReferenceException ex)
-            {
-            }
+                await _context.EmployeeSkills.AddAsync(newSkill);
             
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // ignored
+            }
         }
     }
 }

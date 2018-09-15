@@ -21,18 +21,22 @@ namespace iUni_Workshop.Data.Seeds
             CreateEmployeeCvExternalMeterial(4, "Material 4", 2, "Link 4", context);
         }
 
-        private static void CreateEmployeeCvExternalMeterial(int id, string materialName, int employeeCvId, string link, ApplicationDbContext _context)
+        private static async Task CreateEmployeeCvExternalMeterial(int id, string materialName, int employeeCvId, string link, ApplicationDbContext _context)
         {
-            var newCv = new EmployeeExternalMeterial
-                { Id = id, Name = materialName, EmployeeCvId = employeeCvId, Link = link};
+            var newCv = new EmployeeExternalMeterial{ Id = id, Name = materialName, EmployeeCvId = employeeCvId, Link = link};
+            var check = _context.EmployeeExternalMeterials.Where(a => a.Id == id);
+            if (check.Any())
+            {
+                return;
+            }
             try
             {
-                _context.EmployeeExternalMeterials.Add(newCv);
-                _context.SaveChanges();
-               
+                await _context.EmployeeExternalMeterials.AddAsync(newCv);
+                await _context.SaveChangesAsync();
             }
-            catch (NullReferenceException ex)
+            catch (Exception ex)
             {
+                // ignored
             }
         }
     }
