@@ -1,12 +1,12 @@
 ﻿@using iUni_Workshop.Models.AdministratorModels
 @using iUni_Workshop.Models.JobRelatedModels
-@model IEnumerable<iUni_Workshop.Models.AdministratorModels.AddField>
+@model IEnumerable<UpdateField>
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
-
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 
 <h2>title</h2>
 <form method="post" asp-action="AddFieldAction">
@@ -36,9 +36,9 @@
     <button type="submit" class="btn btn-sm btn-success">Confirm</button>
 </form>
 @{
-    var inUse = new List<AddField>();
-    var inReq = new List<AddField>();
-    var baned = new List<AddField>();
+    var inUse = new List<UpdateField>();
+    var inReq = new List<UpdateField>();
+    var baned = new List<UpdateField>();
     foreach (var model in Model)
     {
         switch (model.Status)

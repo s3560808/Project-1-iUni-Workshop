@@ -3,11 +3,10 @@
     <div class="alert alert-danger" role="alert">
         @{
             string rawErrors = ViewBag.Error;
-            string[] errors = rawErrors.Split('\n');
+            var errors = rawErrors.Split('\n');
             foreach (var error in errors)
             {
-                @error
-                <br>
+                <p>@error</p>
             }
             
         }
@@ -18,11 +17,10 @@
     <div class="alert alert-warning" role="alert">
         @{
             string rawWarns = ViewBag.Inform;
-            string[] warns = rawWarns.Split('\n');
+            var warns = rawWarns.Split('\n');
             foreach (var warn in warns)
             {
-                @warn
-                <br>
+                <p>@warn</p>
             }
         }
     </div>
@@ -32,11 +30,10 @@
     <div class="alert alert-success" role="alert">
         @{
             string rawSuccesses = ViewBag.Success;
-            string[] successes = rawSuccesses.Split('\n');
+            var successes = rawSuccesses.Split('\n');
             foreach (var success in successes)
             {
-                @success
-                <br>
+                <p>@success</p>
             }
         }
     </div>
