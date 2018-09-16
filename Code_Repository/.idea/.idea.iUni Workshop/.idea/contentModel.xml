@@ -78,6 +78,7 @@
           </e>
           <e p="ApplicationUser.cs" t="Include" />
           <e p="EmployeeModels" t="Include">
+            <e p="AcceptOrReject.cs" t="Include" />
             <e p="EditCV.cs" t="Include" />
             <e p="EditCVAction.cs" t="Include" />
             <e p="EditCVEmployeeSkill.cs" t="Include" />

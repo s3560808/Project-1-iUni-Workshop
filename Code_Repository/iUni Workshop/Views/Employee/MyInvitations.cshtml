@@ -5,7 +5,7 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
-
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 <h2>title</h2>
 @{
     foreach (var model in Model)
