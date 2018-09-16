@@ -752,8 +752,23 @@ namespace iUni_Workshop.Controllers
         public async Task<IActionResult> InvitationDetail(int invitationId)
         {
             ProcessSystemInfo();
+            Invatation invitation;
             var user = await _userManager.GetUserAsync(User);
-            var invitation = _context.Invatations.First(a => a.Id == invitationId);
+            try
+            {
+                invitation = _context.Invatations.First(a => a.Id == invitationId);
+                var employeeId = _context.EmployeeCvs.First(a => a.Id == invitation.EmployeeCvId).EmployeeId;
+                if (user.Id != employeeId)
+                {
+                    TempData["Error"] = "Please select correct invitation";
+                    return RedirectToAction("MyInvitations");
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                TempData["Error"] = "Please select correct invitation";
+                return RedirectToAction("MyInvitations");
+            }
             var jobProfile = _context.EmployerJobProfiles.First(a => a.Id == invitation.EmployerJobProfileId);
             var employer = _context.Employers.First(a => a.Id == jobProfile.EmployerId);
             var result = new InvitationDetail
