@@ -8,6 +8,7 @@ using iUni_Workshop.Data;
 using iUni_Workshop.Models;
 using iUni_Workshop.Models.AdministratorModels;
 using iUni_Workshop.Models.EmployeeModels;
+using iUni_Workshop.Models.InvatationModel;
 using iUni_Workshop.Models.JobRelatedModels;
 using iUni_Workshop.Models.SchoolModels;
 using Microsoft.AspNetCore.Authorization;
@@ -729,6 +730,7 @@ namespace iUni_Workshop.Controllers
         
         public async Task<IActionResult> MyInvitations()
         {
+            ProcessSystemInfo();
             var user = await _userManager.GetUserAsync(User);
             var invitations = _context.Invatations.Where(a => a.EmployeeCV.EmployeeId == user.Id).AsEnumerable();
             var results = new List<MyInvitations>();
@@ -749,8 +751,24 @@ namespace iUni_Workshop.Controllers
         //验证是否是这个人的invitation
         public async Task<IActionResult> InvitationDetail(int invitationId)
         {
+            ProcessSystemInfo();
+            Invatation invitation;
             var user = await _userManager.GetUserAsync(User);
-            var invitation = _context.Invatations.First(a => a.Id == invitationId);
+            try
+            {
+                invitation = _context.Invatations.First(a => a.Id == invitationId);
+                var employeeId = _context.EmployeeCvs.First(a => a.Id == invitation.EmployeeCvId).EmployeeId;
+                if (user.Id != employeeId)
+                {
+                    TempData["Error"] = "Please select correct invitation";
+                    return RedirectToAction("MyInvitations");
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                TempData["Error"] = "Please select correct invitation";
+                return RedirectToAction("MyInvitations");
+            }
             var jobProfile = _context.EmployerJobProfiles.First(a => a.Id == invitation.EmployerJobProfileId);
             var employer = _context.Employers.First(a => a.Id == jobProfile.EmployerId);
             var result = new InvitationDetail
@@ -765,10 +783,45 @@ namespace iUni_Workshop.Controllers
             return View(result);
         }
 
-        //Validation 是否是自己
-        public IActionResult AcceptOrReject(bool accept)
+        public async Task<IActionResult> AcceptOrReject(AcceptOrReject model)
         {
-            return RedirectToAction("MyInvitations");
+            var user = await _userManager.GetUserAsync(User);
+            InitialSystemInfo();
+            if (!ModelState.IsValid)
+            {
+                ProcessModelState();
+            }
+            
+
+            try
+            {
+                var invitation = _context.Invatations.First(a => a.Id == model.InvitationId);
+                var employeeId = _context.EmployeeCvs.First(a => a.Id == invitation.EmployeeCvId).EmployeeId;
+                if (employeeId != user.Id)
+                {
+                    TempData["Error"] = "Please select correct invitation";
+                    return RedirectToAction("MyInvitations");
+                }
+
+                if (invitation.status != InvitationStatus.Original)
+                {
+                    TempData["Error"] = "Cannot change status";
+                    return RedirectToAction("InvitationDetail", new{invitationId = invitation.Id});
+                }
+
+                invitation.status = model.Accept == true ? InvitationStatus.Accepted : InvitationStatus.Rejected;
+                _context.Invatations.Update(invitation);
+                _context.SaveChanges();
+                var status = model.Accept == true ? "accepted" : "rejected";
+
+                TempData["Success"] = "Invitation successfully "+status;
+                return RedirectToAction("InvitationDetail", new { invitationId = invitation.Id});
+            }
+            catch (InvalidOperationException)
+            {
+                TempData["Error"] = "Please select correct invitation";
+                return RedirectToAction("MyInvitations");
+            }
         }
         
         private void InitialSystemInfo()
@@ -827,5 +880,5 @@ namespace iUni_Workshop.Controllers
             _context.EmployeeCvs.UpdateRange(cvs);
             _context.SaveChanges();
         }
-    }    
+    }
 }

@@ -97,6 +97,7 @@ namespace iUni_Workshop.Controllers
         [Route("/Employee/MessageDetail/")]
         public async Task<IActionResult> MessageDetail(string conversationId, int invitationId)
         {
+            ProcessSystemInfo();
             MessageDetail result;
             IQueryable<Message> rawMessages;
             IQueryable<Conversation> conversations;
@@ -186,7 +187,7 @@ namespace iUni_Workshop.Controllers
             string receiverId;
             
             user = await _userManager.GetUserAsync(User);
-            if (sendMessage.ConversationId != "")
+            if (sendMessage.ConversationId != null)
             {
                 try
                 {
@@ -216,6 +217,14 @@ namespace iUni_Workshop.Controllers
                     //Get invitation
                     invitation = _context.Invatations
                         .First(a => a.Id == sendMessage.InvitationId);
+                    if (invitation.status == InvitationStatus.Rejected)
+                    {
+                        {
+                            TempData["Error"] += "\n";
+                        }
+                        TempData["Error"] += "Sorry! You rejected corresponding invitation. Cannot reply this message";
+                        return RedirectToAction("MessageDetail", new{invitationId = invitation.Id});
+                    }
                     //If invitation is not null validate invitation
                     //If have invitation it means not system message
                     var cv = _context.EmployeeCvs.First(a => a.Id == invitation.EmployeeCvId);
