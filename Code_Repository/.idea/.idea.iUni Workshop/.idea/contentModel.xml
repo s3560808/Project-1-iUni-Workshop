@@ -74,6 +74,7 @@
             <e p="SetUserType.cs" t="Include" />
             <e p="UpdateField.cs" t="Include" />
             <e p="UpdateSchool.cs" t="Include" />
+            <e p="UpdateSkill.cs" t="Include" />
           </e>
           <e p="ApplicationUser.cs" t="Include" />
           <e p="EmployeeModels" t="Include">
@@ -204,8 +205,6 @@
             <e p="AddSchool.cshtml" t="Include" />
             <e p="AddSkill.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
-            <e p="MessageDetail.cshtml" t="Include" />
-            <e p="MyMessages.cshtml" t="Include" />
             <e p="NewMessage.cshtml" t="Include" />
             <e p="SetUserType.cshtml" t="Include" />
             <e p="Shared" t="Include">
@@ -221,7 +220,6 @@
             <e p="EditPersonalInfo.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
             <e p="InvitationDetail.cshtml" t="Include" />
-            <e p="MessageDetail.cshtml" t="Include" />
             <e p="MyCVs.cshtml" t="Include" />
             <e p="MyInvitations.cshtml" t="Include" />
             <e p="RequestToAddField.cshtml" t="Include" />
@@ -266,6 +264,10 @@
           <e p="Message" t="Include">
             <e p="MessageDetail.cshtml" t="Include" />
             <e p="MyMessages.cshtml" t="Include" />
+            <e p="Shared" t="Include">
+              <e p="_AddSchool.cshtml" t="Include" />
+              <e p="_Validation_Area_From_Backend.cshtml" t="Include" />
+            </e>
           </e>
           <e p="Shared" t="Include">
             <e p="_Layout.cshtml" t="Include" />

@@ -4,7 +4,7 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
-
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 <h2>title</h2>
 <form method="post" asp-action="SetUserTypeAction">
     <table class="table">
@@ -26,7 +26,7 @@
                     </td>
                     <td>
                         <form asp-controller="Administrator" asp-action="SetUserTypeAction">
-                            <button type = "submit" name = "email" value="@item.Email" >Set As Administrator</button>
+                            <button type = "submit" name = "Id" value="@item.Id" >Set As Administrator</button>
                         </form>
                     </td>
                 </tr>

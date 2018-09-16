@@ -11,6 +11,7 @@ using iUni_Workshop.Models.SchoolModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using MessageDetail = iUni_Workshop.Models.AdministratorModels.MessageDetail;
 using MyMessages = iUni_Workshop.Models.AdministratorModels.MyMessages;
 
@@ -461,7 +462,7 @@ namespace iUni_Workshop.Controllers
             //Check if duplicate field name with other field name
             var checkDuplication = _context.Fields
                 .Where(a => a.NormalizedName == field.Name.ToUpper());
-            if (checkDuplication.First().Id != field.Id)
+            if (checkDuplication.Any() && checkDuplication.First().Id != field.Id)
             {
                 if ((string) TempData["Error"] != "")
                 {
@@ -528,7 +529,7 @@ namespace iUni_Workshop.Controllers
                                      + oldName + " to " 
                                      + newName;
             }
-            
+            TempData["Success"] = "Field \"" + field.Name + "\" updated!";
             return RedirectToAction("AddField");
         }
 
@@ -537,7 +538,7 @@ namespace iUni_Workshop.Controllers
             ProcessSystemInfo();
             var result = _context.Skills
                 .Select(a => 
-                    new AddSkill
+                    new UpdateSkill
                     {
                         Id = a.Id, 
                         Name = a.Name, 
@@ -550,20 +551,38 @@ namespace iUni_Workshop.Controllers
         [HttpPost]
         public async Task<IActionResult> AddSkillAction(AddSkill skill)
         {
+            InitialSystemInfo();
+            //Check if front end input is valid
             if (!ModelState.IsValid)
             {
+                ProcessModelState();
+                return RedirectToAction("AddField");
             }
-            
+            //2. Check if already in database
             var checkInDatabase = _context.Skills.Where(a => a.NormalizedName == skill.Name.ToUpper());
 
             Skill newSkill;
-
+            //2.1 Already in database
             if (checkInDatabase.Any())
             {
-                //TODO Need to infrom administrator it is a update. Already in database.
+                string status;
+                switch (checkInDatabase.First().Status)
+                {
+                    case FieldStatus.InUse:
+                        status = "\"In Use\"";
+                        break;
+                    case FieldStatus.InRequest:
+                        status = "\"In Request\"";
+                        break;
+                    default:
+                        status = "\"No Longer Used\"";
+                        break;
+                }
+                TempData["Inform"] = "Field \"" + skill.Name + "\" is already in database. It was in " + status + ".";
                 newSkill = checkInDatabase.First();
                 newSkill.Status = SkillStatus.InUse;
             }
+            //2.1 Not in database
             else
             {
                 newSkill = new Skill
@@ -577,201 +596,205 @@ namespace iUni_Workshop.Controllers
 
             _context.Skills.Update(newSkill);
             await _context.SaveChangesAsync();
-
+            TempData["Success"] = "Field \"" + newSkill.Name + "\" added!";
             return RedirectToAction("AddSkill");
         }
-
-        public void UpdateSkillAction(AddSkill skill)
+        
+        [HttpPost]
+        public RedirectToActionResult UpdateSkillAction(UpdateSkill skill)
         {
+            InitialSystemInfo();
             if (!ModelState.IsValid)
             {
-            }
-            
+                ProcessModelState();
+                return RedirectToAction("AddSkill");
+            }    
+            //Check if id is correct
             var checkInDatabase = _context.Skills.Where(a => a.Id == skill.Id);
-
-            if (!checkInDatabase.Any()) return;//Todo error not in database
-
-            var oldField = checkInDatabase.First();
-
-            //Prepare to log
-            if (oldField.Status != skill.Status)
+            if (!checkInDatabase.Any())
             {
-                oldField.Status = skill.Status;
-                _context.Skills.Update(oldField);
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }
+
+                TempData["Error"] += "Please enter correct skill id!";
+                return RedirectToAction("AddSkill");
+            }
+            //Check if duplicate field name with other field name
+            var checkDuplication = _context.Skills
+                .Where(a => a.NormalizedName == skill.Name.ToUpper());
+            if (checkDuplication.Any()&&checkDuplication.First().Id != skill.Id)
+            {
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }
+                TempData["Error"] += "Entered duplicate skill name "+ "\""+skill.Name+"\" "+"!";
+                return RedirectToAction("AddSkill");
+            }
+            var oldSkill = checkInDatabase.First();
+
+            //Prepare to change status
+            if (oldSkill.Status != skill.Status)
+            {
+                string oldStatus;
+                string newStatus;
+                switch (oldSkill.Status)
+                {
+                    case FieldStatus.InUse:
+                        oldStatus = "\"In Use\"";
+                        break;
+                    case FieldStatus.InRequest:
+                        oldStatus = "\"In Request\"";
+                        break;
+                    default:
+                        oldStatus = "\"No Longer Used\"";
+                        break;
+                }
+                switch (skill.Status)
+                {
+                    case FieldStatus.InUse:
+                        newStatus = "\"In Use\"";
+                        break;
+                    case FieldStatus.InRequest:
+                        newStatus = "\"In Request\"";
+                        break;
+                    default:
+                        newStatus = "\"No Longer Used\"";
+                        break;
+                }
+
+                oldSkill.Status = skill.Status;
+                _context.Skills.Update(oldSkill);
                 _context.SaveChanges();
+                if ((string) TempData["Inform"] != "")
+                {
+                    TempData["Inform"] += "\n";
+                }
+                TempData["Inform"] += "Skill "+ "\""+oldSkill.Name+"\" "+"'s status changed from "
+                                      + oldStatus + " to " 
+                                      + newStatus;
             }
             //Prepare to log
-            if (oldField.Name != skill.Name)
+            if (oldSkill.Name != skill.Name)
             {
-                oldField.Name = skill.Name;
-                oldField.NormalizedName = skill.Name.ToUpper();
-                _context.Skills.Update(oldField);
+                var newName = skill.Name;
+                var oldName = oldSkill.Name;
+                oldSkill.Name = skill.Name;
+                oldSkill.NormalizedName = skill.Name.ToUpper();
+                _context.Skills.Update(oldSkill);
                 _context.SaveChanges();
+                if ((string) TempData["Inform"] != "")
+                {
+                    TempData["Inform"] += "\n";
+                }
+                TempData["Inform"] += "Skill"+ "\""+skill.Name+"\" "+"'s name changed from "
+                                      + oldName + " to " 
+                                      + newName;
             }
-            
-            return;
+            TempData["Success"] = "Skill \"" + skill.Name + "\" updated!";
+            return RedirectToAction("AddSkill");
         }
 
         public async Task<IActionResult> SetUserType()
         {
+            ProcessSystemInfo();
             var users = _userManager.Users.ToList();
-            return View(users);
+            var admins = (await _userManager.GetUsersInRoleAsync(Roles.Administrator)).ToList();
+            var results = users.Except(admins).ToList();
+            return View(results);
         }
         
-        //检查是否已经是admin
         [HttpPost]
         public async Task<IActionResult> SetUserTypeAction(SetUserType setUserType)
         {          
+            InitialSystemInfo();
             if (!ModelState.IsValid)
             {
+                ProcessModelState();
             }
-            var user = _context.Users.First(a => a.Email == setUserType.Email);
+
+            ApplicationUser user;
+            //Check if user exist?
+            try
+            {
+                user = _context.Users.First(a => a.Id == setUserType.Id);
+            }
+            catch (InvalidOperationException)
+            {
+                TempData["Error"] = "Please select correct user!";
+                return RedirectToAction("SetUserType");
+            }
+            //Check if already a Administrator
+            var roles = await _userManager.GetRolesAsync(user);
+            if(roles.Any() && roles.Contains(Roles.Administrator))
+            {
+                TempData["Error"] = "User " + user.Email + "already has \"Administrator\" role! Cannot Add!";
+                return RedirectToAction("SetUserType");
+            }
+            //Add user's role
             await _userManager.AddToRoleAsync(user, Roles.Administrator);
             _context.Administraotrs.Add(new Administraotr { Id = user.Id, Name = user.UserName});
             await _context.SaveChangesAsync();
+            TempData["Success"] = "User" + user.Email + " added \"Administrator\" role!";
             return RedirectToAction("SetUserType");
         }
 
-        public async Task<IActionResult> NewMessage()
+        public ViewResult NewMessage()
         {
+            ProcessSystemInfo();
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> NewMessageAction(NewMessage message)
         {
+            InitialSystemInfo();
             if (!ModelState.IsValid)
             {
+                ProcessModelState();
+                return RedirectToAction("NewMessage");
             }
-            string reciverId = _context.Users.First(a => a.Email == message.Email).Id;
-            //Create Conversation
-            Conversation newConversation = new Conversation
+
+            string receiverId;
+            try{
+                receiverId = _context.Users.First(a => a.Email == message.Email).Id;
+            }catch(InvalidOperationException){
+                TempData["Error"] = "Please enter correct receiver!";
+                return RedirectToAction("NewMessage");
+            }
+            
+            //Create new conversation
+            var newConversation = new Conversation
             {
                 User1Id = (await _userManager.GetUserAsync(User)).Id,
-                User2Id = reciverId,
+                User2Id = receiverId,
                 Title = message.Title,
                 Type = message.Type
             };
-            //Create Message
             _context.Conversations.Add(newConversation);
             _context.SaveChanges();
-            Message newMessage = new Message
+            //Create new message
+            var newMessage = new Message
             {
                 ConversationId = newConversation.Id,
-                receiverId = reciverId,
+                receiverId = receiverId,
                 SentTime = DateTime.Now,
                 Read = false,
                 MessageDetail = message.MessageDetail,
             };
             await _context.Messages.AddAsync(newMessage);
             await _context.SaveChangesAsync();
-            return RedirectToAction("NewMessage");
+            TempData["Success"] = "New message sent!";
+            return RedirectToActionPermanent("MyMessages","Message");
         }
 
         [Route("[Controller]/GetUsers/{userName}/")]
         public IActionResult GetUsers(string userName)
         {
-            var reciver = _context.Users.Where(a => a.UserName.Contains(userName)).ToList();
-            return Json(reciver);
-        }
-
-        public async Task<IActionResult> MyMessages()
-        {
-            var _user = await _userManager.GetUserAsync(User);
-            var conversations = _context.Conversations
-                .Where(a => a.User1Id == _user.Id ||
-                            a.User2Id == _user.Id)
-                .AsEnumerable()
-                .Distinct();
-            List<MyMessages> messages = new List<MyMessages>();
-            foreach (var conversation in conversations)
-            {
-                var message = _context.Messages
-                    .Where(a => a.ConversationId == conversation.Id && a.receiverId == _user.Id)
-                    .OrderByDescending(a => a.SentTime).First();
-                string sender;
-                sender = conversation.User1Id == _user.Id ? 
-                    _context.Users.First(a => a.Id == conversation.User2Id).UserName : 
-                    _context.Users.First(a => a.Id == conversation.User1Id).UserName;
-
-                messages.Add(new MyMessages { ConversationId = message.ConversationId, Read = message.Read, SenderName = sender, SentTime = message.SentTime, Title = conversation.Title});
-            }
-            return View(messages);
-        }
-
-        public async Task<IActionResult> MessageDetail(string conversationId)
-        {
-            var updateMessages = _context.Messages.Where(a => a.ConversationId == conversationId).ToList();
-            
-            List<MessageDetail> messages = new List<MessageDetail> { };
-            var user = await _userManager.GetUserAsync(User);
-            var conversation = _context.Conversations.First(a => a.Id == conversationId);
-            
-            foreach (var updateMessage in updateMessages) {
-                var receiver = _context.Users.First(a => a.Id == updateMessage.receiverId);
-                string senderEmail;
-                if (conversation.User1Id == receiver.Id)
-                {
-                    senderEmail = _context.Users.First(a => a.Id == conversation.User2Id).Email;
-                }
-                else
-                {
-                    senderEmail = _context.Users.First(a => a.Id == conversation.User1Id).Email;
-                }
-
-                messages.Add(new MessageDetail {SenderName = senderEmail, ConversationId = updateMessage.ConversationId, Detail = updateMessage.MessageDetail, SentTime = updateMessage.SentTime, Type = conversation.Type});
-                if (updateMessage.receiverId == user.Id) {
-                    updateMessage.Read = true;
-                }
-            }
-            _context.Messages.UpdateRange(updateMessages);
-            await _context.SaveChangesAsync();
-            return View(messages);
-        }
-
-        public async Task<IActionResult> ReplyMyMessage(ReplyMyMessage replyMyMessage)
-        {
-            if (!ModelState.IsValid)
-            {
-            }
-            var user = await _userManager.GetUserAsync(User);
-            var previousMessages = _context.Messages
-                .Where(a => a.ConversationId == replyMyMessage.ConversationId && a.receiverId == user.Id);
-            var conversation = _context.Conversations
-                .First(a => a.Id == replyMyMessage.ConversationId);
-            
-        //Check sender, writer, conversationid
-            //If no previous message it not reply
-            if (!previousMessages.Any()) {
-                return RedirectToAction("MyMessages");
-            }
-            //System conversation cannot reply
-            if (conversation.Type == MessageType.System)
-            {
-                return RedirectToAction("MyMessages");
-            }
-            string receiverId;
-            if (conversation.User1Id == user.Id)
-            {
-                receiverId = conversation.User2Id;
-            }
-            else
-            {
-                receiverId = conversation.User1Id;
-            }
-
-            var newMessage = new Message
-            {
-                receiverId = receiverId,
-                ConversationId = conversation.Id, 
-                SentTime = DateTime.Now, 
-                Read = false, 
-                MessageDetail = replyMyMessage.MessageDetail,
-                
-            };
-            await _context.AddAsync(newMessage);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("MyMessages");
+            var receiver = _context.Users.Where(a => a.UserName.Contains(userName)).ToList();
+            return Json(receiver);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using iUni_Workshop.Data;
 using iUni_Workshop.Models;
 using iUni_Workshop.Models.EmployeeModels;
+using iUni_Workshop.Models.InvatationModel;
 using iUni_Workshop.Models.MessageModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,7 +17,7 @@ using SendMessage = iUni_Workshop.Models.EmployerModels.SendMessage;
 
 namespace iUni_Workshop.Controllers
 {
-    [Authorize(Roles = Roles.Employer+","+Roles.Employee)]
+    [Authorize(Roles = Roles.Employer+","+Roles.Employee+","+Roles.Administrator)]
     public class MessageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -36,8 +37,11 @@ namespace iUni_Workshop.Controllers
         
         [Route("/Employer/MyMessages/")]
         [Route("/Employee/MyMessages/")]
+        [Route("/Administrator/MyMessages")]
+        [Authorize(Roles = Roles.Employer+","+Roles.Employee+","+Roles.Administrator)]
         public async Task<IActionResult> MyMessages()
         {
+            ProcessSystemInfo();
             var user = await _userManager.GetUserAsync(User);
             var conversations = _context.Conversations
                 .Where(a => a.User1Id == user.Id ||
@@ -46,18 +50,33 @@ namespace iUni_Workshop.Controllers
             foreach (var conversation in conversations)
             {
                 string sender;
+                string senderId;
                 if (conversation.User1Id == user.Id)
                 {
                     sender = _context.Users.First(a => a.Id == conversation.User2Id).Email;
+                    senderId = _context.Users.First(a => a.Id == conversation.User2Id).Id; 
                 }
                 else
                 {
                     sender = _context.Users.First(a => a.Id == conversation.User1Id).Email;
+                    senderId = _context.Users.First(a => a.Id == conversation.User2Id).Id;
                 }
-
-                var rawMessage = _context.Messages
-                    .Where(a => a.ConversationId == conversation.Id && a.receiverId == user.Id)
-                    .OrderByDescending(a => a.SentTime).First();
+                Message rawMessage;
+                try
+                {
+                    rawMessage = _context.Messages
+                        .Where(a => a.ConversationId == conversation.Id && a.receiverId == user.Id)
+                        .OrderByDescending(a => a.SentTime).First();
+                }
+                //If just send but no reply
+                catch (InvalidOperationException)
+                {
+                    rawMessage = _context.Messages
+                        .Where(a => a.ConversationId == conversation.Id && a.receiverId == senderId)
+                        .OrderByDescending(a => a.SentTime).First();
+                    rawMessage.Read = true;
+                }
+                
                 var message = new MyMessages
                 {
                     ConversationId = conversation.Id, 
@@ -126,16 +145,9 @@ namespace iUni_Workshop.Controllers
             var conversation = conversations.First();
             foreach (var updateMessage in rawMessages) {
                 var receiver = _context.Users.First(a => a.Id == updateMessage.receiverId);
-                string senderEmail;
-                if (conversation.User1Id == receiver.Id)
-                {
-                    senderEmail = _context.Users.First(a => a.Id == conversation.User2Id).Email;
-                }
-                else
-                {
-                    senderEmail = _context.Users.First(a => a.Id == conversation.User1Id).Email;
-                }
-
+                var senderEmail = conversation.User1Id == receiver.Id ? 
+                    _context.Users.First(a => a.Id == conversation.User2Id).Email : 
+                    _context.Users.First(a => a.Id == conversation.User1Id).Email;
                 messages.Add(new MessageDetailMessageInfo
                 {
                     SenderName = senderEmail, 
@@ -149,8 +161,9 @@ namespace iUni_Workshop.Controllers
 
             result  = new MessageDetail
             {
-                Type = MessageType.UserMessage, 
+                Type = conversation.Type, 
                 InvitationId = conversation.InvatationId, 
+                ConversationId = conversation.Id,
                 Messages = messages.AsEnumerable().OrderByDescending(a => a.SentTime)
             };
             
@@ -161,51 +174,154 @@ namespace iUni_Workshop.Controllers
 
         public async Task<RedirectToActionResult> SendMessage(SendMessage sendMessage)
         {
+            InitialSystemInfo();
             if (!ModelState.IsValid)
             {
+                ProcessModelState();
+                return RedirectToAction("MyMessages");
             }
-            var user = await _userManager.GetUserAsync(User);
+            ApplicationUser user = null;
             Conversation conversation = null;
-            //Check whether has pre-conversation
-            try
-            {
-                conversation = _context.Conversations
-                    .First(a => a.InvatationId == sendMessage.InvitationId);
-            }
-            catch (InvalidOperationException ex)
-            {
-            }
-            var invitation = _context.Invatations
-                .First(a => a.Id == sendMessage.InvitationId);
+            Invatation invitation = null;
             string receiverId;
             
-            if (conversation != null)
+            user = await _userManager.GetUserAsync(User);
+            if (sendMessage.ConversationId != "")
             {
-                if (conversation.User1Id == user.Id)
+                try
                 {
-                    receiverId = conversation.User2Id;
+                    //Get Conversaiton
+                    conversation = _context.Conversations
+                        .First(a => a.Id == sendMessage.ConversationId);
+                    //Validate conversation if user is user in the Conversation
+                    if (!(conversation.User1Id == user.Id || conversation.User2Id == user.Id))
+                    {
+                        TempData["Error"] += "Please enter correct conversation id!";
+                    }
+                }
+                catch (InvalidOperationException)
+                {
+                    //If invalid conversation id
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Please enter correct conversation id!";
+                } 
+            }
+            if (sendMessage.InvitationId != 0)
+            {
+                try
+                {
+                    //Get invitation
+                    invitation = _context.Invatations
+                        .First(a => a.Id == sendMessage.InvitationId);
+                    //If invitation is not null validate invitation
+                    //If have invitation it means not system message
+                    var cv = _context.EmployeeCvs.First(a => a.Id == invitation.EmployeeCvId);
+                    var jobProfile = _context.EmployerJobProfiles.First(a => a.Id == invitation.EmployerJobProfileId);
+                    if (!(cv.EmployeeId == user.Id || jobProfile.EmployerId == user.Id))
+                    {
+                        if ((string) TempData["Error"] != "")
+                        {
+                            TempData["Error"] += "\n";
+                        }
+                        TempData["Error"] += "Please enter correct invitation id!";
+                    }
+                }
+                catch (InvalidOperationException)
+                {
+                    //If invalid invitation id
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Please enter correct invitation id!";
+                }
+            }        
+            if (sendMessage.ConversationId == "" && sendMessage.InvitationId == 0)
+            {
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }
+                TempData["Error"] += "Please enter correct conversation & invitation!2";
+            }
+            if ((string) TempData["Error"]!="")
+            {
+                return RedirectToAction("MyMessages");
+            }
+            //Validate Conversation with admin?
+            if (conversation != null && invitation == null)
+            {
+                //Validate if have admin user?
+                var roles1 = await _userManager.GetRolesAsync(_context.Users.First(a => a.Id == conversation.User1Id));
+                var roles2 = await _userManager.GetRolesAsync(_context.Users.First(a => a.Id == conversation.User2Id));
+                if (!(roles1.Contains(Roles.Administrator)||roles2.Contains(Roles.Administrator)))
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Please enter correct conversation & invitation!3";
+                    return RedirectToAction("MyMessages");
+                }
+                //Check if system message?
+                if (conversation.Type == MessageType.System)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Please enter correct conversation & invitation!4";
+                    return RedirectToAction("MyMessages");
+                }
+                receiverId = conversation.User1Id == user.Id ? conversation.User2Id : conversation.User1Id;
+            }
+            //Validate conversation between employer & employee
+            else
+            {
+                if (conversation != null)
+                {
+                    if (conversation.InvatationId != invitation.Id)
+                    {
+                        if ((string) TempData["Error"] != "")
+                        {
+                            TempData["Error"] += "\n";
+                        }
+                        TempData["Error"] += "Please enter correct conversation & invitation!5";
+                        return RedirectToAction("MyMessages");
+                    }
+
+                    if (conversation.InvatationId != invitation.Id)
+                    {
+                        if ((string) TempData["Error"] != "")
+                        {
+                            TempData["Error"] += "\n";
+                        }
+                        TempData["Error"] += "Please enter correct conversation & invitation!6";
+                        return RedirectToAction("MyMessages");
+                    }
+                    receiverId = conversation.User1Id == user.Id ? conversation.User2Id : conversation.User1Id;
                 }
                 else
                 {
-                    receiverId = conversation.User1Id;
+                    conversation = new Conversation();
+                    if (sendMessage.InvitationId != 0)
+                    conversation.InvatationId = sendMessage.InvitationId;
+                    conversation.Title = "";
+                    conversation.Type = MessageType.UserMessage;
+                    var employerId = _context.EmployerJobProfiles.First(a => a.Id == invitation.EmployerJobProfileId).EmployerId; 
+                    conversation.User1Id = employerId;
+                    var employeeId = _context.EmployeeCvs.First(a => a.Id == invitation.EmployeeCvId).EmployeeId;
+                    conversation.User2Id = employeeId;
+                
+                    receiverId = conversation.User1Id == user.Id ? conversation.User2Id : conversation.User1Id;
+                    _context.Conversations.Add(conversation);
+                    _context.SaveChanges();
                 }
             }
-            else
-            {
-                conversation = new Conversation();
 
-                conversation.InvatationId = sendMessage.InvitationId;
-                conversation.Title = "";
-                conversation.Type = MessageType.UserMessage;
-                var employerId = _context.EmployerJobProfiles.First(a => a.Id == invitation.EmployerJobProfileId).EmployerId; 
-                conversation.User1Id = employerId;
-                var employeeId = _context.EmployeeCvs.First(a => a.Id == invitation.EmployeeCvId).EmployeeId;
-                conversation.User2Id = employeeId;
-                
-                receiverId = conversation.User1Id;
-                _context.Conversations.Add(conversation);
-                _context.SaveChanges();
-            }
 
             var message = new Message
             {
@@ -221,5 +337,47 @@ namespace iUni_Workshop.Controllers
             return RedirectToAction("MyMessages");
 
         }
+        
+        private void InitialSystemInfo()
+        {
+            TempData["Error"] = "";
+            TempData["Inform"] = "";
+            TempData["Success"] = "";
+        }
+        
+        private void ProcessModelState()
+        {
+            foreach (var model in ModelState)
+            {
+                if (model.Value.Errors.Count == 0) continue;
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }
+                
+                foreach (var error in model.Value.Errors)
+                {
+                    TempData["Error"]  += error.ErrorMessage;
+                }
+                
+            }
+        }
+        
+        private void ProcessSystemInfo()
+        {
+            if ((string) TempData["Error"] != "")
+            {
+                ViewBag.Error = TempData["Error"];
+            }
+            if ((string) TempData["Inform"] != "")
+            {
+                ViewBag.Inform = TempData["Inform"];
+            }
+            if ((string) TempData["Success"] != "")
+            {
+                ViewBag.Success = TempData["Success"];
+            }
+        }
+
     }
 }
