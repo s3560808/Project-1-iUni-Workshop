@@ -13,6 +13,7 @@ namespace iUni_Workshop.Models.AdministratorModels
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Correct Field Id is required")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter correct skill id")]
         public int Id { get; set; }
         
         [Required(ErrorMessage = "Field status is required")]

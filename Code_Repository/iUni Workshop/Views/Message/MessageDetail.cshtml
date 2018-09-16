@@ -9,7 +9,7 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
-
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 <h2>title</h2>
 <table class="table">
     <thead>
@@ -47,11 +47,19 @@
         }
     }
     @{
-        if(@Model.Type != MessageType.System || @Model.ConversationId == "")
+        if(@Model.Type != MessageType.System)
         {
             <form asp-controller="Message" asp-action="SendMessage" method="post">
                 <textarea name = "MessageDetail"></textarea>
-                <button type="submit" name="InvitationId" value="@Model.InvitationId">Post</button>
+                <input type = "text" name="ConversationId" value="@Model.ConversationId" hidden>
+                @{
+                    if (Model.InvitationId == null)
+                    {
+                        Model.InvitationId = 0;
+                    }
+                }
+                <input type = "number" name="InvitationId" value="@Model.InvitationId" hidden>
+                <button type="submit" >Post</button>
             </form>
         }
         else
