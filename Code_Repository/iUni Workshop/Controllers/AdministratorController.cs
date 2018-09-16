@@ -719,7 +719,7 @@ namespace iUni_Workshop.Controllers
             //Check if user exist?
             try
             {
-                user = _context.Users.First(a => a.Email == setUserType.Email);
+                user = _context.Users.First(a => a.Id == setUserType.Id);
             }
             catch (InvalidOperationException)
             {
