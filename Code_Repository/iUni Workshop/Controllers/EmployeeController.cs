@@ -56,7 +56,7 @@ namespace iUni_Workshop.Controllers
             info.ShortDescription = employee.ShortDescription;
             if (employee.SchoolId != null)
             {
-                var school = _context.Schools.First(a => a.Id == employee.SchoolId);
+                var school = _context.Schools.First(a => a.Id == employee.SchoolId );
                 info.SchoolName = school.SchoolName;
                 var schoolSuburb = _context.Suburbs.First(a => a.Id == school.SuburbId);
                 info.CampusName = schoolSuburb.Name;
@@ -103,7 +103,9 @@ namespace iUni_Workshop.Controllers
             {
                 var suburbId = _context.Suburbs.First(a =>
                     a.Name == personalInfo.CampusName.ToUpper() && a.PostCode == personalInfo.PostCode).Id;
-                school = _context.Schools.First(a => a.SchoolName == personalInfo.SchoolName && a.SuburbId == suburbId);
+                school = _context.Schools.First(a => a.NormalizedName == personalInfo.SchoolName.ToUpper() && 
+                                                     a.SuburbId == suburbId &&
+                                                     a.Status == SchoolStatus.InUse);
             }
             catch (InvalidOperationException)
             {
@@ -337,6 +339,7 @@ namespace iUni_Workshop.Controllers
             IEnumerable<EditCVEmployeeSkill> skills, 
             IEnumerable<EditCVExternalMeterial> externalMaterials, 
             IEnumerable<EditCVJobHistory> jobHistories,
+            //TODO 1-7
             IEnumerable<EditCvWorkDay> days)
         {
             InitialSystemInfo();
@@ -347,7 +350,7 @@ namespace iUni_Workshop.Controllers
             }  
             var user = await _userManager.GetUserAsync(User);
             EmployeeCV newCv = null;
-            var newFieldId = 0;
+            int newFieldId;
             var newSkills = new List<EmployeeSkill>();
             //1. Validate if correct cv id
             if (cv.CvId != 0)
@@ -407,7 +410,9 @@ namespace iUni_Workshop.Controllers
                 {
                     var newSkillId = _context.Skills
                         .First(a => 
-                            a.NormalizedName == skill.SkillName.ToUpper())
+                            a.NormalizedName == skill.SkillName.ToUpper()&& 
+                            a.Status == SkillStatus.InUse
+                            )
                         .Id;
                     newSkills.Add(new EmployeeSkill{ CertificationLink = skill.CertificationLink, SkillId = newSkillId});
                 }
@@ -435,6 +440,8 @@ namespace iUni_Workshop.Controllers
             var newJobHistories = jobHistories.Select(jobHistory => new EmployeeJobHistory {Name = jobHistory.JobHistoryName, ShortDescription = jobHistory.JobHistoryShortDescription}).ToList();
             //GET NEW Days
             var newDays = days.Select(day => new EmployeeWorkDay {Day = day.Day}).ToList();
+            
+            //if new cv, create new cv
             if (newCv == null)
             {
                 if (newSkills.Any() && newFieldId != 0)
@@ -480,7 +487,6 @@ namespace iUni_Workshop.Controllers
                     return RedirectToAction("EditCV");
                 }
             }
-            //TODO for
             foreach (var newSkill in newSkills)
             {
                 newSkill.EmployeeCvId = newCv.Id;
@@ -699,9 +705,9 @@ namespace iUni_Workshop.Controllers
             try
             {
                 var oldSkills = _context.EmployeeSkills.Where(a => a.EmployeeCvId == newCv.Id).ToList();
-                var newEnumerable = newSkills.Select(a => new {Link = a.CertificationLink, Id = a.SkillId}).OrderBy(a => a.Id);
-                var oldEnumerable = oldSkills.Select(a => new {Link = a.CertificationLink, Id = a.SkillId}).OrderBy(a => a.Id);
-                if (newEnumerable == oldEnumerable)
+                var newEnumerable = newSkills.Select(a => new {Link = a.CertificationLink, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
+                var oldEnumerable = oldSkills.Select(a => new {Link = a.CertificationLink, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
+                if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
@@ -742,8 +748,7 @@ namespace iUni_Workshop.Controllers
                 var oldExternalMaterials = _context.EmployeeExternalMeterials.Where(a => a.EmployeeCvId == cvId);
                 var newEnumerable = newExternalMaterials.Select(a => new {Name = a.Name, Link = a.Link}).OrderBy(a => a.Name).ToList();
                 var oldEnumerable = oldExternalMaterials.Select(a => new {Name = a.Name, Link = a.Link}).OrderBy(a => a.Name).ToList();
-                var except = newEnumerable.Except(oldEnumerable);
-                if (except.Any())
+                if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
@@ -786,8 +791,7 @@ namespace iUni_Workshop.Controllers
                 var oldJobHistories = _context.EmployeeJobHistories.Where(a => a.EmployeeCvId == cvId);
                 var newEnumerable = newJobHistories.Select(a => new {Name = a.Name, Link = a.ShortDescription}).OrderBy(a => a.Name).ToList();
                 var oldEnumerable = oldJobHistories.Select(a => new {Name = a.Name, Link = a.ShortDescription}).OrderBy(a => a.Name).ToList();
-                var except = newEnumerable.Except(oldEnumerable);
-                if (except.Any())
+                if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
@@ -829,8 +833,7 @@ namespace iUni_Workshop.Controllers
                 var oldDays = _context.EmployeeWorkDays.Where(a => a.EmployeeCvId == cvId);
                 var newEnumerable = newDays.Select(a => new {Day = a.Day}).OrderBy(a => a.Day).ToList();
                 var oldEnumerable = oldDays.Select(a => new {Day = a.Day}).OrderBy(a => a.Day).ToList();
-                var except = newEnumerable.Except(oldEnumerable);
-                if (except.Any())
+                if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {

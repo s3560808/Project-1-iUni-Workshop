@@ -50,6 +50,12 @@
                     </form>
                         
                 </td>
+                <td>
+                    <form asp-controller="Employer" asp-action="SearchApplicants" asp-route-JobProfileId ="@item.Id" method="get" >
+                        <button type="submit" class="btn btn-sm btn-success" >Search Applications</button>
+                    </form>
+                        
+                </td>
             </tr>
         }
     }

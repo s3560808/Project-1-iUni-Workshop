@@ -12,6 +12,7 @@ using iUni_Workshop.Models.EmployeeModels;
 using iUni_Workshop.Models.InvatationModel;
 using iUni_Workshop.Models.JobRelatedModels;
 using iUni_Workshop.Models.MessageModels;
+using iUni_Workshop.Models.SchoolModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -48,7 +49,6 @@ namespace iUni_Workshop.Controllers
             return View();
         }
 
-        //如果认证了则不可改变
         public async Task<IActionResult> EditCompanyInfo()
         {
             ProcessSystemInfo();
@@ -357,6 +357,7 @@ namespace iUni_Workshop.Controllers
         [Route("[Controller]/EditJobProfile/")]
         public async Task<IActionResult> EditJobProfile(int JobProfileId)
         {
+            ProcessSystemInfo();
             var user = await _userManager.GetUserAsync(User);
             JobProfile jobProfile;
             try
@@ -396,242 +397,563 @@ namespace iUni_Workshop.Controllers
 
             jobProfile.EmployerRequiredSchools = _context.EmployerRequiredSchools
                 .Where(a => a.EmployerJobProfileId == jobProfile.ProfileId)
-                .Select(a => new JobProfileRequiredSchool { SchoolName = a.School.SchoolName, Campus = a.School.Suburb.Name })
+                .Select(a => new JobProfileRequiredSchool { SchoolName = a.School.SchoolName, CampusName = a.School.Suburb.Name, CampusPostCode = a.School.Suburb.PostCode})
                 .ToList();
             return View(jobProfile);
         }
 
         //如果有邀请则不可更改
-        //检查是不是本employer的JobProfile
-        //
         public async Task<IActionResult> EditJobProfileAction(
             JobProfile jobProfile,
-            IEnumerable<JobProfileSkill> jobProfileSkill,
+            IEnumerable<JobProfileSkill> jobProfileSkills,
+            //TODO 1-7
             IEnumerable<JobProfileComplusoryWorkDay> jobProfileComplusoryWorkDay,
             IEnumerable<JobProfileRequiredLocation> jobProfileRequiredLocation,
             IEnumerable<JobProfileRequiredSchool> jobProfileRequiredSchool
         ){
+            InitialSystemInfo();
+            if (!ModelState.IsValid)
+            {
+                ProcessModelState();
+                return RedirectToAction("EditJobProfile", new{ JobProfileId = jobProfile.ProfileId});
+            }
             var user = await _userManager.GetUserAsync(User);
-            var field = new Field{};
-            
-            //0. Validate input data
-            //0.1
-            //Validate previous profile
-            EmployerJobProfile preProfile = null;
+            EmployerJobProfile newJobProfile = null;
+            int newFieldId;
+            var newSkills = new List<EmployerSkill>();
+            //1. Validate correct employer job profile
             if (jobProfile.ProfileId != 0)
             {
                 try
                 {
-                    preProfile = _context
+                    newJobProfile = _context
                         .EmployerJobProfiles
-                        .First(a => a.Id == jobProfile.ProfileId);
+                        .First(a => a.Id == jobProfile.ProfileId && a.EmployerId == user.Id);
                 }
-                catch(System.InvalidOperationException ex) {
-                    //No Such profile
-                    return RedirectToAction("EditJobProfile");
-                }
-                //Try to get others profile
-                if (user.Id != preProfile.EmployerId)
-                {
-                    return RedirectToAction("EditJobProfile");
+                catch(InvalidOperationException) {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                        
+                    TempData["Error"] += "Sorry. It is not your job profile!";
+                    return RedirectToAction("EditJobProfile", new{ JobProfileId = jobProfile.ProfileId});
                 }
             }
-            //0.2
-            //If does not have skills
-            var newSkills = new List<EmployerSkill>();
-            foreach (var skill in jobProfileSkill)
+            //2. Validate if correct field name
+            try{
+                //Get new job profile field id
+                newFieldId = _context.Fields.First(a => 
+                    a.Status == FieldStatus.InUse && 
+                    a.NormalizedName == jobProfile.FieldName.ToUpper()
+                ).Id;
+                
+            }
+            catch(InvalidOperationException)
+            {
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }       
+                TempData["Error"] += "Sorry. Not a valid field!";
+                return RedirectToAction("EditJobProfile", new{JobProfileId = jobProfile.ProfileId});
+            }
+            //3. Validate skill name
+            //!! No skill more than 10 skill
+            foreach (var skill in jobProfileSkills)
             {
                 try
                 {
-                    var newSkillId = _context.Skills.First(a => a.NormalizedName ==skill.SkillName.ToUpper()).Id;
-                    newSkills.Add(new EmployerSkill { SkillId = newSkillId, Required = skill.SkillRequired});  
+                    var newSkillId = _context.Skills
+                        .First(a => 
+                            a.NormalizedName == skill.SkillName.ToUpper() && 
+                            a.Status == SkillStatus.InUse
+                            )
+                        .Id;
+                    newSkills.Add(new EmployerSkill{SkillId = newSkillId , Required = skill.SkillRequired});
                 }
-                catch (InvalidOperationException ex)
+                catch (InvalidOperationException)
                 {
-                    continue;
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }       
+                    TempData["Error"] += "Sorry. "+ skill.SkillName + " is not a valid skill";
                 }
             }
-            if (!newSkills.Any())
+            if (!newSkills.Any() || newSkills.ToList().Count>10)
             {
-                return RedirectToAction("EditJobProfile");
-            }    
-            //0.3
-            //Validate field
-            try
-            {
-                field = _context.Fields.First(a => a.Name == jobProfile.FieldName);
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }       
+                TempData["Error"] += "Sorry. At least one skill at most ten skill!";
+                return RedirectToAction("EditJobProfile", new {JobProfileId = jobProfile.ProfileId});
             }
-            catch (InvalidOperationException ex)
-            {
-                return RedirectToAction("EditJobProfile");
-            }
-            //0.4
-            //Validate Title Validate Description
-            //@TODO
-
-            //1. Insert Or Update new profile
-            //1.1
-            //Set up newer version profile
-            var profile = new EmployerJobProfile
-            {
-                EmployerId = user.Id,
-                //需要检查之前
-                CreateDateTime = DateTime.Now,
-                LastUpdateDateTime = DateTime.Now,
-                FieldId = field.Id,
-                Title = jobProfile.Title,
-                Description = jobProfile.Description,
-                RequireJobExperience = jobProfile.RequireJobExperience,
-                MaxDayForAWeek = jobProfile.MaxDay,
-                MinDayForAWeek = jobProfile.MinDay,
-                Salary = jobProfile.Salary
-            };
-            //1.2.1
-            //If does not have pre profile
-            if (preProfile == null)
-            {
-                preProfile = profile;
-                _context.EmployerJobProfiles.Add(preProfile);
-                
-            }
-            //1.2.2.
-            //If has pre profile
-            else
-            {
-                preProfile.LastUpdateDateTime = DateTime.Now;
-                preProfile.FieldId = field.Id;
-                preProfile.Title = jobProfile.Title;
-                preProfile.Description = jobProfile.Description;
-                preProfile.RequireJobExperience = jobProfile.RequireJobExperience;
-                preProfile.MaxDayForAWeek = jobProfile.MaxDay;
-                preProfile.MinDayForAWeek = jobProfile.MinDay;
-                preProfile.Salary = jobProfile.Salary;
-                _context.EmployerJobProfiles.Update(preProfile);
-            }
-            _context.SaveChanges();
-            
-            //2. Update Skills
-            //2.1
-            //Try to find & remove previous Skills
-            try
-            {
-                var preSkills = _context.EmployerSkills.Where(a => a.EmployerJobProfileId == jobProfile.ProfileId).ToList();
-                _context.EmployerSkills.RemoveRange(preSkills);
-                _context.SaveChanges();
-            }
-            catch (System.InvalidOperationException ex)
-            {
-                
-            }
-            //2.2
-            //Insert new skills
-            foreach (var skill in newSkills)
-            {
-                skill.EmployerJobProfileId = preProfile.Id;
-            }
-            _context.EmployerSkills.AddRange(newSkills);
-            _context.SaveChanges();
-            
-            //3. Update Compulsory work Day
-            //3.1
-            //Try to find & remove previous Compulsory work Day
-            try
-            {
-                var preDays = _context.EmployerComplusoryWorkDays.Where(a => a.EmployerJobProfileId == jobProfile.ProfileId).ToList();
-                _context.EmployerComplusoryWorkDays.RemoveRange(preDays);
-                _context.SaveChanges();
-            }
-            catch (System.InvalidOperationException ex)
-            {
-                
-            }
-            //3.2
-            //Add new Compulsory work Day
-            var newDays = new List<EmployerComplusoryWorkDay>();
-            foreach (var day in jobProfileComplusoryWorkDay)
-            {
-                newDays.Add(new EmployerComplusoryWorkDay{EmployerJobProfileId = preProfile.Id,Day = day.Day});
-            }
-            if (newDays.Any())
-            {
-                _context.EmployerComplusoryWorkDays.AddRange(newDays);
-                _context.SaveChanges();
-            }
-            
-            //4. Update Location
-            //4.1
-            //Try to find & remove previous Location
-            try
-            {
-                var preLocation = _context.EmployerWorkLocations.Where(a => a.EmployerJobProfileId == jobProfile.ProfileId).ToList();
-                _context.EmployerWorkLocations.RemoveRange(preLocation);
-                _context.SaveChanges();
-            }
-            catch (System.InvalidOperationException ex)
-            {
-                
-            }
-            //4.2
-            //Add new Location
-            var newLocations = new List<EmployerRequiredWorkLocation>();
+            //GET NEW Days
+            var newDays = jobProfileComplusoryWorkDay.Select(day => new EmployerComplusoryWorkDay {Day = day.Day}).ToList();
+            //GET NEW Locations
+            var newRequiredLocations = new List<EmployerRequiredWorkLocation>();
             foreach (var location in jobProfileRequiredLocation)
             {
                 try
                 {
-                    var suburbId = _context.Suburbs.First(
-                        a => a.Name == location.LocationName &&
-                             a.PostCode == location.PostCode).Id;
-                    newLocations.Add(new EmployerRequiredWorkLocation{EmployerJobProfileId = preProfile.Id,SuburbId = suburbId});
+                    var newSuburbId = _context.Suburbs
+                        .First(a => 
+                            a.Name == location.LocationName.ToUpper() && 
+                            a.PostCode == location.PostCode
+                        )
+                        .Id;
+                    
+                    newRequiredLocations.Add(new EmployerRequiredWorkLocation{ SuburbId = newSuburbId});
                 }
-                catch(InvalidOperationException ex)
+                catch (InvalidOperationException)
                 {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }       
+                    TempData["Error"] += "Sorry. "+ location.LocationName +" "+location.PostCode + " is not a valid location";
                 }
-
             }
-            if (newLocations.Any())
-            {
-                _context.EmployerWorkLocations.AddRange(newLocations);
-                _context.SaveChanges();
-            }
-            
-            //5. Update School
-            //5.1
-            //Try to find & remove previous School
-            try
-            {
-                var preSchools = _context.EmployerRequiredSchools.Where(a => a.EmployerJobProfileId == jobProfile.ProfileId).ToList();
-                _context.EmployerRequiredSchools.RemoveRange(preSchools);
-                _context.SaveChanges();
-            }
-            catch (System.InvalidOperationException ex)
-            {
-                
-            }
-            //5.2
-            //Add new School
-            var newSchools = new List<EmployerRequiredSchool>();
+            //GET NEW Schools
+            var newRequiredSchools = new List<EmployerRequiredSchool>();
             foreach (var school in jobProfileRequiredSchool)
             {
                 try
                 {
-                    var schoolId = _context.Schools.First(
-                        a => a.SchoolName == school.SchoolName &&
-                             a.Suburb.Name == school.Campus).Id;
-                    newSchools.Add(new EmployerRequiredSchool{EmployerJobProfileId = preProfile.Id, SchoolId = schoolId});
-                }
-                catch(InvalidOperationException ex)
-                {
-                }
+                    var newSchoolSuburbId = _context.Suburbs
+                        .First(a => 
+                            a.Name == school.CampusName.ToUpper() && 
+                            a.PostCode == school.CampusPostCode
+                        )
+                        .Id;
 
+                    var schoolId = _context.Schools
+                        .First(a => 
+                            a.NormalizedName == school.SchoolName.ToUpper() &&
+                            a.SuburbId == newSchoolSuburbId &&
+                            a.Status == SchoolStatus.InUse
+                        ).Id;
+                    newRequiredSchools.Add(new EmployerRequiredSchool{ SchoolId = schoolId});
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }       
+                    TempData["Error"] += "Sorry. "+ school.SchoolName +" "+ school.CampusName +" "+ school.CampusPostCode + " is not a valid school";
+                }
             }
-            if (newLocations.Any())
+            //if new cv, create new cv
+            if (newJobProfile == null)
             {
-                _context.EmployerRequiredSchools.AddRange(newSchools);
-                _context.SaveChanges();
+                if (newSkills.Any() && newFieldId != 0)
+                {
+                    newJobProfile = new EmployerJobProfile
+                    {
+                        EmployerId = user.Id,
+                        FieldId = newFieldId,
+                        CreateDateTime = DateTime.Now,
+                        Description = jobProfile.Description, 
+                        Salary = jobProfile.Salary, 
+                        Title = jobProfile.Title, 
+                        RequireJobExperience = jobProfile.RequireJobExperience, 
+                        LastUpdateDateTime = DateTime.Now, 
+                        MaxDayForAWeek = jobProfile.MaxDay, 
+                        MinDayForAWeek = jobProfile.MinDay
+                    };
+                    try
+                    {
+                        _context.EmployerJobProfiles.Update(newJobProfile);
+                        _context.SaveChanges();
+                        if ((string) TempData["Success"] != "")
+                        {
+                            TempData["Success"] += "\n";
+                        }       
+                        TempData["Success"] += "New job profile Added!";
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        if ((string) TempData["Error"] != "")
+                        {
+                            TempData["Error"] += "\n";
+                        }       
+                        TempData["Error"] += "Sorry. Failed to create a new job profile!";
+                        return RedirectToAction("EditJobProfile");
+                    }
+                }
+                else
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }       
+                    TempData["Error"] += "Sorry. Failed to create a new cv!";
+                    return RedirectToAction("EditJobProfile");
+                }
+            }
+
+            foreach (var skill in newSkills)
+            {
+                skill.EmployerJobProfileId = newJobProfile.Id;
             }
             
+            foreach (var day in newDays)
+            {
+                day.EmployerJobProfileId = newJobProfile.Id;
+            }
             
-            return RedirectToAction("EditJobProfile");
+            foreach (var location in newRequiredLocations)
+            {
+                location.EmployerJobProfileId = newJobProfile.Id;
+            }
+            
+            foreach (var school in newRequiredSchools)
+            {
+                school.EmployerJobProfileId = newJobProfile.Id;
+            }
+
+            if (newJobProfile.RequireJobExperience !=jobProfile.RequireJobExperience)
+            {
+                try
+                {
+                    newJobProfile.RequireJobExperience =jobProfile.RequireJobExperience;
+                    _context.EmployerJobProfiles.Update(newJobProfile);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Job Profile's \"Required Job Experience\" changed!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                        
+                    TempData["Error"] += "Sorry. Failed to update \"Required Job Experience\"";
+                }
+            }
+            
+            if (newJobProfile.Title !=jobProfile.Title)
+            {
+                try
+                {
+                    newJobProfile.Title =jobProfile.Title;
+                    _context.EmployerJobProfiles.Update(newJobProfile);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Job Profile's \"Title\" changed!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                        
+                    TempData["Error"] += "Sorry. Failed to update \"Title\"";
+                }
+            }
+            
+            if (newJobProfile.Description !=jobProfile.Description)
+            {
+                try
+                {
+                    newJobProfile.Description =jobProfile.Description;
+                    _context.EmployerJobProfiles.Update(newJobProfile);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Job Profile's \"Description\" changed!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                        
+                    TempData["Error"] += "Sorry. Failed to update \"Description\"";
+                }
+            }
+            
+            if (!Math.Abs(newJobProfile.Salary - jobProfile.Salary).Equals(0))
+            {
+                try
+                {
+                    newJobProfile.Salary =jobProfile.Salary;
+                    _context.EmployerJobProfiles.Update(newJobProfile);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Job Profile's \"Salary\" changed!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                        
+                    TempData["Error"] += "Sorry. Failed to update \"Salary\"";
+                }
+            }
+            
+            if (newJobProfile.MaxDayForAWeek !=jobProfile.MaxDay)
+            {
+                try
+                {
+                    newJobProfile.MaxDayForAWeek =jobProfile.MaxDay;
+                    _context.EmployerJobProfiles.Update(newJobProfile);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Job Profile's \"Max Day For A Week\" changed!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                        
+                    TempData["Error"] += "Sorry. Failed to update \"Max Day For A Week\"";
+                }
+            }
+            
+            if (newJobProfile.MinDayForAWeek !=jobProfile.MinDay)
+            {
+                try
+                {
+                    newJobProfile.MinDayForAWeek =jobProfile.MinDay;
+                    _context.EmployerJobProfiles.Update(newJobProfile);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Job Profile's \"Min Day For A Week\" changed!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                        
+                    TempData["Error"] += "Sorry. Failed to update \"Min Day For A Week\"";
+                }
+            }
+            
+            if (newJobProfile.FieldId != newFieldId)
+            {
+                try
+                {
+                    newJobProfile.MaxDayForAWeek =jobProfile.MaxDay;
+                    _context.EmployerJobProfiles.Update(newJobProfile);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Job Profile's \"Field\" changed!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                        
+                    TempData["Error"] += "Sorry. Failed to update \"Field\"";
+                }
+            }
+            //Update skills  
+            try
+            {
+                var oldSkills = _context.EmployerSkills.Where(a => a.EmployerJobProfileId == newJobProfile.Id).ToList();
+                var newEnumerable = newSkills.Select(a => new {Required = a.Required, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
+                var oldEnumerable = oldSkills.Select(a => new {Required = a.Required, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
+                
+                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                {
+                    try
+                    {
+                        if (oldSkills.Any())
+                        {
+                            _context.EmployerSkills.RemoveRange(oldSkills);
+                            _context.SaveChanges();
+                        }
+                        _context.EmployerSkills.AddRange(newSkills);
+                        _context.SaveChanges();
+                        if ((string) TempData["Success"] != "")
+                        {
+                            TempData["Success"] += "\n";
+                        }       
+                        TempData["Success"] += "Job Profile's skills updated!";
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        if ((string) TempData["Error"] != "")
+                        {
+                            TempData["Error"] += "\n";
+                        }       
+                        TempData["Error"] += "Sorry. Failed to update your skills please retry";
+                    }
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }       
+                TempData["Error"] += "Sorry. Failed to update your skills please retry";
+            } 
+            //New external materials
+            try
+            {
+                var jobProfileId = newJobProfile.Id;
+                var oldDays = _context.EmployerComplusoryWorkDays.Where(a => a.EmployerJobProfileId == jobProfileId);
+                var newEnumerable = newDays.Select(a => new { Day = a.Day}).OrderBy(a => a.Day).ToList();
+                var oldEnumerable = oldDays.Select(a => new { Day = a.Day}).OrderBy(a => a.Day).ToList();
+                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                {
+                    try
+                    {
+                    
+                        _context.EmployerComplusoryWorkDays.RemoveRange(oldDays);     
+                        if (newDays.Any())                                           
+                        {                                                                         
+                            _context.EmployerComplusoryWorkDays.AddRange(newDays);    
+                        }                                                                         
+                        _context.SaveChanges();                                                   
+                        if ((string) TempData["Success"] != "")                                   
+                        {                                                                         
+                            TempData["Success"] += "\n";                                          
+                        }                                                                         
+                        TempData["Success"] += "Job Profile's compulsory work day updated!";                 
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        if ((string) TempData["Error"] != "")
+                        {
+                            TempData["Error"] += "\n";
+                        }       
+                        TempData["Error"] += "Sorry. Failed to update your compulsory work day please retry";
+                    }
+                }
+                
+            }
+            catch (InvalidOperationException)
+            {
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }       
+                TempData["Error"] += "Sorry. Failed to update your compulsory work day please retry";
+            }  
+            //New work location
+            try
+            {
+                var jobProfileId = newJobProfile.Id;
+                var oldRequiredLocations = _context.EmployerWorkLocations.Where(a => a.EmployerJobProfileId == jobProfileId);
+                var newEnumerable = newRequiredLocations.Select(a => new { SuburbId = a.SuburbId}).OrderBy(a => a.SuburbId).ToList();
+                var oldEnumerable = oldRequiredLocations.Select(a => new { SuburbId = a.SuburbId}).OrderBy(a => a.SuburbId).ToList();
+                if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                {
+                    try
+                    {
+                    
+                        _context.EmployerWorkLocations.RemoveRange(oldRequiredLocations);     
+                        if (newDays.Any())                                           
+                        {                                                                         
+                            _context.EmployerWorkLocations.AddRange(newRequiredLocations);    
+                        }                                                                         
+                        _context.SaveChanges();                                                   
+                        if ((string) TempData["Success"] != "")                                   
+                        {                                                                         
+                            TempData["Success"] += "\n";                                          
+                        }                                                                         
+                        TempData["Success"] += "Job Profile's compulsory work location updated!";                 
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        if ((string) TempData["Error"] != "")
+                        {
+                            TempData["Error"] += "\n";
+                        }       
+                        TempData["Error"] += "Sorry. Failed to update your compulsory work location please retry";
+                    }
+                }
+                
+            }
+            catch (InvalidOperationException)
+            {
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }       
+                TempData["Error"] += "Sorry. Failed to update your compulsory please retry";
+            }  
+            //New school
+            try
+            {
+                var jobProfileId = newJobProfile.Id;
+                var oldRequiredSchools = _context.EmployerRequiredSchools.Where(a => a.EmployerJobProfileId == jobProfileId);
+                var newEnumerable = newRequiredSchools.Select(a => new { SchoolId = a.SchoolId}).OrderBy(a => a.SchoolId).ToList();
+                var oldEnumerable = oldRequiredSchools.Select(a => new { SchoolId = a.SchoolId}).OrderBy(a => a.SchoolId).ToList();
+                if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                {
+                    try
+                    {
+                        _context.EmployerRequiredSchools.RemoveRange(oldRequiredSchools);     
+                        if (newDays.Any())                                           
+                        {                                                                         
+                            _context.EmployerRequiredSchools.AddRange(newRequiredSchools);    
+                        }                                                                         
+                        _context.SaveChanges();                                                   
+                        if ((string) TempData["Success"] != "")                                   
+                        {                                                                         
+                            TempData["Success"] += "\n";                                          
+                        }                                                                         
+                        TempData["Success"] += "Job Profile's compulsory employee's school updated!";                 
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        if ((string) TempData["Error"] != "")
+                        {
+                            TempData["Error"] += "\n";
+                        }       
+                        TempData["Error"] += "Sorry. Failed to update your compulsory employee's school please retry";
+                    }
+                }
+                
+            }
+            catch (InvalidOperationException)
+            {
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }       
+                TempData["Error"] += "Sorry. Failed to update your compulsory employee's school please retry";
+            }  
+            
+            return RedirectToAction("EditJobProfile", new{ JobProfileId = jobProfile.ProfileId});
         }
 
         //检查本人操作
@@ -641,14 +963,15 @@ namespace iUni_Workshop.Controllers
         [Route("[Controller]/SearchApplicants/{jobProfileId}")]
         public async Task<IActionResult> SearchApplicants(int jobProfileId)
         {
-            return View(SearchApplicantsCoreRanker(jobProfileId));
+            ViewData["App"] = jobProfileId;
+            return View(SearchApplicantsCoreRanker(jobProfileId).Result);
         }
 
         [Route("[Controller]/ViewApplicantCv/{jobProfileId}/{cvId}")]
         public async Task<IActionResult> ViewApplicantCv(int jobProfileId, int cvId)
         {
-            var validationList = SearchApplicantsCoreRanker(jobProfileId);
-            var validationResultList = validationList.Where(a => a.CvId == cvId);
+            var validationList = ( SearchApplicantsCoreRanker(jobProfileId)).Result;
+            var validationResultList = validationList.Where(a => a.CvId == cvId).ToList();
             //Not valid
             if (!validationResultList.Any())
             {
@@ -662,13 +985,14 @@ namespace iUni_Workshop.Controllers
                 EmployeeName = raw.Employee.Name,
                 //TODO!!More Info required
             };
+            
             return View(result);
         }
 
         [Route("[Controller]/SendInvitation/{jobProfileId}/{cvId}")]
         public IActionResult SendInvitation(int jobProfileId, int cvId)
         {
-            var validationList = SearchApplicantsCoreRanker(jobProfileId);
+            var validationList = SearchApplicantsCoreRanker(jobProfileId).Result;
             var validationResultList = validationList.Where(a => a.CvId == cvId);
             //Not valid
             if (!validationResultList.Any())
@@ -694,22 +1018,28 @@ namespace iUni_Workshop.Controllers
             }
             return View();
         }
-        //TODO Filter sent application
-        public List<SearchApplicant> SearchApplicantsCoreRanker(int jobProfileId)
+        public async Task<List<SearchApplicant>> SearchApplicantsCoreRanker(int jobProfileId)
         {
+            
             var jobProfile = _context.EmployerJobProfiles.First(a => a.Id == jobProfileId);
-            var rawData = new List<EmployeeCV> {};
             var finalData = new List<EmployeeCV> {};
             //1.  Filter first
             //1.1 Filter field
             //1.2 && Filter salary
             //1.3 && Filter Find Job Status
-            rawData = _context.EmployeeCvs
+            await UpdateCvFindJobStatus();
+            var rawData = _context.EmployeeCvs
                 .Where(a => a.FieldId == jobProfile.FieldId 
                             && a.MinSaraly <= jobProfile.Salary 
-                            && a.FindJobStatus 
-                            && a.StartFindJobDate.AddDays(14).Day >= DateTime.Today.Day)
+                            && a.FindJobStatus )
                 .ToList();
+            //Filter already got invitation's applications
+            var hasInvitations = _context.Invatations.Where(a => a.EmployerJobProfileId == jobProfileId).ToList();
+            foreach (var invitation in hasInvitations)
+            {
+                var invitationCv = _context.EmployeeCvs.Where(a => a.Id == invitation.EmployeeCvId).ToList();
+                rawData = rawData.Except(invitationCv).ToList();
+            }
             //1.4 Filter job experience
             if (jobProfile.RequireJobExperience)
             {
@@ -727,19 +1057,18 @@ namespace iUni_Workshop.Controllers
             
             //1.5 Filter compulsory work day
             var employerDays = _context.EmployerComplusoryWorkDays
-                .Where(a => a.EmployerJobProfileId == jobProfile.Id).ToList();
+                .Where(a => a.EmployerJobProfileId == jobProfile.Id)
+                .Select(a => new {Day = a.Day})
+                .OrderBy(a => a.Day);
             if (employerDays.Any())
             {
                 foreach (var data in rawData)
                 {
-                    var employeeDays = _context.EmployeeWorkDays.Where(a => a.EmployeeCvId == data.Id).ToList();
-                    var query =
-                        (from employer in employerDays
-                            join employee in employeeDays
-                                on employer.Day equals employee.Day
-                            where employer.Day == employee.Day
-                            select new EmployeeCV{Id = employee.EmployeeCvId}).ToList();
-                    if (query.Count() == employerDays.Count())
+                    var employeeDays = _context.EmployeeWorkDays
+                        .Where(a => a.EmployeeCvId == data.Id)
+                        .Select(a => new {Day = a.Day})
+                        .OrderBy(a => a.Day);
+                    if (!employerDays.Except(employeeDays).Any())
                     {
                         finalData.Add(data);
                     }
@@ -748,20 +1077,22 @@ namespace iUni_Workshop.Controllers
                 finalData = new List<EmployeeCV>();
             }
             
-            //2. Filter Applicants
-            var employerSkills = _context.EmployerSkills.Where(a => a.Required).ToList();
+            //1.6. Filter compulsory skill
+            var employerSkills = _context.EmployerSkills
+                .Where(a => a.EmployerJobProfileId == jobProfile.Id && a.Required)
+                .Select(a => new {SkillId = a.SkillId})
+                .OrderBy(a =>a .SkillId)
+                .ToList();
             if (employerSkills.Any())
             {
                 foreach (var data in rawData)
                 {
-                    var employeeSkills = _context.EmployeeSkills.Where(a => a.EmployeeCvId == data.Id).ToList();
-                    var query =
-                        (from employer in employerSkills
-                            join employee in employeeSkills
-                                on employer.SkillId equals employee.SkillId
-                            where employee.SkillId == employer.SkillId
-                            select new {id = employee.Id}).ToList();
-                    if (query.Count() == employerSkills.Count())
+                    var employeeSkills = _context.EmployeeSkills
+                        .Where(a => a.EmployeeCvId == data.Id)
+                        .Select(a => new {SkillId = a.SkillId})
+                        .OrderBy(a =>a .SkillId)
+                        .ToList();
+                    if (!employerSkills.Except(employeeSkills).Any())
                     {
                         finalData.Add(data);
                     }
@@ -769,8 +1100,48 @@ namespace iUni_Workshop.Controllers
                 rawData = finalData;
                 finalData = new List<EmployeeCV>();
             }
-            //@TODO Filter School
-            //@TODO Filter Location
+            //1.6. Filter compulsory school
+            var employerSchools = _context.EmployerRequiredSchools
+                .Where(a => a.EmployerJobProfileId == jobProfile.Id)
+                .Select(a => new {SchoolId = (int?) a.SchoolId})
+                .OrderBy(a =>a .SchoolId);
+            if (employerSchools.Any())
+            {
+                foreach (var data in rawData)
+                {
+                    var employeeSchools = _context.Employees
+                        .Where(a => a.Id == data.EmployeeId)
+                        .Select(a => new {SchoolId = a.SchoolId})
+                        .OrderBy(a =>a.SchoolId);
+                    if (!employerSchools.Except(employeeSchools).Any())
+                    {
+                        finalData.Add(data);
+                    }
+                }
+                rawData = finalData;
+                finalData = new List<EmployeeCV>();
+            }
+            //1.6. Filter compulsory location
+            var employerLocations = _context.EmployerWorkLocations
+                .Where(a => a.EmployerJobProfileId == jobProfile.Id)
+                .Select(a => new {SuburbId = (int?) a.SuburbId})
+                .OrderBy(a =>a .SuburbId);
+            if (employerLocations.Any())
+            {
+                foreach (var data in rawData)
+                {
+                    var employeeLocationss = _context.Employees
+                        .Where(a => a.Id == data.EmployeeId)
+                        .Select(a => new {SuburbId = a.SuburbId})
+                        .OrderBy(a =>a.SuburbId);
+                    if (!employerLocations.Except(employeeLocationss).Any())
+                    {
+                        finalData.Add(data);
+                    }
+                }
+                rawData = finalData;
+                finalData = new List<EmployeeCV>();
+            }
             
             //Rank applicants
             var finalResults = new List<SearchApplicant>();
@@ -779,20 +1150,20 @@ namespace iUni_Workshop.Controllers
                 var employeeName = _context.Employees.First(a => a.Id == data.EmployeeId).Name;
                 finalResults.Add(new SearchApplicant{ApplicantName = employeeName, CvId = data.Id, Score = 0});
             }
-            employerSkills = _context.EmployerSkills
+            var employerSelectiveSkills = _context.EmployerSkills
                 .Where(a => !a.Required && a.EmployerJobProfileId == jobProfile.Id)
                 .OrderBy(a => a.Id)
                 .ToList();
-            if (employerSkills.Any())
+            if (employerSelectiveSkills.Any())
             {
                 foreach (var result in finalResults)
                 {
                     var employeeSkills = _context.EmployeeSkills.Where(a => a.EmployeeCvId == result.CvId).OrderBy(a => a.Id).ToList();
-                    for (int i = 0; i < employerSkills.Count; i++)
+                    for (int i = 0; i < employerSelectiveSkills.Count; i++)
                     {
                         for (int j = 0; j < employeeSkills.Count; j++)
                         {
-                            if (employerSkills[i].SkillId == employeeSkills[j].SkillId)
+                            if (employerSelectiveSkills[i].SkillId == employeeSkills[j].SkillId)
                             {
                                 result.Score += (11 - i) * (11 - j);
                             }
@@ -800,6 +1171,8 @@ namespace iUni_Workshop.Controllers
                     }
                 }
             }
+
+            finalResults = finalResults.OrderBy(a => a.Score).ToList();
             return finalResults;
         }
 
@@ -869,12 +1242,14 @@ namespace iUni_Workshop.Controllers
 
         private async Task UpdateCvFindJobStatus()
         {
-            var user = await _userManager.GetUserAsync(User);
-            var cvs = _context.EmployeeCvs.Where(a => a.EmployeeId == user.Id);
+            var cvs = _context.EmployeeCvs.Where(a => a.FindJobStatus).ToList();
             foreach (var cv in cvs)
             {
-                if ((DateTime.Now - cv.StartFindJobDate).TotalDays <= 14||cv.FindJobStatus==false) 
+                var days = (DateTime.Now - cv.StartFindJobDate).TotalDays;
+                if (days <= 14 || cv.FindJobStatus == false)
+                {
                     continue;
+                }
                 cv.FindJobStatus = false;
                 cv.StartFindJobDate = DateTime.MinValue;
             }
