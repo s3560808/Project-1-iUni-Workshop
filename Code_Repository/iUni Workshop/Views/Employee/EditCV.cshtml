@@ -4,44 +4,45 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
-
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 <h2>title</h2>
 
 <form asp-action="EditCvAction" method="post">
     @{
         
-        if (@Model != null)
+        if (Model != null)
         {
             <input type="text" hidden="true" name = "CvId" id="CvId" value="@Model.CvId">
         }
     }
     
     @{
-        string title="";
-        if (@Model != null)
+        var title="";
+        if (Model != null)
         {
             title = Model.Title;
         }
     }
     Title<input type="text" name="Title" value="@title">
-    <hr/>
-    UpdateStatus?<input type="checkbox" name="UpdateStatus" value="true" > 
+<hr/>
+@{
+    var findJob = !(Model.FindJobStatus == false || (DateTime.Now.Day - Model.StartFindJobDate.Day) > 14);
+}
+    UpdateStatus?<input type="checkbox" name="UpdateStatus" value="true" checked="@findJob"> 
    
-    
     <hr/>
     @{
         bool primary = false;
-        if (@Model != null)
+        if (Model != null)
         {
             primary = Model.Primary;
         }
     }
     PrimaryCv? <input type="checkbox" name="PrimaryCv" value="true" checked="@primary">
     
-    
     <hr/>
     @{
-        string field = "";
+        var field = "";
         if (@Model != null)
         {
             field = Model.FieldName;
@@ -51,104 +52,77 @@
     
     <hr/>
     @{
-        string description = "";
+        var description = "";
         if (@Model != null)
         {
             description = Model.Details;
         }
     }
-    <textarea name = "Description"> @description </textarea>
+    <textarea name = "Description">@description</textarea>
     
     <script>
         function AddSkillController() {
-            var suburbselectbox = document.getElementsByClassName("SkillClass");
-            var boxNumber = suburbselectbox.length;
+            var skillElements = document.getElementsByClassName("SkillClass");
+            var skillElementsNumber = skillElements.length;
+            var skillDiv = document.getElementById("Skills");
+            //1. Create new div for new skill
             var divBox = document.createElement("div");
             divBox.className = "SkillClass";
+            //1.1 Create skill name box
             var inputSkillName = document.createElement("input");
             inputSkillName.setAttribute("type","text");
-            inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".SkillName");
+            inputSkillName.setAttribute("name","["+skillElementsNumber+"]"+ ".SkillName");
+            //1.2 Create skill certification link box
             var inputSkillLink = document.createElement("input");
             inputSkillLink.setAttribute("type","text");
-            inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".CertificationLink");
-            var inputSkillNameLable = document.createElement("p");
-            inputSkillNameLable.innerText = "Skill Name "+boxNumber;
-            var inputSkillLinkLable = document.createElement("p");
-            inputSkillLinkLable.innerText = "Skill Certification Link "+boxNumber;
-            divBox.appendChild(inputSkillNameLable);
+            inputSkillLink.setAttribute("name","["+skillElementsNumber+"]"+ ".CertificationLink");
+            //1.3 Create Skill name label
+            var inputSkillNameLabel = document.createElement("p");
+            inputSkillNameLabel.innerText = "Skill Name "+skillElementsNumber;
+            //1.4 Create Skill Certification Link label
+            var inputSkillLinkLabel = document.createElement("p");
+            inputSkillLinkLabel.innerText = "Skill Certification Link "+skillElementsNumber;
+            //2. Append sub elements of new skill div
+            divBox.appendChild(inputSkillNameLabel);
             divBox.appendChild(inputSkillName);
-            divBox.appendChild(inputSkillLinkLable);
+            divBox.appendChild(inputSkillLinkLabel);
             divBox.appendChild(inputSkillLink);
-            var last = suburbselectbox[boxNumber-1];
-            last.append(divBox);
+            skillDiv.append(divBox);
         }
         
-        function AddMeterialController() {
-            var suburbselectbox = document.getElementsByClassName("MaterialClass");
-            var boxNumber = suburbselectbox.length;
+        function AddExternalMaterialsController() {
+            var externalMaterialElements = document.getElementsByClassName("ExternalMaterialClass");
+            var externalMaterialElementsNumber = externalMaterialElements.length;
+            var externalMaterialDiv = document.getElementById("ExternalMaterials");
+            //1. Create new div for new external material
             var divBox = document.createElement("div");
-            divBox.className = "MaterialClass";
-            var inputSkillName = document.createElement("input");
-            inputSkillName.setAttribute("type","text");
-            inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".ExternalMeterialName");
-            var inputSkillLink = document.createElement("input");
-            inputSkillLink.setAttribute("type","text");
-            inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".ExternalMeterialLink");
-            var inputSkillNameLable = document.createElement("p");
-            inputSkillNameLable.innerText = "External Meterial Name "+boxNumber;
-            var inputSkillLinkLable = document.createElement("p");
-            inputSkillLinkLable.innerText = "External Meterial Link "+boxNumber;
-            divBox.appendChild(inputSkillNameLable);
-            divBox.appendChild(inputSkillName);
-            divBox.appendChild(inputSkillLinkLable);
-            divBox.appendChild(inputSkillLink);
-            var last = suburbselectbox[boxNumber-1];
-            last.append(divBox);
+            divBox.className = "ExternalMaterialClass";
+            //1.1 Create external material name box
+            var inputExternalMaterialName = document.createElement("input");
+            inputExternalMaterialName.setAttribute("type","text");
+            inputExternalMaterialName.setAttribute("name","["+externalMaterialElementsNumber+"]"+ ".ExternalMaterialName");
+            //1.2 Create external material certification link box
+            var inputExternalMaterialLink = document.createElement("input");
+            inputExternalMaterialLink.setAttribute("type","text");
+            inputExternalMaterialLink.setAttribute("name","["+externalMaterialElementsNumber+"]"+ ".ExternalMaterialLink");
+            //1.3 Create external material name label
+            var inputExternalMaterialNameLabel = document.createElement("p");
+            inputExternalMaterialNameLabel.innerText = "External Material Name "+externalMaterialElementsNumber;
+            //1.4 Create external material Certification Link label
+            var inputExternalMaterialLinkLabel = document.createElement("p");
+            inputExternalMaterialLinkLabel.innerText = "External Material Certification Link "+externalMaterialElementsNumber;
+            //2. Append sub elements of new skill div
+            divBox.appendChild(inputExternalMaterialNameLabel);
+            divBox.appendChild(inputExternalMaterialName);
+            divBox.appendChild(inputExternalMaterialLinkLabel);
+            divBox.appendChild(inputExternalMaterialLink);
+            externalMaterialDiv.append(divBox);
         }
-        
-        function AddJobHisotryController() {
-            var suburbselectbox = document.getElementsByClassName("HistoryClass");
-            var boxNumber = suburbselectbox.length;
-            var divBox = document.createElement("div");
-            divBox.className = "HistoryClass";
-            var inputSkillName = document.createElement("input");
-            inputSkillName.setAttribute("type","text");
-            inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".JobHistoryName");
-            var inputSkillLink = document.createElement("input");
-            inputSkillLink.setAttribute("type","text");
-            inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".JobHistoryShortDescription");
-            var inputSkillNameLable = document.createElement("p");
-            inputSkillNameLable.innerText = "Job History Name "+boxNumber;
-            var inputSkillLinkLable = document.createElement("p");
-            inputSkillLinkLable.innerText = "Job History Short Description "+boxNumber;
-            divBox.appendChild(inputSkillNameLable);
-            divBox.appendChild(inputSkillName);
-            divBox.appendChild(inputSkillLinkLable);
-            divBox.appendChild(inputSkillLink);
-            var last = suburbselectbox[boxNumber-1];
-            last.append(divBox);
-        }
-//            var xmlhttp = new XMLHttpRequest();
-//            xmlhttp.onreadystatechange = function () {
-//                if (this.readyState == 4 && this.status == 200) {
-//                    var suburbs = JSON.parse(this.responseText);
-//                    suburbselectbox.innerHTML="";
-//                    for (var i = 0; i < suburbs.length; i++) {
-//                        var btn = document.createElement("OPTION");
-//                        btn.value = suburbs[i];
-//                        if (str == suburbs[i]) {
-//                            getPostCode(str);
-//                        }
-//                        suburbselectbox.appendChild(btn);
-//                    }
-//                }
-//            };
-//            xmlhttp.open("GET", "/Suburb/GetSuburb/" + str, true);
-//            xmlhttp.send();
     </script>
-    <hr/>
+
+<div id = "Skills">
     @{
-        if (@Model == null || @Model.Skills == null)
+        if (@Model?.Skills == null)
         {
             int i = 0;
             string skillName = "[" + 0 + "]" + ".SkillName";
@@ -167,8 +141,8 @@
                     string skillName = "[" + i + "]" + ".SkillName";
                     string link = "[" + i + "]" + ".CertificationLink";
                     <div class="SkillClass">
-                    <p>Skill Name @i</p>                    <input type="text" name="@skillName" value="@Model.Skills[i].SkillName">
-                    <p>Skill Certification Link @i</p>      <input type="text" name="@link" value="@Model.Skills[i].CertificationLink">
+                        <p>Skill Name @i</p>                    <input type="text" name="@skillName" value="@Model.Skills[i].SkillName">
+                        <p>Skill Certification Link @i</p>      <input type="text" name="@link" value="@Model.Skills[i].CertificationLink">
                     </div>    
                 }
                 
@@ -177,41 +151,39 @@
         }
         <button type="button" onclick="AddSkillController()">Add Skill</button>
     }
-    
     <hr/>
+</div>
+<div id="ExternalMaterials">
     @{
-        if (@Model==null || @Model.ExternalMeterials == null)
+        if (@Model?.externalMaterials == null)
         {
-            int i = 0;
-            string materialName = "[" + i + "]" + ".ExternalMeterialName";
-            string materialLink = "[" + i + "]" + ".ExternalMeterialLink";
-            <div class="MaterialClass">
-                <p>External Meterial Name @i</p>      <input type="text" name="@materialName">
-                <p>External Meterial Link @i</p>      <input type="text" name="@materialLink">
+            var i = 0;
+            var materialName = "[" + i + "]" + ".ExternalMaterialName";
+            var materialLink = "[" + i + "]" + ".ExternalMaterialLink";
+            <div class="ExternalMaterialClass">
+                <p>External Material Name @i</p>      <input type="text" name="@materialName">
+                <p>External Material Link @i</p>      <input type="text" name="@materialLink">
             </div>
         }
         else
         {
-            for (int i = 0; i < @Model.ExternalMeterials.Count; i++)
+            for (var i = 0; i < @Model.externalMaterials.Count; i++)
             {
                 {
-                    string materialName = "[" + i + "]" + ".ExternalMeterialName";
-                    string materialLink = "[" + i + "]" + ".ExternalMeterialLink";
-                    <div class="MaterialClass">
-                    <p>External Meterial Name @i</p>      <input type="text" name="@materialName" value="@Model.ExternalMeterials[i].Name">
-                    <p>External Meterial Link @i</p>      <input type="text" name="@materialLink" value="@Model.ExternalMeterials[i].Link">
+                    var materialName = "[" + i + "]" + ".ExternalMaterialName";
+                    var materialLink = "[" + i + "]" + ".ExternalMaterialLink";
+                    <div class="ExternalMaterialClass">
+                    <p>External Material Name @i</p>      <input type="text" name="@materialName" value="@Model.externalMaterials[i].Name">
+                    <p>External Material Link @i</p>      <input type="text" name="@materialLink" value="@Model.externalMaterials[i].Link">
                     </div>
-                    
-    }
-                
-                <hr/>
+                } 
             }
-            
         }
-        <button type="button" onclick="AddMeterialController()">More External Meteral</button>
+        <button type="button" onclick="AddExternalMaterialsController()">More External Material</button>
     }
 
-    <hr/>
+<hr/>
+</div>
     @{
         if (@Model==null || @Model.JobHistories == null)
         {
