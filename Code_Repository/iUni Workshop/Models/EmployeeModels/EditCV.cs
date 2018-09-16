@@ -28,7 +28,7 @@ namespace iUni_Workshop.Models.EmployeeModels
 
         public string FieldName { get; set; }
 
-        public List<EmployeeExternalMeterial> ExternalMeterials = new List<EmployeeExternalMeterial>();
+        public List<EmployeeExternalMeterial> externalMaterials = new List<EmployeeExternalMeterial>();
         
         public List<EmployeeJobHistory> JobHistories = new List<EmployeeJobHistory>();
         
