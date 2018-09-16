@@ -51,6 +51,7 @@ namespace iUni_Workshop.Controllers
         //如果认证了则不可改变
         public async Task<IActionResult> EditCompanyInfo()
         {
+            ProcessSystemInfo();
             var user = await _userManager.GetUserAsync(User);
             var info = _context.Employers.Where(a => a.Id == user.Id).Select(a => new EditCompanyInfo
             {
@@ -70,28 +71,203 @@ namespace iUni_Workshop.Controllers
         //Send Email when edited
         public async Task<IActionResult> EditCompanyInfoAction(EditCompanyInfo info)
         {
+            InitialSystemInfo();
             if (!ModelState.IsValid)
             {
-            }
-            int suburbId;
-            if ((suburbId = _suburbController.hasSuburb(info.SuburbName, info.PostCode)) < 1)
-            {
+                ProcessModelState();
+                return RedirectToAction("EditCompanyInfo");
             }
             var user = await _userManager.GetUserAsync(User);
-            var employerInfo = _context.Employers.First(a => a.Id == user.Id);
-            //Infom user if already has abn
-            if (!employerInfo.Certificated)
+            var data = _context.Employers.First(a => a.Id == user.Id);
+            try
             {
-                employerInfo.ABN = info.ABN;
-                employerInfo.Name = info.Name;
+                var suburbId = _context.Suburbs.First(a => a.Name == info.SuburbName && a.PostCode == info.PostCode).Id;
+                if (suburbId != data.SuburbId)
+                {
+                    try
+                    {
+                        data.SuburbId = suburbId;
+                        _context.Employers.Update(data);
+                        _context.SaveChanges();
+                        if ((string) TempData["Success"] != "")
+                        {
+                            TempData["Success"] += "\n";
+                        }
+                        TempData["Success"] += "Your suburb updated!";
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        if ((string) TempData["Error"] != "")
+                        {
+                            TempData["Error"] += "\n";
+                        }
+                        TempData["Error"] += "Please enter correct suburb.";
+                    }
+                }
             }
-            employerInfo.Location = info.Address;
-            employerInfo.BriefDescription = info.BriefDescription;
-            employerInfo.ContactEmail = info.ContactEmail;
-            employerInfo.PhoneNumber = info.PhoneNumber;
-            employerInfo.SuburbId = suburbId;
-            _context.Employers.Update(employerInfo);
-            _context.SaveChanges();
+            catch (InvalidOperationException)
+            {
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }
+                TempData["Error"] += "Please enter correct suburb.";
+            }
+            if (data.Location != info.Address)
+            {
+                try
+                {
+                    data.Location = info.Address;
+                    _context.Employers.Update(data);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Your address updated!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Please enter correct address.";
+                }
+            }
+            if (data.BriefDescription != info.BriefDescription)
+            {
+                try
+                {
+                    data.BriefDescription = info.BriefDescription;
+                    _context.Employers.Update(data);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Your brief description updated!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Please enter correct brief description.";
+                }
+            }
+            if (data.ContactEmail != info.ContactEmail)
+            {
+                try
+                {
+                    data.ContactEmail = info.ContactEmail;
+                    _context.Employers.Update(data);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Your contact email updated!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Please enter correct contact email.";
+                }
+            }
+            if (data.PhoneNumber != info.PhoneNumber)
+            {
+                try
+                {
+                    data.PhoneNumber = info.PhoneNumber;
+                    _context.Employers.Update(data);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Your phone number updated!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Please enter correct phone number.";
+                }
+            }
+            //Infom user if already has abn
+            if (!data.Certificated)
+            {
+                if (data.ABN != info.ABN)
+                {
+                    try
+                    {
+                        data.ABN = info.ABN;
+                        _context.Employers.Update(data);
+                        _context.SaveChanges();
+                        if ((string) TempData["Success"] != "")
+                        {
+                            TempData["Success"] += "\n";
+                        }
+                        TempData["Success"] += "Your abn updated!";
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        if ((string) TempData["Error"] != "")
+                        {
+                            TempData["Error"] += "\n";
+                        }
+                        TempData["Error"] += "Please enter correct abn.";
+                    }
+                }
+                if (data.Name != info.Name)
+                {
+                    try
+                    {
+                        data.Name = info.Name;
+                        _context.Employers.Update(data);
+                        _context.SaveChanges();
+                        if ((string) TempData["Success"] != "")
+                        {
+                            TempData["Success"] += "\n";
+                        }
+                        TempData["Success"] += "Your name updated!";
+                    }
+                    catch (InvalidOperationException)
+                    {
+                        if ((string) TempData["Error"] != "")
+                        {
+                            TempData["Error"] += "\n";
+                        }
+                        TempData["Error"] += "Please enter correct name.";
+                    }
+                }
+            }
+            else
+            {
+                if (data.ABN != info.ABN)
+                {
+                    if ((string) TempData["Inform"] != "")
+                    {
+                        TempData["Inform"] += "\n";
+                    }
+                    TempData["Inform"] += "You are certificated. Your name Cannot updated";
+                }
+                if (data.Name != info.Name)
+                {
+                    if ((string) TempData["Inform"] != "")
+                    {
+                        TempData["Inform"] += "\n";
+                    }
+                    TempData["Inform"] += "You are certificated. Your name Cannot updated";
+                }
+            }
             return RedirectToAction("EditCompanyInfo");
         }
 
@@ -647,6 +823,63 @@ namespace iUni_Workshop.Controllers
         public async Task<IActionResult> CertificateMyCompany()
         {
             return View();
+        }
+        
+        private void InitialSystemInfo()
+        {
+            TempData["Error"] = "";
+            TempData["Inform"] = "";
+            TempData["Success"] = "";
+        }
+        
+        private void ProcessModelState()
+        {
+            foreach (var model in ModelState)
+            {
+                if (model.Value.Errors.Count == 0) continue;
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }
+                
+                foreach (var error in model.Value.Errors)
+                {
+                    TempData["Error"]  += error.ErrorMessage;
+                }
+                
+            }
+        }
+        
+        private void ProcessSystemInfo()
+        {
+            if ((string) TempData["Error"] != "")
+            {
+                ViewBag.Error = TempData["Error"];
+            }
+            if ((string) TempData["Inform"] != "")
+            {
+                ViewBag.Inform = TempData["Inform"];
+            }
+            if ((string) TempData["Success"] != "")
+            {
+                ViewBag.Success = TempData["Success"];
+            }
+        }
+
+
+        private async Task UpdateCvFindJobStatus()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var cvs = _context.EmployeeCvs.Where(a => a.EmployeeId == user.Id);
+            foreach (var cv in cvs)
+            {
+                if ((DateTime.Now - cv.StartFindJobDate).TotalDays <= 14||cv.FindJobStatus==false) 
+                    continue;
+                cv.FindJobStatus = false;
+                cv.StartFindJobDate = DateTime.MinValue;
+            }
+            _context.EmployeeCvs.UpdateRange(cvs);
+            _context.SaveChanges();
         }
 
 

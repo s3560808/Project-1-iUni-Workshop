@@ -11,6 +11,7 @@ using iUni_Workshop.Models.EmployeeModels;
 using iUni_Workshop.Models.InvatationModel;
 using iUni_Workshop.Models.JobRelatedModels;
 using iUni_Workshop.Models.SchoolModels;
+using iUni_Workshop.Models.SuburbModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -45,33 +46,211 @@ namespace iUni_Workshop.Controllers
         //
         public async Task<IActionResult> EditPersonalInfo()
         {
+            ProcessSystemInfo();
             var user = await _userManager.GetUserAsync(User);
             var employee = _context.Employees.First(a => a.Id == user.Id);
-            return View(employee);
+            var info = new EditPersonalInfo();
+            info.Name = employee.Name;
+            info.ContactEmail = employee.ContactEmail;
+            info.PhoneNumber = employee.PhoneNumber;
+            info.ShortDescription = employee.ShortDescription;
+            if (employee.SchoolId != null)
+            {
+                var school = _context.Schools.First(a => a.Id == employee.SchoolId);
+                info.SchoolName = school.SchoolName;
+                var schoolSuburb = _context.Suburbs.First(a => a.Id == school.SuburbId);
+                info.CampusName = schoolSuburb.Name;
+                info.CampusPostCode = schoolSuburb.PostCode;
+            }
+
+            if (employee.SuburbId != null)
+            {
+                var suburb = _context.Suburbs.First(a => a.Id == employee.SuburbId);
+                info.LivingDistrict = suburb.Name;
+                info.PostCode = suburb.PostCode;
+            }
+
+            return View(info);
         }
         
+        //TODO need to update school status
         public async Task<IActionResult> EditPersonalInfoAction(EditPersonalInfo personalInfo)
         {
+            InitialSystemInfo();
             var user = await _userManager.GetUserAsync(User);
             if (!ModelState.IsValid)
             {
+                ProcessModelState();
+                return RedirectToAction("EditPersonalInfo");
             }
 
-            var suburb = _context.Suburbs.First(a => a.Name == personalInfo.LivingDistrict && a.PostCode == personalInfo.PostCode);
-            if (suburb == null)
+            Suburb suburb = null;
+            School school = null;
+            try
             {
+                suburb = _context.Suburbs.First(a => a.Name == personalInfo.LivingDistrict && a.PostCode == personalInfo.PostCode);
+            }
+            catch (InvalidOperationException)
+            {
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }
+
+                TempData["Error"] += "Please enter correct living area information!";
+            }
+            try
+            {
+                var suburbId = _context.Suburbs.First(a =>
+                    a.Name == personalInfo.CampusName.ToUpper() && a.PostCode == personalInfo.PostCode).Id;
+                school = _context.Schools.First(a => a.SchoolName == personalInfo.SchoolName && a.SuburbId == suburbId);
+            }
+            catch (InvalidOperationException)
+            {
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }
+
+                TempData["Error"] += "Please enter correct school information!";
             }
 
             var employee = _context.Employees.First(a => a.Id == user.Id);
-            employee.ContactEmail = personalInfo.ContactEmail;
-            employee.Name = personalInfo.Name;
-            employee.PhoneNumber = personalInfo.PhoneNumber;
-            employee.ShortDescription = personalInfo.ShortDescription;
+            if (employee.ContactEmail != personalInfo.ContactEmail)
+            {
+                try
+                {
+                    employee.ContactEmail = personalInfo.ContactEmail;
+                    _context.Employees.Update(employee);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Your email successfully updated!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Sorry, fail to update your contact email";
+                }
+            }
+            if (employee.Name != personalInfo.Name)
+            {
+                try
+                {
+                    employee.Name = personalInfo.Name;
+                    _context.Employees.Update(employee);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Your name successfully updated!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Sorry, fail to update your name";
+                }
+            }
+            if (employee.PhoneNumber != personalInfo.PhoneNumber)
+            {
+                try
+                {
+                    employee.PhoneNumber = personalInfo.PhoneNumber;
+                    _context.Employees.Update(employee);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Your phone number successfully updated!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Sorry, fail to update your phone number";
+                }
+            }
+            if (employee.ShortDescription != personalInfo.ShortDescription)
+            {
+                try
+                {
+                    employee.ShortDescription = personalInfo.ShortDescription;
+                    _context.Employees.Update(employee);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Your description successfully updated!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Sorry, fail to update your description";
+                }
+            }
 
-            _context.Employees.Update(employee);
-            await _context.SaveChangesAsync();
+            if (suburb != null)
+            {
+                try
+                {
+                    employee.SuburbId = suburb.Id;
+                    _context.Employees.Update(employee);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Your suburb successfully updated!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Sorry, fail to update your suburb";
+                }
+            }
+            if (school != null)
+            {
+                try
+                {
+                    employee.SchoolId = school.Id;
+                    _context.Employees.Update(employee);
+                    _context.SaveChanges();
+                    if ((string) TempData["Success"] != "")
+                    {
+                        TempData["Success"] += "\n";
+                    }
+                    TempData["Success"] += "Your school successfully updated!";
+                }
+                catch (InvalidOperationException)
+                {
+                    if ((string) TempData["Error"] != "")
+                    {
+                        TempData["Error"] += "\n";
+                    }
+                    TempData["Error"] += "Sorry, fail to update your school";
+                }
+            }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("EditPersonalInfo");
         }
         
         public async Task<IActionResult> MyCVs()
@@ -748,7 +927,6 @@ namespace iUni_Workshop.Controllers
             return View(results.AsEnumerable());
         }
 
-        //验证是否是这个人的invitation
         public async Task<IActionResult> InvitationDetail(int invitationId)
         {
             ProcessSystemInfo();
