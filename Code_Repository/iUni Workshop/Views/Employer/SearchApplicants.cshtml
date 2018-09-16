@@ -35,6 +35,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Score)
                 </td>
+                <td>
+                    @* <form asp-controller="Employer" asp-action="ViewApplicantCv" asp-route-JobProfileId ="@item.Id" method="get" > *@
+                        <a href="/Employer/ViewApplicantCv/@ViewData["App"]/@item.CvId/"><button type="submit" class="btn btn-sm btn-success" >View Applications</button></a>
+                    @* </form> *@
+                        
+                </td>
             </tr>
         }
     }

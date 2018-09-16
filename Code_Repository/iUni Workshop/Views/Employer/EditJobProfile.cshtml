@@ -7,7 +7,7 @@
     Layout = "_Layout";
 }
 
-
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 
 @*UPdate date*@
 <h2>title</h2>
@@ -271,13 +271,13 @@
         @{
             if (@Model == null || @Model.JobProfileRequiredLocation.Count() == 0)
             {
-                string locationName = "[" + 0 + "]" + ".LocationName";
-                string postCode = "[" + 0 + "]" + ".PostCode";
+                var locationName = "[" + 0 + "]" + ".LocationName";
+                var postCode = "[" + 0 + "]" + ".PostCode";
                 <div class="LocationClass">
                     <p>Location Name 1</p>
                     <input type="text" name="@locationName">
                     <p>Post COde 1</p>
-                    <input type="text" name="@postCode">
+                    <input type="number" name="@postCode">
                 </div>
             }
             else
@@ -332,7 +332,7 @@
                             <input type="text" name="@schoolName" value="@Model.EmployerRequiredSchools[i].SchoolName">
                             <p>Campus@i</p>
                             @*Value = true?*@
-                            <input type="text" name="@campus" value="@Model.EmployerRequiredSchools[i].Campus">
+                            <input type="text" name="@campus" value="@Model.EmployerRequiredSchools[i].CampusName">
                         </div>
                     }
                 }

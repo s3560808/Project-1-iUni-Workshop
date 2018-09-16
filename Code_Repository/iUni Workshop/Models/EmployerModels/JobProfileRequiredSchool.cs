@@ -4,6 +4,8 @@
     {
         public string SchoolName { get; set; }
 
-        public string Campus { get; set; }
+        public string CampusName { get; set; }
+
+        public int CampusPostCode { get; set; }
     }
 }
