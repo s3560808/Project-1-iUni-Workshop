@@ -8,7 +8,7 @@ namespace iUni_Workshop.Models.AdministratorModels
 {
     public class SetUserType
     {
-        [Required]
+        [Required(ErrorMessage = "Correct user email is required")]
         public string Email { get; set; }
     }
 }

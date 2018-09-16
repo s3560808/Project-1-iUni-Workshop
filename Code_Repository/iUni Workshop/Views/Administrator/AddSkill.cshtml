@@ -1,12 +1,12 @@
 ﻿@using iUni_Workshop.Models.AdministratorModels
 @using iUni_Workshop.Models.JobRelatedModels
-@model IEnumerable<iUni_Workshop.Models.AdministratorModels.AddSkill>
+@model IEnumerable<UpdateSkill>
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
-
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 <h2>title</h2>
 <form method="post" asp-action="AddSkillAction">
     <table class="table">
@@ -31,9 +31,9 @@
 </form>
 
 @{
-    var inUse = new List<AddSkill>();
-    var inReq = new List<AddSkill>();
-    var baned = new List<AddSkill>();
+    var inUse = new List<UpdateSkill>();
+    var inReq = new List<UpdateSkill>();
+    var baned = new List<UpdateSkill>();
     foreach (var model in Model)
     {
         switch (model.Status)
@@ -46,6 +46,8 @@
                 break;
             case FieldStatus.NoLongerUsed:
                 baned.Add(model);
+                break;
+            default:
                 break;
         }
     }
