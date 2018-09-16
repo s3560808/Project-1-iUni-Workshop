@@ -1,4 +1,5 @@
-﻿@model iUni_Workshop.Models.EmployeeModels.Employee
+﻿@using Microsoft.EntityFrameworkCore
+@model iUni_Workshop.Models.EmployeeModels.EditPersonalInfo
 
 @{
 ViewBag.Title = "title";
@@ -46,7 +47,7 @@ Layout = "_Layout";
     }
 
 </script>
-
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 <h2>title</h2>
 <form method="post" asp-action="EditPersonalInfoAction" >
 @Html.DisplayNameFor(model => model.Name)
@@ -87,34 +88,35 @@ name = @Model.Name;
 
 <br />
 
-@Html.DisplayNameFor(model => model.SchoolId)
+@Html.DisplayNameFor(model => model.CampusName)
 @{
-    string schoolName = "";
-    string campus = "";
-    if (Model.SchoolId != null)
+    var schoolName = "";
+    var campusName = "";
+    var campusPostCode = 0;
+    if (Model.CampusName != null)
     {
-        schoolName = @Model.School.SchoolName;
-        campus = @Model.School.Suburb.Name;
+        schoolName = @Model.SchoolName;
+        campusName = @Model.CampusName;
+        campusPostCode = @Model.CampusPostCode;
     }
     <input type="text" name="SchoolName" value="@schoolName">
     <datalist></datalist>
-    <input type="text" name="Campus" value="@campus">
+    <input type="text" name="CampusName" value="@campusName">
+    <datalist></datalist>
+    <input type="text" name="CampusPostCode" value="@campusPostCode">
     <datalist></datalist>
 }  
     
 
-
-
 <br />
-
-@Html.DisplayNameFor(model => model.SuburbId)
+@Html.DisplayNameFor(model => model.LivingDistrict)
     @{
         string LivingDistrict = "";
         int postCode = 0;
-        if (Model.SchoolId != null)
+        if (Model.LivingDistrict != null)
         {
-            LivingDistrict = @Model.Suburb.Name;
-            postCode = @Model.Suburb.PostCode;
+            LivingDistrict = @Model.LivingDistrict;
+            postCode = Model.PostCode;
         }
         
         <input type="text" name="LivingDistrict" id = "LivingDistrict" list="SurburbNameList" onkeyup="GetSuburbName(this.value)" value="@LivingDistrict">
