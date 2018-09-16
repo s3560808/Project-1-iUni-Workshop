@@ -242,6 +242,10 @@
             <e p="RequestToUnCertificateMyCompany.cshtml" t="Include" />
             <e p="SearchApplicants.cshtml" t="Include" />
             <e p="SendInvitation.cshtml" t="Include" />
+            <e p="Shared" t="Include">
+              <e p="_AddSchool.cshtml" t="Include" />
+              <e p="_Validation_Area_From_Backend.cshtml" t="Include" />
+            </e>
             <e p="ViewApplicantCv.cshtml" t="Include" />
           </e>
           <e p="Home" t="Include">

@@ -3,7 +3,7 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
-
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 <script>
 function GetSuburbName(str) {
         var suburbselectbox = document.getElementById("SurburbNameList");
@@ -45,7 +45,7 @@ function GetSuburbName(str) {
     }
 
     function Name_ABN_Warning(){
-        window.alert("sometext");
+        window.alert("You are certificated. ABN/Name cannot be changed");
     }
 
     function Check(){
