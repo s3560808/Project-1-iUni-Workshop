@@ -226,6 +226,10 @@
             <e p="RequestToAddSchool.cs" t="Include" />
             <e p="RequestToAddSchool.cshtml" t="Include" />
             <e p="RequestToAddSkill.cshtml" t="Include" />
+            <e p="Shared" t="Include">
+              <e p="_AddSchool.cshtml" t="Include" />
+              <e p="_Validation_Area_From_Backend.cshtml" t="Include" />
+            </e>
           </e>
           <e p="Employer" t="Include">
             <e p="EditCompanyInfo.cshtml" t="Include" />
