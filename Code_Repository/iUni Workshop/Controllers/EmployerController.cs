@@ -959,7 +959,6 @@ namespace iUni_Workshop.Controllers
         //检查本人操作
         //return if profileId is not right
         //Filter primary id
-        //去除已发送invatation
         [Route("[Controller]/SearchApplicants/{jobProfileId}")]
         public async Task<IActionResult> SearchApplicants(int jobProfileId)
         {

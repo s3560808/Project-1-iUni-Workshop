@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using iUni_Workshop.Data;
 using iUni_Workshop.Models.SchoolModels;
@@ -39,5 +40,26 @@ namespace iUni_Workshop.Controllers
                 .ToList();
             return Json(result);
         }
+        
+        [Route("[Controller]/GetCampus/{schoolName}")]
+        public IActionResult GetCampus(string schoolName)
+        {
+            var rawResults = _context.Schools
+                .Where(a =>a.NormalizedName == schoolName.ToUpper() && a.Status == SchoolStatus.InUse)
+                .Select(b => b.SuburbId)
+                .AsEnumerable()
+                .Distinct()
+                .ToList();
+            var finalResults = new List<GetCampus>();
+            foreach (var rawResult in rawResults)
+            {
+                finalResults.AddRange(
+                    _context.Suburbs
+                        .Where(a => a.Id == rawResult)
+                        .Select(a => new GetCampus{ PostCode = a.PostCode, SuburbName = a.Name, SchoolName = schoolName}));
+            }
+            return Json(finalResults.ToList());
+        }
+        
     }
 }

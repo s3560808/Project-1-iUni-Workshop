@@ -155,6 +155,7 @@
           </e>
           <e p="Roles.cs" t="Include" />
           <e p="SchoolModels" t="Include">
+            <e p="GetCampus.cs" t="Include" />
             <e p="School.cs" t="Include" />
             <e p="SchoolStatus.cs" t="Include" />
           </e>
