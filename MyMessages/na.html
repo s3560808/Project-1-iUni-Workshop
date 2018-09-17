@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width-device-width, intial-scale=1">
+	<title>My Messages Detail</title>
+	<link rel="stylesheet" href="na.css">
+	<style>
+	textarea{
+	resize: none;
+	border-padding-left: 40px;
+	padding-left: 40px;
+	}
+	
+	.chfile{
+	padding: 
+	}
+	
+	.sendd {
+	padding: 0px 0px 2px 60px;
+	margin-left: 0px;
+	}
+	
+	.senddd{
+	padding: 2px;
+	}
+	
+	.active{
+	cursor: pointer;
+	transition: 3s;
+	}
+	
+	/*Javascript Upload Button 
+	.inpfile{
+		width: 0.1px;
+		height: 0.1px;
+		opacity: 0;
+		overflow: hidden;
+		position: absolute;
+		z-index: -1;
+	}
+	
+	.inpfile + label{
+		font-size: 1.00em;
+		font-weight: 700;
+		color: #f56a6a;
+		background-color: white;
+		display: inline-block;
+		border: 2px solid;
+		border-color: #f56a6a;
+		border-radius: 5px;
+		width: 175px;
+		padding: 10px;
+		
+	}
+	
+	.inpfile + label{
+		cursor: pointer;
+	}
+	
+	.inpfile:focus + label{
+		outline: 1px dotted #000;
+		outline: -webkit-focus-ring-color auto 5px;
+	}
+	
+	.inpfile + label *{
+		pointer-events: none;
+	}
+	
+	*/
+	
+	</style>
+</head>
+
+<body>
+	
+	<div id="side-menu" class="side-nav">
+		<a class="btn-close" onclick="closeSlideMenu()">&times;</a>
+			
+		<!-- Section - Search -->
+		<section id="search" class="alt">
+			<form method="post" action="#DoesNothing">
+				<input type="text" name="query" id="query" placeholder="Search" maxlength="30">
+			</form>
+		</section>
+		
+		<!-- Section - Main Section Nav -->
+		<header class="major">
+			<h2>Menu</h2>
+		</header>
+				
+		<a href="#Homepage.html">Home</a>
+		<a href="#MyInvitations.html">Invitations</a> 
+		<a class="active" onclick="location.href='../MyMessages.html'">My Messages</a> 
+		<a href="#PersonalInfo.html">Personal Info</a> 
+		<a href="#Contact.html">Contact Us</a> 
+		<br><br>
+		
+		<header class="major">
+			<h2>Get in Touch</h2>
+		</header>
+			
+		<p>We can fill this in later</p>
+			
+		<a class="para" >Email: test@test.com</a>
+		<p>(ph:) 12341234</p>
+		
+		<!--Footer-->
+		<footer id="footer">
+			<p class="copyright">&copy Untilted. Rights Reserved</p>
+		</footer>
+		
+	</div>
+	
+	<div id="main">
+		<nav class="navbar">
+			<span class="open-slide">
+				<a class="sp" onclick="openSlideMenu()">
+					<span></span>
+					<span></span>
+					<span></span>
+				</a>
+			</span>
+		</nav>
+		
+		<div class="inner">
+			
+			<!-- Header -->
+			<header id="h22" class="major">
+				<h2>Messages</h2>
+			</header>
+			
+			<!-- Form Send Message -->
+			<section id="banner">
+				<div class="content">																	
+					<section id="send" class="alt">
+						<form action="#">
+							<h3>Messages</h3><br>
+								<textarea name="message" rows="12" cols="120" placeholder="Max words 300 per message" maxlength="300"></textarea>
+								<br >
+						</form>
+						
+						<form class="sendd" action="upload.php" method="post" enctype="multipart/form-data">
+							<input type="file" name="file" id="file" class="inpfile" data-multiple-caption="(count files selected)"multiple>
+							<label for="file"></label>
+							<?php
+							$target_dir = "*/";
+							$target_file = $target_dir . basename($_FILES["file"]["name"]);
+							$uploadOk = 1;
+							$fileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+							
+							if(isset($_POST["submit"]))
+							{
+								$check = getfile($_FILES["file"]["tmp_name");
+								if($check !== false)
+								{
+									echo "File accepted - " . $check["mime"] . ".";
+									$uploadOk = 1;
+								}
+								else
+								{
+									echo "File not accepted.";
+									$uploadOk = 0;													
+								}
+							}
+								
+							//Check if file already exists
+							if(file_exists($target_file))
+							{
+								echo "Sorry file already exists.";
+								$uploadOk = 0;
+							}
+							
+							if ($uploadOk == 0)
+							{
+								echo "Sorry, your file was not uploaded";
+							}
+							else
+							{
+								if(move_uploaded_file($_FILES["file"]["tmp_name"],$target_file))
+								{
+									echo "The file " . basename($_FILES["file"]["name"]). " has been uploaded.";
+								}
+								else
+								{
+									echo "Sorry, there was an error uploading your file.";
+								}
+							}
+							
+							?>
+						</form>
+						<form class="sendd">
+							<input class="senddd" type="submit" value="Submit">
+						</form>
+						
+					</section>					
+				</div>									
+			</section>
+			
+		</div>
+	</div>
+	
+	<!-- Scripts -->
+	<script>
+	function openSlideMenu(){
+	document.getElementById('side-menu').style.width = '250px';
+	document.getElementById('main').style.marginLeft = '250px';
+	}
+	
+	function closeSlideMenu(){
+	document.getElementById('side-menu').style.width = '0px';
+	document.getElementById('main').style.marginLeft = '0px';
+	}
+	</script>
+	
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/browser.min.js"></script>
+	<script src="js/breakpoints.min.js"></script>
+	<script src="js/util.js"></script>
+	<script src="js/main.js"></script>
+	
+
+</body>
+
+</html>
