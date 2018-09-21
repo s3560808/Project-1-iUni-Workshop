@@ -1,28 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using iUniWorkshop.Models.EmployerModels;
 using iUni_Workshop.Data;
 using iUni_Workshop.Models;
-using iUni_Workshop.Models.EmployerModels;
-using iUniWorkshop.Models.EmployerModels;
 using iUni_Workshop.Models.EmployeeModels;
+using iUni_Workshop.Models.EmployerModels;
 using iUni_Workshop.Models.InvatationModel;
 using iUni_Workshop.Models.JobRelatedModels;
-using iUni_Workshop.Models.MessageModels;
 using iUni_Workshop.Models.SchoolModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
-using MySql.Data.MySqlClient;
-using Remotion.Linq.Parsing.Structure.IntermediateModel;
-using MessageDetail = iUni_Workshop.Models.EmployerModels.MessageDetail;
-using MyMessages = iUni_Workshop.Models.EmployerModels.MyMessages;
+
 
 namespace iUni_Workshop.Controllers
 {
@@ -286,11 +278,11 @@ namespace iUni_Workshop.Controllers
                 PhoneNumber = a.PhoneNumber,
                 Certificated = a.Certificated
             }).First();
-            if(rawInfo.Certificated==true){
+            if(rawInfo.Certificated){
                 //already Certificated
                 return RedirectToAction("Index");
             }
-            if (rawInfo.RequestCertification == true)
+            if (rawInfo.RequestCertification)
             {
                 //already requested
                 return RedirectToAction("Index");
@@ -305,12 +297,12 @@ namespace iUni_Workshop.Controllers
         public async Task<IActionResult> RequestToCertificateMyCompanyAction(){
             var user = await _userManager.GetUserAsync(User);
             var employer = _context.Employers.First(a => a.Id == user.Id);
-            if (employer.Certificated == true)
+            if (employer.Certificated)
             {
                 //already Certificated
                 return RedirectToAction("Index");
             }
-            if (employer.RequestCertification == true)
+            if (employer.RequestCertification)
             {
                 //already requested
                 return RedirectToAction("Index");
@@ -328,7 +320,7 @@ namespace iUni_Workshop.Controllers
 
         //Send email
         //Database
-        public async Task<IActionResult> RequestToUnCertificateMyCompany() {
+        public IActionResult RequestToUnCertificateMyCompany() {
 
             return View();
         }
@@ -353,16 +345,16 @@ namespace iUni_Workshop.Controllers
             return View(list);
         }
 
-        [Route("[Controller]/EditJobProfile/{JobProfileId}")]
+        [Route("[Controller]/EditJobProfile/{jobProfileId}")]
         [Route("[Controller]/EditJobProfile/")]
-        public async Task<IActionResult> EditJobProfile(int JobProfileId)
+        public async Task<IActionResult> EditJobProfile(int jobProfileId)
         {
             ProcessSystemInfo();
             var user = await _userManager.GetUserAsync(User);
             JobProfile jobProfile;
             try
             {
-                jobProfile = _context.EmployerJobProfiles.Where(a => a.Id == JobProfileId && a.EmployerId == user.Id).Select(a => new JobProfile
+                jobProfile = _context.EmployerJobProfiles.Where(a => a.Id == jobProfileId && a.EmployerId == user.Id).Select(a => new JobProfile
                 {
                     ProfileId = a.Id,
                     UpdateDate = a.LastUpdateDateTime,
@@ -375,7 +367,7 @@ namespace iUni_Workshop.Controllers
                     FieldName = a.Field.Name
                 }).First();
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException)
             {
                 return View();
             }
@@ -402,7 +394,7 @@ namespace iUni_Workshop.Controllers
             return View(jobProfile);
         }
 
-        //如果有邀请则不可更改
+        //If have cannot edit
         public async Task<IActionResult> EditJobProfileAction(
             JobProfile jobProfile,
             IEnumerable<JobProfileSkill> jobProfileSkills,
@@ -421,7 +413,8 @@ namespace iUni_Workshop.Controllers
             EmployerJobProfile newJobProfile = null;
             int newFieldId;
             var newSkills = new List<EmployerSkill>();
-            //1. Validate correct employer job profile
+            //1. Validate correct employer job profile && if have 
+            //invitation     
             if (jobProfile.ProfileId != 0)
             {
                 try
@@ -437,7 +430,27 @@ namespace iUni_Workshop.Controllers
                     }
                         
                     TempData["Error"] += "Sorry. It is not your job profile!";
-                    return RedirectToAction("EditJobProfile", new{ JobProfileId = jobProfile.ProfileId});
+                    //If it is not user's job profile, redirect to job profiles
+                    return RedirectToAction("JobProfiles");
+                }
+
+                try
+                {
+                    var profile = newJobProfile;
+                    var invitation = _context.Invatations.Where(a => a.EmployerJobProfileId == profile.Id);
+                    if (invitation.Any())
+                    {
+                        if ((string) TempData["Error"] != "")
+                        {
+                            TempData["Error"] += "\n";
+                        }
+                        
+                        TempData["Error"] += "Sorry. Your job profile already has invitation. Cannot be changed!";
+                        return RedirectToAction("EditJobProfile", new{ JobProfileId = jobProfile.ProfileId});
+                    }
+                }
+                catch (InvalidOperationException)
+                {
                 }
             }
             //2. Validate if correct field name
@@ -460,7 +473,12 @@ namespace iUni_Workshop.Controllers
             }
             //3. Validate skill name
             //!! No skill more than 10 skill
-            foreach (var skill in jobProfileSkills)
+         
+            var ndSkill  =  jobProfileSkills
+                .GroupBy(p => p.SkillName)
+                .Select(g => g.First())
+                .ToList();
+            foreach (var skill in ndSkill)
             {
                 try
                 {
@@ -491,10 +509,17 @@ namespace iUni_Workshop.Controllers
                 return RedirectToAction("EditJobProfile", new {JobProfileId = jobProfile.ProfileId});
             }
             //GET NEW Days
-            var newDays = jobProfileComplusoryWorkDay.Select(day => new EmployerComplusoryWorkDay {Day = day.Day}).ToList();
+            var newDays = jobProfileComplusoryWorkDay
+                .Select(day => new EmployerComplusoryWorkDay{Day = day.Day})
+                .Distinct()
+                .ToList();
             //GET NEW Locations
+            var ndLocation = jobProfileRequiredLocation
+                .Select(a => new {a.PostCode, a.LocationName})
+                .Distinct()
+                .ToList();
             var newRequiredLocations = new List<EmployerRequiredWorkLocation>();
-            foreach (var location in jobProfileRequiredLocation)
+            foreach (var location in ndLocation)
             {
                 try
                 {
@@ -516,9 +541,14 @@ namespace iUni_Workshop.Controllers
                     TempData["Error"] += "Sorry. "+ location.LocationName +" "+location.PostCode + " is not a valid location";
                 }
             }
+            newRequiredLocations = newRequiredLocations.Distinct().ToList();
             //GET NEW Schools
+            var ndSchool = jobProfileRequiredSchool
+                .Select(a => new {a.SchoolName, a.CampusName, a.CampusPostCode})
+                .Distinct()
+                .ToList();
             var newRequiredSchools = new List<EmployerRequiredSchool>();
-            foreach (var school in jobProfileRequiredSchool)
+            foreach (var school in ndSchool)
             {
                 try
                 {
@@ -546,6 +576,7 @@ namespace iUni_Workshop.Controllers
                     TempData["Error"] += "Sorry. "+ school.SchoolName +" "+ school.CampusName +" "+ school.CampusPostCode + " is not a valid school";
                 }
             }
+            newRequiredSchools = newRequiredSchools.Distinct().ToList();
             //if new cv, create new cv
             if (newJobProfile == null)
             {
@@ -786,18 +817,14 @@ namespace iUni_Workshop.Controllers
             try
             {
                 var oldSkills = _context.EmployerSkills.Where(a => a.EmployerJobProfileId == newJobProfile.Id).ToList();
-                var newEnumerable = newSkills.Select(a => new {Required = a.Required, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
-                var oldEnumerable = oldSkills.Select(a => new {Required = a.Required, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
+                var newEnumerable = newSkills.Select(a => new {a.Required, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
+                var oldEnumerable = oldSkills.Select(a => new {a.Required, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
                 
                 if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
-                        if (oldSkills.Any())
-                        {
                             _context.EmployerSkills.RemoveRange(oldSkills);
-                            _context.SaveChanges();
-                        }
                         _context.EmployerSkills.AddRange(newSkills);
                         _context.SaveChanges();
                         if ((string) TempData["Success"] != "")
@@ -829,18 +856,17 @@ namespace iUni_Workshop.Controllers
             {
                 var jobProfileId = newJobProfile.Id;
                 var oldDays = _context.EmployerComplusoryWorkDays.Where(a => a.EmployerJobProfileId == jobProfileId);
-                var newEnumerable = newDays.Select(a => new { Day = a.Day}).OrderBy(a => a.Day).ToList();
-                var oldEnumerable = oldDays.Select(a => new { Day = a.Day}).OrderBy(a => a.Day).ToList();
+                var newEnumerable = newDays.Select(a => new {a.Day}).OrderBy(a => a.Day).ToList();
+                var oldEnumerable = oldDays.Select(a => new {a.Day}).OrderBy(a => a.Day).ToList();
                 if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
                     
                         _context.EmployerComplusoryWorkDays.RemoveRange(oldDays);     
-                        if (newDays.Any())                                           
-                        {                                                                         
+                                                                                              
                             _context.EmployerComplusoryWorkDays.AddRange(newDays);    
-                        }                                                                         
+                                                                                               
                         _context.SaveChanges();                                                   
                         if ((string) TempData["Success"] != "")                                   
                         {                                                                         
@@ -872,18 +898,17 @@ namespace iUni_Workshop.Controllers
             {
                 var jobProfileId = newJobProfile.Id;
                 var oldRequiredLocations = _context.EmployerWorkLocations.Where(a => a.EmployerJobProfileId == jobProfileId);
-                var newEnumerable = newRequiredLocations.Select(a => new { SuburbId = a.SuburbId}).OrderBy(a => a.SuburbId).ToList();
-                var oldEnumerable = oldRequiredLocations.Select(a => new { SuburbId = a.SuburbId}).OrderBy(a => a.SuburbId).ToList();
+                var newEnumerable = newRequiredLocations.Select(a => new {a.SuburbId}).OrderBy(a => a.SuburbId).ToList();
+                var oldEnumerable = oldRequiredLocations.Select(a => new {a.SuburbId}).OrderBy(a => a.SuburbId).ToList();
                 if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
                     
                         _context.EmployerWorkLocations.RemoveRange(oldRequiredLocations);     
-                        if (newDays.Any())                                           
-                        {                                                                         
+                                                                                             
                             _context.EmployerWorkLocations.AddRange(newRequiredLocations);    
-                        }                                                                         
+                                                                                               
                         _context.SaveChanges();                                                   
                         if ((string) TempData["Success"] != "")                                   
                         {                                                                         
@@ -915,17 +940,16 @@ namespace iUni_Workshop.Controllers
             {
                 var jobProfileId = newJobProfile.Id;
                 var oldRequiredSchools = _context.EmployerRequiredSchools.Where(a => a.EmployerJobProfileId == jobProfileId);
-                var newEnumerable = newRequiredSchools.Select(a => new { SchoolId = a.SchoolId}).OrderBy(a => a.SchoolId).ToList();
-                var oldEnumerable = oldRequiredSchools.Select(a => new { SchoolId = a.SchoolId}).OrderBy(a => a.SchoolId).ToList();
+                var newEnumerable = newRequiredSchools.Select(a => new {a.SchoolId}).OrderBy(a => a.SchoolId).ToList();
+                var oldEnumerable = oldRequiredSchools.Select(a => new {a.SchoolId}).OrderBy(a => a.SchoolId).ToList();
                 if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
                         _context.EmployerRequiredSchools.RemoveRange(oldRequiredSchools);     
-                        if (newDays.Any())                                           
-                        {                                                                         
+                                                                                              
                             _context.EmployerRequiredSchools.AddRange(newRequiredSchools);    
-                        }                                                                         
+                                                                                                
                         _context.SaveChanges();                                                   
                         if ((string) TempData["Success"] != "")                                   
                         {                                                                         
@@ -960,16 +984,16 @@ namespace iUni_Workshop.Controllers
         //return if profileId is not right
         //Filter primary id
         [Route("[Controller]/SearchApplicants/{jobProfileId}")]
-        public async Task<IActionResult> SearchApplicants(int jobProfileId)
+        public IActionResult SearchApplicants(int jobProfileId)
         {
             ViewData["App"] = jobProfileId;
-            return View(SearchApplicantsCoreRanker(jobProfileId).Result);
+            return View(SearchApplicantsCoreRanker(jobProfileId));
         }
 
         [Route("[Controller]/ViewApplicantCv/{jobProfileId}/{cvId}")]
-        public async Task<IActionResult> ViewApplicantCv(int jobProfileId, int cvId)
+        public IActionResult ViewApplicantCv(int jobProfileId, int cvId)
         {
-            var validationList = ( SearchApplicantsCoreRanker(jobProfileId)).Result;
+            var validationList = ( SearchApplicantsCoreRanker(jobProfileId));
             var validationResultList = validationList.Where(a => a.CvId == cvId).ToList();
             //Not valid
             if (!validationResultList.Any())
@@ -981,7 +1005,7 @@ namespace iUni_Workshop.Controllers
             {
                 Title = raw.Title, 
                 Description = raw.Details, 
-                EmployeeName = raw.Employee.Name,
+                EmployeeName = raw.Employee.Name
                 //TODO!!More Info required
             };
             
@@ -991,7 +1015,7 @@ namespace iUni_Workshop.Controllers
         [Route("[Controller]/SendInvitation/{jobProfileId}/{cvId}")]
         public IActionResult SendInvitation(int jobProfileId, int cvId)
         {
-            var validationList = SearchApplicantsCoreRanker(jobProfileId).Result;
+            var validationList = SearchApplicantsCoreRanker(jobProfileId);
             var validationResultList = validationList.Where(a => a.CvId == cvId);
             //Not valid
             if (!validationResultList.Any())
@@ -1007,26 +1031,22 @@ namespace iUni_Workshop.Controllers
                 });
                 _context.SaveChanges();
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException)
             {
 
             }
-            catch (DbUpdateException exception)
-            {
-                
-            }
             return View();
         }
-        public async Task<List<SearchApplicant>> SearchApplicantsCoreRanker(int jobProfileId)
+        public List<SearchApplicant> SearchApplicantsCoreRanker(int jobProfileId)
         {
             
             var jobProfile = _context.EmployerJobProfiles.First(a => a.Id == jobProfileId);
-            var finalData = new List<EmployeeCV> {};
+            var finalData = new List<EmployeeCV>();
             //1.  Filter first
             //1.1 Filter field
             //1.2 && Filter salary
             //1.3 && Filter Find Job Status
-            await UpdateCvFindJobStatus();
+            UpdateCvFindJobStatus();
             var rawData = _context.EmployeeCvs
                 .Where(a => a.FieldId == jobProfile.FieldId 
                             && a.MinSaraly <= jobProfile.Salary 
@@ -1057,7 +1077,7 @@ namespace iUni_Workshop.Controllers
             //1.5 Filter compulsory work day
             var employerDays = _context.EmployerComplusoryWorkDays
                 .Where(a => a.EmployerJobProfileId == jobProfile.Id)
-                .Select(a => new {Day = a.Day})
+                .Select(a => new {a.Day})
                 .OrderBy(a => a.Day);
             if (employerDays.Any())
             {
@@ -1065,7 +1085,7 @@ namespace iUni_Workshop.Controllers
                 {
                     var employeeDays = _context.EmployeeWorkDays
                         .Where(a => a.EmployeeCvId == data.Id)
-                        .Select(a => new {Day = a.Day})
+                        .Select(a => new {a.Day})
                         .OrderBy(a => a.Day);
                     if (!employerDays.Except(employeeDays).Any())
                     {
@@ -1079,7 +1099,7 @@ namespace iUni_Workshop.Controllers
             //1.6. Filter compulsory skill
             var employerSkills = _context.EmployerSkills
                 .Where(a => a.EmployerJobProfileId == jobProfile.Id && a.Required)
-                .Select(a => new {SkillId = a.SkillId})
+                .Select(a => new {a.SkillId})
                 .OrderBy(a =>a .SkillId)
                 .ToList();
             if (employerSkills.Any())
@@ -1088,7 +1108,7 @@ namespace iUni_Workshop.Controllers
                 {
                     var employeeSkills = _context.EmployeeSkills
                         .Where(a => a.EmployeeCvId == data.Id)
-                        .Select(a => new {SkillId = a.SkillId})
+                        .Select(a => new {a.SkillId})
                         .OrderBy(a =>a .SkillId)
                         .ToList();
                     if (!employerSkills.Except(employeeSkills).Any())
@@ -1110,7 +1130,7 @@ namespace iUni_Workshop.Controllers
                 {
                     var employeeSchools = _context.Employees
                         .Where(a => a.Id == data.EmployeeId)
-                        .Select(a => new {SchoolId = a.SchoolId})
+                        .Select(a => new {a.SchoolId})
                         .OrderBy(a =>a.SchoolId);
                     if (!employerSchools.Except(employeeSchools).Any())
                     {
@@ -1129,17 +1149,16 @@ namespace iUni_Workshop.Controllers
             {
                 foreach (var data in rawData)
                 {
-                    var employeeLocationss = _context.Employees
+                    var employeeLocations = _context.Employees
                         .Where(a => a.Id == data.EmployeeId)
-                        .Select(a => new {SuburbId = a.SuburbId})
+                        .Select(a => new {a.SuburbId})
                         .OrderBy(a =>a.SuburbId);
-                    if (!employerLocations.Except(employeeLocationss).Any())
+                    if (!employerLocations.Except(employeeLocations).Any())
                     {
                         finalData.Add(data);
                     }
                 }
                 rawData = finalData;
-                finalData = new List<EmployeeCV>();
             }
             
             //Rank applicants
@@ -1239,7 +1258,7 @@ namespace iUni_Workshop.Controllers
         }
 
 
-        private async Task UpdateCvFindJobStatus()
+        private void UpdateCvFindJobStatus()
         {
             var cvs = _context.EmployeeCvs.Where(a => a.FindJobStatus).ToList();
             foreach (var cv in cvs)

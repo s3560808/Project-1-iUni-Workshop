@@ -404,7 +404,11 @@ namespace iUni_Workshop.Controllers
             }
             //3. Validate skill name
             //!! No skill more than 10 skill
-            foreach (var skill in skills)
+            var ndSkills = skills
+                .Select(a => new{SkillName = a.SkillName, CertificationLink = a.CertificationLink})
+                .Distinct()
+                .ToList();
+            foreach (var skill in ndSkills)
             {
                 try
                 {
@@ -435,12 +439,25 @@ namespace iUni_Workshop.Controllers
                 return RedirectToAction("EditCV", new {CvId = cv.CvId});
             }
             //Get new external materials
-            var newExternalMaterials = externalMaterials.Select(externalMaterial => new EmployeeExternalMeterial {Name = externalMaterial.ExternalMaterialName, Link = externalMaterial.ExternalMaterialLink}).ToList();
+            var ndExternalMaterials = externalMaterials
+                .Select(a => new {exLink = a.ExternalMaterialLink, exName = a.ExternalMaterialName})
+                .Distinct()
+                .ToList();
+            var newExternalMaterials = ndExternalMaterials.Select(a => new EmployeeExternalMeterial {Name = a.exName, Link = a.exLink}).ToList();
             //GET NEW JOB HISTORIES
-            var newJobHistories = jobHistories.Select(jobHistory => new EmployeeJobHistory {Name = jobHistory.JobHistoryName, ShortDescription = jobHistory.JobHistoryShortDescription}).ToList();
+            var ndJobHis = jobHistories
+                    .Select(a => new{jhName = a.JobHistoryName, jhDescri = a.JobHistoryShortDescription})
+                    .Distinct()
+                    .ToList();
+            var newJobHistories = ndJobHis.Select(jobHistory => new EmployeeJobHistory {Name = jobHistory.jhName, ShortDescription = jobHistory.jhDescri}).ToList();
+            newJobHistories = newJobHistories.Distinct().ToList();
             //GET NEW Days
-            var newDays = days.Select(day => new EmployeeWorkDay {Day = day.Day}).ToList();
-            
+            var ndDays = days
+                .Select(a => new{Day = a.Day})
+                .Distinct()
+                .ToList();
+            var newDays = ndDays.Select(day => new EmployeeWorkDay {Day = day.Day}).ToList();
+            newDays = newDays.Distinct().ToList();
             //if new cv, create new cv
             if (newCv == null)
             {
@@ -588,9 +605,7 @@ namespace iUni_Workshop.Controllers
                         }
                     }
             }
-
             
-
                     if (newCv.Title != cv.Title)
                     {
                         try
@@ -707,14 +722,11 @@ namespace iUni_Workshop.Controllers
                 var oldSkills = _context.EmployeeSkills.Where(a => a.EmployeeCvId == newCv.Id).ToList();
                 var newEnumerable = newSkills.Select(a => new {Link = a.CertificationLink, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
                 var oldEnumerable = oldSkills.Select(a => new {Link = a.CertificationLink, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
-                if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
-                        if (oldSkills.Any())
-                        {
-                            _context.EmployeeSkills.RemoveRange(oldSkills);
-                        }
+                        _context.EmployeeSkills.RemoveRange(oldSkills);
                         _context.EmployeeSkills.AddRange(newSkills);
                         _context.SaveChanges();
                         if ((string) TempData["Success"] != "")
@@ -748,17 +760,15 @@ namespace iUni_Workshop.Controllers
                 var oldExternalMaterials = _context.EmployeeExternalMeterials.Where(a => a.EmployeeCvId == cvId);
                 var newEnumerable = newExternalMaterials.Select(a => new {Name = a.Name, Link = a.Link}).OrderBy(a => a.Name).ToList();
                 var oldEnumerable = oldExternalMaterials.Select(a => new {Name = a.Name, Link = a.Link}).OrderBy(a => a.Name).ToList();
-                if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
-                    
-                        _context.EmployeeExternalMeterials.RemoveRange(oldExternalMaterials);     
-                        if (newExternalMaterials.Any())                                           
-                        {                                                                         
-                            _context.EmployeeExternalMeterials.AddRange(newExternalMaterials);    
-                        }                                                                         
-                        _context.SaveChanges();                                                   
+                        _context.EmployeeExternalMeterials.RemoveRange(oldExternalMaterials);  
+                                                                                              
+                            _context.EmployeeExternalMeterials.AddRange(newExternalMaterials);  
+                        
+                        _context.SaveChanges();                                                  
                         if ((string) TempData["Success"] != "")                                   
                         {                                                                         
                             TempData["Success"] += "\n";                                          
@@ -791,15 +801,14 @@ namespace iUni_Workshop.Controllers
                 var oldJobHistories = _context.EmployeeJobHistories.Where(a => a.EmployeeCvId == cvId);
                 var newEnumerable = newJobHistories.Select(a => new {Name = a.Name, Link = a.ShortDescription}).OrderBy(a => a.Name).ToList();
                 var oldEnumerable = oldJobHistories.Select(a => new {Name = a.Name, Link = a.ShortDescription}).OrderBy(a => a.Name).ToList();
-                if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
                         _context.EmployeeJobHistories.RemoveRange(oldJobHistories);
-                        if (newJobHistories.Any())
-                        {
+                        
                             _context.EmployeeJobHistories.AddRange(newJobHistories);
-                        }
+                        
                         _context.SaveChanges();
                         if ((string) TempData["Success"] != "")
                         {
@@ -833,15 +842,12 @@ namespace iUni_Workshop.Controllers
                 var oldDays = _context.EmployeeWorkDays.Where(a => a.EmployeeCvId == cvId);
                 var newEnumerable = newDays.Select(a => new {Day = a.Day}).OrderBy(a => a.Day).ToList();
                 var oldEnumerable = oldDays.Select(a => new {Day = a.Day}).OrderBy(a => a.Day).ToList();
-                if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
                         _context.EmployeeWorkDays.RemoveRange(oldDays);
-                        if (newDays.Any())
-                        {
                             _context.EmployeeWorkDays.AddRange(newDays);
-                        }
                         _context.SaveChanges();
                         if ((string) TempData["Success"] != "")
                         {
