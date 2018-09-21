@@ -49,6 +49,8 @@
         <e p="Migrations" t="Include">
           <e p="20180912155301_Initikdal.cs" t="Include" />
           <e p="20180912155301_Initikdal.Designer.cs" t="Include" />
+          <e p="20180921023151_Initial.cs" t="Include" />
+          <e p="20180921023151_Initial.Designer.cs" t="Include" />
           <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
@@ -155,6 +157,7 @@
           </e>
           <e p="Roles.cs" t="Include" />
           <e p="SchoolModels" t="Include">
+            <e p="GetCampus.cs" t="Include" />
             <e p="School.cs" t="Include" />
             <e p="SchoolStatus.cs" t="Include" />
           </e>
@@ -362,6 +365,6 @@
       <e p="packages" t="ExcludeRecursive" />
     </e>
     <e p="$USER_HOME$/Library/Caches/Rider2018.2/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_iUni Workshop.274702252.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_iUni Workshop.644664593.00" t="ExcludeRecursive" />
   </component>
 </project>
