@@ -476,6 +476,16 @@ namespace iUni_Workshop.Controllers
                     };
                     try
                     {
+                        
+                        var otherCvs = _context.EmployeeCvs.Where(a => a.EmployeeId == user.Id);
+                        if (cv.PrimaryCv == true)
+                        {
+                            foreach (var otherCv in otherCvs)
+                            {
+                                otherCv.Primary = false;
+                            }
+                            _context.EmployeeCvs.UpdateRange(otherCvs);
+                        }
                         _context.EmployeeCvs.Update(newCv);
                         _context.SaveChanges();
                         if ((string) TempData["Success"] != "")
@@ -483,6 +493,8 @@ namespace iUni_Workshop.Controllers
                             TempData["Success"] += "\n";
                         }       
                         TempData["Success"] += "New Cv Added!";
+                        
+                        
                     }
                     catch (InvalidOperationException)
                     {
@@ -874,7 +886,7 @@ namespace iUni_Workshop.Controllers
                 TempData["Error"] += "Sorry. Failed to update your work day please retry";
             }
 
-            return RedirectToAction("EditCV", new {CvId = cv.CvId});
+            return RedirectToAction("EditCV", new {CvId = newCv.Id});
         }
 
 
