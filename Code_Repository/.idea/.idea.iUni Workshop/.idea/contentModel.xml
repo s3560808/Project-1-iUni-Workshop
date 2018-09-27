@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$PROJECT_DIR$" t="IncludeFlat">
+    <e p="C:\Users\Levis\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Levis\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_iUni Workshop.-430258450.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Levis\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository" t="IncludeFlat">
       <e p="iUni Workshop" t="IncludeRecursive">
         <e p=".gitignore" t="Include" />
         <e p="appsettings.Development.json" t="Include" />
@@ -49,6 +51,8 @@
         <e p="Migrations" t="Include">
           <e p="20180912155301_Initikdal.cs" t="Include" />
           <e p="20180912155301_Initikdal.Designer.cs" t="Include" />
+          <e p="20180925033408_Initial.cs" t="Include" />
+          <e p="20180925033408_Initial.Designer.cs" t="Include" />
           <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Models" t="Include">
@@ -287,6 +291,7 @@
         </e>
         <e p="wwwroot" t="Include">
           <e p="css" t="Include">
+            <e p="MyMessages.css" t="Include" />
             <e p="site.css" t="Include" />
             <e p="site.min.css" t="Include" />
           </e>
@@ -296,11 +301,20 @@
             <e p="banner2.svg" t="Include" />
             <e p="banner3.svg" t="Include" />
             <e p="banner4.svg" t="Include" />
+            <e p="job.jpg" t="Include" />
           </e>
           <e p="js" t="Include">
             <e p="_AddSchool.js" t="Include" />
+            <e p="breakpoints.js" t="Include" />
+            <e p="browser.min.js" t="Include" />
+            <e p="jquery.min.js" t="Include" />
+            <e p="label-has-javascript.js" t="Include" />
+            <e p="main.js" t="Include" />
+            <e p="no-javascript.js" t="Include" />
             <e p="site.js" t="Include" />
             <e p="site.min.js" t="Include" />
+            <e p="toggleSidebar.js" t="Include" />
+            <e p="util.js" t="Include" />
           </e>
           <e p="lib" t="Include">
             <e p="bootstrap" t="Include">
@@ -361,7 +375,5 @@
       <e p="iUni Workshop.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
     </e>
-    <e p="$USER_HOME$/Library/Caches/Rider2018.2/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_iUni Workshop.274702252.00" t="ExcludeRecursive" />
   </component>
 </project>

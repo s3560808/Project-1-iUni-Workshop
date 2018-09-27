@@ -45,7 +45,7 @@ namespace iUni_Workshop
                 }
             }
             host.Run();
-//            BuildWebHost(args).Run();
+            BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

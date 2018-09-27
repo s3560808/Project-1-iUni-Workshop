@@ -18,7 +18,7 @@ namespace iUni_Workshop.Data.Seeds
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = serviceProvider.GetService<UserManager<ApplicationUser>>();
             var context = serviceProvider.GetService<ApplicationDbContext>();
-            await CreateUser("admin@example.com", Roles.Administrator, userManager, logger, context);
+            // await CreateUser("admin@example.com", Roles.Administrator, userManager, logger, context);
             await CreateUser("employee@example.com", Roles.Employee, userManager, logger, context);
             await CreateUser("employer@example.com", Roles.Employer, userManager, logger, context);
         }
