@@ -104,6 +104,10 @@ body{
 	-ms-overflow-style: scrollbar;
 }
 
+@-ms-viewport {
+	width: device-width;
+}
+
 
 /* Section */
 #h22 h2{
@@ -132,6 +136,13 @@ header .alt{
 #search input::-moz-focus-inner {
 	border: 0;
 	padding: 20px;
+}
+
+#search input {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
 }
 
 /* Form */
@@ -212,6 +223,41 @@ h3{
 }
 
 
+@media screen(max-width: 1680px)
+{
+	.side-nav{
+		overflow: hidden;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+}
+
+@media screen(max-width: 1280px)
+{
+	.side-nav{
+		overflow: hidden;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+}
+
+@media screen(max-width: 960px)
+{
+	.side-nav{
+		overflow: hidden;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+}
+
+@media screen(max-width:500px)
+{
+	.side-nav{
+		overflow: hidden;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+}
 
 /* Type */		
 #footer .copyright {
@@ -249,3 +295,4 @@ li a.active{
 .active{
 	transition: 3s;
 }
+
