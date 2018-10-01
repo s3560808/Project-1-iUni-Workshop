@@ -41,7 +41,7 @@
 .side-nav .btn-close{
 	position: absolute;
 	top: 0;
-	right: 2px;
+	right: 12px;
 	font-size: 32px;
 	margin-left: 50px;
 	cursor: pointer;
@@ -296,3 +296,14 @@ li a.active{
 	transition: 3s;
 }
 
+h2 a{
+	color: #0f0f0f;
+	font-size: 12pt;
+	padding: 5px;
+	margin: 0;
+}
+
+.navbar-collapse
+{
+	
+}

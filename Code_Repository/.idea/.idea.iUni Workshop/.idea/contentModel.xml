@@ -242,6 +242,7 @@
             <e p="Index.cshtml" t="Include" />
             <e p="Invitations.cshtml" t="Include" />
             <e p="JobProfiles.cshtml" t="Include" />
+            <e p="Reactive_Sidebar.js" t="Include" />
             <e p="RequestToCertificateMyCompany.cshtml" t="Include" />
             <e p="RequestToUnCertificateMyCompany.cshtml" t="Include" />
             <e p="SearchApplicants.cshtml" t="Include" />
