@@ -6,6 +6,6 @@ namespace iUni_Workshop.Models.EmployeeModels
     {
         public string Name { get; set; }
         public string BriefDescription { get; set; }
-        public List<IndexCv> Cvs { get; set; }
+        public readonly List<IndexCv> Cvs = new List<IndexCv>();
     }
 }

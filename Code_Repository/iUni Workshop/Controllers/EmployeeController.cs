@@ -49,6 +49,7 @@ namespace iUni_Workshop.Controllers
                 var cvSkillIds = _context.EmployeeSkills.Where(a => a.EmployeeCvId == cvId);
                 foreach (var skillId in cvSkillIds)
                 {
+                    var bb = _context.Skills.First(a => a.Id == skillId.SkillId);
                     indexCv.SkillNames.Add(_context.Skills.First(a => a.Id == skillId.SkillId).Name);
                 }
                 result.Cvs.Add(indexCv);
