@@ -3,13 +3,13 @@ function GetSuburbName(str) {
     var suburbSelectBox = document.getElementById("SuburbNameList");
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
+        if (this.readyState === 4 && this.status === 200) {
             var suburbs = JSON.parse(this.responseText);
             suburbSelectBox.innerHTML = "";
             for (var i = 0; i < suburbs.length; i++) {
                 var btn = document.createElement("OPTION");
                 btn.value = suburbs[i];
-                if (str == suburbs[i]) {
+                if (str === suburbs[i]) {
                     GetPostCode(str);
                 }
                 suburbSelectBox.appendChild(btn);
@@ -48,7 +48,7 @@ function GetSchoolName(schoolName) {
             for (var i = 0; i < names.length; i++) {
                 var btn = document.createElement("OPTION");
                 btn.value = names[i];
-                if (schoolName == names[i]) {
+                if (schoolName === names[i]) {
                     GetSchoolDomainExtension(schoolName);
                 }
                 schoolSelectBox.appendChild(btn);
@@ -60,7 +60,7 @@ function GetSchoolName(schoolName) {
 }
 
 function GetSchoolDomainExtension(schoolName) {
-    var schoolSelectBox = document.getElementById("DomainList");
+    var schoolSelectBox = document.getElementById("DomainExtensionList");
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
         if (this.readyState === 4 && this.status === 200) {
