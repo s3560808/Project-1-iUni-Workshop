@@ -33,9 +33,27 @@ namespace iUni_Workshop.Controllers
         
         //View of index page of employee
         [Route("[Controller]/Index")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var user = await _userManager.GetUserAsync(User);
+            var employee = _context.Employees.First(a => a.Id == user.Id);
+            var employeeCvs = _context.EmployeeCvs.Where(a => a.EmployeeId == user.Id);
+            var result = new Index {Name = employee.Name, BriefDescription = employee.ShortDescription};
+            foreach (var cv in employeeCvs)
+            {
+                var indexCv = new IndexCv();
+                var cvId = cv.Id;
+                indexCv.Description = cv.Details;
+                var cvFieldId = cv.FieldId;
+                indexCv.FieldName = _context.Fields.First(a => a.Id == cvFieldId).Name;
+                var cvSkillIds = _context.EmployeeSkills.Where(a => a.EmployeeCvId == cvId);
+                foreach (var skillId in cvSkillIds)
+                {
+                    indexCv.SkillNames.Add(_context.Skills.First(a => a.Id == skillId.SkillId).Name);
+                }
+                result.Cvs.Add(indexCv);
+            }
+            return View(result);
         }
   
         //View of EditPersonalInfo

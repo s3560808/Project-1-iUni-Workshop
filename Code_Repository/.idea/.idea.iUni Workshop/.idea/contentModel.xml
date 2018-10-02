@@ -94,6 +94,8 @@
             <e p="EmployeeJobHistory.cs" t="Include" />
             <e p="EmployeeSkill.cs" t="Include" />
             <e p="EmployeeWorkDay.cs" t="Include" />
+            <e p="Index.cs" t="Include" />
+            <e p="IndexCv.cs" t="Include" />
             <e p="InvitationDetail.cs" t="Include" />
             <e p="MessageDetail.cs" t="Include" />
             <e p="MyCvs.cs" t="Include" />
