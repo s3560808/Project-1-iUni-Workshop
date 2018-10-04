@@ -1,0 +1,40 @@
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @{
+            string rawErrors = ViewBag.Error;
+            var errors = rawErrors.Split('\n');
+            foreach (var error in errors)
+            {
+                <p>@error</p>
+            }
+            
+        }
+    </div>
+}
+@if (ViewBag.Inform != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @{
+            string rawWarns = ViewBag.Inform;
+            var warns = rawWarns.Split('\n');
+            foreach (var warn in warns)
+            {
+                <p>@warn</p>
+            }
+        }
+    </div>
+}
+@if (ViewBag.Success != null)
+{
+    <div class="alert alert-success" role="alert">
+        @{
+            string rawSuccesses = ViewBag.Success;
+            var successes = rawSuccesses.Split('\n');
+            foreach (var success in successes)
+            {
+                <p>@success</p>
+            }
+        }
+    </div>
+}

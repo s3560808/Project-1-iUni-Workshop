@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using iUni_Workshop.Data;
@@ -11,18 +10,17 @@ using iUni_Workshop.Models.SchoolModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Internal;
-using MessageDetail = iUni_Workshop.Models.AdministratorModels.MessageDetail;
-using MyMessages = iUni_Workshop.Models.AdministratorModels.MyMessages;
 
 namespace iUni_Workshop.Controllers
 {
     [Authorize(Roles = "Administrator")]
     public class AdministratorController : Controller
     {
+        //Properties of admin controller
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
 
+        //Constructor of admin controller
         public AdministratorController(UserManager<ApplicationUser> userManager,
             ApplicationDbContext context,
             RoleManager<IdentityRole> roleManager
@@ -31,7 +29,7 @@ namespace iUni_Workshop.Controllers
             _context = context;
         }
 
-        
+        //Dashboard
         public ViewResult Index()
         {
             return View();
@@ -40,7 +38,9 @@ namespace iUni_Workshop.Controllers
         [HttpGet]
         public ViewResult AddSchool()
         {
+            //1. Process system information from AddSchoolAction()/UpdateSchoolAction()
             ProcessSystemInfo();
+            //2. Get all schools in database
             var result = _context.Schools
                 .Select(a => new AddSchool
                 {
@@ -51,74 +51,30 @@ namespace iUni_Workshop.Controllers
                     SurburbName = a.Suburb.Name,
                     Id = a.Id
                 }).OrderBy(a => a.DomainExtension);
+            //3. Go to view
             return View(result);
-        }
-
-        private void ProcessSystemInfo()
-        {
-            if ((string) TempData["Error"] != "")
-            {
-                ViewBag.Error = TempData["Error"];
-            }
-            if ((string) TempData["Inform"] != "")
-            {
-                ViewBag.Inform = TempData["Inform"];
-            }
-            if ((string) TempData["Success"] != "")
-            {
-                ViewBag.Success = TempData["Success"];
-            }
-        }
-
-        private void InitialSystemInfo()
-        {
-            TempData["Error"] = "";
-            TempData["Inform"] = "";
-            TempData["Success"] = "";
-        }
-
-        private void ProcessModelState()
-        {
-            foreach (var model in ModelState)
-            {
-                if (model.Value.Errors.Count == 0) continue;
-                if ((string) TempData["Error"] != "")
-                {
-                    TempData["Error"] += "\n";
-                }
-                
-                    foreach (var error in model.Value.Errors)
-                    {
-                        TempData["Error"]  += error.ErrorMessage;
-                    }
-                
-            }
         }
 
         [HttpPost]
         public async Task<IActionResult> AddSchoolAction(AddSchoolAction school)
         {
-            const int schoolStatus = SchoolStatus.InUse;
             InitialSystemInfo();
+            const int schoolStatus = SchoolStatus.InUse;
             //1. Check if correct input from front-end
             if (!ModelState.IsValid)
             {
                 foreach (var model in ModelState)
                 {
                     if (model.Value.Errors.Count == 0) continue;
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }
                     if (model.Key == "PostCode")
                     {
-                        TempData["Error"]  += "Correct postcode is required";
+                        AddToTempDataError("Correct postcode is required");
                     }
                     else
                     {
                         foreach (var error in model.Value.Errors)
                         {
-                            TempData["Error"]  += error.ErrorMessage;
+                            AddToTempDataError(error.ErrorMessage);
                         }
                     }
                 }
@@ -127,18 +83,22 @@ namespace iUni_Workshop.Controllers
             //2. Check if user entered correct suburb
             var suburbs = _context.Suburbs
                 .Where(a => a.Name == school.SuburbName.ToUpper() && a.PostCode == school.PostCode);
+            //2.1 If wrong suburb, give error and
+            //return to AddSchool()
             if (!suburbs.Any())
             {
-                TempData["Error"] = "Cannot find your Suburb, Please select correct one";
+                AddToTempDataError("Cannot find your Suburb, Please select correct one");
                 return RedirectToAction("AddSchool");
             }
-            var checkWhetherUpdate = _context.Schools.Where(a => 
-                    (a.SchoolName == school.SchoolName && a.SuburbId == suburbs.First().Id) &&
-                    (a.DomainExtension == school.DomainExtension)
+            //3.Check if new a school or already in database 
+            var checkWhetherUpdate = _context.Schools.Where(
+                a => 
+                    a.SchoolName == school.SchoolName && 
+                    a.SuburbId == suburbs.First().Id &&
+                    a.DomainExtension == school.DomainExtension.ToLower()
                 );
             School newSchool;
-            //2.Check if new a school or already in database 
-            //2.1Update a school
+            //3.1 Update an exist school's status to "in use"
             if (checkWhetherUpdate.Any())
             {
                 var oldStatus = checkWhetherUpdate.First().Status;
@@ -148,26 +108,24 @@ namespace iUni_Workshop.Controllers
                 newSchool.SchoolName = school.SchoolName;
                 newSchool.DomainExtension = school.DomainExtension;
                 newSchool.Status = schoolStatus;
-                if ((string) TempData["Inform"] != "")
-                {
-                    TempData["Inform"] += "\n";
-                }
-                TempData["Inform"] += "It is not a new school. " 
+                var information = "It is not a new school. " 
                                       + newSchool.SchoolName + " in " 
                                       + oldLocationName+" campus was in ";
-                if (oldStatus == SchoolStatus.InUse)
+                switch (oldStatus)
                 {
-                    TempData["Inform"]  += "\"In Use\"";
-                }else if (oldStatus == SchoolStatus.InRequest)
-                {
-                    TempData["Inform"]  += "\"In Request\"";
+                    case SchoolStatus.InUse:
+                        information  += "\"In Use\"";
+                        break;
+                    case SchoolStatus.InRequest:
+                        information  += "\"In Request\"";
+                        break;
+                    default:
+                        information += "\"No Longer Used\"";
+                        break;
                 }
-                else
-                {
-                    TempData["Inform"]  += "\"No Longer Used\"";
-                }
+                AddToTempDataInform(information);
             }
-            //2.2Insert a new school
+            //3.2 Insert a new school
             else
             {
                 newSchool = new School
@@ -180,12 +138,12 @@ namespace iUni_Workshop.Controllers
                     Status = SchoolStatus.InUse
                 };
             }
-            //3. Update user required school
+            //4. Update user required school
             _context.Schools.Update(newSchool);
             await _context.SaveChangesAsync();
-            //4. To update school name if school name changes
+            //5. To update school name if school name changes
             await UpdateRelatedInfo(newSchool.SchoolName, newSchool.DomainExtension);
-            TempData["Success"] = "School inserted successfully";
+            TempData["Success"] = "School "+school.SchoolName+" "+school.SuburbName+" inserted successfully";
             return RedirectToAction("AddSchool");
         }
 
@@ -371,6 +329,7 @@ namespace iUni_Workshop.Controllers
             await _context.SaveChangesAsync();
         }
 
+        [HttpGet]
         public ViewResult AddField()
         {
             ProcessSystemInfo();
@@ -390,7 +349,7 @@ namespace iUni_Workshop.Controllers
         public async Task<IActionResult> AddFieldAction(AddField field)
         {
             InitialSystemInfo();
-            //Check if front end input is valid
+            //1. Check if front end input is valid
             if (!ModelState.IsValid)
             {
                 ProcessModelState();
@@ -400,7 +359,7 @@ namespace iUni_Workshop.Controllers
             var checkInDatabase = _context.Fields
                 .Where(a => a.NormalizedName == field.Name.ToUpper());
             Field newField;
-            //2.1 Already in database
+            //2.1 if already in database
             if (checkInDatabase.Any())
             {
                 string status;
@@ -416,7 +375,7 @@ namespace iUni_Workshop.Controllers
                         status = "\"No Longer Used\"";
                         break;
                 }
-                TempData["Inform"] = "Field \"" + field.Name + "\" is already in database. It was in " + status + ".";
+                AddToTempDataInform("Field \"" + field.Name + "\" is already in database. It was in " + status + ".");
                 newField = checkInDatabase.First();
                 newField.Status = FieldStatus.InUse;
             }
@@ -431,10 +390,9 @@ namespace iUni_Workshop.Controllers
                     AddedBy = (await _userManager.GetUserAsync(User)).Id
                 };
             }
-            
             _context.Fields.Update(newField);
             await _context.SaveChangesAsync();
-            TempData["Success"] = "Field \"" + field.Name + "\" added!";
+            AddToTempDataSuccess("Field \"" + field.Name + "\" added!");
             return RedirectToAction("AddField");
         }
 
@@ -448,31 +406,22 @@ namespace iUni_Workshop.Controllers
                 return RedirectToAction("AddField");
             }    
             var checkInDatabase = _context.Fields.Where(a => a.Id == field.Id);
-            //Check if field id is not in database
+            //1. Check if field id is not in database
             if (!checkInDatabase.Any())
             {
-                if ((string) TempData["Error"] != "")
-                {
-                    TempData["Error"] += "\n";
-                }
-
-                TempData["Error"] += "Please enter correct field id!";
+                AddToTempDataError("Please enter correct field id!");
                 return RedirectToAction("AddField");
             }
-            //Check if duplicate field name with other field name
+            //2. Check if duplicate field name with other field name
             var checkDuplication = _context.Fields
                 .Where(a => a.NormalizedName == field.Name.ToUpper());
             if (checkDuplication.Any() && checkDuplication.First().Id != field.Id)
             {
-                if ((string) TempData["Error"] != "")
-                {
-                    TempData["Error"] += "\n";
-                }
-                TempData["Error"] += "Entered duplicate field name "+ "\""+field.Name+"\" "+"!";
+                AddToTempDataError("Entered duplicate field name "+ "\""+field.Name+"\" "+"!");
                 return RedirectToAction("AddField");
             }
             var oldField = checkInDatabase.First();
-            //Prepare to change status
+            //3. Prepare to change status
             if (oldField.Status != field.Status)
             {
                 string oldStatus;
@@ -504,15 +453,11 @@ namespace iUni_Workshop.Controllers
                 oldField.Status = field.Status;
                 _context.Fields.Update(oldField);
                 _context.SaveChanges();
-                if ((string) TempData["Inform"] != "")
-                {
-                    TempData["Inform"] += "\n";
-                }
-                TempData["Inform"] += "Field "+ "\""+field.Name+"\" "+"'s status changed from "
-                                     + oldStatus + " to " 
-                                     + newStatus;
+                AddToTempDataSuccess("Field "+ "\""+field.Name+"\" "+"'s status changed from "
+                                    + oldStatus + " to " 
+                                    + newStatus);
             }
-            //Prepare to change field name
+            //4. Prepare to change field name
             if (oldField.Name != field.Name)
             {
                 var newName = field.Name;
@@ -521,18 +466,15 @@ namespace iUni_Workshop.Controllers
                 oldField.NormalizedName = field.Name.ToUpper();
                 _context.Fields.Update(oldField);
                 _context.SaveChanges();
-                if ((string) TempData["Inform"] != "")
-                {
-                    TempData["Inform"] += "\n";
-                }
-                TempData["Inform"] += "Field"+ "\""+field.Name+"\" "+"'s name changed from "
+                AddToTempDataSuccess("Field"+ "\""+field.Name+"\" "+"'s name changed from "
                                      + oldName + " to " 
-                                     + newName;
+                                     + newName);
             }
-            TempData["Success"] = "Field \"" + field.Name + "\" updated!";
+            AddToTempDataSuccess("Field \"" + field.Name + "\" updated!");
             return RedirectToAction("AddField");
         }
 
+        [HttpGet]
         public ViewResult AddSkill()
         {
             ProcessSystemInfo();
@@ -552,17 +494,16 @@ namespace iUni_Workshop.Controllers
         public async Task<IActionResult> AddSkillAction(AddSkill skill)
         {
             InitialSystemInfo();
-            //Check if front end input is valid
+            //1. Check if front-end input is valid
             if (!ModelState.IsValid)
             {
                 ProcessModelState();
-                return RedirectToAction("AddField");
+                return RedirectToAction("AddSkill");
             }
             //2. Check if already in database
             var checkInDatabase = _context.Skills.Where(a => a.NormalizedName == skill.Name.ToUpper());
-
             Skill newSkill;
-            //2.1 Already in database
+            //2.1 if already in database
             if (checkInDatabase.Any())
             {
                 string status;
@@ -578,11 +519,11 @@ namespace iUni_Workshop.Controllers
                         status = "\"No Longer Used\"";
                         break;
                 }
-                TempData["Inform"] = "Field \"" + skill.Name + "\" is already in database. It was in " + status + ".";
+                AddToTempDataInform("Field \"" + skill.Name + "\" is already in database. It was in " + status + ".");
                 newSkill = checkInDatabase.First();
                 newSkill.Status = SkillStatus.InUse;
             }
-            //2.1 Not in database
+            //2.2 if not in database
             else
             {
                 newSkill = new Skill
@@ -593,10 +534,10 @@ namespace iUni_Workshop.Controllers
                     Status = SkillStatus.InUse
                 };
             }
-
+            //3. Update skill
             _context.Skills.Update(newSkill);
             await _context.SaveChangesAsync();
-            TempData["Success"] = "Field \"" + newSkill.Name + "\" added!";
+            AddToTempDataSuccess("Field \"" + newSkill.Name + "\" added!");
             return RedirectToAction("AddSkill");
         }
         
@@ -604,38 +545,29 @@ namespace iUni_Workshop.Controllers
         public RedirectToActionResult UpdateSkillAction(UpdateSkill skill)
         {
             InitialSystemInfo();
+            //1. Check if front-end input is valid
             if (!ModelState.IsValid)
             {
                 ProcessModelState();
                 return RedirectToAction("AddSkill");
             }    
-            //Check if id is correct
+            //2. Check if id is correct
             var checkInDatabase = _context.Skills.Where(a => a.Id == skill.Id);
             if (!checkInDatabase.Any())
             {
-                if ((string) TempData["Error"] != "")
-                {
-                    TempData["Error"] += "\n";
-                }
-
-                TempData["Error"] += "Please enter correct skill id!";
+                AddToTempDataError("Please enter correct skill id!");
                 return RedirectToAction("AddSkill");
             }
-            //Check if duplicate field name with other field name
+            //3. Check if duplicate field name with other field's name
             var checkDuplication = _context.Skills
                 .Where(a => a.NormalizedName == skill.Name.ToUpper());
             if (checkDuplication.Any()&&checkDuplication.First().Id != skill.Id)
             {
-                if ((string) TempData["Error"] != "")
-                {
-                    TempData["Error"] += "\n";
-                }
-                TempData["Error"] += "Entered duplicate skill name "+ "\""+skill.Name+"\" "+"!";
+                AddToTempDataError("Entered duplicate skill name "+ "\""+skill.Name+"\" "+"!");
                 return RedirectToAction("AddSkill");
             }
             var oldSkill = checkInDatabase.First();
-
-            //Prepare to change status
+            //4. Change skill status
             if (oldSkill.Status != skill.Status)
             {
                 string oldStatus;
@@ -668,15 +600,11 @@ namespace iUni_Workshop.Controllers
                 oldSkill.Status = skill.Status;
                 _context.Skills.Update(oldSkill);
                 _context.SaveChanges();
-                if ((string) TempData["Inform"] != "")
-                {
-                    TempData["Inform"] += "\n";
-                }
-                TempData["Inform"] += "Skill "+ "\""+oldSkill.Name+"\" "+"'s status changed from "
-                                      + oldStatus + " to " 
-                                      + newStatus;
+                AddToTempDataSuccess("Skill "+ "\""+oldSkill.Name+"\" "+"'s status changed from "
+                                    + oldStatus + " to " 
+                                    + newStatus);
             }
-            //Prepare to log
+            //5. Change skill name
             if (oldSkill.Name != skill.Name)
             {
                 var newName = skill.Name;
@@ -692,6 +620,9 @@ namespace iUni_Workshop.Controllers
                 TempData["Inform"] += "Skill"+ "\""+skill.Name+"\" "+"'s name changed from "
                                       + oldName + " to " 
                                       + newName;
+                AddToTempDataSuccess("Skill" + "\"" + skill.Name + "\" " + "'s name changed from "
+                                     + oldName + " to "
+                                     + newName);
             }
             TempData["Success"] = "Skill \"" + skill.Name + "\" updated!";
             return RedirectToAction("AddSkill");
@@ -795,6 +726,137 @@ namespace iUni_Workshop.Controllers
         {
             var receiver = _context.Users.Where(a => a.UserName.Contains(userName)).ToList();
             return Json(receiver);
+        }
+        
+        public IActionResult CertificateCompanies()
+        {
+            ProcessSystemInfo();
+            var companies = _context.Employers.Where(a => a.RequestCertification);
+            return View(companies.AsEnumerable());
+        }
+        
+        public async Task<IActionResult> CertificateCompaniesAction(CertificateCompaniesAction certification)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            InitialSystemInfo();
+            if (!ModelState.IsValid)
+            {
+                ProcessModelState();
+            }
+            try
+            {
+                var employer = _context.Employers.First(a => a.Id == certification.Id);
+                if (employer.Certificated)
+                {
+                    AddToTempDataInform("Already certificated");
+                    return RedirectToAction("CertificateCompanies");
+                }
+                employer.RequestCertification = false;
+                employer.Certificated = true;
+                employer.CertificatedBy = user.Id;
+                _context.Employers.Update(employer);
+                AddToTempDataSuccess("Company "+ employer.Name+" certificate successfully!");
+            }
+            catch (InvalidOperationException)
+            {
+                AddToTempDataError("Invalid company id");
+            }
+            return RedirectToAction("CertificateCompanies");
+        }
+        
+        private void ProcessSystemInfo()
+        {
+            if ((string) TempData["Error"] != "")
+            {
+                ViewBag.Error = TempData["Error"];
+            }
+            if ((string) TempData["Inform"] != "")
+            {
+                ViewBag.Inform = TempData["Inform"];
+            }
+            if ((string) TempData["Success"] != "")
+            {
+                ViewBag.Success = TempData["Success"];
+            }
+        }
+
+        private void InitialSystemInfo()
+        {
+            TempData["Error"] = "";
+            TempData["Inform"] = "";
+            TempData["Success"] = "";
+        }
+
+        private void ProcessModelState()
+        {
+            foreach (var model in ModelState)
+            {
+                if (model.Value.Errors.Count == 0) continue;
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }
+                
+                foreach (var error in model.Value.Errors)
+                {
+                    TempData["Error"]  += error.ErrorMessage;
+                }
+                
+            }
+        }
+
+        private void AddToViewBagInform(string informMessage)
+        {
+            if ((string) ViewBag.Inform != "")
+            {
+                ViewBag.Inform += "\n";
+            }
+            ViewBag.Inform += informMessage;
+        }
+        
+        private void AddToViewBagError(string errorMessage)
+        {
+            if ((string) ViewBag.Error != "")
+            {
+                ViewBag.Error+= "\n";
+            }
+            ViewBag.Error += errorMessage;
+        }
+        
+        private void AddToViewBagSuccess(string successMessage)
+        {
+            if ((string) ViewBag.Success != "")
+            {
+                ViewBag.Success += "\n";
+            }
+            ViewBag.Success += successMessage;
+        }
+        
+        private void AddToTempDataSuccess(string successMessage)
+        {
+            if ((string) TempData["Success"] != "")
+            {
+                TempData["Success"] += "\n";
+            }
+            TempData["Success"] += successMessage;
+        }
+        
+        private void AddToTempDataInform(string informMessage)
+        {
+            if ((string) TempData["Inform"] != "")
+            {
+                TempData["Inform"] += "\n";
+            }
+            TempData["Inform"] += informMessage;
+        }
+        
+        private void AddToTempDataError(string errorMessage)
+        {
+            if ((string) TempData["Error"] != "")
+            {
+                TempData["Error"] += "\n";
+            }
+            TempData["Error"] += errorMessage;
         }
     }
 }
