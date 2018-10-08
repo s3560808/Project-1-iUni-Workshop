@@ -5,11 +5,13 @@ using iUni_Workshop.Data;
 using iUni_Workshop.Models;
 using iUni_Workshop.Models.FiledModels;
 using iUni_Workshop.Models.JobRelatedModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace iUni_Workshop.Controllers
 {
+    [Authorize(Roles = Roles.Employer+","+Roles.Employee+","+Roles.Administrator)]
     public class FieldController : Controller
     {
         private readonly ApplicationDbContext _context;

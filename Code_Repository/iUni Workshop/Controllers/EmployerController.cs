@@ -802,18 +802,17 @@ namespace iUni_Workshop.Controllers
             return RedirectToAction("EditJobProfile", new{ JobProfileId = newJobProfile.Id});
         }
 
-        //TODO Filter primary id
         [Route("[Controller]/SearchApplicants/{jobProfileId}")]
         public IActionResult SearchApplicants(int jobProfileId)
         {
             ViewData["App"] = jobProfileId;
-            return View(SearchApplicantsCoreRanker(jobProfileId));
+            return View(SearchApplicantsCoreRanker(jobProfileId).Result);
         }
 
         [Route("[Controller]/ViewApplicantCv/{jobProfileId}/{cvId}")]
         public IActionResult ViewApplicantCv(int jobProfileId, int cvId)
         {
-            var validationList = ( SearchApplicantsCoreRanker(jobProfileId));
+            var validationList = ( SearchApplicantsCoreRanker(jobProfileId)).Result;
             var validationResultList = validationList.Where(a => a.CvId == cvId).ToList();
             //1. Not valid jobProfileId & CvId
             if (!validationResultList.Any())
@@ -835,7 +834,7 @@ namespace iUni_Workshop.Controllers
         [Route("[Controller]/SendInvitation/{jobProfileId}/{cvId}")]
         public IActionResult SendInvitation(int jobProfileId, int cvId)
         {
-            var validationList = SearchApplicantsCoreRanker(jobProfileId);
+            var validationList = SearchApplicantsCoreRanker(jobProfileId).Result;
             var validationResultList = validationList.Where(a => a.CvId == cvId);
             //Not valid
             if (!validationResultList.Any())
@@ -846,7 +845,7 @@ namespace iUni_Workshop.Controllers
             {
                 _context.Invatations.Update(new Invatation
                 {
-                    SentTime = DateTime.Now, status = InvitationStatus.Original, 
+                    SentTime = DateTime.Now, Status = InvitationStatus.Original, 
                     EmployeeCvId = cvId,
                     EmployerJobProfileId = jobProfileId
                 });
@@ -868,14 +867,15 @@ namespace iUni_Workshop.Controllers
             return View();
         }
         
-        public List<SearchApplicant> SearchApplicantsCoreRanker(int jobProfileId)
+        public async Task<List<SearchApplicant>> SearchApplicantsCoreRanker(int jobProfileId)
         {
 
             EmployerJobProfile jobProfile;
             var finalData = new List<EmployeeCV>();
+            var user = await _userManager.GetUserAsync(User);
             try
             {
-                jobProfile = _context.EmployerJobProfiles.First(a => a.Id == jobProfileId);
+                jobProfile = _context.EmployerJobProfiles.First(a => a.Id == jobProfileId && a.EmployerId == user.Id);
             }
             catch(InvalidOperationException)
             {
@@ -1039,7 +1039,7 @@ namespace iUni_Workshop.Controllers
             var user = await _userManager.GetUserAsync(User);
             var results = _context.Invatations
                 .Where(a => a.EmployerJobProfile.EmployerId == user.Id)
-                .Select(a => new EmployerInvitation{ InvitationId = a.Id, Status = a.status});
+                .Select(a => new EmployerInvitation{ InvitationId = a.Id, Status = a.Status});
             return View(results);
         }
 

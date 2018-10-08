@@ -16,14 +16,14 @@ namespace iUni_Workshop.Models.InvatationModel
         
         public int EmployeeCvId { get; set; }
         [ForeignKey(("EmployeeCvId"))]
-        public virtual EmployeeCV EmployeeCV { get; set; }
+        public virtual EmployeeCV EmployeeCv { get; set; }
 
         public int EmployerJobProfileId { get; set; }
         [ForeignKey(("EmployerJobProfileId"))]
         public virtual EmployerJobProfile EmployerJobProfile { get; set; }
         
         [Required]
-        public int status { get; set; }
+        public int Status { get; set; }
 
         [Required]
         public DateTime SentTime { get; set; }

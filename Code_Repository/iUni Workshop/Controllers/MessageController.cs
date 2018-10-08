@@ -275,7 +275,7 @@ namespace iUni_Workshop.Controllers
                         return RedirectToAction("MyMessages");
                     }
                     //1.3.3 Invitation rejected
-                    if (invitation.status == InvitationStatus.Rejected)
+                    if (invitation.Status == InvitationStatus.Rejected)
                     {
                         AddToTempDataError("Sorry! You rejected corresponding invitation. Cannot reply this message");
                         return RedirectToAction("MyMessages");

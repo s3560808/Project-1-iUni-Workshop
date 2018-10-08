@@ -725,7 +725,7 @@ namespace iUni_Workshop.Controllers
         {
             ProcessSystemInfo();
             var user = await _userManager.GetUserAsync(User);
-            var invitations = _context.Invatations.Where(a => a.EmployeeCV.EmployeeId == user.Id).AsEnumerable();
+            var invitations = _context.Invatations.Where(a => a.EmployeeCv.EmployeeId == user.Id).AsEnumerable();
             var results = new List<MyInvitations>();
             results.AddRange(
                 invitations.Select(
@@ -773,7 +773,6 @@ namespace iUni_Workshop.Controllers
                 Title = jobProfile.Title,
                 InvitationId = invitation.Id
             };
-            
             return View(result);
         }
 
@@ -796,13 +795,13 @@ namespace iUni_Workshop.Controllers
                     return RedirectToAction("MyInvitations");
                 }
 
-                if (invitation.status != InvitationStatus.Original)
+                if (invitation.Status != InvitationStatus.Original)
                 {
                     TempData["Error"] = "Cannot change status";
                     return RedirectToAction("InvitationDetail", new{invitationId = invitation.Id});
                 }
 
-                invitation.status = model.Accept ? InvitationStatus.Accepted : InvitationStatus.Rejected;
+                invitation.Status = model.Accept ? InvitationStatus.Accepted : InvitationStatus.Rejected;
                 _context.Invatations.Update(invitation);
                 _context.SaveChanges();
                 var status = model.Accept ? "accepted" : "rejected";

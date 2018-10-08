@@ -35,8 +35,8 @@ namespace iUni_Workshop.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             var userRoleList = await _userManager.GetRolesAsync(user);
-            var adminNum = (await _userManager.GetUsersInRoleAsync(Roles.Administrator)).Count();
-            if (userRoleList.ToArray().Count() != 0)
+            var adminNum = (await _userManager.GetUsersInRoleAsync(Roles.Administrator)).Count;
+            if (userRoleList.ToArray().Length != 0)
             {
                 var role = userRoleList.First();
                 switch (role)
@@ -56,12 +56,13 @@ namespace iUni_Workshop.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SetUserType(String UserTypeId)
+        public async Task<IActionResult> SetUserType(string userTypeId)
         {
             var user = await _userManager.GetUserAsync(User);
-            switch (UserTypeId)
+            switch (userTypeId)
             {
                     case Roles.AdministratorId:
+                        //TODO if already has admins in database return
                         await _userManager.AddToRoleAsync(user,Roles.Administrator);
                         _context.Administraotrs.Add(new Administraotr{Id=user.Id,Name=user.UserName});
                         await _context.SaveChangesAsync();
