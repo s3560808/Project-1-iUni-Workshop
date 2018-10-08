@@ -50,8 +50,6 @@
         </e>
         <e p="iUni Workshop.csproj" t="IncludeRecursive" />
         <e p="Migrations" t="Include">
-          <e p="20180912155301_Initikdal.cs" t="Include" />
-          <e p="20180912155301_Initikdal.Designer.cs" t="Include" />
           <e p="20180921033421_Initial.cs" t="Include" />
           <e p="20180921033421_Initial.Designer.cs" t="Include" />
           <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
@@ -118,7 +116,6 @@
             <e p="EmployerRequiredWorkLocation.cs" t="Include" />
             <e p="EmployerSkill.cs" t="Include" />
             <e p="JobProfile.cs" t="Include" />
-            <e p="JobProfileComplusoryWorkDay.cs" t="Include" />
             <e p="JobProfileCompulsoryWorkDay.cs" t="Include" />
             <e p="JobProfileRequiredLocation.cs" t="Include" />
             <e p="JobProfileRequiredSchool.cs" t="Include" />
@@ -240,10 +237,7 @@
             <e p="InvitationDetail.cshtml" t="Include" />
             <e p="MyCVs.cshtml" t="Include" />
             <e p="MyInvitations.cshtml" t="Include" />
-            <e p="RequestToAddField.cshtml" t="Include" />
             <e p="RequestToAddSchool.cs" t="Include" />
-            <e p="RequestToAddSchool.cshtml" t="Include" />
-            <e p="RequestToAddSkill.cshtml" t="Include" />
             <e p="Shared" t="Include">
               <e p="_AddSchool.cshtml" t="Include" />
               <e p="_Validation_Area_From_Backend.cshtml" t="Include" />
