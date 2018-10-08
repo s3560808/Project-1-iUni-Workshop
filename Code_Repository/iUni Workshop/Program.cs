@@ -25,8 +25,6 @@ namespace iUni_Workshop
                 try
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    //                    
-                    //                    StateSeed.Initialize(services);
                     RoleSeed.Initialize(services, logger).Wait();
                     UserSeed.Initialize(services, logger).Wait();
                     
@@ -45,7 +43,6 @@ namespace iUni_Workshop
                 }
             }
             host.Run();
-//            BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
