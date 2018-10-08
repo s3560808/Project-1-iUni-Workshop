@@ -25,30 +25,38 @@ namespace iUni_Workshop.Data.Seeds
 
         private static async Task CreateUser(String userName, String role, UserManager<ApplicationUser> userManager, ILogger<Program> logger, ApplicationDbContext applicationDbContext) {
             var user = new ApplicationUser { UserName = userName, Email = userName};
-            var result = await userManager.CreateAsync(user, "1234qwAS./");
-            logger.LogCritical(result.Succeeded.ToString());
-            if (result.Succeeded)
+            
+            try
             {
-                switch(role)
-            {
-                case Roles.Administrator:
-                    await userManager.AddToRoleAsync(user, Roles.Administrator);
-                        applicationDbContext.Administraotrs.Add(new Administraotr { Id = user.Id, Name = user.UserName });
-                    await applicationDbContext.SaveChangesAsync();
-                    break;
-                case Roles.Employee:
-                    await userManager.AddToRoleAsync(user, Roles.Employee);
-                        applicationDbContext.Employees.Add(new Employee { Id = user.Id, Name = user.UserName });
-                        applicationDbContext.SaveChanges();
-                    break;
-                case Roles.Employer:
-                    await userManager.AddToRoleAsync(user, Roles.Employer);
-                        applicationDbContext.Employers.Add(new Employer { Id = user.Id, Name = user.UserName });
-                        applicationDbContext.SaveChanges();
-                    break;
-                    default:
-                    break;
+                var result = await userManager.CreateAsync(user, "1234qwAS./");
+                logger.LogCritical(result.Succeeded.ToString());
+                if (result.Succeeded)
+                {
+                    switch (role)
+                    {
+                        case Roles.Administrator:
+                            await userManager.AddToRoleAsync(user, Roles.Administrator);
+                            applicationDbContext.Administraotrs.Add(new Administraotr
+                                {Id = user.Id, Name = user.UserName});
+                            await applicationDbContext.SaveChangesAsync();
+                            break;
+                        case Roles.Employee:
+                            await userManager.AddToRoleAsync(user, Roles.Employee);
+                            applicationDbContext.Employees.Add(new Employee {Id = user.Id, Name = user.UserName});
+                            applicationDbContext.SaveChanges();
+                            break;
+                        case Roles.Employer:
+                            await userManager.AddToRoleAsync(user, Roles.Employer);
+                            applicationDbContext.Employers.Add(new Employer {Id = user.Id, Name = user.UserName});
+                            applicationDbContext.SaveChanges();
+                            break;
+                        default:
+                            break;
+                    }
                 }
+            }
+            catch (Exception)
+            {
             }
         }
     }
