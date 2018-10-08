@@ -34,7 +34,6 @@ namespace iUni_Workshop.Data.Seeds
             catch (Exception ex)
             {
             }
-
             
         }
     }

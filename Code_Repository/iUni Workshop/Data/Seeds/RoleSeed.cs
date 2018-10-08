@@ -22,8 +22,14 @@ namespace iUniWorkshop.Data.Seeds
 
         private static async Task CreateRole(string role, RoleManager<IdentityRole> roleManager, ILogger<Program> logger)
         {
-            var result = await roleManager.CreateAsync(new IdentityRole { Name = role });
-            logger.LogCritical(result.ToString());
+            try
+            {
+                var result = await roleManager.CreateAsync(new IdentityRole { Name = role });
+                logger.LogCritical(result.ToString());
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }
