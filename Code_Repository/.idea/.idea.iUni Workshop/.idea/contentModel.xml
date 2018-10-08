@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$PROJECT_DIR$" t="IncludeFlat">
+    <e p="C:\Users\Winston Lam\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Winston Lam\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_iUni Workshop.2095775489.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Winston Lam\Documents\GitHub\Project-1-iUni-Workshop\Code_Repository" t="IncludeFlat">
       <e p="iUni Workshop" t="IncludeRecursive">
         <e p=".gitignore" t="Include" />
         <e p="appsettings.Development.json" t="Include" />
@@ -315,10 +317,21 @@
         </e>
         <e p="wwwroot" t="Include">
           <e p="css" t="Include">
+            <e p="font-awesome.min.css" t="Include" />
+            <e p="main.css" t="Include" />
             <e p="site.css" t="Include" />
             <e p="site.min.css" t="Include" />
+            <e p="tab.css" t="Include" />
           </e>
           <e p="favicon.ico" t="Include" />
+          <e p="fonts" t="Include">
+            <e p="fontawesome-webfont.eot" t="Include" />
+            <e p="fontawesome-webfont.svg" t="Include" />
+            <e p="fontawesome-webfont.ttf" t="Include" />
+            <e p="fontawesome-webfont.woff" t="Include" />
+            <e p="fontawesome-webfont.woff2" t="Include" />
+            <e p="FontAwesome.otf" t="Include" />
+          </e>
           <e p="images" t="Include">
             <e p="banner1.svg" t="Include" />
             <e p="banner2.svg" t="Include" />
@@ -327,8 +340,14 @@
           </e>
           <e p="js" t="Include">
             <e p="_AddSchool.js" t="Include" />
+            <e p="breakpoints.min.js" t="Include" />
+            <e p="browser.min.js" t="Include" />
+            <e p="jquery.min.js" t="Include" />
+            <e p="main.js" t="Include" />
             <e p="site.js" t="Include" />
             <e p="site.min.js" t="Include" />
+            <e p="tab.js" t="Include" />
+            <e p="util.js" t="Include" />
           </e>
           <e p="lib" t="Include">
             <e p="bootstrap" t="Include">
@@ -384,12 +403,53 @@
               <e p="jquery.validate.unobtrusive.min.js" t="Include" />
             </e>
           </e>
+          <e p="sass" t="Include">
+            <e p="base" t="Include">
+              <e p="_page.scss" t="Include" />
+              <e p="_reset.scss" t="Include" />
+              <e p="_typography.scss" t="Include" />
+            </e>
+            <e p="components" t="Include">
+              <e p="_actions.scss" t="Include" />
+              <e p="_box.scss" t="Include" />
+              <e p="_button.scss" t="Include" />
+              <e p="_contact.scss" t="Include" />
+              <e p="_features.scss" t="Include" />
+              <e p="_form.scss" t="Include" />
+              <e p="_icon.scss" t="Include" />
+              <e p="_icons.scss" t="Include" />
+              <e p="_image.scss" t="Include" />
+              <e p="_list.scss" t="Include" />
+              <e p="_mini-posts.scss" t="Include" />
+              <e p="_pagination.scss" t="Include" />
+              <e p="_posts.scss" t="Include" />
+              <e p="_row.scss" t="Include" />
+              <e p="_section.scss" t="Include" />
+              <e p="_table.scss" t="Include" />
+            </e>
+            <e p="layout" t="Include">
+              <e p="_banner.scss" t="Include" />
+              <e p="_footer.scss" t="Include" />
+              <e p="_header.scss" t="Include" />
+              <e p="_main.scss" t="Include" />
+              <e p="_menu.scss" t="Include" />
+              <e p="_sidebar.scss" t="Include" />
+              <e p="_wrapper.scss" t="Include" />
+            </e>
+            <e p="libs" t="Include">
+              <e p="_breakpoints.scss" t="Include" />
+              <e p="_functions.scss" t="Include" />
+              <e p="_html-grid.scss" t="Include" />
+              <e p="_mixins.scss" t="Include" />
+              <e p="_vars.scss" t="Include" />
+              <e p="_vendor.scss" t="Include" />
+            </e>
+            <e p="main.scss" t="Include" />
+          </e>
         </e>
       </e>
       <e p="iUni Workshop.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
     </e>
-    <e p="$USER_HOME$/Library/Caches/Rider2018.2/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2018.2/resharper-host/local/Transient/ReSharperHost/v182/SolutionCaches/_iUni Workshop.644664593.00" t="ExcludeRecursive" />
   </component>
 </project>
