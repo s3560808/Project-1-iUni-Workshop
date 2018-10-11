@@ -4,6 +4,7 @@
 
 @{
     ViewBag.Title = "title";
+    Layout = "_Layout";
 }
 
 <environment include="Dev">
@@ -17,18 +18,28 @@
     </script>
 </environment>
 
-<environment exclude="Dev">
-    <link rel="stylesheet" href="~/css/site.css" />
-    @{
-        Layout = "_Layout";
-    }
-</environment>
              
 
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 
+<style>
+    #content {
+	    transition: margin-left 1.5s;
+	    padding: 20px 0px 20px 30px;
+	    overflow-x: hidden;
+	    width: 1350px;
+    }
+    
+    #content.page {
+	    width: 1350px;
+    }
+
+</style>
+
 @*UPdate date*@
-<h2>Edit Job Profile</h2>
+<body id="content">
+
+<h2 class="page">Edit Job Profile</h2>
 
 
 <script>
@@ -38,20 +49,20 @@
         var divBox = document.createElement("div");
         divBox.className = "SkillClass";
         var inputSkillName = document.createElement("input");
-        inputSkillName.setAttribute("type","text");
-        inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".SkillName");
+        inputSkillName.setAttribute("type", "text");
+        inputSkillName.setAttribute("name", "[" + boxNumber + "]" + ".SkillName");
         var inputSkillLink = document.createElement("input");
-        inputSkillLink.setAttribute("type","text");
-        inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".CertificationLink");
+        inputSkillLink.setAttribute("type", "text");
+        inputSkillLink.setAttribute("name", "[" + boxNumber + "]" + ".CertificationLink");
         var inputSkillNameLable = document.createElement("p");
-        inputSkillNameLable.innerText = "Skill Name "+boxNumber;
+        inputSkillNameLable.innerText = "Skill Name " + boxNumber;
         var inputSkillLinkLable = document.createElement("p");
-        inputSkillLinkLable.innerText = "Skill Certification Link "+boxNumber;
+        inputSkillLinkLable.innerText = "Skill Certification Link " + boxNumber;
         divBox.appendChild(inputSkillNameLable);
         divBox.appendChild(inputSkillName);
         divBox.appendChild(inputSkillLinkLable);
         divBox.appendChild(inputSkillLink);
-        var last = suburbselectbox[boxNumber-1];
+        var last = suburbselectbox[boxNumber - 1];
         last.append(divBox);
     }
 
@@ -61,20 +72,20 @@
         var divBox = document.createElement("div");
         divBox.className = "MaterialClass";
         var inputSkillName = document.createElement("input");
-        inputSkillName.setAttribute("type","text");
-        inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".ExternalMeterialName");
+        inputSkillName.setAttribute("type", "text");
+        inputSkillName.setAttribute("name", "[" + boxNumber + "]" + ".ExternalMeterialName");
         var inputSkillLink = document.createElement("input");
-        inputSkillLink.setAttribute("type","text");
-        inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".ExternalMeterialLink");
+        inputSkillLink.setAttribute("type", "text");
+        inputSkillLink.setAttribute("name", "[" + boxNumber + "]" + ".ExternalMeterialLink");
         var inputSkillNameLable = document.createElement("p");
-        inputSkillNameLable.innerText = "External Meterial Name "+boxNumber;
+        inputSkillNameLable.innerText = "External Meterial Name " + boxNumber;
         var inputSkillLinkLable = document.createElement("p");
-        inputSkillLinkLable.innerText = "External Meterial Link "+boxNumber;
+        inputSkillLinkLable.innerText = "External Meterial Link " + boxNumber;
         divBox.appendChild(inputSkillNameLable);
         divBox.appendChild(inputSkillName);
         divBox.appendChild(inputSkillLinkLable);
         divBox.appendChild(inputSkillLink);
-        var last = suburbselectbox[boxNumber-1];
+        var last = suburbselectbox[boxNumber - 1];
         last.append(divBox);
     }
 
@@ -84,24 +95,24 @@
         var divBox = document.createElement("div");
         divBox.className = "HistoryClass";
         var inputSkillName = document.createElement("input");
-        inputSkillName.setAttribute("type","text");
-        inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".JobHistoryName");
+        inputSkillName.setAttribute("type", "text");
+        inputSkillName.setAttribute("name", "[" + boxNumber + "]" + ".JobHistoryName");
         var inputSkillLink = document.createElement("input");
-        inputSkillLink.setAttribute("type","text");
-        inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".JobHistoryShortDescription");
+        inputSkillLink.setAttribute("type", "text");
+        inputSkillLink.setAttribute("name", "[" + boxNumber + "]" + ".JobHistoryShortDescription");
         var inputSkillNameLable = document.createElement("p");
-        inputSkillNameLable.innerText = "Job History Name "+boxNumber;
+        inputSkillNameLable.innerText = "Job History Name " + boxNumber;
         var inputSkillLinkLable = document.createElement("p");
-        inputSkillLinkLable.innerText = "Job History Short Description "+boxNumber;
+        inputSkillLinkLable.innerText = "Job History Short Description " + boxNumber;
         divBox.appendChild(inputSkillNameLable);
         divBox.appendChild(inputSkillName);
         divBox.appendChild(inputSkillLinkLable);
         divBox.appendChild(inputSkillLink);
-        var last = suburbselectbox[boxNumber-1];
+        var last = suburbselectbox[boxNumber - 1];
         last.append(divBox);
-                
+
     }
-            
+
     function getSkillName(skillName) {
         var postCodeSelectBox = document.getElementById("skillList");
         postCodeSelectBox.innerHTML = "";
@@ -119,7 +130,7 @@
         xmlHttp.open("GET", "/Skill/GetSkillName/" + skillName, true);
         xmlHttp.send();
     }
-            
+
     window.onload = function getFieldName() {
         var postCodeSelectBox = document.getElementById("fieldList");
         postCodeSelectBox.innerHTML = "";
@@ -140,338 +151,325 @@
     }
 </script>
 
-<environment include="Development">
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/browser.min.js"></script>
-    <script src="js/breakpoints.js"></script>
-    <script src="js/util.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/Reactive_Sidebar.js"></script>
-</environment>
-<environment exclude="Development">
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-            asp-fallback-test="window.jQuery"
-            crossorigin="anonymous"
-            integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-    </script>
-    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-            asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-            crossorigin="anonymous"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-    </script>
-    <script src="~/js/site.min.js" asp-append-version="true"></script>
 
-   
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		    <form asp-action="EditJobProfileAction" method="post">
+		    @*Profiled id(if not a new profield)*@
+		    <div id="ProfileIdDiv">
+		        @if (@Model != null)
+		        {
+		            <input type="text" hidden name="ProfileId" id="ProfileId" value="@Model.ProfileId">
+		            <p>@Model.UpdateDate</p>
+		        }
+		        <hr/>
+		    </div>
 
-</environment>
+		    @*Field of Job Profile*@
+		    <div id="FieldDiv">
+		        @{
+		            string FieldName = "";
+		            if (@Model != null)
+		            {
+		                FieldName = Model.FieldName;
+		            }
+		        }
+		        Select a Field Name: <br>
+		        <select name="FieldName" value="@FieldName" id="fieldList">
+		        </select>
+		        <hr/>
+		    </div>
 
+		    @*Title of Job Profile*@
+		    <div id="TitleDiv">
+		        @{
+		            string Title = "";
+		            if (@Model != null)
+		            {
+		                Title = Model.Title;
+		            }
+		        }
+		        Title of Job Profile / Name: <br> <input type="text" name="Title" maxlength="30" value="@Title">
+		        <hr/>
+		    </div>
 
+		    @*Description of Job Profile*@
+		    <div id="DescriptionDiv">
+		        @{
+		            string description = "";
+		            if (@Model != null)
+		            {
+		                description = Model.Description;
+		            }
+		        }
+		        Description of Job Profile: <br><textarea name="Description" placeholder="Write Description" style="width: 100%; height: 200px; resize: none;"  >@description</textarea>
 
-<form asp-action="EditJobProfileAction" method="post">
-    @*Profiled id(if not a new profield)*@
-    <div id="ProfileIdDiv">
-        @if (@Model != null)
-        {
-            <input type="text" hidden name="ProfileId" id="ProfileId" value="@Model.ProfileId">
-            <p>@Model.UpdateDate</p>
-        }
-        <hr />
-    </div>
+		        <hr/>
+		    </div>
 
-    @*Field of Job Profile*@
-    <div id="FieldDiv">
-        @{
-            string FieldName = "";
-            if (@Model != null)
-            {
-                FieldName = Model.FieldName;
-            }
-        }
-        Select a Field Name: <br><select name="FieldName" value="@FieldName" id="fieldList">
-        </select>
-        <hr />
-    </div>
+		    @*Job Experience Required? of Job Profile*@
+		    <div id="ExperienceDiv">
+		        @{
+		            bool requireJobExperience = false;
+		            if (@Model != null)
+		            {
+		                requireJobExperience = Model.RequireJobExperience;
+		            }
+		        }
+		        Experience Required: <br/><input type="checkbox" name="RequireJobExperience" onclick="return myFun()" checked="@requireJobExperience" value="true">Yes<br>
+		        <input type="checkbox" name="RequireJobExperience" value="False" onclick="return myFun()">No<br><br>
+		        Select only one option
+		        <div>
+		            <span id="notValid"></span>
+		        </div>
 
-    @*Title of Job Profile*@
-    <div id="TitleDiv">
-        @{
-            string Title = "";
-            if (@Model != null)
-            {
-                Title = Model.Title;
-            }
-        }
-        Title of Job Profile / Name: <br> <input type="text" name="Title" maxlength="30" value="@Title">
-        <hr />
-    </div>
+		        <script type="text/javascript">
+        		    function myFun() {
+        		        var a = document.getElementsByName('RequireJobExperience');
+        		        var b = 0;
+        		        var count;
 
-    @*Description of Job Profile*@
-    <div id="DescriptionDiv">
-        @{
-            string description = "";
-            if (@Model != null)
-            {
-                description = Model.Description;
-            }
-        }
-        Description of Job Profile: <br><textarea name="Description" placeholder="Write Description" style="width: 100%; height: 200px; resize: none;"  >@description</textarea>
+        		        for (count = 1; count > a.length; count++) {
+        		            if (a[count].checked == true) {
+        		                b = b + 1;
+        		            }
+        		        }
 
-        <hr />
-    </div>
+        		        if (b >= 1) {
+        		            document.getElementById('notValid').innerHTML = "Only can select one option";
+        		            return false;
+        		        }
+        		    }
 
-    @*Job Experience Required? of Job Profile*@
-    <div id="ExperienceDiv">
-        @{
-            bool requireJobExperience = false;
-            if (@Model != null)
-            {
-                requireJobExperience = Model.RequireJobExperience;
-            }
-        }
-        Experience Required: <br/><input type="checkbox" name="RequireJobExperience"  onclick="return myFun()" checked="@requireJobExperience" value="true">Yes<br>
-        <input type="checkbox" name="RequireJobExperience" value="False" onclick="return myFun()">No<br><br>
-        Select only one option
-        <div>
-            <span id="notValid"></span>
-        </div>
-        
-        <script type="text/javascript">
-            function myFun() {
-                var a = document.getElementsByName('RequireJobExperience');
-                var b = 0;
-                var count;
-                
-                for (count = 1; count > a.length; count++) {
-                    if (a[count].checked == true) {
-                        b = b + 1;
-                    }
-                }
-                
-                if (b >= 1) {
-                    document.getElementById('notValid').innerHTML = "Only can select one option";
-                    return false;
-                }
-            }
+        		</script>
+		        <hr/>
+		    </div>
 
-        </script>
-        <hr />
-    </div>
+		    @*Max work day of Job Profile*@
+		    <div id="MaxDayDiv">
+		        @{
+		            int? max = null;
+		            if (@Model != null)
+		            {
+		                max = Model.MaxDay;
+		            }
+		        }
+		        Max amount of days for the Job:<br> <input type="number" name="MaxDay" value="@max" min="0" max="1825" style="width: 150px;">
+		        <hr/>
+		    </div>
 
-    @*Max work day of Job Profile*@
-    <div id="MaxDayDiv">
-        @{
-            int? max = null;
-            if (@Model != null)
-            {
-                max = Model.MaxDay;
-            }
-        }
-        Max amount of days for the Job:<br> <input type="number" name="MaxDay" value="@max" min="0" max="1825" style="width: 150px;">
-        <hr />
-    </div>
-
-    @*Min work day of Job Profile*@
-    <div id="MinDayDiv">
-        @{
-            int? min = null;
-            if (@Model != null)
-            {
-                min = Model.MinDay;
-            }
-        }
-        Minimum amount of days for the Job: <br><input type="number" name="MinDay"  value="@min" min="0" style="width: 150px;">
-        <hr />
-    </div>
+		    @*Min work day of Job Profile*@
+		    <div id="MinDayDiv">
+		        @{
+		            int? min = null;
+		            if (@Model != null)
+		            {
+		                min = Model.MinDay;
+		            }
+		        }
+		        Minimum amount of days for the Job: <br><input type="number" name="MinDay" value="@min" min="0" style="width: 150px;">
+		        <hr/>
+		    </div>
 
 
-    @*Salary of Job Profile*@
-    <div id="SalaryDiv">
-        @{
-            float? salary = null;
-            if (@Model != null)
-            {
-                salary = Model.Salary;
-            }
-        }
-        Salary for Job: <br><input type="number" name="Salary" value="@salary" step="0.01" max="999999.99" placeholder="$amount" style="width: 150px;">
-        <hr />
-    </div>
+		    @*Salary of Job Profile*@
+		    <div id="SalaryDiv">
+		        @{
+		            float? salary = null;
+		            if (@Model != null)
+		            {
+		                salary = Model.Salary;
+		            }
+		        }
+		        Salary for Job: <br><input type="number" name="Salary" value="@salary" step="0.01" max="999999.99" placeholder="$amount" style="width: 150px;">
+		        <hr/>
+		    </div>
 
-    @*Skills of Job Profile*@
-    <div id="SkillsDiv">
-        @{
-            if (@Model == null || !@Model.JobProfileSkills.Any())
-            {
-                int i = 0;
-                string skillName = "[" + 0 + "]" + ".SkillName";
-                string skillRequired = "[" + 0 + "]" + ".SkillRequired";
-                <div class="SkillClass">
-                    <p>Skill Name @i</p>
-                    <input type="text" name="@skillName" list="skillList" onkeyup="getSkillName(this.value)">
-                    <datalist id="skillList"></datalist>
-                    <p>Required @i</p>
-                    <input type="checkbox" name="@skillRequired" value="true">
-                </div>
-            }
-            else
-            {
-                for (int i = 0; i < @Model.JobProfileSkills.Count; i++)
-                {
+		    @*Skills of Job Profile*@
+		    <div id="SkillsDiv">
+		        @{
+		            if (@Model == null || !@Model.JobProfileSkills.Any())
+		            {
+		                int i = 0;
+		                string skillName = "[" + 0 + "]" + ".SkillName";
+		                string skillRequired = "[" + 0 + "]" + ".SkillRequired";
+		                <div class="SkillClass">
+		                    <p>Skill Name @i</p>
+		                    <input type="text" name="@skillName" list="skillList" onkeyup="getSkillName(this.value)">
+		                    <datalist id="skillList"></datalist>
+		                    <p>Required @i</p>
+		                    <input type="checkbox" name="@skillRequired" value="true">
+		                </div>
+		            }
+		            else
+		            {
+		                for (int i = 0; i < @Model.JobProfileSkills.Count; i++)
+		                {
 
-                    {
-                        string skillName = "[" + i + "]" + ".SkillName";
-                        string skillRequired = "[" + i + "]" + ".SkillRequired";
-                        <div class="SkillClass">
-                            <p>Skill Name @i</p>
-                            <input type="text" name="@skillName" value="@Model.JobProfileSkills[i].SkillName">
-                            <p>Required @i</p>
-                            @*Value = true?*@
-                            <input type="checkbox" name="@skillRequired" checked="@Model.JobProfileSkills[i].SkillRequired" value="true">
-                        </div>
-                    }
-                }
-            }
-            <button type="button" onclick="AddSkillController()">Add Skill</button>
-        }
-        <hr />
-    </div>
+		                    {
+		                        string skillName = "[" + i + "]" + ".SkillName";
+		                        string skillRequired = "[" + i + "]" + ".SkillRequired";
+		                        <div class="SkillClass">
+		                            <p>Skill Name @i</p>
+		                            <input type="text" name="@skillName" value="@Model.JobProfileSkills[i].SkillName">
+		                            <p>Required @i</p>
+		                            @*Value = true?*@
+		                            <input type="checkbox" name="@skillRequired" checked="@Model.JobProfileSkills[i].SkillRequired" value="true">
+		                        </div>
+		                    }
+		                }
+		            }
+		            <button type="button" onclick="AddSkillController()">Add Skill</button>
+		        }
+		        <hr/>
+		    </div>
 
-    @*Required Locations of Job Profile*@
-    <div id="LocationDiv">
-        @{
-            if (@Model == null || @Model.JobProfileRequiredLocation.Count() == 0)
-            {
-                var locationName = "[" + 0 + "]" + ".LocationName";
-                var postCode = "[" + 0 + "]" + ".PostCode";
-                <div class="LocationClass">
-                    <p>Location Name 1</p>
-                    <input type="text" name="@locationName">
-                    <p>Post COde 1</p>
-                    <input type="number" name="@postCode">
-                </div>
-            }
-            else
-            {
-                for (int i = 0; i < @Model.JobProfileRequiredLocation.Count; i++)
-                {
+		    @*Required Locations of Job Profile*@
+		    <div id="LocationDiv">
+		        @{
+		            if (@Model == null || @Model.JobProfileRequiredLocation.Count() == 0)
+		            {
+		                var locationName = "[" + 0 + "]" + ".LocationName";
+		                var postCode = "[" + 0 + "]" + ".PostCode";
+		                <div class="LocationClass">
+		                    <p>Location Name 1</p>
+		                    <input type="text" name="@locationName">
+		                    <p>Post COde 1</p>
+		                    <input type="number" name="@postCode">
+		                </div>
+		            }
+		            else
+		            {
+		                for (int i = 0; i < @Model.JobProfileRequiredLocation.Count; i++)
+		                {
 
-                    {
-                        string locationName = "[" + i + "]" + ".LocationName";
-                        string postCode = "[" + i + "]" + ".PostCode";
-                        <div class="LocationClass">
-                            <p>Skill Name 1</p>
-                            <input type="text" name="@locationName" value="@Model.JobProfileRequiredLocation[i].LocationName">
-                            <p>Required 1</p>
-                            @*Value = true?*@
-                            <input type="text" name="@postCode" value="@Model.JobProfileRequiredLocation[i].PostCode">
-                        </div>
-                    }
+		                    {
+		                        string locationName = "[" + i + "]" + ".LocationName";
+		                        string postCode = "[" + i + "]" + ".PostCode";
+		                        <div class="LocationClass">
+		                            <p>Skill Name 1</p>
+		                            <input type="text" name="@locationName" value="@Model.JobProfileRequiredLocation[i].LocationName">
+		                            <p>Required 1</p>
+		                            @*Value = true?*@
+		                            <input type="text" name="@postCode" value="@Model.JobProfileRequiredLocation[i].PostCode">
+		                        </div>
+		                    }
 
-                }
-            }
+		                }
+		            }
 
-            <button type="button" onclick="AddSkillController()">Add Location</button>
-        }
-        <hr />
-    </div>
+		            <button type="button" onclick="AddSkillController()">Add Location</button>
+		        }
+		        <hr/>
+		    </div>
 
-    @*Required Schools of Job Profile*@
-    <div id="SchoolsDiv">
-        @{
-            if (@Model == null || @Model.EmployerRequiredSchools.Count() == 0)
-            {
-                string schoolName = "[" + 0 + "]" + ".SchoolName";
-                string campus = "[" + 0 + "]" + ".Campus";
-                <div class="SchoolClass">
-                    <p>School Name 1</p>
-                    <input type="text" name="@schoolName">
-                    <p>Campus 1</p>
-                    <input type="text" name="@campus">
-                </div>
-            }
-            else
-            {
-                for (int i = 0; i < @Model.EmployerRequiredSchools.Count; i++)
-                {
+		    @*Required Schools of Job Profile*@
+		    <div id="SchoolsDiv">
+		        @{
+		            if (@Model == null || @Model.EmployerRequiredSchools.Count() == 0)
+		            {
+		                string schoolName = "[" + 0 + "]" + ".SchoolName";
+		                string campus = "[" + 0 + "]" + ".Campus";
+		                <div class="SchoolClass">
+		                    <p>School Name 1</p>
+		                    <input type="text" name="@schoolName">
+		                    <p>Campus 1</p>
+		                    <input type="text" name="@campus">
+		                </div>
+		            }
+		            else
+		            {
+		                for (int i = 0; i < @Model.EmployerRequiredSchools.Count; i++)
+		                {
 
-                    {
-                        string schoolName = "[" + i + "]" + ".SchoolName";
-                        string campus = "[" + i + "]" + ".Campus";
-                        <div class="SchoolClass">
-                            <p>School Name @i</p>
-                            <input type="text" name="@schoolName" value="@Model.EmployerRequiredSchools[i].SchoolName">
-                            <p>Campus@i</p>
-                            @*Value = true?*@
-                            <input type="text" name="@campus" value="@Model.EmployerRequiredSchools[i].CampusName">
-                        </div>
-                    }
-                }
-            }
-            <button type="button" onclick="AddSkillController()">Add School</button>
-        }
-        <hr />
-    </div>
+		                    {
+		                        string schoolName = "[" + i + "]" + ".SchoolName";
+		                        string campus = "[" + i + "]" + ".Campus";
+		                        <div class="SchoolClass">
+		                            <p>School Name @i</p>
+		                            <input type="text" name="@schoolName" value="@Model.EmployerRequiredSchools[i].SchoolName">
+		                            <p>Campus@i</p>
+		                            @*Value = true?*@
+		                            <input type="text" name="@campus" value="@Model.EmployerRequiredSchools[i].CampusName">
+		                        </div>
+		                    }
+		                }
+		            }
+		            <button type="button" onclick="AddSkillController()">Add School</button>
+		        }
+		        <hr/>
+		    </div>
 
-    @*Complusory work day*@
-    <div id="ComplusoryWorkDay">
-        @{
-        bool Mon = false;
-        bool Tue = false;
-        bool Wed = false;
-        bool Thu = false;
-        bool Fri = false;
-        bool Sat = false;
-        bool Sun = false;
+		    @*Complusory work day*@
+		    <div id="ComplusoryWorkDay">
+		        @{
+		            bool Mon = false;
+		            bool Tue = false;
+		            bool Wed = false;
+		            bool Thu = false;
+		            bool Fri = false;
+		            bool Sat = false;
+		            bool Sun = false;
 
-        if (Model == null || Model.JobProfileComplusoryWorkDays == null)
-        {
-        }
-        else
-        {
-            for (int i = 0; i < @Model.JobProfileComplusoryWorkDays.Count; i++)
-            {
-                switch (@Model.JobProfileComplusoryWorkDays[i].Day)
-                {
-                    case 1:
-                        Mon = true;
-                        break;
-                    case 2:
-                        Tue = true;
-                        break;
-                    case 3:
-                        Wed = true;
-                        break;
-                    case 4:
-                        Thu = true;
-                        break;
-                    case 5:
-                        Fri = true;
-                        break;
-                    case 6:
-                        Sat = true;
-                        break;
-                    case 7:
-                        Sun = true;
-                        break;
-                }
-            }
-        }
-        }
-        Monday         <input type="checkbox" name="[0].Day" value="1" checked="@Mon">
-        Tuesday        <input type="checkbox" name="[1].Day" value="2" checked="@Tue">
-        Wednesday      <input type="checkbox" name="[2].Day" value="3" checked="@Wed">
-        Thursday       <input type="checkbox" name="[3].Day" value="4" checked="@Thu">
-        Friday         <input type="checkbox" name="[4].Day" value="5" checked="@Fri">
-        Saturday       <input type="checkbox" name="[5].Day" value="6" checked="@Sat">
-        Sunday         <input type="checkbox" name="[6].Day" value="7" checked="@Sun">
-        <hr />
-    </div>
-    
-    <button type="submit">Submit</button>
-</form>
+		            if (Model == null || Model.JobProfileComplusoryWorkDays == null)
+		            {
+		            }
+		            else
+		            {
+		                for (int i = 0; i < @Model.JobProfileComplusoryWorkDays.Count; i++)
+		                {
+		                    switch (@Model.JobProfileComplusoryWorkDays[i].Day)
+		                    {
+		                        case 1:
+		                            Mon = true;
+		                            break;
+		                        case 2:
+		                            Tue = true;
+		                            break;
+		                        case 3:
+		                            Wed = true;
+		                            break;
+		                        case 4:
+		                            Thu = true;
+		                            break;
+		                        case 5:
+		                            Fri = true;
+		                            break;
+		                        case 6:
+		                            Sat = true;
+		                            break;
+		                        case 7:
+		                            Sun = true;
+		                            break;
+		                    }
+		                }
+		            }
+		        }
+		        Monday <input type="checkbox" name="[0].Day" value="1" checked="@Mon">
+		        Tuesday <input type="checkbox" name="[1].Day" value="2" checked="@Tue">
+		        Wednesday <input type="checkbox" name="[2].Day" value="3" checked="@Wed">
+		        Thursday <input type="checkbox" name="[3].Day" value="4" checked="@Thu">
+		        Friday <input type="checkbox" name="[4].Day" value="5" checked="@Fri">
+		        Saturday <input type="checkbox" name="[5].Day" value="6" checked="@Sat">
+		        Sunday <input type="checkbox" name="[6].Day" value="7" checked="@Sun">
+		        <hr/>
+		    </div>
 
+
+
+
+		    <button type="submit">Submit</button>
+
+		    <!-- Scripts -->
+		    <script>
+    		    function openSlideMenu(){
+    		        document.getElementById('side-menu').style.width = '250px';
+			        document.getElementById('content').style.marginLeft = '250px';
+		        }
+	
+    		    function closeSlideMenu(){
+    		        document.getElementById('side-menu').style.width = '0px';
+    		        document.getElementById('main').style.marginLeft = '0px';
+			        document.getElementById('content').style.marginLeft = '0px';
+		        }
+    		</script>
+		    </form>
+</body>
