@@ -23,6 +23,7 @@
 <style>
    #mainBottom{
       padding: 20px 0px 20px 160px;
+      transition: 1.5s;
    }
    
    .navbar {
@@ -30,23 +31,23 @@
       margin-bottom: 0px;
    }
    
-   .navbarclass {
+   .cl {
       padding-right: 15px;
       padding-top: 0px;
       padding-bottom: 0px;
-      margin-left: 10px;
+      margin-left: 8px;
       margin-bottom: 0px;
+      padding-left: 0px;
+      font-family: Arial;
+      font-size: 24px;
    }
    
-   .navbar-brand {
-      padding-bottom: 0px;
-      padding-top: 0px;
-   }
    
    #main {
       padding-bottom: 10px;
       padding-left: 15px;
       margin-left: 0px;
+      overflow-x: hidden;
    }
 </style>
 
@@ -103,19 +104,23 @@
    
    <div class="inner">
       <header id="h22" class="major">
-         <h2 style="margin-bottom: 0px;"><a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">iUni_Workshop</a></h2>
-         <h2 class="navbarclass">@await Html.PartialAsync("_LoginPartial")</h2>
+         <h2 style="margin-bottom: 0px; "><a asp-area="" asp-controller="Home" asp-action="Index" class="cl" style="text-decoration: none;"
+                                          >iUni_Workshop</a>
+            @await Html.PartialAsync("_LoginPartial")</h2>
       </header>
       
    </div>
    
 </div>
-<div class="container-body-content">
+
+<div class="">
+   <div class="container-body-content">
    @RenderBody()
-   <footer id="mainBottom">
-      <hr/>
-      <p>&copy; 2018 - iUni_Workshop</p>
-   </footer>
+      <footer id="mainBottom">
+         <hr/>
+         <p>&copy; 2018 - iUni_Workshop</p>
+      </footer>
+   </div>
 </div>
 
 <environment include="Development">

@@ -5,9 +5,20 @@
 @inject UserManager<ApplicationUser> UserManager
 
 
-<environment include="Development">
-    <link rel="stylesheet" href=""/>
-</environment>
+<style>
+    h2{
+        margin-left: 10px;
+    }
+
+    .login1 a{
+        color:#ff4000;
+    }
+
+    .login1 {
+        text-decoration: none;
+    }
+     
+</style>
 
 @if (SignInManager.IsSignedIn(User))
 {
@@ -24,8 +35,10 @@
 }
 else
 {
-    <h2 style="margin-left: 10px;"><a class="login1" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
-    <a  class="login1"asp-area="" asp-controller="Account" asp-action="Login" >Log in</a></h2>
+    <h2 style="margin-left: 10px; padding-top: 0px; text-align: right; padding-right: 5px;">
+        <a asp-area="" asp-controller="Account" asp-action="Register" style="text-decoration: none;">Register</a>
+        <a asp-area="" asp-controller="Account" asp-action="Login" style="text-decoration: none;">Log in</a>
+    </h2>
     
 }
 

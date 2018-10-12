@@ -293,7 +293,6 @@
         <e p="wwwroot" t="Include">
           <e p="css" t="Include">
             <e p="font-awesome.min.css" t="Include" />
-            <e p="Login.css" t="Include" />
             <e p="MyMessages.css" t="Include" />
             <e p="na.css" t="Include" />
             <e p="site.css" t="Include" />
