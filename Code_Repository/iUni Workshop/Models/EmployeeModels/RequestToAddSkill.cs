@@ -2,6 +2,6 @@
 {
     public class RequestToAddSkill
     {
-        public string Name { get; set; }
+        public string SkillName { get; set; }
     }
 }

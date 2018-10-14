@@ -26,7 +26,16 @@
     Title<input type="text" name="Title" value="@title">
 <hr/>
 @{
-    var findJob = !(Model.FindJobStatus == false || (DateTime.Now.Day - Model.StartFindJobDate.Day) > 14);
+    var findJob = false;
+    try
+    {
+        findJob = !(Model.FindJobStatus == false || (DateTime.Now.Day - Model.StartFindJobDate.Day) > 14);
+    }
+    catch (NullReferenceException)
+    {
+        
+    }
+
 }
     UpdateStatus?<input type="checkbox" name="UpdateStatus" value="true" checked="@findJob"> 
    

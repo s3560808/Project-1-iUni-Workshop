@@ -7,17 +7,13 @@
     Layout = "_Layout";
 }
 
-<link rel="stylesheet" href="~/css/admin.css"/>
-
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
-@await Html.PartialAsync("Shared/_AddSchool")
+<script src="~/js/_AddSchool.js" type="text/javascript"></script>
 
-<div id="adds">
-    
-    <h2>title</h2>
-    <form method="post" asp-action="AddSchoolAction">
-        <table class="table">
-            <thead>
+<h2>title</h2>
+<form method="post" asp-action="AddSchoolAction">
+    <table class="table">
+        <thead>
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.SchoolName)
@@ -27,157 +23,155 @@
                 </th>
                 <th></th>
             </tr>
-            </thead>
-            <tbody>
+        </thead>
+        <tbody>
             <tr>
                 <td>
-                    <input type="text" name="SchoolName" list="SchoolNameList" onkeyup="GetSchoolName(this.value)">
-                    <datalist id="SchoolNameList"></datalist>
+                    <input type="text" name="SchoolName" list = "SchoolNameList" onkeyup="GetSchoolName(this.value)" >
+                    <datalist id = "SchoolNameList"></datalist>
                 </td>
                 <td>
-                    <input type="text" name="DomainExtension" list="DomainList">
-                    <datalist id="DomainList"></datalist>
+                    <input type="text" name="DomainExtension" list="DomainExtensionList">
+                    <datalist id = "DomainExtensionList"></datalist>
                 </td>
                 <td>
-                    <input type="text" name="SuburbName" id="SuburbId" list="SuburbNameList" onkeyup="GetSuburbName(this.value)">
+                    <input type="text" name="SuburbName" id = "SuburbId" list="SuburbNameList" onkeyup="GetSuburbName(this.value)">
                     <datalist id="SuburbNameList">
                     </datalist>
                 </td>
                 <td>
-                    <input type="text" name="PostCode" id="PostCode" list="PostCodeList">
+                    <input type="text" name="PostCode" id = "PostCode" list="PostCodeList">
                     <datalist id="PostCodeList">
                     </datalist>
                 </td>
             </tr>
-            </tbody>
+        </tbody>
 
-        </table>
-        <button type="submit" class="btn btn-sm btn-success">Confirm</button>
-    </form>
-    @{
-        var inUse = new List<AddSchool>();
-        var inRequest = new List<AddSchool>();
-        var baned = new List<AddSchool>();
-        foreach (var school in Model)
+    </table>
+    <button type="submit" class="btn btn-sm btn-success">Confirm</button>
+</form>
+@{
+       var inUse = new List<AddSchool>();
+       var inRequest = new List<AddSchool>();
+       var baned = new List<AddSchool>();
+    foreach (var school in Model)
+    {
+        switch (school.Status)
         {
-            switch (school.Status)
-            {
-                case SchoolStatus.InUse:
-                    inUse.Add(school);
-                    break;
-                case SchoolStatus.InRequest:
-                    inRequest.Add(school);
-                    break;
-                case SchoolStatus.NoLongerUsed:
-                    baned.Add(school);
-                    break;
-                default:
-                    break;
-            }
+            case SchoolStatus.InUse:
+                inUse.Add(school);
+                break;
+            case SchoolStatus.InRequest:
+                inRequest.Add(school);
+                break;
+            case SchoolStatus.NoLongerUsed:
+                baned.Add(school);
+                break;
+             default:
+                 break;
         }
     }
-    <p>In Database School</p>
-    @{
-        foreach (var school in inUse)
-        {
-            <form asp-action="UpdateSchoolAction">
-                <tr>
-                    <td>
-                        <input type="text" name="SchoolName" value="@school.SchoolName">
-                    </td>
-                    <td>
-                        <input type="text" name="DomainExtension" value="@school.DomainExtension">
-                    </td>
-                    <td>
-                        <input type="text" name="SuburbName" id="SuburbId" list="SuburbNameList" onkeyup="GetSuburbName(this.value)" value="@school.SurburbName">
-                        <datalist id="SuburbNameList">
-                        </datalist>
-                    </td>
-                    <td>
-                        <input type="text" name="PostCode" id="PostCode" list="PostCodeList" value="@school.PostCode">
-                        <datalist id="PostCodeList">
-                        </datalist>
-                    </td>
-                </tr>
-                <select name="Status">
-                    <option value=@SchoolStatus.InUse selected="selected">In Use</option>
-                    <option value=@SchoolStatus.InRequest>In Request</option>
-                    <option value=@SchoolStatus.NoLongerUsed>No Longer Used</option>
-                </select>
-                <button type="submit" name="Id" value="@school.Id">Submit</button>
-            </form>
-        }
+}
+<p>In Database School</p>
+@{
+    foreach (var school in inUse)
+    {
+        <form asp-action="UpdateSchoolAction">
+            <tr>
+                <td>
+                    <input type="text" name="SchoolName" value = "@school.SchoolName">
+                </td>
+                <td>
+                    <input type="text" name="DomainExtension" value = "@school.DomainExtension">
+                </td>
+                <td>
+                    <input type="text" name="SuburbName" id = "SuburbId" list="SuburbNameList" onkeyup="GetSuburbName(this.value)" value="@school.SurburbName">
+                    <datalist id="SuburbNameList">
+                    </datalist>
+                </td>
+                <td>
+                    <input type="text" name="PostCode" id = "PostCode" list="PostCodeList" value="@school.PostCode">
+                    <datalist id="PostCodeList">
+                    </datalist>
+                </td>
+            </tr>
+            <select name="Status">
+                <option value=@SchoolStatus.InUse selected="selected">In Use</option>
+                <option value=@SchoolStatus.InRequest>In Request</option>
+                <option value=@SchoolStatus.NoLongerUsed>No Longer Used</option>
+            </select>
+            <button type="submit" name="Id" value="@school.Id">Submit</button>
+        </form>
     }
-    <p>In Request School</p>
-    @{
-        foreach (var school in inRequest)
-        {
-            <form asp-action="UpdateSchoolAction">
-                <tr>
-                    <td>
-                        <input type="text" name="SchoolName" value="@school.SchoolName">
-                    </td>
-                    <td>
-                        <input type="text" name="DomainExtension" value="@school.DomainExtension">
-                    </td>
-                    <td>
-                        <input type="text" name="SuburbName" id="SuburbId" list="SuburbNameList" onkeyup="GetSuburbName(this.value)" value="@school.SurburbName">
-                        <datalist id="SuburbNameList">
-                        </datalist>
-                    </td>
-                    <td>
-                        <input type="text" name="PostCode" id="PostCode" list="PostCodeList" value="@school.PostCode">
-                        <datalist id="PostCodeList">
-                        </datalist>
-                    </td>
-                </tr>
-                <select name="Status">
-                    <option value=@SchoolStatus.InUse>In Use</option>
-                    <option value=@SchoolStatus.InRequest selected="selected">In Request</option>
-                    <option value=@SchoolStatus.NoLongerUsed>No Longer Used</option>
-                </select>
-                <button type="submit" name="Id" value="@school.Id">Submit</button>
-            </form>
-        }
+}
+<p>In Request School</p>
+@{
+    foreach (var school in inRequest)
+    {
+        <form asp-action="UpdateSchoolAction">
+            <tr>
+                <td>
+                    <input type="text" name="SchoolName" value = "@school.SchoolName">
+                </td>
+                <td>
+                    <input type="text" name="DomainExtension" value = "@school.DomainExtension">
+                </td>
+                <td>
+                    <input type="text" name="SuburbName" id = "SuburbId" list="SuburbNameList" onkeyup="GetSuburbName(this.value)" value="@school.SurburbName">
+                    <datalist id="SuburbNameList">
+                    </datalist>
+                </td>
+                <td>
+                    <input type="text" name="PostCode" id = "PostCode" list="PostCodeList" value="@school.PostCode">
+                    <datalist id="PostCodeList">
+                    </datalist>
+                </td>
+            </tr>
+            <select name="Status">
+                <option value=@SchoolStatus.InUse>In Use</option>
+                <option value=@SchoolStatus.InRequest  selected="selected">In Request</option>
+                <option value=@SchoolStatus.NoLongerUsed>No Longer Used</option>
+            </select>
+            <button type="submit" name="Id" value="@school.Id">Submit</button>
+        </form>
     }
-    <p>No Longer Used School</p>
-    @{
-        foreach (var school in baned)
-        {
-            <form asp-action="UpdateSchoolAction">
-                <tr>
-                    <td>
-                        <input type="text" name="SchoolName" value="@school.SchoolName">
-                    </td>
-                    <td>
-                        <input type="text" name="DomainExtension" value="@school.DomainExtension">
-                    </td>
-                    <td>
-                        <input type="text" name="SuburbName" id="SuburbId" list="SuburbNameList" onkeyup="GetSuburbName(this.value)" value="@school.SurburbName">
-                        <datalist id="SuburbNameList">
-                        </datalist>
-                    </td>
-                    <td>
-                        <input type="text" name="PostCode" id="PostCode" list="PostCodeList" value="@school.PostCode">
-                        <datalist id="PostCodeList">
-                        </datalist>
-                    </td>
-                </tr>
-                <select name="Status">
-                    <option value=@SchoolStatus.InUse>In Use</option>
-                    <option value=@SchoolStatus.InRequest>In Request</option>
-                    <option value=@SchoolStatus.NoLongerUsed selected="selected">No Longer Used</option>
-                </select>
-                <button type="submit" name="Id" value="@school.Id">Submit</button>
-            </form>
-        }
+}
+<p>No Longer Used School</p>
+@{
+    foreach (var school in baned)
+    {
+        <form asp-action="UpdateSchoolAction">
+            <tr>
+                <td>
+                    <input type="text" name="SchoolName" value = "@school.SchoolName">
+                </td>
+                <td>
+                    <input type="text" name="DomainExtension" value = "@school.DomainExtension">
+                </td>
+                <td>
+                    <input type="text" name="SuburbName" id = "SuburbId" list="SuburbNameList" onkeyup="GetSuburbName(this.value)" value="@school.SurburbName">
+                    <datalist id="SuburbNameList">
+                    </datalist>
+                </td>
+                <td>
+                    <input type="text" name="PostCode" id = "PostCode" list="PostCodeList" value="@school.PostCode">
+                    <datalist id="PostCodeList">
+                    </datalist>
+                </td>
+            </tr>
+            <select name="Status">
+                <option value=@SchoolStatus.InUse>In Use</option>
+                <option value=@SchoolStatus.InRequest >In Request</option>
+                <option value=@SchoolStatus.NoLongerUsed  selected="selected">No Longer Used</option>
+            </select>
+            <button type="submit" name="Id" value="@school.Id">Submit</button>
+        </form>
     }
+}
 
 
 
-    @section Scripts {
-        @await Html.PartialAsync("_ValidationScriptsPartial")
-
-    }
-
-</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    
+}

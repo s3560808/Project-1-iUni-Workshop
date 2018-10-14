@@ -1,0 +1,87 @@
+@model System.Collections.Generic.IEnumerable<iUni_Workshop.Models.EmployerModels.Employer>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+
+<h2>title</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Suburb)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BriefDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ContactEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ABN)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <p>@item.Id</p>
+                    </td>
+                    <td>
+                        <p>@item.Location</p>
+                    </td>
+                    <td>
+                        <p>@item.Suburb.Name</p>
+                    </td>
+                    <td>
+                        <p>@item.Name</p>
+                    </td>
+                    <td>
+                        <p>@item.BriefDescription</p>
+                    </td>
+                    <td>
+                        <p>@item.PhoneNumber</p>
+                    </td>
+                    <td>
+                        <p>@item.ContactEmail</p>
+                    </td>
+                    <td>
+                        <p>@item.ABN</p>
+                    </td>
+                    <td>
+                        <form asp-action="CertificateCompaniesAction">
+                            <input type="hidden" name="Id" value="@item.Id">
+                            <button type="submit" name = "Accept" value="true">Accept</button>
+                            <button type="submit" name = "Accept" value="false">Reject</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    
+}

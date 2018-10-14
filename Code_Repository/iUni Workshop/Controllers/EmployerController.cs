@@ -1,38 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using iUniWorkshop.Models.EmployerModels;
 using iUni_Workshop.Data;
 using iUni_Workshop.Models;
-using iUni_Workshop.Models.EmployerModels;
-using iUniWorkshop.Models.EmployerModels;
 using iUni_Workshop.Models.EmployeeModels;
+using iUni_Workshop.Models.EmployerModels;
 using iUni_Workshop.Models.InvatationModel;
 using iUni_Workshop.Models.JobRelatedModels;
-using iUni_Workshop.Models.MessageModels;
 using iUni_Workshop.Models.SchoolModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using MySql.Data.MySqlClient;
-using Remotion.Linq.Parsing.Structure.IntermediateModel;
-using MessageDetail = iUni_Workshop.Models.EmployerModels.MessageDetail;
-using MyMessages = iUni_Workshop.Models.EmployerModels.MyMessages;
+
 
 namespace iUni_Workshop.Controllers
 {
     [Authorize(Roles = Roles.Employer)]
     public class EmployerController : Controller
     {
+        //Property of employer controller
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext _context;
-        private readonly SuburbController _suburbController;
 
+        //Constructor of employer controller
         public EmployerController(UserManager<ApplicationUser> userManager,
             ApplicationDbContext context,
             RoleManager<IdentityRole> roleManager
@@ -40,15 +32,17 @@ namespace iUni_Workshop.Controllers
         {
             _userManager = userManager;
             _context = context;
-            _suburbController = new SuburbController(_context);
         }
-        // GET
+
+        //View of index page of employer
+        [Route("[Controller]/Index")]
         public IActionResult Index()
         {
-
             return View();
         }
 
+        //View of edit company info
+        [Route("[Controller]/EditCompanyInfo")]
         public async Task<IActionResult> EditCompanyInfo()
         {
             ProcessSystemInfo();
@@ -68,10 +62,11 @@ namespace iUni_Workshop.Controllers
             return View(info);
         }
 
-        //Send Email when edited
+        //Edit company inforation
         public async Task<IActionResult> EditCompanyInfoAction(EditCompanyInfo info)
         {
             InitialSystemInfo();
+            //1. Validate front-end user input
             if (!ModelState.IsValid)
             {
                 ProcessModelState();
@@ -79,6 +74,7 @@ namespace iUni_Workshop.Controllers
             }
             var user = await _userManager.GetUserAsync(User);
             var data = _context.Employers.First(a => a.Id == user.Id);
+            //2. Update suburb
             try
             {
                 var suburbId = _context.Suburbs.First(a => a.Name == info.SuburbName && a.PostCode == info.PostCode).Id;
@@ -89,30 +85,19 @@ namespace iUni_Workshop.Controllers
                         data.SuburbId = suburbId;
                         _context.Employers.Update(data);
                         _context.SaveChanges();
-                        if ((string) TempData["Success"] != "")
-                        {
-                            TempData["Success"] += "\n";
-                        }
-                        TempData["Success"] += "Your suburb updated!";
+                        AddToTempDataSuccess("Your suburb updated!");
                     }
                     catch (InvalidOperationException)
                     {
-                        if ((string) TempData["Error"] != "")
-                        {
-                            TempData["Error"] += "\n";
-                        }
-                        TempData["Error"] += "Please enter correct suburb.";
+                        AddToTempDataError("Suburb failed to update, please retry.");
                     }
                 }
             }
             catch (InvalidOperationException)
             {
-                if ((string) TempData["Error"] != "")
-                {
-                    TempData["Error"] += "\n";
-                }
-                TempData["Error"] += "Please enter correct suburb.";
+                AddToTempDataError("Please enter correct suburb.");
             }
+            //3. Update address
             if (data.Location != info.Address)
             {
                 try
@@ -120,21 +105,14 @@ namespace iUni_Workshop.Controllers
                     data.Location = info.Address;
                     _context.Employers.Update(data);
                     _context.SaveChanges();
-                    if ((string) TempData["Success"] != "")
-                    {
-                        TempData["Success"] += "\n";
-                    }
-                    TempData["Success"] += "Your address updated!";
+                    AddToTempDataSuccess("Your address updated!");
                 }
                 catch (InvalidOperationException)
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }
-                    TempData["Error"] += "Please enter correct address.";
+                    AddToTempDataError("Address failed to update, please retry.");
                 }
             }
+            //4. Update brief description
             if (data.BriefDescription != info.BriefDescription)
             {
                 try
@@ -142,21 +120,14 @@ namespace iUni_Workshop.Controllers
                     data.BriefDescription = info.BriefDescription;
                     _context.Employers.Update(data);
                     _context.SaveChanges();
-                    if ((string) TempData["Success"] != "")
-                    {
-                        TempData["Success"] += "\n";
-                    }
-                    TempData["Success"] += "Your brief description updated!";
+                    AddToTempDataSuccess("Your brief description updated!");
                 }
                 catch (InvalidOperationException)
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }
-                    TempData["Error"] += "Please enter correct brief description.";
+                    AddToTempDataError("Please enter correct brief description.");
                 }
             }
+            //5. Update contact email
             if (data.ContactEmail != info.ContactEmail)
             {
                 try
@@ -164,21 +135,14 @@ namespace iUni_Workshop.Controllers
                     data.ContactEmail = info.ContactEmail;
                     _context.Employers.Update(data);
                     _context.SaveChanges();
-                    if ((string) TempData["Success"] != "")
-                    {
-                        TempData["Success"] += "\n";
-                    }
-                    TempData["Success"] += "Your contact email updated!";
+                    AddToTempDataSuccess("Your contact email updated!");
                 }
                 catch (InvalidOperationException)
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }
-                    TempData["Error"] += "Please enter correct contact email.";
+                    AddToTempDataError("Please enter correct contact email.");
                 }
             }
+            //5. Update contact email
             if (data.PhoneNumber != info.PhoneNumber)
             {
                 try
@@ -186,24 +150,17 @@ namespace iUni_Workshop.Controllers
                     data.PhoneNumber = info.PhoneNumber;
                     _context.Employers.Update(data);
                     _context.SaveChanges();
-                    if ((string) TempData["Success"] != "")
-                    {
-                        TempData["Success"] += "\n";
-                    }
-                    TempData["Success"] += "Your phone number updated!";
+                    AddToTempDataSuccess("Your phone number updated!");
                 }
                 catch (InvalidOperationException)
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }
-                    TempData["Error"] += "Please enter correct phone number.";
+                    AddToTempDataError("Please enter correct phone number.");
                 }
             }
-            //Infom user if already has abn
+            //If certificated ABN & company cannot be changed
             if (!data.Certificated)
             {
+                //6. Update ABN
                 if (data.ABN != info.ABN)
                 {
                     try
@@ -211,68 +168,45 @@ namespace iUni_Workshop.Controllers
                         data.ABN = info.ABN;
                         _context.Employers.Update(data);
                         _context.SaveChanges();
-                        if ((string) TempData["Success"] != "")
-                        {
-                            TempData["Success"] += "\n";
-                        }
-                        TempData["Success"] += "Your abn updated!";
+                        AddToTempDataSuccess("Your ABN updated!");
                     }
                     catch (InvalidOperationException)
                     {
-                        if ((string) TempData["Error"] != "")
-                        {
-                            TempData["Error"] += "\n";
-                        }
-                        TempData["Error"] += "Please enter correct abn.";
+                        AddToTempDataError("Please enter correct ABN.");
                     }
                 }
-                if (data.Name != info.Name)
+                //7. Update company name
+                if (data.Name == info.Name) return RedirectToAction("EditCompanyInfo");
+                try
                 {
-                    try
-                    {
-                        data.Name = info.Name;
-                        _context.Employers.Update(data);
-                        _context.SaveChanges();
-                        if ((string) TempData["Success"] != "")
-                        {
-                            TempData["Success"] += "\n";
-                        }
-                        TempData["Success"] += "Your name updated!";
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        if ((string) TempData["Error"] != "")
-                        {
-                            TempData["Error"] += "\n";
-                        }
-                        TempData["Error"] += "Please enter correct name.";
-                    }
+                    data.Name = info.Name;
+                    _context.Employers.Update(data);
+                    _context.SaveChanges();
+                    AddToTempDataSuccess("Your company updated!");
+                }
+                catch (InvalidOperationException)
+                {
+                    AddToTempDataError("Please enter correct company name.");
                 }
             }
             else
             {
                 if (data.ABN != info.ABN)
                 {
-                    if ((string) TempData["Inform"] != "")
-                    {
-                        TempData["Inform"] += "\n";
-                    }
-                    TempData["Inform"] += "You are certificated. Your name Cannot updated";
+                    AddToTempDataInform("You are certificated. Your name Cannot updated");
                 }
                 if (data.Name != info.Name)
                 {
-                    if ((string) TempData["Inform"] != "")
-                    {
-                        TempData["Inform"] += "\n";
-                    }
-                    TempData["Inform"] += "You are certificated. Your name Cannot updated";
+                    AddToTempDataInform("You are certificated. Your name Cannot updated");
                 }
             }
             return RedirectToAction("EditCompanyInfo");
         }
 
-        //Send email
+        //View of RequestToCertificateMyCompany 
+        [Route("[Controller]/RequestToCertificateMyCompany")]
         public async Task<IActionResult> RequestToCertificateMyCompany(){
+            ProcessSystemInfo();
             var user = await _userManager.GetUserAsync(User);
             var rawInfo = _context.Employers.Where(a => a.Id == user.Id).Select(a => new RequestToCertificateMyCompany
             {
@@ -286,53 +220,66 @@ namespace iUni_Workshop.Controllers
                 PhoneNumber = a.PhoneNumber,
                 Certificated = a.Certificated
             }).First();
-            if(rawInfo.Certificated==true){
-                //already Certificated
-                return RedirectToAction("Index");
+            if(rawInfo.Certificated){
+                if ((string) ViewBag.Inform != "")
+                {
+                    ViewBag.Inform += "\n";
+                }
+                ViewBag.Inform += "You already certificated.";
             }
-            if (rawInfo.RequestCertification == true)
+            if (rawInfo.RequestCertification)
             {
-                //already requested
-                return RedirectToAction("Index");
+                if ((string) ViewBag.Inform != "")
+                {
+                    ViewBag.Inform += "\n";
+                }
+                ViewBag.Inform += "You already requested certification.";
             }
             if (rawInfo.ABN==""||rawInfo.Name==""){
-                //Need to update info
-                return RedirectToAction("Index");
+                if ((string) ViewBag.Inform != "")
+                {
+                    ViewBag.Inform += "\n";
+                }
+                ViewBag.Inform += "You need update your company's ABN and Name first.";
             }
             return View(rawInfo);
         }
 
+        //Action of RequestToCertificateMyCompany 
         public async Task<IActionResult> RequestToCertificateMyCompanyAction(){
             var user = await _userManager.GetUserAsync(User);
             var employer = _context.Employers.First(a => a.Id == user.Id);
-            if (employer.Certificated == true)
+            if (employer.Certificated)
             {
-                //already Certificated
-                return RedirectToAction("Index");
+                AddToTempDataInform("Your company already certificated.");
+                return RedirectToAction("RequestToCertificateMyCompany");
             }
-            if (employer.RequestCertification == true)
+            if (employer.RequestCertification)
             {
-                //already requested
-                return RedirectToAction("Index");
+                AddToTempDataInform("Your company already requested to certificate company.\n Please wait.");
+                return RedirectToAction("RequestToCertificateMyCompany");
             }
             if (employer.ABN == "" || employer.Name == "")
             {
-                //Need to update info
-                return RedirectToAction("Index");
+                AddToTempDataInform("Please update ABN & company name first");
+                return RedirectToAction("RequestToCertificateMyCompany");
             }
             employer.RequestCertification = true;
             _context.Employers.Update(employer);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            AddToTempDataSuccess("Request to certificate company sent!");
+            return RedirectToAction("RequestToCertificateMyCompany");
         }
 
-        //Send email
-        //Database
-        public async Task<IActionResult> RequestToUnCertificateMyCompany() {
-
+        //View of RequestToUnCertificateMyCompany 
+        [Route("[Controller]/RequestToUnCertificateMyCompany")]
+        public IActionResult RequestToUnCertificateMyCompany() 
+        {
+            ProcessSystemInfo();
             return View();
         }
 
+        //Action of RequestToUnCertificateMyCompany 
         public async Task<IActionResult> RequestToUnCertificateMyCompanyAction(){
             var user = await _userManager.GetUserAsync(User);
             var employer = _context.Employers.First(a => a.Id == user.Id);
@@ -340,29 +287,41 @@ namespace iUni_Workshop.Controllers
             employer.Certificated = false;
             _context.Employers.Update(employer);
             _context.SaveChanges();
-            return RedirectToAction("Index");
+            AddToTempDataSuccess("Your company changed to not certificated status!");
+            return RedirectToAction("RequestToUnCertificateMyCompany");
         }
 
+        //View of Job Profiles
+        [Route("[Controller]/JobProfiles")]
         public async Task<IActionResult> JobProfiles()
         {
             var user = await _userManager.GetUserAsync(User);
             var list = _context.EmployerJobProfiles
                 .Where(a => a.EmployerId == user.Id)
-                .Select(a => new JobProfiles{ Title = a.Title, Id = a.Id, Field = a.Field.Name, LastUpdateTime = a.LastUpdateDateTime})
+                .Select(a => new JobProfiles
+                {
+                    Title = a.Title, 
+                    Id = a.Id, 
+                    Field = a.Field.Name, 
+                    LastUpdateTime = a.LastUpdateDateTime
+                })
                 .ToList();
             return View(list);
         }
 
-        [Route("[Controller]/EditJobProfile/{JobProfileId}")]
+        //View of EditJobProfile
+        [Route("[Controller]/EditJobProfile/{jobProfileId}")]
         [Route("[Controller]/EditJobProfile/")]
-        public async Task<IActionResult> EditJobProfile(int JobProfileId)
+        public async Task<IActionResult> EditJobProfile(int jobProfileId)
         {
             ProcessSystemInfo();
+            InitialSystemInfo();
             var user = await _userManager.GetUserAsync(User);
             JobProfile jobProfile;
+            //1.1. Get specific user profile
             try
             {
-                jobProfile = _context.EmployerJobProfiles.Where(a => a.Id == JobProfileId && a.EmployerId == user.Id).Select(a => new JobProfile
+                jobProfile = _context.EmployerJobProfiles.Where(a => a.Id == jobProfileId && a.EmployerId == user.Id).Select(a => new JobProfile
                 {
                     ProfileId = a.Id,
                     UpdateDate = a.LastUpdateDateTime,
@@ -375,26 +334,27 @@ namespace iUni_Workshop.Controllers
                     FieldName = a.Field.Name
                 }).First();
             }
-            catch (InvalidOperationException ex)
+            //1.2. New user profile
+            catch (InvalidOperationException)
             {
                 return View();
             }
-
+            //2. Get profile's skills 
             jobProfile.JobProfileSkills = _context.EmployerSkills
                 .Where(a => a.EmployerJobProfileId == jobProfile.ProfileId)
                 .Select(a => new JobProfileSkill{ SkillName = a.Skill.Name,SkillRequired = a.Required})
                 .ToList();
-
+            //3. Get profile's compulsory work days 
             jobProfile.JobProfileComplusoryWorkDays = _context.EmployerComplusoryWorkDays
                 .Where(a => a.EmployerJobProfileId == jobProfile.ProfileId)
-                .Select(a => new JobProfileComplusoryWorkDay {Day = a.Day})
+                .Select(a => new JobProfileCompulsoryWorkDay {Day = a.Day})
                 .ToList();
-
+            //4. Get profile's required location 
             jobProfile.JobProfileRequiredLocation = _context.EmployerWorkLocations
                 .Where(a => a.EmployerJobProfileId == jobProfile.ProfileId)
                 .Select( a=> new JobProfileRequiredLocation{ LocationName = a.Suburb.Name, PostCode = a.Suburb.PostCode})
                 .ToList();
-
+            //4. Get profile's required schools 
             jobProfile.EmployerRequiredSchools = _context.EmployerRequiredSchools
                 .Where(a => a.EmployerJobProfileId == jobProfile.ProfileId)
                 .Select(a => new JobProfileRequiredSchool { SchoolName = a.School.SchoolName, CampusName = a.School.Suburb.Name, CampusPostCode = a.School.Suburb.PostCode})
@@ -402,16 +362,16 @@ namespace iUni_Workshop.Controllers
             return View(jobProfile);
         }
 
-        //如果有邀请则不可更改
+        //If have cannot edit
         public async Task<IActionResult> EditJobProfileAction(
             JobProfile jobProfile,
             IEnumerable<JobProfileSkill> jobProfileSkills,
-            //TODO 1-7
-            IEnumerable<JobProfileComplusoryWorkDay> jobProfileComplusoryWorkDay,
+            IEnumerable<JobProfileCompulsoryWorkDay> jobProfileCompulsoryWorkDay,
             IEnumerable<JobProfileRequiredLocation> jobProfileRequiredLocation,
             IEnumerable<JobProfileRequiredSchool> jobProfileRequiredSchool
         ){
             InitialSystemInfo();
+            //0. Validate front-end page
             if (!ModelState.IsValid)
             {
                 ProcessModelState();
@@ -421,9 +381,11 @@ namespace iUni_Workshop.Controllers
             EmployerJobProfile newJobProfile = null;
             int newFieldId;
             var newSkills = new List<EmployerSkill>();
-            //1. Validate correct employer job profile
+            //1. Validate correct employer job profile && if have 
+            //invitation     
             if (jobProfile.ProfileId != 0)
             {
+                //1.1. Get correct user's job profile
                 try
                 {
                     newJobProfile = _context
@@ -431,36 +393,47 @@ namespace iUni_Workshop.Controllers
                         .First(a => a.Id == jobProfile.ProfileId && a.EmployerId == user.Id);
                 }
                 catch(InvalidOperationException) {
-                    if ((string) TempData["Error"] != "")
+                    AddToTempDataError("Sorry. It is not your job profile!");
+                    //If it is not user's job profile, redirect to job profiles
+                    return RedirectToAction("JobProfiles");
+                }
+                //1.2. Get correct user's invitation
+                try
+                {
+                    var profile = newJobProfile;
+                    var invitation = _context.Invatations.Where(a => a.EmployerJobProfileId == profile.Id);
+                    if (invitation.Any())
                     {
-                        TempData["Error"] += "\n";
+                        AddToTempDataError("Sorry. Your job profile already has invitation. Cannot be changed!");
+                        return RedirectToAction("EditJobProfile", new{ JobProfileId = jobProfile.ProfileId});
                     }
-                        
-                    TempData["Error"] += "Sorry. It is not your job profile!";
-                    return RedirectToAction("EditJobProfile", new{ JobProfileId = jobProfile.ProfileId});
+                }
+                catch (InvalidOperationException)
+                {
                 }
             }
             //2. Validate if correct field name
             try{
-                //Get new job profile field id
+                //2.1 Get new job profile field id
                 newFieldId = _context.Fields.First(a => 
                     a.Status == FieldStatus.InUse && 
                     a.NormalizedName == jobProfile.FieldName.ToUpper()
                 ).Id;
-                
             }
             catch(InvalidOperationException)
             {
-                if ((string) TempData["Error"] != "")
-                {
-                    TempData["Error"] += "\n";
-                }       
-                TempData["Error"] += "Sorry. Not a valid field!";
+                //2.3 Not valid filed
+                AddToTempDataError("Sorry. Not a valid field!");
                 return RedirectToAction("EditJobProfile", new{JobProfileId = jobProfile.ProfileId});
             }
-            //3. Validate skill name
+            //3. Get related information
+            //3.1 Validate skill name & Get skill id list
             //!! No skill more than 10 skill
-            foreach (var skill in jobProfileSkills)
+            var ndSkill  =  jobProfileSkills
+                .GroupBy(p => p.SkillName)
+                .Select(g => g.First())
+                .ToList();
+            foreach (var skill in ndSkill)
             {
                 try
                 {
@@ -474,27 +447,26 @@ namespace iUni_Workshop.Controllers
                 }
                 catch (InvalidOperationException)
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }       
-                    TempData["Error"] += "Sorry. "+ skill.SkillName + " is not a valid skill";
+                    AddToTempDataError("Sorry. "+ skill.SkillName + " is not a valid skill");
                 }
             }
             if (!newSkills.Any() || newSkills.ToList().Count>10)
             {
-                if ((string) TempData["Error"] != "")
-                {
-                    TempData["Error"] += "\n";
-                }       
-                TempData["Error"] += "Sorry. At least one skill at most ten skill!";
+                AddToTempDataError("Sorry. At least one skill at most ten skill!");
                 return RedirectToAction("EditJobProfile", new {JobProfileId = jobProfile.ProfileId});
             }
-            //GET NEW Days
-            var newDays = jobProfileComplusoryWorkDay.Select(day => new EmployerComplusoryWorkDay {Day = day.Day}).ToList();
-            //GET NEW Locations
+            //3.2 GET NEW Days
+            var newDays = jobProfileCompulsoryWorkDay
+                .Select(day => new EmployerComplusoryWorkDay{Day = day.Day})
+                .Distinct()
+                .ToList();
+            //3.3 GET required Locations
+            var ndLocation = jobProfileRequiredLocation
+                .Select(a => new {a.PostCode, a.LocationName})
+                .Distinct()
+                .ToList();
             var newRequiredLocations = new List<EmployerRequiredWorkLocation>();
-            foreach (var location in jobProfileRequiredLocation)
+            foreach (var location in ndLocation)
             {
                 try
                 {
@@ -516,9 +488,14 @@ namespace iUni_Workshop.Controllers
                     TempData["Error"] += "Sorry. "+ location.LocationName +" "+location.PostCode + " is not a valid location";
                 }
             }
-            //GET NEW Schools
+            newRequiredLocations = newRequiredLocations.Distinct().ToList();
+            //3.4 GET required Schools
+            var ndSchool = jobProfileRequiredSchool
+                .Select(a => new {a.SchoolName, a.CampusName, a.CampusPostCode})
+                .Distinct()
+                .ToList();
             var newRequiredSchools = new List<EmployerRequiredSchool>();
-            foreach (var school in jobProfileRequiredSchool)
+            foreach (var school in ndSchool)
             {
                 try
                 {
@@ -539,14 +516,11 @@ namespace iUni_Workshop.Controllers
                 }
                 catch (InvalidOperationException)
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }       
-                    TempData["Error"] += "Sorry. "+ school.SchoolName +" "+ school.CampusName +" "+ school.CampusPostCode + " is not a valid school";
+                    AddToTempDataError("Sorry. "+ school.SchoolName +" "+ school.CampusName +" "+ school.CampusPostCode + " is not a valid school");
                 }
             }
-            //if new cv, create new cv
+            newRequiredSchools = newRequiredSchools.Distinct().ToList();
+            //4. if new cv, create new cv
             if (newJobProfile == null)
             {
                 if (newSkills.Any() && newFieldId != 0)
@@ -568,33 +542,22 @@ namespace iUni_Workshop.Controllers
                     {
                         _context.EmployerJobProfiles.Update(newJobProfile);
                         _context.SaveChanges();
-                        if ((string) TempData["Success"] != "")
-                        {
-                            TempData["Success"] += "\n";
-                        }       
-                        TempData["Success"] += "New job profile Added!";
+                        AddToTempDataSuccess("New job profile Added!");
                     }
                     catch (InvalidOperationException)
                     {
-                        if ((string) TempData["Error"] != "")
-                        {
-                            TempData["Error"] += "\n";
-                        }       
-                        TempData["Error"] += "Sorry. Failed to create a new job profile!";
+                        AddToTempDataError("Sorry. Failed to create a new job profile!");
                         return RedirectToAction("EditJobProfile");
                     }
                 }
                 else
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }       
-                    TempData["Error"] += "Sorry. Failed to create a new cv!";
+                    AddToTempDataError("Sorry. Failed to create a new cv!");
                     return RedirectToAction("EditJobProfile");
                 }
             }
 
+            //5. Set job profile id
             foreach (var skill in newSkills)
             {
                 skill.EmployerJobProfileId = newJobProfile.Id;
@@ -615,6 +578,8 @@ namespace iUni_Workshop.Controllers
                 school.EmployerJobProfileId = newJobProfile.Id;
             }
 
+            //6.Update info
+            //6.1 Update Require Job Experience
             if (newJobProfile.RequireJobExperience !=jobProfile.RequireJobExperience)
             {
                 try
@@ -622,23 +587,14 @@ namespace iUni_Workshop.Controllers
                     newJobProfile.RequireJobExperience =jobProfile.RequireJobExperience;
                     _context.EmployerJobProfiles.Update(newJobProfile);
                     _context.SaveChanges();
-                    if ((string) TempData["Success"] != "")
-                    {
-                        TempData["Success"] += "\n";
-                    }
-                    TempData["Success"] += "Job Profile's \"Required Job Experience\" changed!";
+                    AddToTempDataSuccess("Job Profile's \"Required Job Experience\" changed!");
                 }
                 catch (InvalidOperationException)
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }
-                        
-                    TempData["Error"] += "Sorry. Failed to update \"Required Job Experience\"";
+                    AddToTempDataError("Sorry. Failed to update \"Required Job Experience\"");
                 }
             }
-            
+            //6.2 Update job profile title
             if (newJobProfile.Title !=jobProfile.Title)
             {
                 try
@@ -646,23 +602,14 @@ namespace iUni_Workshop.Controllers
                     newJobProfile.Title =jobProfile.Title;
                     _context.EmployerJobProfiles.Update(newJobProfile);
                     _context.SaveChanges();
-                    if ((string) TempData["Success"] != "")
-                    {
-                        TempData["Success"] += "\n";
-                    }
-                    TempData["Success"] += "Job Profile's \"Title\" changed!";
+                    AddToTempDataSuccess("Job Profile's \"Title\" changed!");
                 }
                 catch (InvalidOperationException)
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }
-                        
-                    TempData["Error"] += "Sorry. Failed to update \"Title\"";
+                    AddToTempDataError("Sorry. Failed to update \"Title\"");
                 }
             }
-            
+            //6.2 Update job profile description
             if (newJobProfile.Description !=jobProfile.Description)
             {
                 try
@@ -670,23 +617,15 @@ namespace iUni_Workshop.Controllers
                     newJobProfile.Description =jobProfile.Description;
                     _context.EmployerJobProfiles.Update(newJobProfile);
                     _context.SaveChanges();
-                    if ((string) TempData["Success"] != "")
-                    {
-                        TempData["Success"] += "\n";
-                    }
-                    TempData["Success"] += "Job Profile's \"Description\" changed!";
+                    AddToTempDataSuccess("Job Profile's \"Description\" changed!");
                 }
                 catch (InvalidOperationException)
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }
-                        
-                    TempData["Error"] += "Sorry. Failed to update \"Description\"";
+                    AddToTempDataError("Sorry. Failed to update \"Description\"");
                 }
             }
             
+            //6.3 Update job profile salary
             if (!Math.Abs(newJobProfile.Salary - jobProfile.Salary).Equals(0))
             {
                 try
@@ -694,23 +633,15 @@ namespace iUni_Workshop.Controllers
                     newJobProfile.Salary =jobProfile.Salary;
                     _context.EmployerJobProfiles.Update(newJobProfile);
                     _context.SaveChanges();
-                    if ((string) TempData["Success"] != "")
-                    {
-                        TempData["Success"] += "\n";
-                    }
-                    TempData["Success"] += "Job Profile's \"Salary\" changed!";
+                    AddToTempDataSuccess("Job Profile's \"Salary\" changed!");
                 }
                 catch (InvalidOperationException)
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }
-                        
-                    TempData["Error"] += "Sorry. Failed to update \"Salary\"";
+                    AddToTempDataError("Sorry. Failed to update \"Salary\"");
                 }
             }
             
+            //6.4 Update job profile max day
             if (newJobProfile.MaxDayForAWeek !=jobProfile.MaxDay)
             {
                 try
@@ -718,23 +649,15 @@ namespace iUni_Workshop.Controllers
                     newJobProfile.MaxDayForAWeek =jobProfile.MaxDay;
                     _context.EmployerJobProfiles.Update(newJobProfile);
                     _context.SaveChanges();
-                    if ((string) TempData["Success"] != "")
-                    {
-                        TempData["Success"] += "\n";
-                    }
-                    TempData["Success"] += "Job Profile's \"Max Day For A Week\" changed!";
+                    AddToTempDataSuccess("Job Profile's \"Max Day For A Week\" changed!");
                 }
                 catch (InvalidOperationException)
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }
-                        
-                    TempData["Error"] += "Sorry. Failed to update \"Max Day For A Week\"";
+                    AddToTempDataError("Sorry. Failed to update \"Max Day For A Week\"");
                 }
             }
             
+            //6.5 Update job profile min day
             if (newJobProfile.MinDayForAWeek !=jobProfile.MinDay)
             {
                 try
@@ -742,23 +665,14 @@ namespace iUni_Workshop.Controllers
                     newJobProfile.MinDayForAWeek =jobProfile.MinDay;
                     _context.EmployerJobProfiles.Update(newJobProfile);
                     _context.SaveChanges();
-                    if ((string) TempData["Success"] != "")
-                    {
-                        TempData["Success"] += "\n";
-                    }
-                    TempData["Success"] += "Job Profile's \"Min Day For A Week\" changed!";
+                    AddToTempDataSuccess("Job Profile's \"Min Day For A Week\" changed!");
                 }
                 catch (InvalidOperationException)
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }
-                        
-                    TempData["Error"] += "Sorry. Failed to update \"Min Day For A Week\"";
+                    AddToTempDataError("Sorry. Failed to update \"Min Day For A Week\"");
                 }
             }
-            
+            //6.6 Update job profile field
             if (newJobProfile.FieldId != newFieldId)
             {
                 try
@@ -766,268 +680,213 @@ namespace iUni_Workshop.Controllers
                     newJobProfile.MaxDayForAWeek =jobProfile.MaxDay;
                     _context.EmployerJobProfiles.Update(newJobProfile);
                     _context.SaveChanges();
-                    if ((string) TempData["Success"] != "")
-                    {
-                        TempData["Success"] += "\n";
-                    }
-                    TempData["Success"] += "Job Profile's \"Field\" changed!";
+                    AddToTempDataSuccess("Job Profile's \"Field\" changed!");
                 }
                 catch (InvalidOperationException)
                 {
-                    if ((string) TempData["Error"] != "")
-                    {
-                        TempData["Error"] += "\n";
-                    }
-                        
-                    TempData["Error"] += "Sorry. Failed to update \"Field\"";
+                    AddToTempDataError("Sorry. Failed to update \"Field\"");
                 }
             }
-            //Update skills  
+            //6.7 Update job skills
             try
             {
                 var oldSkills = _context.EmployerSkills.Where(a => a.EmployerJobProfileId == newJobProfile.Id).ToList();
-                var newEnumerable = newSkills.Select(a => new {Required = a.Required, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
-                var oldEnumerable = oldSkills.Select(a => new {Required = a.Required, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
+                var newEnumerable = newSkills.Select(a => new {a.Required, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
+                var oldEnumerable = oldSkills.Select(a => new {a.Required, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
                 
                 if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
-                        if (oldSkills.Any())
-                        {
                             _context.EmployerSkills.RemoveRange(oldSkills);
-                            _context.SaveChanges();
-                        }
                         _context.EmployerSkills.AddRange(newSkills);
                         _context.SaveChanges();
-                        if ((string) TempData["Success"] != "")
-                        {
-                            TempData["Success"] += "\n";
-                        }       
-                        TempData["Success"] += "Job Profile's skills updated!";
+                        AddToTempDataSuccess("Job Profile's skills updated!");
                     }
                     catch (InvalidOperationException)
                     {
-                        if ((string) TempData["Error"] != "")
-                        {
-                            TempData["Error"] += "\n";
-                        }       
-                        TempData["Error"] += "Sorry. Failed to update your skills please retry";
+                        AddToTempDataError("Sorry. Failed to update your skills please retry");
                     }
                 }
             }
             catch (InvalidOperationException)
             {
-                if ((string) TempData["Error"] != "")
-                {
-                    TempData["Error"] += "\n";
-                }       
-                TempData["Error"] += "Sorry. Failed to update your skills please retry";
+                AddToTempDataError("Sorry. Failed to update your skills please retry");
             } 
-            //New external materials
+            //6.7 Update external materials
             try
             {
                 var jobProfileId = newJobProfile.Id;
                 var oldDays = _context.EmployerComplusoryWorkDays.Where(a => a.EmployerJobProfileId == jobProfileId);
-                var newEnumerable = newDays.Select(a => new { Day = a.Day}).OrderBy(a => a.Day).ToList();
-                var oldEnumerable = oldDays.Select(a => new { Day = a.Day}).OrderBy(a => a.Day).ToList();
+                var newEnumerable = newDays.Select(a => new {a.Day}).OrderBy(a => a.Day).ToList();
+                var oldEnumerable = oldDays.Select(a => new {a.Day}).OrderBy(a => a.Day).ToList();
                 if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
                     
                         _context.EmployerComplusoryWorkDays.RemoveRange(oldDays);     
-                        if (newDays.Any())                                           
-                        {                                                                         
+                                                                                              
                             _context.EmployerComplusoryWorkDays.AddRange(newDays);    
-                        }                                                                         
+                                                                                               
                         _context.SaveChanges();                                                   
-                        if ((string) TempData["Success"] != "")                                   
-                        {                                                                         
-                            TempData["Success"] += "\n";                                          
-                        }                                                                         
-                        TempData["Success"] += "Job Profile's compulsory work day updated!";                 
+                        AddToTempDataSuccess("Job Profile's compulsory work day updated!");                 
                     }
                     catch (InvalidOperationException)
                     {
-                        if ((string) TempData["Error"] != "")
-                        {
-                            TempData["Error"] += "\n";
-                        }       
-                        TempData["Error"] += "Sorry. Failed to update your compulsory work day please retry";
+                        AddToTempDataError("Sorry. Failed to update your compulsory work day please retry");
                     }
                 }
                 
             }
             catch (InvalidOperationException)
             {
-                if ((string) TempData["Error"] != "")
-                {
-                    TempData["Error"] += "\n";
-                }       
-                TempData["Error"] += "Sorry. Failed to update your compulsory work day please retry";
+                AddToTempDataError("Sorry. Failed to update your compulsory work day please retry");
             }  
-            //New work location
+            //6.8 Update compulsory work location
             try
             {
                 var jobProfileId = newJobProfile.Id;
                 var oldRequiredLocations = _context.EmployerWorkLocations.Where(a => a.EmployerJobProfileId == jobProfileId);
-                var newEnumerable = newRequiredLocations.Select(a => new { SuburbId = a.SuburbId}).OrderBy(a => a.SuburbId).ToList();
-                var oldEnumerable = oldRequiredLocations.Select(a => new { SuburbId = a.SuburbId}).OrderBy(a => a.SuburbId).ToList();
+                var newEnumerable = newRequiredLocations.Select(a => new {a.SuburbId}).OrderBy(a => a.SuburbId).ToList();
+                var oldEnumerable = oldRequiredLocations.Select(a => new {a.SuburbId}).OrderBy(a => a.SuburbId).ToList();
                 if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
                     
                         _context.EmployerWorkLocations.RemoveRange(oldRequiredLocations);     
-                        if (newDays.Any())                                           
-                        {                                                                         
+                                                                                             
                             _context.EmployerWorkLocations.AddRange(newRequiredLocations);    
-                        }                                                                         
+                                                                                               
                         _context.SaveChanges();                                                   
-                        if ((string) TempData["Success"] != "")                                   
-                        {                                                                         
-                            TempData["Success"] += "\n";                                          
-                        }                                                                         
-                        TempData["Success"] += "Job Profile's compulsory work location updated!";                 
+                        AddToTempDataSuccess("Job Profile's compulsory work location updated!");                 
                     }
                     catch (InvalidOperationException)
                     {
-                        if ((string) TempData["Error"] != "")
-                        {
-                            TempData["Error"] += "\n";
-                        }       
-                        TempData["Error"] += "Sorry. Failed to update your compulsory work location please retry";
+                        AddToTempDataError("Sorry. Failed to update your compulsory work location please retry");
                     }
                 }
                 
             }
             catch (InvalidOperationException)
             {
-                if ((string) TempData["Error"] != "")
-                {
-                    TempData["Error"] += "\n";
-                }       
-                TempData["Error"] += "Sorry. Failed to update your compulsory please retry";
+                AddToTempDataError("Sorry. Failed to update your compulsory please retry");
             }  
-            //New school
+            //6.9 Update required school
             try
             {
                 var jobProfileId = newJobProfile.Id;
                 var oldRequiredSchools = _context.EmployerRequiredSchools.Where(a => a.EmployerJobProfileId == jobProfileId);
-                var newEnumerable = newRequiredSchools.Select(a => new { SchoolId = a.SchoolId}).OrderBy(a => a.SchoolId).ToList();
-                var oldEnumerable = oldRequiredSchools.Select(a => new { SchoolId = a.SchoolId}).OrderBy(a => a.SchoolId).ToList();
+                var newEnumerable = newRequiredSchools.Select(a => new {a.SchoolId}).OrderBy(a => a.SchoolId).ToList();
+                var oldEnumerable = oldRequiredSchools.Select(a => new {a.SchoolId}).OrderBy(a => a.SchoolId).ToList();
                 if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
                 {
                     try
                     {
-                        _context.EmployerRequiredSchools.RemoveRange(oldRequiredSchools);     
-                        if (newDays.Any())                                           
-                        {                                                                         
-                            _context.EmployerRequiredSchools.AddRange(newRequiredSchools);    
-                        }                                                                         
+                        _context.EmployerRequiredSchools.RemoveRange(oldRequiredSchools);                                                                  
+                        _context.EmployerRequiredSchools.AddRange(newRequiredSchools);                                                                        
                         _context.SaveChanges();                                                   
-                        if ((string) TempData["Success"] != "")                                   
-                        {                                                                         
-                            TempData["Success"] += "\n";                                          
-                        }                                                                         
-                        TempData["Success"] += "Job Profile's compulsory employee's school updated!";                 
+                        AddToTempDataSuccess("Job Profile's compulsory employee's school updated!");                 
                     }
                     catch (InvalidOperationException)
                     {
-                        if ((string) TempData["Error"] != "")
-                        {
-                            TempData["Error"] += "\n";
-                        }       
-                        TempData["Error"] += "Sorry. Failed to update your compulsory employee's school please retry";
+                        AddToTempDataError("Sorry. Failed to update your compulsory employee's school please retry");
                     }
                 }
-                
             }
             catch (InvalidOperationException)
             {
-                if ((string) TempData["Error"] != "")
-                {
-                    TempData["Error"] += "\n";
-                }       
-                TempData["Error"] += "Sorry. Failed to update your compulsory employee's school please retry";
+                AddToTempDataError("Sorry. Failed to update your compulsory employee's school please retry");
             }  
-            
-            return RedirectToAction("EditJobProfile", new{ JobProfileId = jobProfile.ProfileId});
+            return RedirectToAction("EditJobProfile", new{ JobProfileId = newJobProfile.Id});
         }
 
-        //检查本人操作
-        //return if profileId is not right
-        //Filter primary id
-        //去除已发送invatation
+        //TODO Filter primary id
         [Route("[Controller]/SearchApplicants/{jobProfileId}")]
-        public async Task<IActionResult> SearchApplicants(int jobProfileId)
+        public IActionResult SearchApplicants(int jobProfileId)
         {
             ViewData["App"] = jobProfileId;
-            return View(SearchApplicantsCoreRanker(jobProfileId).Result);
+            return View(SearchApplicantsCoreRanker(jobProfileId));
         }
 
         [Route("[Controller]/ViewApplicantCv/{jobProfileId}/{cvId}")]
-        public async Task<IActionResult> ViewApplicantCv(int jobProfileId, int cvId)
+        public IActionResult ViewApplicantCv(int jobProfileId, int cvId)
         {
-            var validationList = ( SearchApplicantsCoreRanker(jobProfileId)).Result;
+            var validationList = ( SearchApplicantsCoreRanker(jobProfileId));
             var validationResultList = validationList.Where(a => a.CvId == cvId).ToList();
-            //Not valid
+            //1. Not valid jobProfileId & CvId
             if (!validationResultList.Any())
             {
+                AddToTempDataError("Wrong CV Request");
                 return RedirectToAction("Index");
             }
             var raw = _context.EmployeeCvs.First(a => a.Id == validationResultList.First().CvId);
+            //2. Get cv info
             var result = new ViewApplicantCv
             {
                 Title = raw.Title, 
                 Description = raw.Details, 
-                EmployeeName = raw.Employee.Name,
-                //TODO!!More Info required
+                EmployeeName = raw.Employee.Name
             };
-            
             return View(result);
         }
 
         [Route("[Controller]/SendInvitation/{jobProfileId}/{cvId}")]
         public IActionResult SendInvitation(int jobProfileId, int cvId)
         {
-            var validationList = SearchApplicantsCoreRanker(jobProfileId).Result;
+            var validationList = SearchApplicantsCoreRanker(jobProfileId);
             var validationResultList = validationList.Where(a => a.CvId == cvId);
             //Not valid
             if (!validationResultList.Any())
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("SearchApplicants", new {jobProfileId = jobProfileId});
             }
             try
             {
                 _context.Invatations.Update(new Invatation
                 {
-                    SentTime = DateTime.Now, status = InvitationStatus.Original, EmployeeCvId = cvId,
+                    SentTime = DateTime.Now, status = InvitationStatus.Original, 
+                    EmployeeCvId = cvId,
                     EmployerJobProfileId = jobProfileId
                 });
                 _context.SaveChanges();
+                if ((string) ViewBag.Sucess != "")
+                {
+                    ViewBag.Sucess  += "\n";
+                }       
+                ViewBag.Sucess += "Invitation Sent!";
             }
-            catch (InvalidOperationException ex)
+            catch (InvalidOperationException)
             {
-
-            }
-            catch (DbUpdateException exception)
-            {
-                
+                if ((string) ViewBag.Error != "")
+                {
+                    ViewBag.Error += "\n";
+                }       
+                ViewBag.Error += "Invitation sent failed";
             }
             return View();
         }
-        public async Task<List<SearchApplicant>> SearchApplicantsCoreRanker(int jobProfileId)
+        
+        public List<SearchApplicant> SearchApplicantsCoreRanker(int jobProfileId)
         {
-            
-            var jobProfile = _context.EmployerJobProfiles.First(a => a.Id == jobProfileId);
-            var finalData = new List<EmployeeCV> {};
+
+            EmployerJobProfile jobProfile;
+            var finalData = new List<EmployeeCV>();
+            try
+            {
+                jobProfile = _context.EmployerJobProfiles.First(a => a.Id == jobProfileId);
+            }
+            catch(InvalidOperationException)
+            {
+                AddToTempDataError("It is not your job profile");
+                return new List<SearchApplicant>();
+            }
             //1.  Filter first
             //1.1 Filter field
             //1.2 && Filter salary
             //1.3 && Filter Find Job Status
-            await UpdateCvFindJobStatus();
+            UpdateCvFindJobStatus();
             var rawData = _context.EmployeeCvs
                 .Where(a => a.FieldId == jobProfile.FieldId 
                             && a.MinSaraly <= jobProfile.Salary 
@@ -1058,7 +917,7 @@ namespace iUni_Workshop.Controllers
             //1.5 Filter compulsory work day
             var employerDays = _context.EmployerComplusoryWorkDays
                 .Where(a => a.EmployerJobProfileId == jobProfile.Id)
-                .Select(a => new {Day = a.Day})
+                .Select(a => new {a.Day})
                 .OrderBy(a => a.Day);
             if (employerDays.Any())
             {
@@ -1066,7 +925,7 @@ namespace iUni_Workshop.Controllers
                 {
                     var employeeDays = _context.EmployeeWorkDays
                         .Where(a => a.EmployeeCvId == data.Id)
-                        .Select(a => new {Day = a.Day})
+                        .Select(a => new {a.Day})
                         .OrderBy(a => a.Day);
                     if (!employerDays.Except(employeeDays).Any())
                     {
@@ -1080,7 +939,7 @@ namespace iUni_Workshop.Controllers
             //1.6. Filter compulsory skill
             var employerSkills = _context.EmployerSkills
                 .Where(a => a.EmployerJobProfileId == jobProfile.Id && a.Required)
-                .Select(a => new {SkillId = a.SkillId})
+                .Select(a => new {a.SkillId})
                 .OrderBy(a =>a .SkillId)
                 .ToList();
             if (employerSkills.Any())
@@ -1089,7 +948,7 @@ namespace iUni_Workshop.Controllers
                 {
                     var employeeSkills = _context.EmployeeSkills
                         .Where(a => a.EmployeeCvId == data.Id)
-                        .Select(a => new {SkillId = a.SkillId})
+                        .Select(a => new {a.SkillId})
                         .OrderBy(a =>a .SkillId)
                         .ToList();
                     if (!employerSkills.Except(employeeSkills).Any())
@@ -1111,7 +970,7 @@ namespace iUni_Workshop.Controllers
                 {
                     var employeeSchools = _context.Employees
                         .Where(a => a.Id == data.EmployeeId)
-                        .Select(a => new {SchoolId = a.SchoolId})
+                        .Select(a => new {a.SchoolId})
                         .OrderBy(a =>a.SchoolId);
                     if (!employerSchools.Except(employeeSchools).Any())
                     {
@@ -1130,17 +989,16 @@ namespace iUni_Workshop.Controllers
             {
                 foreach (var data in rawData)
                 {
-                    var employeeLocationss = _context.Employees
+                    var employeeLocations = _context.Employees
                         .Where(a => a.Id == data.EmployeeId)
-                        .Select(a => new {SuburbId = a.SuburbId})
+                        .Select(a => new {a.SuburbId})
                         .OrderBy(a =>a.SuburbId);
-                    if (!employerLocations.Except(employeeLocationss).Any())
+                    if (!employerLocations.Except(employeeLocations).Any())
                     {
                         finalData.Add(data);
                     }
                 }
                 rawData = finalData;
-                finalData = new List<EmployeeCV>();
             }
             
             //Rank applicants
@@ -1171,13 +1029,14 @@ namespace iUni_Workshop.Controllers
                     }
                 }
             }
-
             finalResults = finalResults.OrderBy(a => a.Score).ToList();
             return finalResults;
         }
 
+        [Route("[Controller]/Invitations")]
         public async Task<IActionResult> Invitations()
         {
+            ProcessSystemInfo();
             var user = await _userManager.GetUserAsync(User);
             var results = _context.Invatations
                 .Where(a => a.EmployerJobProfile.EmployerId == user.Id)
@@ -1185,62 +1044,21 @@ namespace iUni_Workshop.Controllers
             return View(results);
         }
 
-        public async Task<IActionResult> InvitationDetail()
+        [Route("[Controller]/InvitationDetail/{invitationId}")]
+        public async Task<IActionResult> InvitationDetail(int invitationId)
         {
-            
-            return View();
+            var user = await _userManager.GetUserAsync(User);
+            var invitation =
+                _context.Invatations.Where(a => a.Id == invitationId && a.EmployerJobProfile.EmployerId == user.Id);
+            if (!invitation.Any())
+            {
+                AddToTempDataError("Invalid invitation id.");
+                return RedirectToAction("Invitations");
+            }
+            return View(invitation);
         }
 
-        //To employee
-
-        public async Task<IActionResult> CertificateMyCompany()
-        {
-            return View();
-        }
-        
-        private void InitialSystemInfo()
-        {
-            TempData["Error"] = "";
-            TempData["Inform"] = "";
-            TempData["Success"] = "";
-        }
-        
-        private void ProcessModelState()
-        {
-            foreach (var model in ModelState)
-            {
-                if (model.Value.Errors.Count == 0) continue;
-                if ((string) TempData["Error"] != "")
-                {
-                    TempData["Error"] += "\n";
-                }
-                
-                foreach (var error in model.Value.Errors)
-                {
-                    TempData["Error"]  += error.ErrorMessage;
-                }
-                
-            }
-        }
-        
-        private void ProcessSystemInfo()
-        {
-            if ((string) TempData["Error"] != "")
-            {
-                ViewBag.Error = TempData["Error"];
-            }
-            if ((string) TempData["Inform"] != "")
-            {
-                ViewBag.Inform = TempData["Inform"];
-            }
-            if ((string) TempData["Success"] != "")
-            {
-                ViewBag.Success = TempData["Success"];
-            }
-        }
-
-
-        private async Task UpdateCvFindJobStatus()
+        private void UpdateCvFindJobStatus()
         {
             var cvs = _context.EmployeeCvs.Where(a => a.FindJobStatus).ToList();
             foreach (var cv in cvs)
@@ -1257,6 +1075,108 @@ namespace iUni_Workshop.Controllers
             _context.SaveChanges();
         }
 
+        
+        //----------------------------------
+        //----------------------------------
+        //----------------------------------
+        //----------------------------------
+        //----------------------------------
+        //----------------------------------
+        //----------------------------------
+        public void ProcessSystemInfo()
+        {
+            if ((string) TempData["Error"] != "")
+            {
+                ViewBag.Error = TempData["Error"];
+            }
+            if ((string) TempData["Inform"] != "")
+            {
+                ViewBag.Inform = TempData["Inform"];
+            }
+            if ((string) TempData["Success"] != "")
+            {
+                ViewBag.Success = TempData["Success"];
+            }
+        }
+
+        public void InitialSystemInfo()
+        {
+            TempData["Error"] = "";
+            TempData["Inform"] = "";
+            TempData["Success"] = "";
+        }
+
+        public void ProcessModelState()
+        {
+            foreach (var model in ModelState)
+            {
+                if (model.Value.Errors.Count == 0) continue;
+                if ((string) TempData["Error"] != "")
+                {
+                    TempData["Error"] += "\n";
+                }
+                
+                foreach (var error in model.Value.Errors)
+                {
+                    TempData["Error"]  += error.ErrorMessage;
+                }
+                
+            }
+        }
+
+        public void AddToViewBagInform(string informMessage)
+        {
+            if ((string) ViewBag.Inform != "")
+            {
+                ViewBag.Inform += "\n";
+            }
+            ViewBag.Inform += informMessage;
+        }
+        
+        public void AddToViewBagError(string errorMessage)
+        {
+            if ((string) ViewBag.Error != "")
+            {
+                ViewBag.Error+= "\n";
+            }
+            ViewBag.Error += errorMessage;
+        }
+        
+        public void AddToViewBagSuccess(string successMessage)
+        {
+            if ((string) ViewBag.Success != "")
+            {
+                ViewBag.Success += "\n";
+            }
+            ViewBag.Success += successMessage;
+        }
+        
+        public void AddToTempDataSuccess(string successMessage)
+        {
+            if ((string) TempData["Success"] != "")
+            {
+                TempData["Success"] += "\n";
+            }
+            TempData["Success"] += successMessage;
+        }
+        
+        public void AddToTempDataInform(string informMessage)
+        {
+            if ((string) TempData["Inform"] != "")
+            {
+                TempData["Inform"] += "\n";
+            }
+            TempData["Inform"] += informMessage;
+        }
+        
+        public void AddToTempDataError(string errorMessage)
+        {
+            if ((string) TempData["Error"] != "")
+            {
+                TempData["Error"] += "\n";
+            }
+            TempData["Error"] += errorMessage;
+        }
 
     }
 }

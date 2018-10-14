@@ -31,7 +31,7 @@ namespace iUniWorkshop.Models.EmployerModels
 
         public List<JobProfileRequiredSchool> EmployerRequiredSchools { get; set; }
 
-        public List<JobProfileComplusoryWorkDay> JobProfileComplusoryWorkDays { get; set; }
+        public List<JobProfileCompulsoryWorkDay> JobProfileComplusoryWorkDays { get; set; }
 
     }
 }

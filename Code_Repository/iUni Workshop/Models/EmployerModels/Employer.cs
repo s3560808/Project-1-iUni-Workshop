@@ -32,9 +32,7 @@ namespace iUni_Workshop.Models.EmployerModels
         
         public string ContactEmail { get; set; }
 
-//        public String Photo { get; set; }
 
-        
         public string BriefDescription { get; set; }
 
        

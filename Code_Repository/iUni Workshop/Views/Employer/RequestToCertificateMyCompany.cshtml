@@ -5,6 +5,7 @@
     Layout = "_Layout";
 }
 
+@await Html.PartialAsync("_Validation_Area_From_Backend")
 <form method="post" asp-action="RequestToCertificateMyCompanyAction">
     @Html.DisplayNameFor(model => model.Name)
     @{

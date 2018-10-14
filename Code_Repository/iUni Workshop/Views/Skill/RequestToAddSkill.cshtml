@@ -1,0 +1,19 @@
+@model iUni_Workshop.Models.EmployeeModels.RequestToAddSkill
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
+
+
+<h2>title</h2>
+<form asp-controller="Skill" asp-action="RequestToAddSkillAction" method="post">
+    <input type="text" name="SkillName">
+    <button type="submit" class="btn btn-sm btn-success">Request</button>
+</form>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

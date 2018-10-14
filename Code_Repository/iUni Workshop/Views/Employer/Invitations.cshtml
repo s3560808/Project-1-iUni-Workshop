@@ -1,3 +1,4 @@
+@using iUni_Workshop.Models.InvatationModel
 @model IEnumerable<iUni_Workshop.Models.EmployerModels.EmployerInvitation>
 
 @{
@@ -5,43 +6,64 @@
     Layout = "_Layout";
 }
 
-<link rel="stylesheet" href="~/css/invite.css"/>
-
-<div id="inv">
-    <h2>Invitations</h2>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.InvitationId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        @{
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.InvitationId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                </tr>
-            }
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
+<h2>title</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.InvitationId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @{
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InvitationId)
+                </td>
+                <td>
+                    @{
+                        switch (item.Status)
+                        {
+                            case InvitationStatus.Accepted:
+                                <p>Accepted</p>
+                                break;
+                            case InvitationStatus.Expired:
+                                <p>Expired</p>
+                                break;
+                            case InvitationStatus.Original:
+                                <p>Employee Deciding</p>
+                                break;
+                            case InvitationStatus.Rejected:
+                                <p>Rejected</p>
+                                break;
+                            default:
+                                break;
+                        }
+                        
+                    }
+                </td>
+                <td>
+                    <button>
+                    <a asp-controller="Employer" asp-action="InvitationDetail" asp-route-invitationId="@item.InvitationId"> View Detail</a>
+                    </button>
+                </td>
+            </tr>
         }
-        
-        </tbody>
-
-    </table>
-
-    @section Scripts {
-        @await Html.PartialAsync("_ValidationScriptsPartial")
     }
+        
+    </tbody>
 
-</div>
+</table>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+

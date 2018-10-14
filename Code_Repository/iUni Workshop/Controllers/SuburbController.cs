@@ -12,18 +12,20 @@ namespace iUni_Workshop.Controllers
     [Authorize]
     public class SuburbController : Controller
     {
-        private  ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
         public SuburbController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        [Route("[Controller]/GetSuburb/{surburbName}")]
-        public IActionResult GetSuburb(string surburbName)
+        //This is an API to get suburb names with partial suburb name
+        //Return with JSON list, if result more than 10 will only return first 10 results
+        [Route("[Controller]/GetSuburb/{suburbName}")]
+        public IActionResult GetSuburb(string suburbName)
         {
             var allSuburbs = _context.Suburbs.Where(a =>
-                    a.Name.Contains(surburbName.ToUpper()) &&
+                    a.Name.Contains(suburbName.ToUpper()) &&
                     (
                         (a.PostCode > 0 && a.PostCode < 200) ||
                         (a.PostCode > 299 && a.PostCode < 900) ||
@@ -32,10 +34,10 @@ namespace iUni_Workshop.Controllers
                         (a.PostCode > 6999 && a.PostCode < 7800)
                     )
                 ).ToList();
-            List<string> result = new List<string> { };
+            var result = new List<string> { };
             if (allSuburbs.Count > 10)
             {
-                for (int i = 0; i < 10; i++)
+                for (var i = 0; i < 10; i++)
                 {
                     result.Add(allSuburbs[i].Name);
                 }
@@ -48,22 +50,30 @@ namespace iUni_Workshop.Controllers
             return Json(result);
         }
         
-        [Route("[Controller]/GetPostCode/{surburbName}")]
-        public IActionResult GetPostCode(string surburbName)
+        //This is an API to get post-codes with a suburb name
+        //Return with JSON
+        [Route("[Controller]/GetPostCode/{suburbName}")]
+        public IActionResult GetPostCode(string suburbName)
         {
-            var result = _context.Suburbs.Where(a =>a.Name == surburbName).Select(b => b.PostCode).ToList();
+            var result = _context.Suburbs.Where(a =>a.Name == suburbName).Select(b => b.PostCode).ToList();
             return Json(result);
         }
 
-        public int hasSuburb(string SuburbName, int PostCode)
+        //This is an function to check if has a suburb
+        //If cannot find corresponding suburb will return -1
+        //If find corresponding suburb successfully return suburb id
+        [Route("[Controller]/HasSuburb/{suburbName}/{postCode}")]
+        public int HasSuburb(string suburbName, int postCode)
         {
-            var suburb = _context.Suburbs.First(a => a.Name == SuburbName && a.PostCode == PostCode);
-            if (suburb == null)
+            var suburb = _context.Suburbs.Where(a => a.Name == suburbName && a.PostCode == postCode);
+            if (!suburb.Any())
             {
                 return -1;
             }
-            return suburb.Id;
+            else
+            {
+                return suburb.First().Id;
+            }
         }
-
     }
 }

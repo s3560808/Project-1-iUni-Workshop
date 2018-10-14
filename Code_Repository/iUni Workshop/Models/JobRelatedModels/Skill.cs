@@ -25,7 +25,7 @@ namespace iUni_Workshop.Models.JobRelatedModels
 
         public string AddedBy { get; set; }
         [ForeignKey(("AddedBy"))]
-        public virtual Administraotr Administraotr { get; set; }
+        public virtual Administraotr Administrator { get; set; }
         
         public string RequestedByUserId { get; set; }
         [ForeignKey(("RequestedByUserId"))]
