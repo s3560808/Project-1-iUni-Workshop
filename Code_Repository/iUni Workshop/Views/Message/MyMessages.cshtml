@@ -5,23 +5,25 @@
     Layout = "_Layout";
 }
 
+<link rel="stylesheet" href="~/css/mmessages.css"/>
 
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
+<div id="mm">
 <h2>My Messages</h2>
 <table class="table">
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.SenderEmail)
+            Conversation With:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            Title:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SentTime)
+            Time Sent:
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Read)
+            Read:
         </th>
         <th></th>
     </tr>
@@ -54,7 +56,7 @@
                 </td>
                 <td>
                     <form asp-controller="Message" asp-action="MessageDetail" method="post">
-                        <button name="conversationId" type="submit" value="@item.ConversationId" class="btn btn-sm btn-success">Read</button>
+                        <button name="conversationId" type="submit" value="@item.ConversationId" >Read</button>
                     </form>
                         
                 </td>
@@ -70,3 +72,4 @@
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
 
+</div>
