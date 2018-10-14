@@ -298,6 +298,7 @@
             <e p="font-awesome.min.css" t="Include" />
             <e p="invite.css" t="Include" />
             <e p="log.css" t="Include" />
+            <e p="mdetails.css" t="Include" />
             <e p="mmessages.css" t="Include" />
             <e p="MyMessages.css" t="Include" />
             <e p="na.css" t="Include" />
