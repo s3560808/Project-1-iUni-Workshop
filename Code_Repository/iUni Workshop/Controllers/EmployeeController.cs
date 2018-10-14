@@ -742,7 +742,7 @@ namespace iUni_Workshop.Controllers
         }
 
         //View of InvitationDetail
-        [Route("[Controller]/InvitationDetail/{invitationId}")]
+//        [Route("[Controller]/InvitationDetail/{invitationId}")]
         public async Task<IActionResult> InvitationDetail(int invitationId)
         {
             ProcessSystemInfo();

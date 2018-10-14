@@ -1036,6 +1036,7 @@ namespace iUni_Workshop.Controllers
         [Route("[Controller]/Invitations")]
         public async Task<IActionResult> Invitations()
         {
+            ProcessSystemInfo();
             var user = await _userManager.GetUserAsync(User);
             var results = _context.Invatations
                 .Where(a => a.EmployerJobProfile.EmployerId == user.Id)
@@ -1052,7 +1053,7 @@ namespace iUni_Workshop.Controllers
             if (!invitation.Any())
             {
                 AddToTempDataError("Invalid invitation id.");
-                RedirectToAction("Invitations");
+                return RedirectToAction("Invitations");
             }
             return View(invitation);
         }

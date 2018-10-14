@@ -1,6 +1,6 @@
 @using Microsoft.EntityFrameworkCore.Internal
 @model iUniWorkshop.Models.EmployerModels.JobProfile
-@*如果递出邀请profilejob不能编辑*@
+@*If profile already send invitation then the profile cannot change*@
 
 @{
     ViewBag.Title = "title";
@@ -253,7 +253,8 @@
                         string skillRequired = "[" + i + "]" + ".SkillRequired";
                         <div class="SkillClass">
                             <p>Skill Name @i</p>
-                            <input type="text" name="@skillName" value="@Model.JobProfileSkills[i].SkillName">
+                            <input type="text" name="@skillName" value="@Model.JobProfileSkills[i].SkillName"  list="skillList" onkeyup="getSkillName(this.value)">
+                            <datalist id="skillList"></datalist>
                             <p>Required @i</p>
                             @*Value = true?*@
                             <input type="checkbox" name="@skillRequired" checked="@Model.JobProfileSkills[i].SkillRequired" value="true">
