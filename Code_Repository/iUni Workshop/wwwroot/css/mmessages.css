@@ -20,3 +20,30 @@
     font-weight: bold;
     font-size: 13px;
 }
+
+#main1{
+    transition: 1.5s;
+    padding: 0px 0px 20px 160px;
+    width: 85%;
+    position: center;
+    overflow-x: hidden;
+}
+
+#bob {
+    padding-top: 1px;
+    overflow-x: hidden;
+}
+
+#main1 .carousel-indicators {
+    margin-bottom: 0px;
+}
+
+#main1.ind {
+    margin-left: 0px;
+}
+
+#mainBottom{
+    transition: 1.5s;
+    margin-left: 0px;
+    padding-left: 0px;
+}
