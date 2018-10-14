@@ -4,23 +4,8 @@
     Layout = "_Layout";
 }
 
-<link rel="stylesheet" href="css/reg.css"/>
+<link rel="stylesheet" href="~/css/reg.css"/> 
 
-@*<style>
-    #reg h2, .row {
-        margin-left: 40px;
-        padding-left: 365px;
-        padding-right: 100px;
-    }
-    
-    #reg h2 {
-        padding-left: 400px;
-        margin-right: 15px;                   
-    }
-
-     
-</style>
-*@
 <div id="reg">
     
 
@@ -47,7 +32,7 @@
                     <input placeholder="Retype password" asp-for="ConfirmPassword" class="form-control"/>
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
-                <button type="submit" class="btn btn-default">Register</button>
+                <button type="submit" class="btn">Register</button>
             </form>
         </div>
     </div>
