@@ -42,6 +42,10 @@
     margin-left: 0px;
 }
 
+#main1 hr{
+    width: 100%;
+}
+
 #mainBottom{
     transition: 1.5s;
     margin-left: 0px;
@@ -55,6 +59,41 @@
 
 }
 
-#con hr{
+#mainBottom hr{
     width: 850%;
+}
+
+#con #mainBottom{
+    transition: 1.5s;
+    margin-left: 65px;
+    padding-left: 0px;
+    position: absolute;
+}
+
+#about h2, h3, p{
+    margin-left: 40px;
+    margin-bottom: 0px;
+    padding: 0px 100px 12px 25px;
+}
+
+#about h2 {
+    margin-bottom: 10px;
+
+}
+
+#about p {
+    margin-right: 30px;
+}
+
+
+#about #mainBottom{
+    transition: 1.5s;
+    margin-left: 0px;
+    padding-left: 0px;
+    position: absolute;
+}
+
+#about hr{
+    width: 390%;
+    margin-left: 60px;
 }
