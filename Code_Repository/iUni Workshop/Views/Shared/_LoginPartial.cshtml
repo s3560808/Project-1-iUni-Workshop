@@ -16,10 +16,15 @@
         
         if (role == Roles.Administrator)
         {
-            <a asp-area="" asp-controller="Administrator" asp-action="AddSchool" title="Manage">Add School</a>
-            <a asp-area="" asp-controller="Administrator" asp-action="AddField" title="Manage">Add Fields</a>
-            <a asp-area="" asp-controller="Administrator" asp-action="AddSkill" title="Manage">Add Skill</a>
+            <a asp-area="" asp-controller="Message" asp-action="MyMessages" title="Manage">MyMessages</a>
             <a asp-area="" asp-controller="Administrator" asp-action="NewMessage" title="Manage">Send Message</a>
+            <li><span class="opener">Add</span>
+                <ul>
+                    <li><a asp-area="" asp-controller="Administrator" asp-action="AddSchool" title="Manage">Add School</a></li>
+                    <li><a asp-area="" asp-controller="Administrator" asp-action="AddField" title="Manage">Add Fields</a></li>
+                    <li><a asp-area="" asp-controller="Administrator" asp-action="AddSkill" title="Manage">Add Skill</a></li>
+                </ul>
+            </li>
         }
         
         if (role == Roles.Employee)
@@ -27,6 +32,14 @@
             <a asp-area="" asp-controller="Employee" asp-action="MyCVs" title="Manage">MyCVs</a>
             <a asp-area="" asp-controller="Employee" asp-action="EditPersonalInfo" title="Manage">Edit Personal Info</a>
             <a asp-area="" asp-controller="Employee" asp-action="MyInvitations" title="Manage">MyInvitations</a>
+            <li><a asp-area="" asp-controller="Message" asp-action="MyMessages" title="Manage">MyMessages</a></li>
+            <li><span class="opener">Requests</span>
+                <ul>
+                    <li><a asp-area="" asp-controller="Skill" asp-action="RequestToAddSkill" title="Manage">Request to add Skill</a></li>
+                    <li><a asp-area="" asp-controller="Field" asp-action="RequestToAddField" title="Manage">Request to add Field</a></li>
+                    <li><a asp-area="" asp-controller="School" asp-action="RequestToAddSchool" title="Manage">Request to add School</a></li>
+                </ul>
+            </li>
         }
         
         if (role == Roles.Employer)
@@ -34,6 +47,15 @@
             <a asp-area="" asp-controller="Employer" asp-action="EditCompanyInfo" title="Manage">Edit Company Info</a>
             <a asp-area="" asp-controller="Employer" asp-action="JobProfiles" title="Manage">Job Profiles</a>
             <a asp-area="" asp-controller="Employer" asp-action="Invitations" title="Manage">Invitations</a>
+            <a asp-area="" asp-controller="Message" asp-action="MyMessages" title="Manage">MyMessages</a>
+            <li><span class="opener">Requests</span>
+                <ul>
+                    <li><a asp-area="" asp-controller="Skill" asp-action="RequestToAddSkill" title="Manage">Request to add Skill</a></li>
+                    <li><a asp-area="" asp-controller="Field" asp-action="RequestToAddField" title="Manage">Request to add Field</a></li>
+                    <li><a asp-area="" asp-controller="School" asp-action="RequestToAddSchool" title="Manage">Request to add School</a></li>
+                </ul>
+            </li>
+            
         }
     }
     catch (Exception)

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Winston\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_iUni Workshop.1449027793.00" t="ExcludeRecursive" />
-    <e p="C:\Users\Winston\Downloads\Project-1-iUni-Workshop\Code_Repository" t="IncludeFlat">
+    <e p="C:\Users\Winston Lam\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Winston Lam\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_iUni Workshop.189207482.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Winston Lam\Desktop\Project-1-iUni-Workshop\Code_Repository" t="IncludeFlat">
       <e p="iUni Workshop" t="IncludeRecursive">
         <e p=".gitignore" t="Include" />
         <e p="appsettings.Development.json" t="Include" />
