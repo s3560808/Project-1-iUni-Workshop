@@ -88,10 +88,11 @@
 
          if (role == Roles.Administrator)
          {
-            <a asp-area="" asp-controller="Administrator" asp-action="" title="Manage">Add School</a>
-            <a asp-area="" asp-controller="Administrator" asp-action="" title="Manage">Add Fields</a>
-            <a asp-area="" asp-controller="Administrator" asp-action="" title="Manage">Add Skill</a>
-            <a asp-area="" asp-controller="Administrator" asp-action="" title="Manage">Send Message</a>
+            <a asp-area="" asp-controller="Administrator" asp-action="AddSchool" title="Manage">Add School</a>
+            <a asp-area="" asp-controller="Administrator" asp-action="AddField" title="Manage">Add Fields</a>
+            <a asp-area="" asp-controller="Administrator" asp-action="AddSkill" title="Manage">Add Skill</a>
+            <a asp-area="" asp-controller="Administrator" asp-action="NewMessage" title="Manage">Send Message</a>
+            <a asp-area="" asp-controller="Administrator" asp-action="SetUserType" title="Manage">Set Users</a>
          }
 
          if (role == Roles.Employee)

@@ -292,6 +292,7 @@
         </e>
         <e p="wwwroot" t="Include">
           <e p="css" t="Include">
+            <e p="admin.css" t="Include" />
             <e p="editcominfo.css" t="Include" />
             <e p="ejp.css" t="Include" />
             <e p="font-awesome.min.css" t="Include" />
