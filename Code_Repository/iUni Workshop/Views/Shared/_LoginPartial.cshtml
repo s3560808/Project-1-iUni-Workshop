@@ -22,6 +22,42 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
+    var user = await UserManager.GetUserAsync(User);
+    try
+    {
+        var role = (await UserManager.GetRolesAsync(user)).AsEnumerable().First();
+        <li>
+            <a asp-area="" asp-controller="Dashboard" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+        </li>
+
+        if (role == Roles.Administrator)
+        {
+            <a asp-area="" asp-controller="Administrator" asp-action="" title="Manage">Add School</a>
+            <a asp-area="" asp-controller="Administrator" asp-action="" title="Manage">Add Fields</a>
+            <a asp-area="" asp-controller="Administrator" asp-action="" title="Manage">Add Skill</a>
+            <a asp-area="" asp-controller="Administrator" asp-action="" title="Manage">Send Message</a>
+        }
+
+        if (role == Roles.Employee)
+        {
+            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">MyCVs</a>
+            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">EditPersonalInfo</a>
+            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">MyInvitations</a>
+        }
+
+        if (role == Roles.Employer)
+        {
+            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">EditCompanyInfo</a>
+            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">Job Profiles</a>
+            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">Invitations</a>
+        }
+    }
+
+    catch (Exception)
+    {
+        
+    }
+    
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
             <li>

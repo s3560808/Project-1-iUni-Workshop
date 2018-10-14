@@ -10,6 +10,7 @@
       <link rel="stylesheet" href="~/css/site.css" />
       <link rel="stylesheet" href="~/css/font-awesome.min.css"/>
       <link rel="stylesheet" href="~/css/MyMessages.css"/>
+      <link rel="stylesheet" href=""/>
    </environment>
     
    <environment exclude="Development">
@@ -21,11 +22,6 @@
 </head>
 
 <style>
-   #mainBottom{
-      padding: 20px 0px 20px 160px;
-      transition: 1.5s;
-   }
-   
    .navbar {
       margin-top: 0;
       margin-bottom: 0px;
@@ -49,6 +45,10 @@
       margin-left: 0px;
       overflow-x: hidden;
    }
+   
+   .p p {
+      margin-left: 0px;
+   }
 </style>
 
 <body>
@@ -68,26 +68,27 @@
       <h2>Menu</h2>
    </header>
 				
-   <a href="#Homepage.html">Home</a>
-   <a href="#MyInvitations.html">Invitations</a> 
-   <a href="MyMessages.html">My Messages</a> 
-   <a href="#PersonalInfo.html">Personal Info</a> 
-   <a href="#Contact.html">Contact Us</a> 
+   <a asp-area="" asp-controller="Home" asp-action="Index" >Home</a>
+   <a asp-area="" asp-controller="Home" asp-action="About">About</a>
+   <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a> 
    <br><br>
-		
-   <header class="major">
-      <h2>Get in Touch</h2>
-   </header>
-			
-   <p>We can fill this in later</p>
-			
-   <a class="para" >Email: test@test.com</a>
-   <p>(ph:) 12341234</p>
+   
+   <div class="p">
+      <header class="major">
+         <h2>Get in Touch</h2>
+      </header>
+
+      <p>We can fill this in later</p>
+
+      <a class="para">Email: test@test.com</a>
+      <p>(ph:) 12341234</p>
+   
 		
    <!--Footer-->
-   <footer id="footer">
-      <p class="copyright">&copy; 2018 - iUni_Workshop. Rights Reserved </p>
-   </footer>
+      <footer id="footer">
+         <p class="copyright">&copy; 2018 - iUni_Workshop. Rights Reserved </p>
+      </footer>
+   </div>
 		
 </div>
 	
@@ -113,15 +114,11 @@
    
 </div>
 
-<div class="">
-   <div class="container-body-content">
-   @RenderBody()
-      <footer id="mainBottom">
-         <hr/>
-         <p>&copy; 2018 - iUni_Workshop</p>
-      </footer>
-   </div>
+<div id="cent">
+      @RenderBody()
+      
 </div>
+
 
 <environment include="Development">
    
@@ -130,14 +127,14 @@
          document.getElementById('side-menu').style.width = '250px';
          document.getElementById('main').style.marginLeft = '250px';
          document.getElementById('main1').style.marginLeft = '250px';
-         document.getElementById('mainBottom').style.marginLeft = '250px';
+         document.getElementById('cent').style.marginLeft = '250px';
       }
 	
       function closeSlideMenu(){
          document.getElementById('side-menu').style.width = '0px';
          document.getElementById('main').style.marginLeft = '0px';
          document.getElementById('main1').style.marginLeft = '0px';
-         document.getElementById('mainBottom').style.marginLeft = '0px';
+         document.getElementById('cent').style.marginLeft = '0px';
       }
    </script>
    
