@@ -1,9 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+<!DOCTYPE html>
 <html>
 <head>
    <meta charset="utf-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-   <title>@ViewData["Title"] - iUni_Workshop</title>
+   <title>@ViewData[""] iUni_Workshop</title>
 
    <environment include="Development">
       <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -67,10 +71,50 @@
    <header class="major">
       <h2>Menu</h2>
    </header>
-				
+
    <a asp-area="" asp-controller="Home" asp-action="Index" >Home</a>
    <a asp-area="" asp-controller="Home" asp-action="About">About</a>
    <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a> 
+   
+   @if (SignInManager.IsSignedIn(User))
+   {
+      var user = await UserManager.GetUserAsync(User);
+
+      try
+      {
+         var role = (await UserManager.GetRolesAsync(user)).AsEnumerable().First();
+
+
+         if (role == Roles.Administrator)
+         {
+            <a asp-area="" asp-controller="Administrator" asp-action="" title="Manage">Add School</a>
+            <a asp-area="" asp-controller="Administrator" asp-action="" title="Manage">Add Fields</a>
+            <a asp-area="" asp-controller="Administrator" asp-action="" title="Manage">Add Skill</a>
+            <a asp-area="" asp-controller="Administrator" asp-action="" title="Manage">Send Message</a>
+         }
+
+         if (role == Roles.Employee)
+         {
+            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">MyCVs</a>
+            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">EditPersonalInfo</a>
+            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">MyInvitations</a>
+         }
+
+         if (role == Roles.Employer)
+         {
+
+            <a asp-area="" asp-controller="Employer" asp-action="" title="Manage">EditCompanyInfo</a>
+            <a asp-area="" asp-controller="Employer" asp-action="" title="Manage">Job Profiles</a>
+            <a asp-area="" asp-controller="Employer" asp-action="" title="Manage">Invitations</a>
+         }
+      }
+
+      catch (Exception)
+      {
+
+      }
+   }
+
    <br><br>
    
    <div class="p">
@@ -105,8 +149,8 @@
    
    <div class="inner">
       <header id="h22" class="major">
-         <h2 style="margin-bottom: 0px; "><a asp-area="" asp-controller="Home" asp-action="Index" class="cl" style="text-decoration: none;"
-                                          >iUni_Workshop</a>
+        
+         <h2 style="margin-bottom: 0px;"><a asp-area="" asp-controller="Home" asp-action="Index" class="cl" style="text-decoration: none;">iUni_Workshop</a><br>
             @await Html.PartialAsync("_LoginPartial")</h2>
       </header>
       
@@ -127,14 +171,14 @@
          document.getElementById('side-menu').style.width = '250px';
          document.getElementById('main').style.marginLeft = '250px';
          document.getElementById('main1').style.marginLeft = '250px';
-         document.getElementById('cent').style.marginLeft = '250px';
+         document.getElementById('').style.marginLeft = '250px';
       }
 	
       function closeSlideMenu(){
          document.getElementById('side-menu').style.width = '0px';
          document.getElementById('main').style.marginLeft = '0px';
          document.getElementById('main1').style.marginLeft = '0px';
-         document.getElementById('cent').style.marginLeft = '0px';
+         document.getElementById('').style.marginLeft = '0px';
       }
    </script>
    
