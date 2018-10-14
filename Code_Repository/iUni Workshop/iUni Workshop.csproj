@@ -24,4 +24,10 @@
     <Compile Remove="Controllers\Validator.cs" />
     <Compile Remove="Data\FieldDbContext.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="Views\Home\About.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Pack>false</Pack>
+    </Content>
+  </ItemGroup>
 </Project>

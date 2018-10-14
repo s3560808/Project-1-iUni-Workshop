@@ -1,0 +1,296 @@
+@import url(font-awesome.min.css);
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic|Roboto+Slab:400,700");
+
+/* Navigation bar to left */
+.side-nav{
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #f2f2f2;
+	overflow-x: hidden;
+	padding-top: 60px;
+	transition:1.5s;
+}
+
+
+.side-nav a{
+	padding: 10px 10px 10px 20px;
+	text-decoration: none;
+	font-size: 15px;
+	color: #7a7a52;
+	display: block;
+	transition:1s;
+	font-family: sans-serif;
+	text-transform: uppercase;
+}	
+
+
+.side-nav a:hover{
+	color:#ff4000;
+}
+
+.side-nav a:active{
+	color: #ff4000;
+}
+
+.side-nav .btn-close{
+	position: absolute;
+	top: 0;
+	right: 2px;
+	font-size: 32px;
+	margin-left: 50px;
+	cursor: pointer;
+}
+
+.side-nav .para{
+	padding: 10px 10px 10px 20px;
+	text-decoration: none;
+	font-size: 0.9em;
+	color: #7a7a52;
+	display: block;
+	transition:1s;
+	font-family: "Roboto", "Arial";
+	text-transform: none;
+	
+}
+
+.side-nav p{
+	padding: 15px 10px 15px 20px;
+	font-family: "Roboto", "Arial";
+	font-size: 0.9em;
+	color: #7a7a52;
+}
+
+
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: sans-serif;
+}
+
+
+.navbar .open-slide .sp span{
+	display: block;
+	width: 30px;
+	height: 5px;
+	background: #f56a6a;
+	margin: 4px 0px;
+	cursor: pointer;
+}
+
+/* Main Section */
+#main {
+	transition:margin-left 1.5s;
+	padding: 20px 0px 20px 30px;
+	overflow: hidden;
+	width: 80%;
+}
+
+#main header{
+	padding: 5px 0px 10px 40px;
+}
+
+body{
+	font-family: "Ärial" , Serif;
+	background-color: white;
+	overflow-x: hidden;
+	-ms-overflow-style: scrollbar;
+}
+
+@-ms-viewport {
+	width: device-width;
+}
+
+
+/* Section */
+#h22 h2{
+	width: 90%;
+}
+
+
+header h2 .alt html {
+	margin: 0;
+	padding: 2px 15px 20px 15px;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+header .alt{
+	display: block;
+}
+
+#side-menu > section:first-of-type{
+	border-top: 0 !important;
+}
+
+/* Input for Section */
+#search input::-moz-focus-inner {
+	border: 0;
+	padding: 20px;
+}
+
+#search input {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	appearance: none;
+}
+
+/* Form */
+form{
+	margin: 0 2px 30px 20px;
+}
+
+
+#search form:before {
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-font-smoothing: antialiased;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	text-transform: none !important;
+	padding: 20px;
+}
+
+/* Section - Navigation Header */
+header.major > :last-child {
+	display: inline-block;
+	margin: 0 0 15px 20px;
+	padding: 5px 0px 5px 0px;
+	border-bottom: solid 3px #f56a6a;
+}
+
+/* Section - Main Header */
+header.main > :last-child {
+	margin: 0 0 1em 0;
+}
+
+
+#header {
+	display: -moz-flex;
+	display: -webkit-flex;
+	display: -ms-flex;
+	display: flex;
+	border-bottom: solid 5px #f56a6a;
+	padding: 6em 0 1em 0;
+	position: relative;
+}
+
+#header > * {
+	flex: 1;
+	margin-bottom: 0;
+}
+
+@media screen and (max-width: 1680px) {
+	#header {
+		padding-top: 5em;
+	}
+}
+
+/* Type */
+h2{
+	color: #3d4449;
+	font-family: "Roboto Slab", serif;
+	font-weight: 700;
+	line-height: 1.5;
+	margin: 0 0 1em 0;
+}
+
+h2 {
+	font-size: 1.75em;
+}
+
+#side-menu h2 {
+	font-size: 1.3888888889em;
+}
+
+
+h3{
+	margin: 0;
+	padding: 10px 15px 10px 40px;
+	border: 0;
+	color: #9fa3a6;
+	font-size: 26px;
+}
+
+
+@media screen(max-width: 1680px)
+{
+	.side-nav{
+		overflow: hidden;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+}
+
+@media screen(max-width: 1280px)
+{
+	.side-nav{
+		overflow: hidden;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+}
+
+@media screen(max-width: 960px)
+{
+	.side-nav{
+		overflow: hidden;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+}
+
+@media screen(max-width:500px)
+{
+	.side-nav{
+		overflow: hidden;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+}
+
+/* Type */		
+#footer .copyright {
+	color: #9fa3a6;
+	font-size: 0.9em;
+}
+
+/*Main - table */
+table tr td{
+	padding: 15px 30px 15px 40px;
+	cursor: pointer;
+	font-weight: bold;
+	border-bottom: solid 1px rgba(210, 215, 217, 0.75);
+	border-width: 1.5px;
+	
+}
+
+table{
+	width: 90%;
+}
+
+tr.link123{
+	background-color: white;
+}
+	
+tr.link123:hover{
+	background-color:#ff4000;
+	color: white;
+}	
+
+li a.active{
+	background-color: #eaeae1
+}
+
+
+
+
+
+
+

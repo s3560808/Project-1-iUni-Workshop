@@ -1,0 +1,33 @@
+#ejpp, .page{
+    transition: margin-left 1.5s;
+    margin-left: 40px;
+    padding-left: 25px;
+    
+}
+
+.page{
+    padding-left: 40px;
+}
+
+hr{
+    width: 90%;
+}
+ 
+#ejpp div p {
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+
+#ejpp .ejpinput, #fieldList, textarea{
+    border: 1px solid #ff4000;
+}
+
+#ejpp button{
+    background-color: white;
+    color: #ff4000;
+    padding: 5px;
+    border: 1.5px solid #ff4000;
+    font-weight: bold;
+    font-size: 14px;
+}
+

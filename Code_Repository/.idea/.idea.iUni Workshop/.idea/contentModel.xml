@@ -47,11 +47,7 @@
           <e p="UrlHelperExtensions.cs" t="Include" />
         </e>
         <e p="iUni Workshop.csproj" t="IncludeRecursive" />
-        <e p="Migrations" t="Include">
-          <e p="20180921033421_Initial.cs" t="Include" />
-          <e p="20180921033421_Initial.Designer.cs" t="Include" />
-          <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
-        </e>
+        <e p="Migrations" t="Include" />
         <e p="Models" t="Include">
           <e p="AccountViewModels" t="Include">
             <e p="ExternalLoginViewModel.cs" t="Include" />
@@ -248,6 +244,7 @@
             <e p="InvitationDetail.cshtml" t="Include" />
             <e p="Invitations.cshtml" t="Include" />
             <e p="JobProfiles.cshtml" t="Include" />
+            <e p="Reactive_Sidebar.js" t="Include" />
             <e p="RequestToCertificateMyCompany.cshtml" t="Include" />
             <e p="RequestToUnCertificateMyCompany.cshtml" t="Include" />
             <e p="SearchApplicants.cshtml" t="Include" />
@@ -315,6 +312,17 @@
         </e>
         <e p="wwwroot" t="Include">
           <e p="css" t="Include">
+            <e p="admin.css" t="Include" />
+            <e p="editcominfo.css" t="Include" />
+            <e p="ejp.css" t="Include" />
+            <e p="font-awesome.min.css" t="Include" />
+            <e p="invite.css" t="Include" />
+            <e p="log.css" t="Include" />
+            <e p="mdetails.css" t="Include" />
+            <e p="mmessages.css" t="Include" />
+            <e p="MyMessages.css" t="Include" />
+            <e p="na.css" t="Include" />
+            <e p="reg.css" t="Include" />
             <e p="site.css" t="Include" />
             <e p="site.min.css" t="Include" />
           </e>
@@ -324,11 +332,21 @@
             <e p="banner2.svg" t="Include" />
             <e p="banner3.svg" t="Include" />
             <e p="banner4.svg" t="Include" />
+            <e p="job.jpg" t="Include" />
           </e>
           <e p="js" t="Include">
             <e p="_AddSchool.js" t="Include" />
+            <e p="breakpoints.js" t="Include" />
+            <e p="browser.min.js" t="Include" />
+            <e p="jquery.min.js" t="Include" />
+            <e p="label-has-javascript.js" t="Include" />
+            <e p="main.js" t="Include" />
+            <e p="no-javascript.js" t="Include" />
+            <e p="Reactive_Sidebar.js" t="Include" />
             <e p="site.js" t="Include" />
             <e p="site.min.js" t="Include" />
+            <e p="toggleSidebar.js" t="Include" />
+            <e p="util.js" t="Include" />
           </e>
           <e p="lib" t="Include">
             <e p="bootstrap" t="Include">

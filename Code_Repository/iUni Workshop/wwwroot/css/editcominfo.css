@@ -1,0 +1,35 @@
+#eci{
+    margin-left: 40px;
+    padding-left: 40px;
+} 
+
+#eci h2{
+    padding-left: 0px;
+}
+
+.CoreInfo{
+    width: 200px;
+}
+
+.CoreInfo1{
+    width: 800px;
+    height: 150px;
+    resize: none;
+}
+
+#eci input, #bd{
+    border: 1px solid #ff4000;
+}
+
+#eci p{
+    font-weight: bold;
+}
+
+#eci button{
+    background-color: white;
+    color: #ff4000;
+    padding: 5px;
+    border: 1.5px solid #ff4000;
+    font-weight: bold;
+    font-size: 15px;
+}

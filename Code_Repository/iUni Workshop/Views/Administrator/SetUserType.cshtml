@@ -4,14 +4,19 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
+
+<link rel="stylesheet" href="~/css/admin.css"/>
+
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
-<h2>title</h2>
+
+<div id="sut">
+<h2>Set User Type</h2>
 <form method="post" asp-action="SetUserTypeAction">
     <table class="table">
         <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                Email
             </th>
             <th></th>
         </tr>
@@ -24,7 +29,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Email)
                     </td>
-                    <td>
+                    <td >
                         <form asp-controller="Administrator" asp-action="SetUserTypeAction">
                             <button type = "submit" name = "Id" value="@item.Id" >Set As Administrator</button>
                         </form>
@@ -43,4 +48,4 @@
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
 
-
+</div>
