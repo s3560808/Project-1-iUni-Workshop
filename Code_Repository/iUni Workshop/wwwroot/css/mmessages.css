@@ -20,3 +20,80 @@
     font-weight: bold;
     font-size: 13px;
 }
+
+#main1{
+    transition: 1.5s;
+    padding: 0px 0px 20px 160px;
+    width: 85%;
+    position: center;
+    overflow-x: hidden;
+}
+
+#bob {
+    padding-top: 1px;
+    overflow-x: hidden;
+}
+
+#main1 .carousel-indicators {
+    margin-bottom: 0px;
+}
+
+#main1.ind {
+    margin-left: 0px;
+}
+
+#main1 hr{
+    width: 100%;
+}
+
+#mainBottom{
+    transition: 1.5s;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+#con h2, #con address{
+    margin-left: 40px;
+    padding-left: 25px;
+    padding-right: 100px;
+
+}
+
+#mainBottom hr{
+    width: 850%;
+}
+
+#con #mainBottom{
+    transition: 1.5s;
+    margin-left: 65px;
+    padding-left: 0px;
+    position: absolute;
+}
+
+#about h2, h3, p{
+    margin-left: 40px;
+    margin-bottom: 0px;
+    padding: 0px 100px 12px 25px;
+}
+
+#about h2 {
+    margin-bottom: 10px;
+
+}
+
+#about p {
+    margin-right: 30px;
+}
+
+
+#about #mainBottom{
+    transition: 1.5s;
+    margin-left: 0px;
+    padding-left: 0px;
+    position: absolute;
+}
+
+#about hr{
+    width: 390%;
+    margin-left: 60px;
+}
