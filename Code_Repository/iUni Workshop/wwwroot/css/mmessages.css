@@ -47,3 +47,14 @@
     margin-left: 0px;
     padding-left: 0px;
 }
+
+#con h2, #con address{
+    margin-left: 40px;
+    padding-left: 25px;
+    padding-right: 100px;
+
+}
+
+#con hr{
+    width: 850%;
+}
