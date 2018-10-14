@@ -1,0 +1,16 @@
+#reg h2, .row {
+    margin-left: 40px;
+    padding-left: 365px;
+    padding-right: 100px;
+}
+
+#reg h2 {
+    padding-left: 400px;
+    margin-right: 15px;
+    color: #ff4000;
+}
+
+label{
+    color: #ff4000;
+}
+

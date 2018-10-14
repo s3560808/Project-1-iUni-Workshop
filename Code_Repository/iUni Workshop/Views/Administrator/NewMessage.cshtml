@@ -5,6 +5,9 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
+
+<link rel="stylesheet" href="~/css/admin.css"/>
+
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 <script>
     function GetReviverEmail(str) {
@@ -26,47 +29,44 @@
     }
 </script>
 
-<h2>title</h2>
+<div id="nm">
+<h2>Message</h2>
 <form method="post" asp-action="NewMessageAction">
-    <table class="table">
-        <thead>
-        <tr>
+    
             @* <th> *@
             @*     @Html.DisplayNameFor(model => model.SchoolName) *@
             @* </th> *@
             @* <th> *@
             @*     @Html.DisplayNameFor(model => model.DomainExtension) *@
             @* </th> *@
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-                <input type="text" name="Email" id="userName" list="ReciverEmailList" onkeyup="GetReviverEmail(this.value)">
-                <datalist id="ReciverEmailList"></datalist>
-            </td>
-        </tr>
-        <tr>
-            <input type ="text" name="Title" value="This is a title">
-        </tr>
-        <tr>
-            <textarea rows="4" cols="50" name="MessageDetail">This is a example</textarea>
-        </tr>
-        <tr>
-            <select name="Type">
-                <option>Please select message type</option>
+            
+    <p>To:
+        <input type="text" name="Email" id="userName" list="ReciverEmailList" onkeyup="GetReviverEmail(this.value)">
+        <datalist id="ReciverEmailList"></datalist>
+    </p><br>
+    <hr>
+    
+    <p>Title:
+        <input maxLength="30" placeholder="Title for message" name="Title">
+    </p><br><hr>
+    
+    <p>Description: </p>
+    <textarea name="MessageDetail" maxlength="600">Write message here</textarea>
+    <br><br><hr>
+    
+    <p>Select message type:
+    <select name="Type">
+                <option>Options</option>
                 <option value="@MessageType.System">System info message</option>
-                <option value="@MessageType.UserMessage">Conversation Message</option>
+                <option value="@MessageType.UserMessage">Message User</option>
             </select>
-        </tr>
-        </tbody>
-
-    </table>
-    <button type="submit" class="btn btn-sm btn-success">Confirm</button>
+    </p><br><hr>
+    
+    <button type="submit" >Send Message</button>
 </form>
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
 
+</div>

@@ -5,40 +5,43 @@
     Layout = "_Layout";
 }
 
+<link rel="stylesheet" href="~/css/invite.css"/>
 
-<h2>title</h2>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.InvitationId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @{
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InvitationId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-            </tr>
+<div id="inv">
+    <h2>Invitations</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.InvitationId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InvitationId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                </tr>
+            }
         }
-    }
         
-    </tbody>
+        </tbody>
 
-</table>
+    </table>
 
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
 
+</div>

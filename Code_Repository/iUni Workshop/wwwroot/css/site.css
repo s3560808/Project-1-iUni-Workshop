@@ -33,3 +33,82 @@
         display: none;
     }
 }
+
+.side-nav{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f2f2f2;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition:1.5s;
+}
+
+
+.side-nav a{
+    padding: 10px 10px 10px 20px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #7a7a52;
+    display: block;
+    transition:1s;
+    font-family: sans-serif;
+    text-transform: uppercase;
+}
+
+
+.side-nav a:hover{
+    color:#ff4000;
+}
+
+.side-nav a:active{
+    color: #ff4000;
+}
+
+.side-nav .btn-close{
+    position: absolute;
+    top: 0;
+    right: 2px;
+    font-size: 32px;
+    margin-left: 50px;
+    cursor: pointer;
+}
+
+.side-nav .para{
+    padding: 10px 10px 10px 20px;
+    text-decoration: none;
+    font-size: 0.9em;
+    color: #7a7a52;
+    display: block;
+    transition:1s;
+    font-family: "Roboto", "Arial";
+    text-transform: none;
+
+}
+
+.side-nav p{
+    padding: 15px 10px 15px 20px;
+    font-family: "Roboto", "Arial";
+    font-size: 0.9em;
+    color: #7a7a52;
+}
+
+
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: sans-serif;
+}
+
+
+.navbar .open-slide .sp span{
+    display: block;
+    width: 30px;
+    height: 5px;
+    background: #f56a6a;
+    margin: 4px 0px;
+    cursor: pointer;
+}

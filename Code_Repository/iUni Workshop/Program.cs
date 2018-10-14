@@ -43,6 +43,10 @@ namespace iUni_Workshop
                 }
             }
             host.Run();
+<<<<<<< HEAD
+=======
+            BuildWebHost(args).Run();
+>>>>>>> Levis
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
