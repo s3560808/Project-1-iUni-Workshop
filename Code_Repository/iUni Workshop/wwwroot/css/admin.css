@@ -1,0 +1,53 @@
+#addf, #adds, #addsk, #nm, #sut{
+    margin-left: 40px;
+    padding-left: 25px;
+    padding-right: 10px;
+}
+
+#addf h2, #adds h2, #addsk h2, #nm h2, #sut h2{
+    padding-left: 10px;
+}
+
+#sut table{
+    width: 90%;
+}
+
+#sut button, #nm button{
+    background-color: white;
+    color: #ff4000;
+    padding: 5px;
+    border: 1.5px solid #ff4000;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#nm button {
+    font-size: 14px;
+}
+
+#nm input{
+    width: 200px;
+    border: 1px solid #ff4000;
+    font-weight: normal;
+}
+
+#nm hr{
+    margin-top: 0px;
+    width: 90%;
+}
+
+#nm textarea{
+    width: 1000px;
+    height: 250px;
+    resize: none;
+    border: 1px solid #ff4000;
+}
+
+#nm select{
+    border: 1px solid #ff4000;
+    font-weight: normal;
+}
+
+#nm p{
+    font-weight: bold;
+}

@@ -6,7 +6,12 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
+
+<link rel="stylesheet" href="~/css/admin.css"/>
+
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
+
+<div id="addsk">
 <h2>title</h2>
 <form method="post" asp-action="AddSkillAction">
     <table class="table">
@@ -101,13 +106,8 @@
 }
 
 
-
-
-
-
-
-
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
 
+</div>
