@@ -1,18 +1,19 @@
+#cent{
+    transition: margin-left 1.5s;
+}
+
+
 #ejpp, .page{
     transition: margin-left 1.5s;
     margin-left: 40px;
     padding-left: 25px;
-    
-}
 
-.page{
-    padding-left: 40px;
 }
 
 hr{
     width: 90%;
 }
- 
+
 #ejpp div p {
     margin-bottom: 0px;
     font-weight: bold;
@@ -29,5 +30,11 @@ hr{
     border: 1.5px solid #ff4000;
     font-weight: bold;
     font-size: 14px;
+}
+
+#ejpp h2{
+    margin-left: 0px;
+    padding-left: 10px;
+    
 }
 

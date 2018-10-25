@@ -32,7 +32,9 @@
                     <input placeholder="Retype password" asp-for="ConfirmPassword" class="form-control"/>
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div><br>
-                <button type="submit" class="btn">Register</button>
+                <button id="btn" type="submit" >Register</button>
+                
+                <br><br><p><a asp-action="Login">Already Registered?</a></p>
             </form>
         </div>
     </div>

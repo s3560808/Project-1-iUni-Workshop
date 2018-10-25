@@ -6,10 +6,10 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Login";
 }
 
-<link rel="stylesheet" href="~/css/log.css"/>
+<link rel="stylesheet" href="~/css/log.css">
 
 <div id="log">
     
@@ -23,12 +23,12 @@
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Email"></label>
-                        <input asp-for="Email" class="form-control"/>
+                        <input asp-for="Email" class="form-control" placeholder="test@test.com"/>
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Password"></label>
-                        <input asp-for="Password" class="form-control"/>
+                        <input asp-for="Password" class="form-control" placeholder="Type password"/>
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-default">Log in</button>
+                        <button id="bn" type="submit" >Login</button>
                     </div>
                     <br>
                     <div class="form-group">

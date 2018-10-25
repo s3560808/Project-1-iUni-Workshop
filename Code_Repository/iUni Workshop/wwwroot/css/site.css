@@ -1,4 +1,9 @@
-﻿body {
+﻿#cent{
+    transition: margin-left 1.5s;
+}
+
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }

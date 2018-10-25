@@ -24,7 +24,7 @@ namespace iUniWorkshop.Models.EmployerModels
         public int? MinDay { get; set; }
         [Required]
         public float Salary { get; set; }
-
+        
         public List<JobProfileSkill> JobProfileSkills { get; set; }
 
         public List<JobProfileRequiredLocation> JobProfileRequiredLocation { get; set; }

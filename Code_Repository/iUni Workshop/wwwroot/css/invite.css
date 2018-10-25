@@ -1,3 +1,8 @@
+#cent{
+    transition: margin-left 1.5s;
+}
+
+
 #inv{
     margin-left: 40px;
     padding-left: 45px;

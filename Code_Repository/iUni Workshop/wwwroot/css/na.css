@@ -2,6 +2,11 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic|Roboto+Slab:400,700");
 
 /* Navigation bar to left */
+#cent{
+	transition: margin-left 1.5s;
+}
+
+
 .side-nav{
 	height: 100%;
 	width: 0;
@@ -25,7 +30,7 @@
 	transition:1s;
 	font-family: sans-serif;
 	text-transform: uppercase;
-}	
+}
 
 
 .side-nav a:hover{
@@ -54,7 +59,7 @@
 	transition:1s;
 	font-family: "Roboto", "Arial";
 	text-transform: none;
-	
+
 }
 
 .side-nav p{
@@ -255,7 +260,7 @@ h3{
 	}
 }
 
-/* Type */		
+/* Type */
 #footer .copyright {
 	color: #9fa3a6;
 	font-size: 0.9em;
@@ -268,7 +273,7 @@ table tr td{
 	font-weight: bold;
 	border-bottom: solid 1px rgba(210, 215, 217, 0.75);
 	border-width: 1.5px;
-	
+
 }
 
 table{
@@ -278,11 +283,11 @@ table{
 tr.link123{
 	background-color: white;
 }
-	
+
 tr.link123:hover{
 	background-color:#ff4000;
 	color: white;
-}	
+}
 
 li a.active{
 	background-color: #eaeae1

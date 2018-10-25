@@ -1,10 +1,16 @@
-#addf, #adds, #addsk, #nm, #sut{
+
+
+#cent{
+    transition: margin-left 1.5s;
+}
+
+#addf, #addsk, #nm, #sut{
     margin-left: 40px;
     padding-left: 25px;
     padding-right: 10px;
 }
 
-#addf h2, #adds h2, #addsk h2, #nm h2, #sut h2{
+#addf h2, #addsk h2, #nm h2, #sut h2{
     padding-left: 10px;
 }
 
@@ -51,3 +57,4 @@
 #nm p{
     font-weight: bold;
 }
+
