@@ -60,13 +60,6 @@
 
 <div id="side-menu" class="side-nav">
    <a class="btn-close" onclick="closeSlideMenu()">&times;</a>
-			
-   <!-- Section - Search -->
-   <section id="search" class="alt">
-      <form method="post" action="#DoesNothing">
-         <input type="text" name="query" id="query" placeholder="Search" maxlength="30">
-      </form>
-   </section>
 		
    <!-- Section - Main Section Nav -->
    <header class="major">
@@ -74,40 +67,47 @@
    </header>
 
    <a asp-area="" asp-controller="Home" asp-action="Index" >Home</a>
-   <a asp-area="" asp-controller="Home" asp-action="About">About</a>
-   <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a> 
    
    @if (SignInManager.IsSignedIn(User))
    {
       var user = await UserManager.GetUserAsync(User);
 
+      <a asp-controller="Dashboard" asp-action="Index">My Dashboard</a>
       try
       {
          var role = (await UserManager.GetRolesAsync(user)).AsEnumerable().First();
-
-
+         
          if (role == Roles.Administrator)
          {
-            <a asp-area="" asp-controller="Administrator" asp-action="AddSchool" title="Manage">Add School</a>
-            <a asp-area="" asp-controller="Administrator" asp-action="AddField" title="Manage">Add Fields</a>
-            <a asp-area="" asp-controller="Administrator" asp-action="AddSkill" title="Manage">Add Skill</a>
-            <a asp-area="" asp-controller="Administrator" asp-action="NewMessage" title="Manage">Send Message</a>
-            <a asp-area="" asp-controller="Administrator" asp-action="SetUserType" title="Manage">Set Users</a>
+            <a asp-controller="Administrator" asp-action="AddSchool">Add School</a>
+            <a asp-controller="Administrator" asp-action="AddField">Add Fields</a>
+            <a asp-controller="Administrator" asp-action="AddSkill">Add Skill</a>
+            <a asp-controller="Message"       asp-action="MyMessages">My Messages</a>
+            <a asp-controller="Administrator" asp-action="NewMessage">Create a New Message</a>
+            <a asp-controller="Administrator" asp-action="CertificateCompanies">Certificate Companies</a>
+            <a asp-controller="Administrator" asp-action="SetUserType">Set a User as Admin</a>
          }
-
+         
          if (role == Roles.Employee)
          {
-            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">MyCVs</a>
-            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">EditPersonalInfo</a>
-            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">MyInvitations</a>
+            <a asp-controller="Employee" asp-action="EditPersonalInfo">Edit Personal Info</a>
+            <a asp-controller="Employee" asp-action="MyCVs">My CVs</a>
+            <a asp-controller="Employee" asp-action="MyInvitations">My Invitations</a>
+            <a asp-controller="Message"  asp-action="MyMessages">My Messages</a>
+            <a asp-controller="Skill"    asp-action="RequestToAddSkill">Request to Add Skill</a>
+            <a asp-controller="Field"    asp-action="RequestToAddField">Request to Add Field</a> 
+            <a asp-controller="School"   asp-action="RequestToAddSchool" title="">Request to Add School</a>      
          }
 
          if (role == Roles.Employer)
          {
-
-            <a asp-area="" asp-controller="Employer" asp-action="EditCompanyInfo" title="Manage">Edit Company Info</a>
-            <a asp-area="" asp-controller="Employer" asp-action="EditJobProfile" title="Manage">Edit Job Profiles</a>
-            <a asp-area="" asp-controller="Employer" asp-action="Invitations" title="Manage">Invitations</a>
+            <a asp-controller="Employer" asp-action="EditCompanyInfo" title="Manage">Edit Company Info</a>
+            <a asp-controller="Employer" asp-action="JobProfiles" title="Manage">My Job Profiles</a>
+            <a asp-controller="Employer" asp-action="Invitations" title="Manage">Invitations</a>
+            <a asp-controller="Message"  asp-action="MyMessages">My Messages</a>
+            <a asp-controller="Skill"    asp-action="RequestToAddSkill">Request to Add Skill</a>
+            <a asp-controller="Field"    asp-action="RequestToAddField">Request to Add Field</a> 
+            <a asp-controller="School"   asp-action="RequestToAddSchool" title="">Request to Add School</a>    
          }
       }
 
@@ -132,7 +132,7 @@
 		
    <!--Footer-->
       <footer id="footer">
-         <p class="copyright">&copy; 2018 - iUni_Workshop. Rights Reserved </p>
+         <p class="copyright">&copy; @DateTime.Now.Year - iUni_Workshop. Rights Reserved </p>
       </footer>
    </div>
 		
