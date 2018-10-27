@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -638,7 +638,7 @@ namespace iUni_Workshop.Controllers
                 var oldExternalMaterials = _context.EmployeeExternalMeterials.Where(a => a.EmployeeCvId == cvId);
                 var newEnumerable = newExternalMaterials.Select(a => new {a.Name, a.Link}).OrderBy(a => a.Name).ToList();
                 var oldEnumerable = oldExternalMaterials.Select(a => new {a.Name, a.Link}).OrderBy(a => a.Name).ToList();
-                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>=0)
                 {
                     try
                     {
@@ -667,7 +667,7 @@ namespace iUni_Workshop.Controllers
                 var oldJobHistories = _context.EmployeeJobHistories.Where(a => a.EmployeeCvId == cvId);
                 var newEnumerable = newJobHistories.Select(a => new {a.Name, Link = a.ShortDescription}).OrderBy(a => a.Name).ToList();
                 var oldEnumerable = oldJobHistories.Select(a => new {a.Name, Link = a.ShortDescription}).OrderBy(a => a.Name).ToList();
-                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>=0)
                 {
                     try
                     {
