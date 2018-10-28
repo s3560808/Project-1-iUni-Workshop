@@ -8,3 +8,93 @@
     color: #ff4000;
 }
 
+
+#addsk, #addsk .alert{
+    margin-left: 40px;
+    margin-right: 120px;
+    padding-left: 40px;
+} 
+
+#addsk h2, #addsk p{
+    color: #ff4000;
+}
+
+#addsk p{
+    font-weight: bold;
+}
+
+#addsk input, #addsk select{
+    border: 1px solid #ff4000;
+}
+
+#addsk #btn1 {
+    background-color: white;
+    color: #ff4000;
+    padding: 5px;
+    border: 1.5px solid #ff4000;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#md{
+    margin-left: 40px;
+    margin-right: 130px;
+    padding-left: 40px;
+}
+
+#md h2{
+    color: #ff4000;
+}
+
+#md textarea {
+    border: 1px solid #ff4000;
+    resize: none;
+    width: 1080px;
+    height: 200px;
+}
+
+#md #btn{
+    background-color: white;
+    color: #ff4000;
+    padding: 5px;
+    border: 1.5px solid #ff4000;
+    font-weight: bold;
+    font-size: 12px;
+    margin-right: 1000px;
+}
+
+#mcv, #ecv{
+    padding-left: 40px;
+    margin-right: 130px;
+    margin-left: 40px;
+}
+
+#mcv h2, #ecv h2 {
+    color: #ff4000;
+}
+
+#mcv #btn{
+    background-color: white;
+    color: #ff4000;
+    padding: 5px;
+    border: 1.5px solid #ff4000;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#ecv p{
+    font-weight: bold;
+}
+
+#ecv input, #ecv textarea{
+    border: 1px solid #ff4000;
+}
+
+#ecv .btn{
+    background-color: white;
+    color: #ff4000;
+    padding: 5px;
+    border: 1.5px solid #ff4000;
+    font-weight: bold;
+    font-size: 12px;
+}

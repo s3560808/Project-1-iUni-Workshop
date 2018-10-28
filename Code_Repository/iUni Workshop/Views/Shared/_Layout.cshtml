@@ -95,9 +95,10 @@
 
          if (role == Roles.Employee)
          {
-            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">MyCVs</a>
+            <a asp-area="" asp-controller="Employee" asp-action="MyCVs" title="Manage">MyCVs</a>
             <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">EditPersonalInfo</a>
             <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">MyInvitations</a>
+            <a asp-area="" asp-controller="Employee" asp-action="" title="Manage">Messages</a>
          }
 
          if (role == Roles.Employer)
@@ -106,6 +107,7 @@
             <a asp-area="" asp-controller="Employer" asp-action="EditCompanyInfo" title="Manage">Edit Company Info</a>
             <a asp-area="" asp-controller="Employer" asp-action="EditJobProfile" title="Manage">Edit Job Profiles</a>
             <a asp-area="" asp-controller="Employer" asp-action="Invitations" title="Manage">Invitations</a>
+            <a asp-area="" asp-controller="Employer" asp-action="" title="Manage">Messages</a>
             
          }
       }

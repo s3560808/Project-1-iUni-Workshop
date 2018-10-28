@@ -1,24 +1,35 @@
-
-
-#cent{
-    transition: margin-left 1.5s;
-}
-
-#addf, #addsk, #nm, #sut{
+#nm{
     margin-left: 40px;
-    padding-left: 25px;
-    padding-right: 10px;
+    margin-right: 125px;
+    padding-left: 35px;
 }
 
-#addf h2, #addsk h2, #nm h2, #sut h2{
-    padding-left: 10px;
+#nm h2{
+    color: #ff4000;
+}
+#nm p{
+    font-weight: bold;
 }
 
-#sut table{
-    width: 90%;
+#nm input, #nm textarea, #nm select{
+    border: 1px solid #ff4000;
 }
 
-#sut button, #nm button{
+#nm input{
+    width: 200px;
+}
+
+#nm select, #nm input{
+    font-weight: normal;
+}
+
+#nm textarea{
+    width: 1050px;
+    height: 120px;
+    resize: none;
+}
+
+#nm #btn{
     background-color: white;
     color: #ff4000;
     padding: 5px;
@@ -27,34 +38,58 @@
     font-size: 12px;
 }
 
-#nm button {
-    font-size: 14px;
+#addf{
+    margin-left: 40px;
+    margin-right: 120px;
+    padding-left: 35px;
 }
 
-#nm input{
-    width: 200px;
-    border: 1px solid #ff4000;
-    font-weight: normal;
+#addf h2, #addf p{
+    color: #ff4000;
 }
 
-#nm hr{
-    margin-top: 0px;
-    width: 90%;
-}
-
-#nm textarea{
-    width: 1000px;
-    height: 250px;
-    resize: none;
-    border: 1px solid #ff4000;
-}
-
-#nm select{
-    border: 1px solid #ff4000;
-    font-weight: normal;
-}
-
-#nm p{
+#addf p{
     font-weight: bold;
 }
+
+#addf #btn4, #addf .btn1{
+    background-color: white;
+    color: #ff4000;
+    padding: 5px;
+    border: 1.5px solid #ff4000;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+#addf input, #addf select{
+    border: 1px solid #ff4000;
+}
+
+#addf input{
+    width: 250px;
+}
+
+#fp, #fpc{
+    margin-left: 40px;
+    margin-right: 132px;
+    padding-left: 30px;
+}
+
+#fp h2, #fp label, #fpc h2{
+    color: #ff4000;
+}
+
+#fp #btn {
+    background-color: white;
+    color: #ff4000;
+    padding: 5px;
+    border: 1.5px solid #ff4000;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+
+
+
+
 

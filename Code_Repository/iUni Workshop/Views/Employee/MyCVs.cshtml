@@ -4,26 +4,31 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
+
+<link rel="stylesheet" href="~/css/mdetails.css"/>
+
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 
-<h2>title</h2>
+
+<div id="mcv">
+    <h2>My CV's</h2>
     <table class="table">
         <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.CvId)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CvTitle)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FieldName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FindJobStatus)
-                </th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CvId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CvTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FieldName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FindJobStatus)
+            </th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
         @{
@@ -41,31 +46,32 @@
                     </td>
                     <td>
                         @{
-                               if (item.FindJobStatus)
-                               {
-                                   <p>Finding job</p>
-                               }
-                               else
-                               {
-                                   <p>Pause</p>
-                               }
-                           }
+                            if (item.FindJobStatus)
+                            {
+                                <p>Finding job</p>
+                            }
+                            else
+                            {
+                                <p>Pause</p>
+                            }
+                        }
                     </td>
                     <td>
-                        <form asp-controller="Employee" asp-action="EditCv" asp-route-CvId="@item.CvId" method="get" >
-                            <button name="CvId" type="submit" value = "@item.CvId" class="btn btn-sm btn-success" >Read</button>
+                        <form asp-controller="Employee" asp-action="EditCv" asp-route-CvId="@item.CvId" method="get">
+                            <button name="CvId" type="submit" value="@item.CvId" id="btn">View</button>
                         </form>
-                        
+
                     </td>
                 </tr>
             }
         }
-        
+
         </tbody>
 
     </table>
 
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
 
+</div>

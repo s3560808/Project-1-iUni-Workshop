@@ -30,43 +30,43 @@
 </script>
 
 <div id="nm">
-<h2>Message</h2>
-<form method="post" asp-action="NewMessageAction">
-    
-            @* <th> *@
-            @*     @Html.DisplayNameFor(model => model.SchoolName) *@
-            @* </th> *@
-            @* <th> *@
-            @*     @Html.DisplayNameFor(model => model.DomainExtension) *@
-            @* </th> *@
-            
-    <p>To:
-        <input type="text" name="Email" id="userName" list="ReciverEmailList" onkeyup="GetReviverEmail(this.value)">
-        <datalist id="ReciverEmailList"></datalist>
-    </p><br>
-    <hr>
-    
-    <p>Title:
-        <input maxLength="30" placeholder="Title for message" name="Title">
-    </p><br><hr>
-    
-    <p>Description: </p>
-    <textarea name="MessageDetail" maxlength="600">Write message here</textarea>
-    <br><br><hr>
-    
-    <p>Select message type:
-    <select name="Type">
+    <h2>Message</h2>
+    <form method="post" asp-action="NewMessageAction">
+
+        @* <th> *@
+        @*     @Html.DisplayNameFor(model => model.SchoolName) *@
+        @* </th> *@
+        @* <th> *@
+        @*     @Html.DisplayNameFor(model => model.DomainExtension) *@
+        @* </th> *@
+
+        <p>To:
+            <input type="text" name="Email" id="userName" list="ReciverEmailList" onkeyup="GetReviverEmail(this.value)">
+            <datalist id="ReciverEmailList"></datalist>
+        </p><br>
+        <hr>
+
+        <p>Title:
+            <input maxLength="30" placeholder="Title for message" name="Title">
+        </p><br><hr>
+
+        <p>Description: </p>
+        <textarea name="MessageDetail" maxlength="600" placeholder="Write description here"></textarea>
+        <br><br><hr>
+
+        <p>Select message type:
+            <select name="Type">
                 <option>Options</option>
                 <option value="@MessageType.System">System info message</option>
                 <option value="@MessageType.UserMessage">Message User</option>
             </select>
-    </p><br><hr>
-    
-    <button type="submit" >Send Message</button>
-</form>
+        </p><br><hr>
 
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+        <button id="btn" type="submit">Send Message</button>
+    </form>
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
 
 </div>
