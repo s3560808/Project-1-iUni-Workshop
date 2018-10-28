@@ -41,15 +41,15 @@
                     </td>
                     <td>
                         @{
-                               if (item.FindJobStatus)
-                               {
-                                   <p>Finding job</p>
-                               }
-                               else
-                               {
-                                   <p>Pause</p>
-                               }
-                           }
+                            if (item.FindJobStatus)
+                            {
+                                <p>Finding job</p>
+                            }
+                            else
+                            {
+                                <p>Pause</p>
+                            }
+                        }
                     </td>
                     <td>
                         <form asp-controller="Employee" asp-action="EditCv" asp-route-CvId="@item.CvId" method="get" >
@@ -58,11 +58,12 @@
                         
                     </td>
                 </tr>
+                
             }
         }
         
         </tbody>
-
+        <button><a asp-controller="Employee" asp-action="EditCv" class="btn btn-sm btn-info">Create a new CV</a></button>
     </table>
 
 @section Scripts {
