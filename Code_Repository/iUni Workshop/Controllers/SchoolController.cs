@@ -84,7 +84,6 @@ namespace iUni_Workshop.Controllers
             return View();
         }
         
-        //TODO 如果相同学校名字，不同domainextension？
         //Real action of RequestToAddSchool
         public async Task<IActionResult> AddSchoolAction(AddSchoolAction school)
         {

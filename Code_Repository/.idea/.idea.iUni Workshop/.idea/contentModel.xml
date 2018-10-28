@@ -258,6 +258,10 @@
           </e>
           <e p="Field" t="Include">
             <e p="RequestToAddField.cshtml" t="Include" />
+            <e p="Shared" t="Include">
+              <e p="_AddSchool.cshtml" t="Include" />
+              <e p="_Validation_Area_From_Backend.cshtml" t="Include" />
+            </e>
           </e>
           <e p="Home" t="Include">
             <e p="About.cshtml" t="Include" />

@@ -755,6 +755,7 @@ namespace iUni_Workshop.Controllers
                 employer.Certificated = true;
                 employer.CertificatedBy = user.Id;
                 _context.Employers.Update(employer);
+                _context.SaveChanges();
                 AddToTempDataSuccess("Company "+ employer.Name+" certificate successfully!");
             }
             catch (InvalidOperationException)

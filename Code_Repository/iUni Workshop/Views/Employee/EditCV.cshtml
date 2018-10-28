@@ -1,35 +1,29 @@
-﻿@model iUni_Workshop.Models.EmployeeModels.EditCV
+@model iUni_Workshop.Models.EmployeeModels.EditCV
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
-
-<link rel="stylesheet" href="~/css/mdetails.css"/>
-
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
-
-<div id="ecv">
-
-<h2>Edit Cv</h2>
+<h2>title</h2>
 
 <form asp-action="EditCvAction" method="post">
-@{
-
-    if (Model != null)
-    {
-        <input type="text" hidden="true" name="CvId" id="CvId" value="@Model.CvId">
+    @{
+        
+        if (Model != null)
+        {
+            <input type="text" hidden="true" name = "CvId" id="CvId" value="@Model.CvId">
+        }
     }
-}
-
-@{
-    var title = "";
-    if (Model != null)
-    {
-        title = Model.Title;
+    
+    @{
+        var title="";
+        if (Model != null)
+        {
+            title = Model.Title;
+        }
     }
-}
-<p>Title</p><input type="text" name="Title" value="@title">
+    Title<input type="text" name="Title" value="@title">
 <hr/>
 @{
     var findJob = false;
@@ -39,115 +33,254 @@
     }
     catch (NullReferenceException)
     {
-
+        
     }
 
 }
-<p>UpdateStatus?<input type="checkbox" name="UpdateStatus" value="true" checked="@findJob"></p>
-
+    UpdateStatus?<input type="checkbox" name="UpdateStatus" value="true" checked="@findJob"> 
+   
+    <hr/>
+    @{
+        bool primary = false;
+        if (Model != null)
+        {
+            primary = Model.Primary;
+        }
+    }
+    PrimaryCv? <input type="checkbox" name="PrimaryCv" value="true" checked="@primary">
+    
+    <hr/>
+    @{
+        var field = "";
+        if (@Model != null)
+        {
+            field = Model.FieldName;
+        }
+    }
+    <select name="FieldName" value="@field" id="fieldList"></select>
+    
+    <hr/>
+    @{
+        var description = "";
+        if (@Model != null)
+        {
+            description = Model.Details;
+        }
+    }
+    <textarea name = "Description">@description</textarea>
 <hr/>
-@{
-    bool primary = false;
-    if (Model != null)
-    {
-        primary = Model.Primary;
-    }
-}
-<p>PrimaryCv? <input type="checkbox" name="PrimaryCv" value="true" checked="@primary"></p>
-
-<hr/>
-@{
-    var field = "";
-    if (@Model != null)
-    {
-        field = Model.FieldName;
-    }
-}
-<p>FieldName</p> <input type="text" name="FieldName" value="@field">
-
-<hr/>
-@{
-    var description = "";
-    if (@Model != null)
-    {
-        description = Model.Details;
-    }
-}
-<p>Detail of Job</p><textarea name = "Description">@description</textarea><br/><br/><hr/>
-
-<script>
-    function AddSkillController() {
-        var skillElements = document.getElementsByClassName("SkillClass");
-        var skillElementsNumber = skillElements.length;
-        var skillDiv = document.getElementById("Skills");
-        //1. Create new div for new skill
-        var divBox = document.createElement("div");
-        divBox.className = "SkillClass";
-        //1.1 Create skill name box
-        var inputSkillName = document.createElement("input");
-        inputSkillName.setAttribute("type", "text");
-        inputSkillName.setAttribute("name", "[" + skillElementsNumber + "]" + ".SkillName");
-        //1.2 Create skill certification link box
-        var inputSkillLink = document.createElement("input");
-        inputSkillLink.setAttribute("type", "text");
-        inputSkillLink.setAttribute("name", "[" + skillElementsNumber + "]" + ".CertificationLink");
-        //1.3 Create Skill name label
-        var inputSkillNameLabel = document.createElement("p");
-        inputSkillNameLabel.innerText = "Skill Name " + skillElementsNumber;
-        //1.4 Create Skill Certification Link label
-        var inputSkillLinkLabel = document.createElement("p");
-        inputSkillLinkLabel.innerText = "Skill Certification Link " + skillElementsNumber;
-        //2. Append sub elements of new skill div
-        divBox.appendChild(inputSkillNameLabel);
-        divBox.appendChild(inputSkillName);
-        divBox.appendChild(inputSkillLinkLabel);
-        divBox.appendChild(inputSkillLink);
-        skillDiv.append(divBox);
-    }
-
-    function AddExternalMaterialsController() {
-        var externalMaterialElements = document.getElementsByClassName("ExternalMaterialClass");
-        var externalMaterialElementsNumber = externalMaterialElements.length;
-        var externalMaterialDiv = document.getElementById("ExternalMaterials");
-        //1. Create new div for new external material
-        var divBox = document.createElement("div");
-        divBox.className = "ExternalMaterialClass";
-        //1.1 Create external material name box
-        var inputExternalMaterialName = document.createElement("input");
-        inputExternalMaterialName.setAttribute("type", "text");
-        inputExternalMaterialName.setAttribute("name",
-            "[" + externalMaterialElementsNumber + "]" + ".ExternalMaterialName");
-        //1.2 Create external material certification link box
-        var inputExternalMaterialLink = document.createElement("input");
-        inputExternalMaterialLink.setAttribute("type", "text");
-        inputExternalMaterialLink.setAttribute("name",
-            "[" + externalMaterialElementsNumber + "]" + ".ExternalMaterialLink");
-        //1.3 Create external material name label
-        var inputExternalMaterialNameLabel = document.createElement("p");
-        inputExternalMaterialNameLabel.innerText = "External Material Name " + externalMaterialElementsNumber;
-        //1.4 Create external material Certification Link label
-        var inputExternalMaterialLinkLabel = document.createElement("p");
-        inputExternalMaterialLinkLabel.innerText =
-            "External Material Certification Link " + externalMaterialElementsNumber;
-        //2. Append sub elements of new skill div
-        divBox.appendChild(inputExternalMaterialNameLabel);
-        divBox.appendChild(inputExternalMaterialName);
-        divBox.appendChild(inputExternalMaterialLinkLabel);
-        divBox.appendChild(inputExternalMaterialLink);
-        externalMaterialDiv.append(divBox);
-    }
-</script>
+    <script>
+        function AddSkillController() {
+            
+            var skillElements = document.getElementsByClassName("SkillClass");
+            var skillElementsNumber = skillElements.length;
+            var skillDiv = document.getElementById("Skills");
+            if (skillElementsNumber >= 10) {
+                alert("At most have 10 skill");
+                return;
+            }
+            //1. Create new div for new skill
+            var divBox = document.createElement("div");
+            divBox.className = "SkillClass";
+            divBox.id = "SkillClassId"+skillElementsNumber;
+            //1.1 Create skill name box
+            var inputSkillName = document.createElement("input");
+            inputSkillName.setAttribute("type","text");
+            inputSkillName.setAttribute("name","["+skillElementsNumber+"]"+ ".SkillName");
+            inputSkillName.onkeyup = function() { getSkillName(this.value) };
+            inputSkillName.setAttribute("list","skillList");
+            //1.1.1 Data List
+            var dataList = document.createElement("datalist");
+            dataList.setAttribute("id", "skillList");
+            //1.2 Create skill certification link box
+            var inputSkillLink = document.createElement("input");
+            inputSkillLink.setAttribute("type","text");
+            inputSkillLink.setAttribute("name","["+skillElementsNumber+"]"+ ".CertificationLink");
+            //1.3 Create Skill name label
+            var inputSkillNameLabel = document.createElement("p");
+            inputSkillNameLabel.innerText = "Skill Name "+skillElementsNumber;
+            //1.4 Create Skill Certification Link label
+            var inputSkillLinkLabel = document.createElement("p");
+            inputSkillLinkLabel.innerText = "Skill Certification Link "+skillElementsNumber;
+            //1.5 Create remove button
+            var buttonSkillButton = document.createElement("button");
+            buttonSkillButton.type = "button";
+            buttonSkillButton.textContent = "remove";
+            buttonSkillButton.onclick = function() {RemoveSkill(this)};
+            //2. Append sub elements of new skill div
+            divBox.appendChild(inputSkillNameLabel);
+            divBox.appendChild(inputSkillName);
+            divBox.appendChild(inputSkillLinkLabel);
+            divBox.appendChild(inputSkillLink);
+            divBox.appendChild(buttonSkillButton);
+            skillDiv.append(divBox);
+            
+        }
+        
+        function RemoveSkill(element) {
+            var all = document.getElementsByClassName('SkillClass');
+            if (all.length === 1) {
+                alert("At Least have 1 skill");
+                return;
+            }
+            
+            var skillDiv = element.parentNode;
+            skillDiv.remove(skillDiv);
+            var remains = document.getElementsByClassName('SkillClass');
+            for (var i = 0; i < remains.length; i++) {
+                remains[i].id = "SkillClassId" + i;
+                remains[i].children[1].name = "[" + i + "]" + ".SkillName";
+                remains[i].children[3].name = "[" + i + "]" + ".CertificationLink";
+            }
+        }
+        
+        function getSkillName(skillName) {
+            var postCodeSelectBox = document.getElementById("skillList");
+            postCodeSelectBox.innerHTML = "";
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    var skills = JSON.parse(this.responseText);
+                    for (var i = 0; i < skills.length; i++) {
+                        var skill = document.createElement("OPTION");
+                        skill.value = skills[i];
+                        postCodeSelectBox.appendChild(skill);
+                    }
+                }
+            };
+            xmlHttp.open("GET", "/Skill/GetSkillName/" + skillName, true);
+            xmlHttp.send();
+        }
+        
+        window.onload = function getFieldName() {
+            var postCodeSelectBox = document.getElementById("fieldList");
+            postCodeSelectBox.innerHTML = "";
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function() {
+                if (this.readyState === 4 && this.status === 200) {
+                    var fields = JSON.parse(this.responseText);
+                    for (var i = 0; i < fields.length; i++) {
+                        var field = document.createElement("OPTION");
+                        field.value = fields[i];
+                        field.innerText = fields[i];
+                        postCodeSelectBox.appendChild(field);
+                    }
+                }
+            };
+            xmlHttp.open("GET", "/Field/GetAllFields/", true);
+            xmlHttp.send();
+        }
+        
+        function AddExternalMaterialsController() {
+            var externalMaterialElements = document.getElementsByClassName("ExternalMaterialClass");
+            var externalMaterialElementsNumber = externalMaterialElements.length;
+            var externalMaterialDiv = document.getElementById("ExternalMaterials");
+            //1. Create new div for new external material
+            var divBox = document.createElement("div");
+            divBox.className = "ExternalMaterialClass";
+            divBox.id = "ExternalMaterialClassId"+externalMaterialElements.length;
+            //1.1 Create external material name box
+            var inputExternalMaterialName = document.createElement("input");
+            inputExternalMaterialName.setAttribute("type","text");
+            inputExternalMaterialName.setAttribute("name","["+externalMaterialElementsNumber+"]"+ ".ExternalMaterialName");
+            //1.2 Create external material certification link box
+            var inputExternalMaterialLink = document.createElement("input");
+            inputExternalMaterialLink.setAttribute("type","text");
+            inputExternalMaterialLink.setAttribute("name","["+externalMaterialElementsNumber+"]"+ ".ExternalMaterialLink");
+            //1.3 Create external material name label
+            var inputExternalMaterialNameLabel = document.createElement("p");
+            inputExternalMaterialNameLabel.innerText = "External Material Name "+externalMaterialElementsNumber;
+            //1.4 Create external material Certification Link label
+            var inputExternalMaterialLinkLabel = document.createElement("p");
+            inputExternalMaterialLinkLabel.innerText = "External Material Certification Link "+externalMaterialElementsNumber;
+            //1.5 Create remove button
+            var buttonExternalMaterialButton = document.createElement("button");
+            buttonExternalMaterialButton.type = "button";
+            buttonExternalMaterialButton.textContent = "remove";
+            buttonExternalMaterialButton.onclick = function() {RemoveExternalMaterial(this)};
+            //2. Append sub elements of new skill div
+            divBox.appendChild(inputExternalMaterialNameLabel);
+            divBox.appendChild(inputExternalMaterialName);
+            divBox.appendChild(inputExternalMaterialLinkLabel);
+            divBox.appendChild(inputExternalMaterialLink);
+            divBox.appendChild(buttonExternalMaterialButton);
+            externalMaterialDiv.append(divBox);
+        }
+        
+        function RemoveExternalMaterial(element) {
+            var externalMaterialDiv = element.parentNode;
+            externalMaterialDiv.remove(externalMaterialDiv);
+            var remains = document.getElementsByClassName('ExternalMaterialClass');
+            for (var i = 0; i < remains.length; i++) {
+                remains[i].id = "ExternalMaterialClassId" + i;
+                remains[i].children[1].name = "[" + i + "]" + ".ExternalMaterialName";
+                remains[i].children[3].name = "[" + i + "]" + ".ExternalMaterialLink";
+            }
+        }
+        
+        function AddJobHistoryController() {
+            var historyElements = document.getElementsByClassName('HistoryClass');
+            var historyElementsNumber = historyElements.length;
+            var historyDiv = document.getElementById("JobHistories");
+            //1. Create new div for new external material
+            var divBox = document.createElement("div");
+            divBox.className = "HistoryClass";
+            divBox.id = "HistoryClassId"+historyElements;
+            //1.1 Create external material name box
+            var inputJobHistory = document.createElement("input");
+            inputJobHistory.setAttribute("type","text");
+            inputJobHistory.setAttribute("name","["+historyElementsNumber+"]"+ ".JobHistoryName");
+            //1.2 Create external material certification link box
+            var inputJobHistoryLink = document.createElement("input");
+            inputJobHistoryLink.setAttribute("type","text");
+            inputJobHistoryLink.setAttribute("name","["+historyElementsNumber+"]"+ ".JobHistoryShortDescription");
+            //1.3 Create external material name label
+            var inputJobHistoryLabel = document.createElement("p");
+            inputJobHistoryLabel.innerText = "Job History "+historyElementsNumber;
+            //1.4 Create external material Certification Link label
+            var jobHistoryLinkLabel = document.createElement("p");
+            jobHistoryLinkLabel.innerText = "Job History Certification Link "+historyElementsNumber;
+            //1.5 Create remove button
+            var buttonHistoryButton = document.createElement("button");
+            buttonHistoryButton.type = "button";
+            buttonHistoryButton.textContent = "remove";
+            buttonHistoryButton.onclick = function() {RemoveJobHistory(this)};
+            //2. Append sub elements of new skill div
+            divBox.appendChild(inputJobHistoryLabel);
+            divBox.appendChild(inputJobHistory);
+            divBox.appendChild(jobHistoryLinkLabel);
+            divBox.appendChild(inputJobHistoryLink);
+            divBox.appendChild(buttonHistoryButton);
+            historyDiv.append(divBox);
+        }
+        
+        function RemoveJobHistory(element) {
+            var historyDiv = element.parentNode;
+            historyDiv.remove(historyDiv);
+            var remains = document.getElementsByClassName('HistoryClass');
+            for (var i = 0; i < remains.length; i++) {
+                remains[i].id = "HistoryClassId" + i;
+                remains[i].children[1].name = "[" + i + "]" + ".JobHistoryName";
+                remains[i].children[3].name = "[" + i + "]" + ".JobHistoryShortDescription";
+            }
+        }
+    </script>
 
 <div id="Skills">
+    <p class="text-danger">Please enter your best skill on top first</p>
     @{
         if (@Model?.Skills == null)
         {
             int i = 0;
             string skillName = "[" + 0 + "]" + ".SkillName";
             string link = "[" + 0 + "]" + ".CertificationLink";
-            <div class="SkillClass">
-                <p>Skill Name @i</p> <input type="text" name="@skillName">
+            string skillClassId = "SkillClassId0";
+            <div class="SkillClass" id=@skillClassId>
+                <p>Skill Name @i</p>
+                <input type="text" name="@skillName" list="skillList" onkeyup="getSkillName(this.value)">
+                <datalist id="skillList"></datalist>
                 <p>Skill Certification Link @i</p> <input type="text" name="@link">
+                <button onclick="RemoveSkill(this)" type="button">remove</button>
             </div>
         }
         else
@@ -158,30 +291,26 @@
                 {
                     string skillName = "[" + i + "]" + ".SkillName";
                     string link = "[" + i + "]" + ".CertificationLink";
-                    <div class="SkillClass">
-                        <p>Skill Name @i</p> <input type="text" name="@skillName" value="@Model.Skills[i].SkillName">
+                    string skillClassId = "SkillClassId"+i;
+                    <div class="SkillClass" id="@skillClassId">
+                        <p>Skill Name @i</p> 
+                        <input type="text" name="@skillName" list="skillList" onkeyup="getSkillName(this.value)" value="@Model.Skills[i].SkillName">
+                        <datalist id="skillList"></datalist>
                         <p>Skill Certification Link @i</p> <input type="text" name="@link" value="@Model.Skills[i].CertificationLink">
+                        <button onclick="RemoveSkill(this)" type="button">remove</button>
                     </div>
                 }
-
-                <hr/>
             }
         }
-        <button class="btn" type="button" onclick="AddSkillController()">Add Skill</button>
+        
     }
-    <hr/>
 </div>
+<button type="button" onclick="AddSkillController()">More Skill</button>
+<hr/>
 <div id="ExternalMaterials">
     @{
         if (@Model?.externalMaterials == null)
         {
-            var i = 0;
-            var materialName = "[" + i + "]" + ".ExternalMaterialName";
-            var materialLink = "[" + i + "]" + ".ExternalMaterialLink";
-            <div class="ExternalMaterialClass">
-                <p>External Material Name @i</p> <input type="text" name="@materialName">
-                <p>External Material Link @i</p> <input type="text" name="@materialLink">
-            </div>
         }
         else
         {
@@ -190,113 +319,109 @@
                 {
                     var materialName = "[" + i + "]" + ".ExternalMaterialName";
                     var materialLink = "[" + i + "]" + ".ExternalMaterialLink";
-                    <div class="ExternalMaterialClass">
-                        <p>External Material Name @i</p> <input type="text" name="@materialName" value="@Model.externalMaterials[i].Name">
-                        <p>External Material Link @i</p> <input type="text" name="@materialLink" value="@Model.externalMaterials[i].Link">
+                    string externalMaterialClassId = "ExternalMaterialClassId"+i;
+                    <div class="ExternalMaterialClass" id="@externalMaterialClassId">
+                        <p>External Material Name @i</p>      <input type="text" name="@materialName" value="@Model.externalMaterials[i].Name">
+                        <p>External Material Link @i</p>      <input type="text" name="@materialLink" value="@Model.externalMaterials[i].Link">
+                        <button onclick="RemoveExternalMaterial(this)" type="button">remove</button>
+                    </div>
+                } 
+            }
+        }
+    }
+</div>
+<button type="button" onclick="AddExternalMaterialsController()">More External Material</button>
+<hr/>
+<div id="JobHistories">
+    @{
+        if (@Model==null || @Model.JobHistories == null)
+        {
+        }
+        else
+        {
+            for (int i = 0; i < @Model.JobHistories.Count; i++)
+            {
+                {
+                    string jobHistoryName = "[" + i + "]" + ".JobHistoryName";
+                    string jobHistoryDescription = "[" + i + "]" + ".JobHistoryShortDescription";
+                    string historyId = "HistoryClassId"+i;
+                    <div class="HistoryClass" id="@historyId">
+                        <p>Job History Name @i</p>      
+                        <input type="text" name="@jobHistoryName" value="@Model.JobHistories[i].Name">
+                        <p>Job History Short Description @i</p>      
+                        <input type="text" name="@jobHistoryDescription" value="@Model.JobHistories[i].ShortDescription">
+                        <button onclick="RemoveJobHistory(this)" type="button">remove</button>
                     </div>
                 }
             }
+            
         }
-        <button class="btn" type="button" onclick="AddExternalMaterialsController()">More External Material</button>
+        
     }
-
+</div>
+<button type="button" onclick="AddJobHistoryController()">More Job History</button>
     <hr/>
-</div>
-@{
-    if (@Model == null || @Model.JobHistories == null)
-    {
-        int i = 0;
-        string jobHistoryName = "[" + i + "]" + ".JobHistoryName";
-        string jobHisotryDescription = "[" + i + "]" + ".JobHistoryShortDescription";
-        <div class="HistoryClass">
-            <p>Job History Name @i</p> <input type="text" name="@jobHistoryName">
-            <p>Job History Short Description @i</p> <input type="text" name="@jobHisotryDescription">
-        </div>
-    }
-    else
-    {
-        for (int i = 0; i < @Model.JobHistories.Count; i++)
-        {
-            {
-                string jobHistoryName = "[" + i + "]" + ".JobHistoryName";
-                string jobHisotryDescription = "[" + i + "]" + ".JobHistoryShortDescription";
-                <div class="HistoryClass">
-                    <p>Job History Name @i</p> <input type="text" name="@jobHistoryName" value="@Model.JobHistories[i].Name">
-                    <p>Job History Short Description @i</p> <input type="text" name="@jobHisotryDescription" value="@Model.JobHistories[i].ShortDescription">
-                </div>
-            }
+    @{
+        bool Mon = false;
+        bool Tue = false;
+        bool Wed = false;
+        bool Thu = false;
+        bool Fri = false;
+        bool Sat = false;
+        bool Sun = false;
 
-            <hr/>
+        if (Model==null||Model.WorkDays==null)
+        {
         }
-
-    }
-    <button class="btn" type="button" onclick="AddJobHisotryController()">More Job History</button>
-}
-
-<hr/>
-@{
-    bool Mon = false;
-    bool Tue = false;
-    bool Wed = false;
-    bool Thu = false;
-    bool Fri = false;
-    bool Sat = false;
-    bool Sun = false;
-
-    if (Model == null || Model.WorkDays == null)
-    {
-    }
-    else
-    {
-        for (int i = 0; i < @Model.WorkDays.Count; i++)
+        else
         {
-            switch (@Model.WorkDays[i].Day)
+            for (int i = 0; i < @Model.WorkDays.Count; i++)
             {
-                case 1:
-                    Mon = true;
-                    break;
-                case 2:
-                    Tue = true;
-                    break;
-                case 3:
-                    Wed = true;
-                    break;
-                case 4:
-                    Thu = true;
-                    break;
-                case 5:
-                    Fri = true;
-                    break;
-                case 6:
-                    Sat = true;
-                    break;
-                case 7:
-                    Sun = true;
-                    break;
+                switch (@Model.WorkDays[i].Day)
+                {
+                    case 1:
+                        Mon = true;
+                        break;
+                    case 2:
+                        Tue = true;
+                        break;
+                    case 3:
+                        Wed = true;
+                        break;
+                    case 4:
+                        Thu = true;
+                        break;
+                    case 5:
+                        Fri = true;
+                        break;
+                    case 6:
+                        Sat = true;
+                        break;
+                    case 7:
+                        Sun = true;
+                        break;
+                }
             }
         }
     }
-}
-Monday <input type="checkbox" name="[0].Day" value="1" checked="@Mon">
-Tuesday <input type="checkbox" name="[1].Day" value="2" checked="@Tue">
-Wednesday <input type="checkbox" name="[2].Day" value="3" checked="@Wed">
-Thursday <input type="checkbox" name="[3].Day" value="4" checked="@Thu">
-Friday <input type="checkbox" name="[4].Day" value="5" checked="@Fri">
-Saturday <input type="checkbox" name="[5].Day" value="6" checked="@Sat">    
-Sunday <input type="checkbox" name="[6].Day" value="7" checked="@Sun">
-<hr/>
-
-@{
-    float salary = 0;
-    if (Model != null)
-    {
-        salary = @Model.MinSaraly;
+    Monday         <input type="checkbox" name="[0].Day" value = "1" checked="@Mon">  
+    Tuesday        <input type="checkbox" name="[1].Day" value = "2" checked="@Tue"> 
+    Wednesday      <input type="checkbox" name="[2].Day" value = "3" checked="@Wed"> 
+    Thursday       <input type="checkbox" name="[3].Day" value = "4" checked="@Thu">
+    Friday         <input type="checkbox" name="[4].Day" value = "5" checked="@Fri">
+    Saturday       <input type="checkbox" name="[5].Day" value = "6" checked="@Sat">
+    Sunday         <input type="checkbox" name="[6].Day" value = "7" checked="@Sun">
+    <hr/>
+    
+    @{
+        float salary = 0;
+        if (Model != null)
+        {
+            salary = @Model.MinSaraly;   
+        }
+        
     }
-
-}
-Min Salary<input type="number" name="MinSalary" min="0" step="0.01" value="@salary">
-<hr/>
-<button class="btn" type="submit">Submit</button>
+    Min Salary<input type="number" name="MinSalary" min="0" step="0.01" value="@salary"> 
+    <hr/>
+    <button type="submit">Submit</button>
 </form>
-
-</div>
