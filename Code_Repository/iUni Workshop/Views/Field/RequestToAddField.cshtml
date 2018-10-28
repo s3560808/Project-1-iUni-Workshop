@@ -2,11 +2,10 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
-@await Html.PartialAsync("/_Validation_Area_From_Backend")
 
-
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 <h2>title</h2>
-<form asp-controller="Field" asp-action="RequestToAddField" method="post">
+<form asp-controller="Field" asp-action="RequestToAddFieldAction" method="post">
     <input type="text" name="FieldName">
     <button type="submit" class="btn btn-sm btn-success">Request</button>
 </form>
