@@ -45,6 +45,66 @@ Layout = "_Layout";
         xmlhttp.open("GET", "/Suburb/GetPostCode/" + suburbName, true);
         xmlhttp.send();
     }
+    
+    function getSchoolName(schoolName) {
+        var schoolSelectBox = document.getElementById("schoolList");
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var suburbs = JSON.parse(this.responseText);
+                schoolSelectBox.innerHTML="";
+                for (var i = 0; i < suburbs.length; i++) {
+                    var btn = document.createElement("OPTION");
+                    btn.value = suburbs[i];
+                    if (schoolName == suburbs[i]) {
+                        getSchoolSuburb(schoolName);
+                    }
+                    schoolSelectBox.appendChild(btn);
+                }
+            }
+        };
+        xmlHttp.open("GET", "/School/GetSchoolName/" + schoolName, true);
+        xmlHttp.send();
+    }
+    
+    function getSchoolSuburb(schoolName) {
+        var schoolSelectBox = document.getElementById("campusList");
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var suburbs = JSON.parse(this.responseText);
+                schoolSelectBox.innerHTML="";
+                for (var i = 0; i < suburbs.length; i++) {
+                    var btn = document.createElement("OPTION");
+                    btn.value = suburbs[i].suburbName;
+                    schoolSelectBox.appendChild(btn);
+                }
+            }
+        };
+        xmlHttp.open("GET", "/School/GetCampus/" + schoolName, true);
+        xmlHttp.send();
+    }
+    
+    function getSchoolPostCode(suburbName) {
+        var schoolName = document.getElementById("SchoolName").value;
+        var postCode = document.getElementById("CampusPostCode");
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var suburbs = JSON.parse(this.responseText);
+                for (var i = 0; i < suburbs.length; i++) {
+                    var btn = document.createElement("OPTION");
+                    btn.value = suburbs[i].suburbName;
+                    if (suburbName == suburbs[i].suburbName) {
+                        postCode.value = suburbs[i].postCode;
+                    }
+//                    schoolSelectBox.appendChild(btn);
+                }
+            }
+        };
+        xmlHttp.open("GET", "/School/GetCampus/" + schoolName, true);
+        xmlHttp.send();
+    }
 
 </script>
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
@@ -59,8 +119,6 @@ name = @Model.Name;
 }
         <input type="text" name="Name" value="@name" @{}>
     }
-
-
 <br />
 
 @Html.DisplayNameFor(model => model.PhoneNumber)
@@ -72,8 +130,6 @@ name = @Model.Name;
         }
         <input type="text" name="PhoneNumber" value="@phoneNumber">
     }
-
-
 <br />
 
 @Html.DisplayNameFor(model => model.ContactEmail)
@@ -85,34 +141,32 @@ name = @Model.Name;
         }
         <input type="text" name="ContactEmail" value="@email">
     }
-
 <br />
 
 @Html.DisplayNameFor(model => model.CampusName)
 @{
     var schoolName = "";
     var campusName = "";
-    var campusPostCode = 0;
+    int? campusPostCode = null;
     if (Model.CampusName != null)
     {
         schoolName = @Model.SchoolName;
         campusName = @Model.CampusName;
         campusPostCode = @Model.CampusPostCode;
     }
-    <input type="text" name="SchoolName" value="@schoolName">
-    <datalist></datalist>
-    <input type="text" name="CampusName" value="@campusName">
-    <datalist></datalist>
-    <input type="text" name="CampusPostCode" value="@campusPostCode">
-    <datalist></datalist>
+    <input type="text" name="SchoolName" value="@schoolName" id="SchoolName" list="schoolList" onkeyup="getSchoolName(this.value)">
+    <datalist id="schoolList"></datalist>
+    <input type="text" name="CampusName" value="@campusName" id="CampusName" list="campusList" onkeyup="getSchoolPostCode(this.value)">
+    <datalist id="campusList"></datalist>
+    <input type="text" name="CampusPostCode" value="@campusPostCode" id="CampusPostCode">
+    <datalist id="campusPostCodeList"></datalist>
 }  
-    
 
 <br />
 @Html.DisplayNameFor(model => model.LivingDistrict)
     @{
         string LivingDistrict = "";
-        int postCode = 0;
+        int? postCode = null;
         if (Model.LivingDistrict != null)
         {
             LivingDistrict = @Model.LivingDistrict;
