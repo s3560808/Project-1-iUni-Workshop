@@ -16,6 +16,12 @@
 	#ejpp h2{
 		color: #ff4000;
 	}
+	
+	#ejpp #bbb{
+		margin-top: 0px;
+		margin-bottom: 20px;
+		margin-left: 110px;
+	}
 </style>
 
 <link rel="stylesheet" href="~/css/ejp.css"/>    
@@ -168,11 +174,12 @@
 			string skillName = "[" + 0 + "]" + ".SkillName";
 			string skillRequired = "[" + 0 + "]" + ".SkillRequired";
 			<div class="SkillClass">
-				<p>Skill Name @i:</p>
+				<p>Skill Name @i</p>
 				<input class="ejpinput" type="text" name="@skillName" list="skillList" onkeyup="getSkillName(this.value)"><br>
 				<datalist id="skillList"></datalist>
-				<p>Required @i:
-					<input class="ejpinput" type="checkbox" name="@skillRequired" value="true">
+				<p>Required @i
+					<p><input class="ejpinput" type="checkbox" name="@skillRequired" value="true"></p>
+				<button id="bbb"onclick="RemoveSkill(this)" type="button">Remove</button>
 				</p>
 			</div>
 		}
@@ -248,14 +255,7 @@
 	@{
 		if (@Model == null || @Model.EmployerRequiredSchools.Count() == 0)
 		{
-			@*string schoolName = "[" + 0 + "]" + ".SchoolName";
-			string campus = "[" + 0 + "]" + ".Campus";
-			<div class="SchoolClass">
-				<p>School Name 0:</p>
-				<input class="ejpinput" type="text" name="@schoolName">
-				<p>Campus 0:</p>
-				<input class="ejpinput" type="text" name="@campus">
-			</div>*@
+			
 		}
 		else
 		{
@@ -359,11 +359,6 @@
 		//1.1 Create space
 		var space = document.createElement("p");
 		space.innerText = "";
-		//1.1.2 Push button
-		var s = document.createElement("input");
-		s.style.border = "none";
-		s.style.width = "110px";
-		s.style.cursor = "context-menu";
 		//1.2 Create skill name box
         var inputSkillName = document.createElement("input");
         inputSkillName.setAttribute("type","text");
@@ -388,6 +383,9 @@
         var buttonSkillButtonR = document.createElement("button");
         buttonSkillButtonR.type = "button";
         buttonSkillButtonR.textContent = "Remove";
+		buttonSkillButtonR.style.marginTop = "0px";
+		buttonSkillButtonR.style.marginBottom = "20px";
+		buttonSkillButtonR.style.marginLeft = "110px";
         buttonSkillButtonR.onclick = function() {RemoveSkill(this)};
         //2. Append sub elements of new skill div
 		divBox.appendChild(space);
@@ -396,7 +394,6 @@
         divBox.appendChild(inputSkillLinkLabel);
         divBox.appendChild(inputSkillRequired);
 		divBox.appendChild(space);
-		divBox.appendChild(s);
 		divBox.appendChild(buttonSkillButtonR);
         skillDiv.append(divBox);
 		
@@ -418,12 +415,8 @@
         divBox.className = "LocationClass";
         divBox.id = "LocationClassId"+locationElementsNumber;
 		//1.1 Create space
-		var space = document.createElement("input");
-		space.style.border = "none";
-		space.style.width = "110px";
-		space.style.cursor = "context-menu";
-		var spac = document.createElement("p");
-		spac.innerText = "";
+		var space = document.createElement("p");
+		space.innerText = "";
 		//1.2 Data List for Location
 		var dataList = document.createElement("datalist");
 		dataList.setAttribute("id", "SuburbNameList");
@@ -453,6 +446,8 @@
         var buttonLocationButton = document.createElement("button");
         buttonLocationButton.type = "button";
         buttonLocationButton.textContent = "Remove";
+		buttonLocationButton.style.marginTop = "5px";
+		buttonLocationButton.style.marginBottom = "20px";
         buttonLocationButton.onclick = function() {RemoveLocation(this)};
         //2. Append sub elements of new skill div
 		divBox.appendChild(inputLocationNameLabel);
@@ -461,7 +456,6 @@
         divBox.appendChild(inputPostcodeLabel);
 		divBox.appendChild(dataLis);
         divBox.appendChild(inputPostcode);
-		divBox.appendChild(spac);
 		divBox.appendChild(space);
         divBox.appendChild(buttonLocationButton);
 		//var last = locationElements[locationElementsNumber - 1];
