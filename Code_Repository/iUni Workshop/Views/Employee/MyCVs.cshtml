@@ -7,11 +7,31 @@
 
 <link rel="stylesheet" href="~/css/mdetails.css"/>
 
+<style>
+    #mcv #new {
+        margin-bottom: 30px;
+        border: 0px;
+    }
+    
+    #mcv a {
+        background-color: white;
+        color: #ff4000;
+        padding: 5px;
+        border: 1.5px solid #ff4000;
+        font-weight: bold;
+        font-size: 12px;
+        text-decoration: none;
+    }
+</style>
+
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 
 
 <div id="mcv">
     <h2>My CV's</h2>
+    
+    <button id="new"><a asp-controller="Employee" asp-action="EditCv" >Create a new CV</a></button>
+    
     <table class="table">
         <thead>
         <tr>
@@ -68,8 +88,8 @@
         }
 
         </tbody>
-        <button><a asp-controller="Employee" asp-action="EditCv" class="btn btn-sm btn-info">Create a new CV</a></button>
     </table>
+    
 
     @section Scripts {
         @await Html.PartialAsync("_ValidationScriptsPartial")

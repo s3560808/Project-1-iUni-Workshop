@@ -2,17 +2,19 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<h2>@ViewData["Title"]</h2>
-<p>
-    Please choose your account type.
-    
-</p>
-<form asp-action="SetUserType" method="get">
-    @if (ViewBag.HasAdmin == false)
-    {
-        <button name="UserTypeId" type="submit" value="@Roles.AdministratorId" class="btn btn-sm btn-danger">Administrator</button>
-    }
-    <button name="UserTypeId" type="submit" value="@Roles.EmployeeId" class="btn btn-sm btn-danger">Employee</button>
-    <button name="UserTypeId" type="submit" value="@Roles.EmployerId" class="btn btn-sm btn-danger">Employer</button>
-</form>
+
+    <h2>@ViewData["Title"]</h2>
+    <p>
+        Please choose your account type.
+
+    </p>
+    <form asp-action="SetUserType" method="get">
+        @if (ViewBag.HasAdmin == false)
+        {
+            <button name="UserTypeId" type="submit" value="@Roles.AdministratorId" class="btn btn-sm btn-danger">Administrator</button>
+        }
+        <button name="UserTypeId" type="submit" value="@Roles.EmployeeId" class="btn btn-sm btn-danger">Employee</button>
+        <button name="UserTypeId" type="submit" value="@Roles.EmployerId" class="btn btn-sm btn-danger">Employer</button>
+    </form>
+
 

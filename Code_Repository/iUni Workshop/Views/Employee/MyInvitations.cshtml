@@ -5,54 +5,61 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
-@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
-<h2>title</h2>
-@{
-    foreach (var model in Model)
-    {
-        
-    }
-    
-    <table class="table">
-        <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmployeeCvTitle)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmployerJobProfileTitle)
-            </th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        @{
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmployeeCvTitle)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EmployerJobProfileTitle)
-                    </td>
-                    <td>
-                        <form asp-controller="Employee" asp-action="InvitationDetail" method="post">
-                            <button name="invitationId" type="submit" value = "@item.Id" class="btn btn-sm btn-success">View</button>
-                        </form>
-                        
-                    </td>
-                </tr>
-            }
-        }
-        
-        </tbody>
 
-    </table>
-}
+<link rel="stylesheet" href="~/css/ejp.css"/>
+
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
+
+<div id="myinv">
+    <h2>Invitations</h2>
+    @{
+        foreach (var model in Model)
+        {
+
+        }
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeCvTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployerJobProfileTitle)
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployeeCvTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EmployerJobProfileTitle)
+                        </td>
+                        <td>
+                            <form asp-controller="Employee" asp-action="InvitationDetail" method="post">
+                                <button name="invitationId" type="submit" value="@item.Id" class="btn btn-sm btn-success">View</button>
+                            </form>
+
+                        </td>
+                    </tr>
+                }
+            }
+
+            </tbody>
+
+        </table>
+    }
+
+</div>

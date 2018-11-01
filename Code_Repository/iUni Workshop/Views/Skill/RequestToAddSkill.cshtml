@@ -6,14 +6,20 @@
 }
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 
+<link rel="stylesheet" href="~/css/ejp.css"/>
 
-<h2>title</h2>
-<form asp-controller="Skill" asp-action="RequestToAddSkillAction" method="post">
-    <input type="text" name="SkillName">
-    <button type="submit" class="btn btn-sm btn-success">Request</button>
-</form>
+<div class="reqaddsk">
+    <h2>Request to add a skill</h2>
+    <form asp-controller="Skill" asp-action="RequestToAddSkillAction" method="post">
+        <p>Skill:<input type="text" name="SkillName">
+            <button type="submit" >Request</button></p>
+    </form>
 
 
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+
+    <br>
+    <hr>
+</div>

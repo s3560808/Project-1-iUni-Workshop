@@ -5,51 +5,55 @@
     Layout = "_Layout";
 }
 
-<h2>title</h2>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CvId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApplicantName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Score)
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @{
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CvId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ApplicantName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Score)
-                </td>
-                <td>
-                    @* <form asp-controller="Employer" asp-action="ViewApplicantCv" asp-route-JobProfileId ="@item.Id" method="get" > *@
-                        <a href="/Employer/ViewApplicantCv/@ViewData["App"]/@item.CvId/"><button type="submit" class="btn btn-sm btn-success" >View Applications</button></a>
-                    @* </form> *@
-                        
-                </td>
-            </tr>
+<link rel="stylesheet" href="~/css/admin.css"/>
+
+<div id="searchAp">
+    <h2>Search Applicants</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CvId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ApplicantName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Score)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CvId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicantName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Score)
+                    </td>
+                    <td>
+                        @* <form asp-controller="Employer" asp-action="ViewApplicantCv" asp-route-JobProfileId ="@item.Id" method="get" > *@
+                        <a href="/Employer/ViewApplicantCv/@ViewData["App"]/@item.CvId/"><button type="submit" class="btn btn-sm btn-success">View Applications</button></a>
+                        @* </form> *@
+
+                    </td>
+                </tr>
+            }
         }
+
+        </tbody>
+
+    </table>
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
     }
-        
-    </tbody>
 
-</table>
-
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
-
+</div>

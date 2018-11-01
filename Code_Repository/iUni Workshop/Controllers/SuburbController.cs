@@ -76,18 +76,5 @@ namespace iUni_Workshop.Controllers
             }
         }
         
-        [Route("[Controller]/HasSuburb/{suburbName}/{postCode}")]
-        public int HasSuburb(string suburbName, int postCode)
-        {
-            var suburb = _context.Suburbs.Where(a => a.Name == suburbName && a.PostCode == postCode);
-            if (!suburb.Any())
-            {
-                return -1;
-            }
-            else
-            {
-                return suburb.First().Id;
-            }
-        }
     }
 }

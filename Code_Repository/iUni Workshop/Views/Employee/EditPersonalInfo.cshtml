@@ -5,6 +5,10 @@
 ViewBag.Title = "title";
 Layout = "_Layout";
 }
+
+<link rel="stylesheet" href="~/css/ejp.css"/>
+
+
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 <script>
     function GetSuburbName(str) {
@@ -107,102 +111,149 @@ Layout = "_Layout";
     }
 
 </script>
+
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
-<h2>title</h2>
-<form method="post" asp-action="EditPersonalInfoAction" >
-@Html.DisplayNameFor(model => model.Name)
-    @{
-string name = "";
-if (Model.Name != null)
-{
-name = @Model.Name;
-}
-        <input type="text" name="Name" value="@name" @{}>
-    }
-<br />
 
-@Html.DisplayNameFor(model => model.PhoneNumber)
-    @{
-        string phoneNumber = "";
-        if (Model.PhoneNumber != null)
-        {
-            phoneNumber = @Model.PhoneNumber;
+<div id="epi">
+    <h2>Edit Personal Info</h2>
+    <form method="post" asp-action="EditPersonalInfoAction">
+        <p> @Html.DisplayNameFor(model => model.Name):
+        @{
+            string name = "";
+            if (Model.Name != null)
+            {
+                name = @Model.Name;
+            }
+            <input class="btn1" type="text" name="Name" value="@name"
+                   @{}>
         }
-        <input type="text" name="PhoneNumber" value="@phoneNumber">
-    }
-<br />
+        </p>
+        <hr>
 
-@Html.DisplayNameFor(model => model.ContactEmail)
-    @{
-        string email = "";
-        if (Model.ContactEmail != null)
-        {
-            email = @Model.ContactEmail;
+        <p> @Html.DisplayNameFor(model => model.PhoneNumber):
+        @{
+            string phoneNumber = "";
+            if (Model.PhoneNumber != null)
+            {
+                phoneNumber = @Model.PhoneNumber;
+            }
+            <input class="btn1" type="text" name="PhoneNumber" value="@phoneNumber">
         }
-        <input type="text" name="ContactEmail" value="@email">
-    }
-<br />
+        </p>
+        <hr/>
 
-@Html.DisplayNameFor(model => model.CampusName)
-@{
-    var schoolName = "";
-    var campusName = "";
-    int? campusPostCode = null;
-    if (Model.CampusName != null)
-    {
-        schoolName = @Model.SchoolName;
-        campusName = @Model.CampusName;
-        campusPostCode = @Model.CampusPostCode;
-    }
-    <input type="text" name="SchoolName" value="@schoolName" id="SchoolName" list="schoolList" onkeyup="getSchoolName(this.value)">
-    <datalist id="schoolList"></datalist>
-    <input type="text" name="CampusName" value="@campusName" id="CampusName" list="campusList" onkeyup="getSchoolPostCode(this.value)">
-    <datalist id="campusList"></datalist>
-    <input type="text" name="CampusPostCode" value="@campusPostCode" id="CampusPostCode">
-    <datalist id="campusPostCodeList"></datalist>
-}  
-
-<br />
-@Html.DisplayNameFor(model => model.LivingDistrict)
-    @{
-        string LivingDistrict = "";
-        int? postCode = null;
-        if (Model.LivingDistrict != null)
-        {
-            LivingDistrict = @Model.LivingDistrict;
-            postCode = Model.PostCode;
+        <p> @Html.DisplayNameFor(model => model.ContactEmail):
+        @{
+            string email = "";
+            if (Model.ContactEmail != null)
+            {
+                email = @Model.ContactEmail;
+            }
+            <input class="btn1" type="text" name="ContactEmail" value="@email">
         }
+        </p>
+        <hr/>
+
+        <p>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.CampusName):
+                </div>
+                
+                <div class="col-md-3">
+                    Location:
+                </div>
+                
+                <div class="col-md-3">
+                    Postcode:
+                </div>
+                
+            </div>
+            @{
+                var schoolName = "";
+                var campusName = "";
+                int? campusPostCode = null;
+                if (Model.CampusName != null)
+                {
+                    schoolName = @Model.SchoolName;
+                    campusName = @Model.CampusName;
+                    campusPostCode = @Model.CampusPostCode;
+                }
+                <div class="row">
+                    <div class="col-md-3">
+                        <input class="btn1" type="text" name="SchoolName" value="@schoolName" id="SchoolName" list="schoolList" onkeyup="getSchoolName(this.value)">
+                        <datalist id="schoolList"></datalist>
+                    </div>
+                    <div class="col-md-3">
+                        <input class="btn1" type="text" name="CampusName" value="@campusName" id="CampusName" list="campusList" onkeyup="getSchoolPostCode(this.value)">
+                        <datalist id="campusList"></datalist>
+                    </div>
+                    <div class="col-md-3">
+                        <input class="btn1" type="text" name="CampusPostCode" value="@campusPostCode" id="CampusPostCode">
+                        <datalist id="campusPostCodeList"></datalist>
+                    </div>
+                </div>
+            }
+        </p>
+        <hr/>
         
-        <input type="text" name="LivingDistrict" id = "LivingDistrict" list="SurburbNameList" onkeyup="GetSuburbName(this.value)" value="@LivingDistrict">
-        <datalist id="SurburbNameList">
-        </datalist>
-        
-        <input type="text" name="PostCode" id = "PostCode" list="PostCodeList" value="@postCode">
-        <datalist id="PostCodeList">
-        </datalist>
-    }  
+        <p>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.LivingDistrict):
+                </div>
+                <div class="col-md-3">
+                    Postcode:
+                </div>
+            </div>
+            
+            @{
+                string LivingDistrict = "";
+                int? postCode = null;
+                if (Model.LivingDistrict != null)
+                {
+                    LivingDistrict = @Model.LivingDistrict;
+                    postCode = Model.PostCode;
+                }
+                
+                <div class="row">
+                    <div class="col-md-3">
+                    <input class="btn1" type="text" name="LivingDistrict" id="LivingDistrict" list="SurburbNameList" onkeyup="GetSuburbName(this.value)" value="@LivingDistrict">
+                        <datalist id="SurburbNameList">
+                        </datalist>
+                    </div>
+                    
+                    <div class="col-md-3">
+                    <input class="btn1" type="text" name="PostCode" id="PostCode" list="PostCodeList" value="@postCode">
+                        <datalist id="PostCodeList">
+                        </datalist>
+                    </div>
+                </div>
+            }
 
 
 
+        </p>
 
+        <hr/>
 
-<br />
+        <p>@Html.DisplayNameFor(model => model.ShortDescription):
+        @{
+            string description = "";
+            if (Model.ShortDescription != null)
+            {
+                description = @Model.ShortDescription;
+            }
 
-@Html.DisplayNameFor(model => model.ShortDescription)
-    @{
-        string description = "";
-        if (Model.ShortDescription != null)
-        {
-            description = @Model.ShortDescription;
+            <input class="btn1" type="text" name="ShortDescription" value="@description">
         }
-        
-        <input type="text" name="ShortDescription" value="@description">
-    }
-    
-    
-    <button type="submit">Submit</button>
-</form>
 
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+        </p><hr/>
+        <button type="submit">Submit</button>
+    </form>
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+
+</div>

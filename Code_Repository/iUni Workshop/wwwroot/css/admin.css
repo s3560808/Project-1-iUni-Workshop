@@ -1,28 +1,36 @@
+/*Creating a margin either side of the page */
 #nm{
     margin-left: 40px;
     margin-right: 125px;
     padding-left: 35px;
 }
 
+/*Setting the color of listed id headers */
 #nm h2{
     color: #ff4000;
 }
-#nm p{
+
+/*Setting listed p tags to have specific font weight */
+#nm p, #edcv p, #rtcmc p{
     font-weight: bold;
 }
 
+/*Setting listed id tags to have a colored border */
 #nm input, #nm textarea, #nm select{
     border: 1px solid #ff4000;
 }
 
+/*Setting specific width to listed id input tag(s) */
 #nm input{
     width: 200px;
 }
 
+/*Setting font weight to specific listed id tag(s) */
 #nm select, #nm input{
     font-weight: normal;
 }
 
+/*Setting specific style to textarea tag(s) listed */
 #nm textarea{
     width: 1050px;
     height: 120px;
@@ -61,7 +69,7 @@
     font-size: 12px;
 }
 
-#addf input, #addf select{
+#addf input, #addf select, #rtcmc input, #rtcmc textarea, #rtas input, #edcv input, #edcv textarea, #edcv select{
     border: 1px solid #ff4000;
 }
 
@@ -75,11 +83,11 @@
     padding-left: 30px;
 }
 
-#fp h2, #fp label, #fpc h2{
+#fp h2, #fp label, #fpc h2, #adminDash h2, #jp h2, #searchAp h2, #rtcmc h2, #rtumc h2, #rtas h2, #inAd h2, #cc h2, #edcv h2{
     color: #ff4000;
 }
 
-#fp #btn {
+#fp #btn, #jp #btn1, #jp .btn2, #rtcmc button, #rtumc button, #rtas button, #edcv button {
     background-color: white;
     color: #ff4000;
     padding: 5px;
@@ -88,8 +96,50 @@
     font-size: 12px;
 }
 
+#adminDash, #jp, #searchAp, #rtcmc, #rtumc, #rtas, #inAd, #cc, #edcv{
+    margin-left: 40px;
+    margin-right: 70px;
+    padding-left: 35px;
+}
 
+#jp, #searchAp, #rtas, #inAd, #cc, #edcv{
+    margin-right: 120px;
+}
 
+#jp #btn1{
+    margin-bottom: 30px;
+}
 
+#jp a{
+    text-decoration: none;
+    color: #ff4000;
+}
 
+#rtcmc p{
+    margin-bottom: 10px;
+}
+
+#rtcmc textarea, #edcv textarea{
+    width: 800px;
+    height: 150px;
+    resize: none;
+}
+
+#edcv p{
+    margin-bottom: 0px;
+}
+
+#edcv .nc{
+    color: red;
+}
+
+#edcv input{
+    font-weight: normal;
+    
+}
+
+#edcv .aaa{
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
 

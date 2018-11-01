@@ -1,103 +1,118 @@
+@using System.Reflection
 @model iUniWorkshop.Models.EmployerModels.RequestToCertificateMyCompany
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Request to Certify My Company";
     Layout = "_Layout";
 }
 
+<link rel="stylesheet" href="~/css/admin.css"/>
+
 @await Html.PartialAsync("_Validation_Area_From_Backend")
-<form method="post" asp-action="RequestToCertificateMyCompanyAction">
-    @Html.DisplayNameFor(model => model.Name)
-    @{
-        string name = "";
-        bool readOnlyFlag = Model.Certificated;
-        if (Model.Name != null)
-        {
-            name = @Model.Name;
+<div id="rtcmc">
+    <h2>@ViewBag.Title</h2>
+    <form method="post" asp-action="RequestToCertificateMyCompanyAction">
+        <p>@Html.DisplayNameFor(model => model.Name):
+        @{
+            string name = "";
+            bool readOnlyFlag = Model.Certificated;
+            if (Model.Name != null)
+            {
+                name = @Model.Name;
+            }
+            <input type="text" name="Name" value="@name" class="CoreInfo">
         }
-        <input type="text" name="Name" value="@name" class="CoreInfo">
-    }
+        </p>
 
-    <br />
-    @Html.DisplayNameFor(model => model.PhoneNumber)
-    @{
-        string phoneNumber = "";
-        if (Model.PhoneNumber != null)
-        {
-            phoneNumber = @Model.PhoneNumber;
+        <br>
+        
+        <p>@Html.DisplayNameFor(model => model.PhoneNumber):
+        @{
+            string phoneNumber = "";
+            if (Model.PhoneNumber != null)
+            {
+                phoneNumber = @Model.PhoneNumber;
+            }
+            <input type="text" name="PhoneNumber" value="@phoneNumber">
         }
-        <input type="text" name="PhoneNumber" value="@phoneNumber">
-    }
-
-    <br />
-    @Html.DisplayNameFor(model => model.ContactEmail)
-    @{
-        string email = "";
-        if (Model.ContactEmail != null)
-        {
-            email = @Model.ContactEmail;
+        </p>
+        <br>
+        
+        <p>@Html.DisplayNameFor(model => model.ContactEmail):
+        @{
+            string email = "";
+            if (Model.ContactEmail != null)
+            {
+                email = @Model.ContactEmail;
+            }
+            <input type="text" name="ContactEmail" value="@email">
         }
-        <input type="text" name="ContactEmail" value="@email">
-    }
-    <br />
+        </p>
+        <br>
 
-    @Html.DisplayNameFor(model => model.Address)
-    @{
-        string address = "";
-        if (Model.Address != null)
-        {
-            address = @Model.Address;
+        <p>@Html.DisplayNameFor(model => model.Address):
+        @{
+            string address = "";
+            if (Model.Address != null)
+            {
+                address = @Model.Address;
+            }
+            <input type="text" name="Address" value="@address">
         }
-        <input type="text" name="Address" value="@address">
-    }
-    <br />
+        </p>
+        <br>
 
-    @Html.DisplayNameFor(model => model.BriefDescription)
-    @{
-        string briefDescription = "";
-        if (Model.BriefDescription != null)
-        {
-            briefDescription = @Model.BriefDescription;
+        <p>@Html.DisplayNameFor(model => model.BriefDescription):
+        @{
+            string briefDescription = "";
+            if (Model.BriefDescription != null)
+            {
+                briefDescription = @Model.BriefDescription;
+            }
+            <br>
+            <textarea name="BriefDescription">@briefDescription</textarea>
         }
-        <textarea name="BriefDescription">@briefDescription</textarea>
-    }
-    <br />
+        </p>
+        <br>
 
-    @Html.DisplayNameFor(model => model.PostCode)
-    @{
-        string postcode = "";
-        if (Model.PostCode != null)
-        {
-            postcode = @Model.PostCode.ToString();
+        <p>@Html.DisplayNameFor(model => model.PostCode):
+        @{
+            string postcode = "";
+            if (Model.PostCode != null)
+            {
+                postcode = @Model.PostCode.ToString();
+            }
+            <input type="text" name="PostCode" value="@postcode" list="PostCodeList">
+            <datalist id="PostCodeList"></datalist>
         }
-        <input type="text" name="PostCode" value="@postcode" list="PostCodeList">
-        <datalist id="PostCodeList"></datalist>
-    }
-    <br />
+        </p>
+        <br>
 
-    @Html.DisplayNameFor(model => model.SuburbName)
-    @{
-        string suburbName = "";
-        if (Model.SuburbName != null)
-        {
-            suburbName = @Model.SuburbName;
+        <p>@Html.DisplayNameFor(model => model.SuburbName):
+        @{
+            string suburbName = "";
+            if (Model.SuburbName != null)
+            {
+                suburbName = @Model.SuburbName;
+            }
+            <input type="text" name="SuburbName" value="@suburbName" list="SurburbNameList" onkeyup="GetSuburbName(this.value)">
+            <datalist id="SurburbNameList"></datalist>
         }
-        <input type="text" name="SuburbName" value="@suburbName" list="SurburbNameList" onkeyup="GetSuburbName(this.value)">
-        <datalist id="SurburbNameList"></datalist>
-    }
-    <br />
+        </p>
+        <br>
 
-    @Html.DisplayNameFor(model => model.ABN)
-    @{
-        string abn = "";
-        if (Model.ABN != null)
-        {
-            abn = @Model.ABN;
+        <p>@Html.DisplayNameFor(model => model.ABN):
+        @{
+            string abn = "";
+            if (Model.ABN != null)
+            {
+                abn = @Model.ABN;
+            }
+            <input type="text" name="ABN" value="@abn" class="CoreInfo">
         }
-        <input type="text" name="ABN" value="@abn" class="CoreInfo">
-    }
-    <br />
+        </p>
+        <br>
 
-    <button type="submit">Submit</button>
-</form>
-
+        <button type="submit">Submit</button>
+    </form>
+</div>

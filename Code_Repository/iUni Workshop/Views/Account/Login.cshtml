@@ -9,12 +9,17 @@
     ViewData["Title"] = "Login";
 }
 
+@* Style for page is found via this link under id log*@
 <link rel="stylesheet" href="~/css/log.css">
 
+@*Identifier for css page*@
 <div id="log">
     
     <h2>@ViewData["Title"]</h2>
+    
+    @*Split into rows for cleaner layout*@
     <div class="row">
+        @*Main content in one column / before button*@
         <div class="col-md-4">
             <section>
                 <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
@@ -40,8 +45,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button id="bn" type="submit" >Login</button>
+                        <button id="bn" type="submit">Login</button>
                     </div>
+                    
+                    @*Main content after button*@
                     <br>
                     <div class="form-group">
                         <p>
@@ -55,8 +62,10 @@
             </section>
         </div>
         <br>
-        @*
-         <div class="col-md-4">
+        @***Commented out as I don't know if this is needed
+        If this section is required it has not been styled*@
+        
+        @* <div class="col-md-4">
             <section>
                 <h4>Use another service to log in.</h4>
                 <hr/>

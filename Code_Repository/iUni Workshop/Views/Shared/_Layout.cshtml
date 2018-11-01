@@ -27,33 +27,37 @@
 </head>
 
 <style>
-   .navbar {
-      margin-top: 0;
-      margin-bottom: 0px;
-   }
+    #side-menu {
+       overflow: auto;
+    }
+    
+    .navbar {
+        margin-top: 0;
+        margin-bottom: 0px;
+    }
    
-   .cl {
-      padding-right: 15px;
-      padding-top: 0px;
-      padding-bottom: 0px;
-      margin-left: 8px;
-      margin-bottom: 0px;
-      padding-left: 0px;
-      font-family: Arial;
-      font-size: 24px;
-   }
+    .cl {
+        padding-right: 15px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        margin-left: 8px;
+        margin-bottom: 0px;
+        padding-left: 0px;
+        font-family: Arial;
+        font-size: 24px;
+    }
    
    
-   #main {
-      padding-bottom: 10px;
-      padding-left: 15px;
-      margin-left: 0px;
-      overflow-x: hidden;
-   }
+    #main {
+        padding-bottom: 10px;
+        padding-left: 15px;
+        margin-left: 0px;
+        overflow-x: hidden;
+    }
    
-   .p p {
-      margin-left: 0px;
-   }
+    .p p {
+        margin-left: 0px;
+    }
 </style>
 
 <body>
@@ -168,21 +172,22 @@
 </div>
 
 
-<environment include="Development">
+
    
    <script>
       function openSlideMenu(){
          document.getElementById('side-menu').style.width = '250px';
          document.getElementById('main').style.marginLeft = '250px';
-         document.getElementById('main1').style.marginLeft = '250px';
-         document.getElementById('content').style.marginLeft = '250px';
+         document.getElementById('cent').style.marginLeft = '250px';
+         document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+         
       }
 	
       function closeSlideMenu(){
          document.getElementById('side-menu').style.width = '0px';
          document.getElementById('main').style.marginLeft = '0px';
-         document.getElementById('main1').style.marginLeft = '0px';
-         document.getElementById('content').style.marginLeft = '0px';
+         document.getElementById('cent').style.marginLeft = '0px';
+         document.body.style.backgroundColor = "white";
       }
    </script>
    
@@ -195,7 +200,7 @@
    <script src="js/breakpoints.js"></script>
    <script src="js/util.js"></script>
    <script src="js/main.js"></script>
-</environment>
+
 <environment exclude="Development">
    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
