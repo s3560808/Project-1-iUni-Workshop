@@ -26,9 +26,7 @@
 
 <link rel="stylesheet" href="~/css/ejp.css"/>    
 <script src="~/js/_AddSchool.js" type="text/javascript"></script>
-<script src ="~/js/Add_Buttons_EditJobProfile.js"></script>
-<script src ="~/js/Remove_Buttons_EditJobProfile.js"></script>
-<script src ="~/js/Ajax_EditJobProfile.js"></script>
+
 
 @*UPdate date*@
 <div id="content">
@@ -347,7 +345,7 @@
 
 
 
-@*<script>
+<script>
 	function AddSkillController() {
 		
      	var skillElements = document.getElementsByClassName("SkillClass");
@@ -648,7 +646,7 @@
         xmlHttp.send();
     }
 	
-	@*function RemoveSkill(element) {
+	function RemoveSkill(element) {
 		var all = document.getElementsByClassName('SkillClass');
 		if (all.length === 1) {
 			alert("At Least have 1 skill");
@@ -691,7 +689,7 @@
 			remain[i].children[5].name = "[" + i + "]" + ".CampusPostCode";
 		}
 	}
-</script>*@
+</script>
 </form>
 
 </div>
