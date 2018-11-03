@@ -26,7 +26,9 @@
 
 <link rel="stylesheet" href="~/css/ejp.css"/>    
 <script src="~/js/_AddSchool.js" type="text/javascript"></script>
-
+<script src ="~/js/Add_Buttons_EditJobProfile.js"></script>
+<script src ="~/js/Remove_Buttons_EditJobProfile.js"></script>
+<script src ="~/js/Ajax_EditJobProfile.js"></script>
 
 @*UPdate date*@
 <div id="content">
@@ -265,19 +267,23 @@
 				{
 					string schoolName = "[" + i + "]" + ".SchoolName";
 					string campus = "[" + i + "]" + ".Campus";
+					string postcode = "[" + i + "]" + ".CampusPostCode";
 					<div class="SchoolClass">
 						<p>School Name @i</p>
-						<input class="ejpinput" type="text" name="@schoolName" value="@Model.EmployerRequiredSchools[i].SchoolName">
-						<p>Campus @i</p>
+						<input class="ejpinput" type="text" name="@schoolName" id="SchoolName" value="@Model.EmployerRequiredSchools[i].SchoolName">
+						<p>Location @i</p>
 						@*Value = true?*@
-						<input class="ejpinput" type="text" name="@campus" value="@Model.EmployerRequiredSchools[i].CampusName">
+						<input class="ejpinput" type="text" name="@campus" id="Campus" value="@Model.EmployerRequiredSchools[i].CampusName">
+						<p>Postcode @i</p>
+						<input class="ejpinput" type="text" name="@postcode" id="CampusPostCode" value="@Model.EmployerRequiredSchools[i].CampusPostCode">
+						<button onclick="RemoveSchool(this)" type="button">Remove</button>
 					</div>
 				}
 			}
 		}
 	}
 </div>
-<button type="button" onclick="AddSchoolToProfile()">Add School</button>
+<br><button type="button" onclick="AddSchoolProfile()">Add School</button>
 <hr/>
 
 @*Complusory work day*@
@@ -341,7 +347,7 @@
 
 
 
-<script>
+@*<script>
 	function AddSkillController() {
 		
      	var skillElements = document.getElementsByClassName("SkillClass");
@@ -379,6 +385,7 @@
         //1.5 Create Required label
         var inputSkillLinkLabel = document.createElement("p");
         inputSkillLinkLabel.innerText = "Required "+skillElementsNumber;
+		inputSkillLinkLabel.style.marginTop = "5px";
         //1.6 Create remove button
         var buttonSkillButtonR = document.createElement("button");
         buttonSkillButtonR.type = "button";
@@ -442,6 +449,7 @@
         //1.5 Create Skill Certification Link label
         var inputPostcodeLabel = document.createElement("p");
         inputPostcodeLabel.innerText = "Postcode "+locationElementsNumber;
+		inputPostcodeLabel.style.marginTop = "5px";
         //1.6 Create remove button
         var buttonLocationButton = document.createElement("button");
         buttonLocationButton.type = "button";
@@ -458,32 +466,89 @@
         divBox.appendChild(inputPostcode);
 		divBox.appendChild(space);
         divBox.appendChild(buttonLocationButton);
-		//var last = locationElements[locationElementsNumber - 1];
-		//last.append(divBox)
-        locationDiv.append(divBox);
+		locationDiv.append(divBox);
 	}
 	
-	function AddSchoolToProfile() {
-		var schoolselectbox = document.getElementsByClassName("SchoolClass");
-		var boxNumber = schoolselectbox.length;
-		var divBox = document.createElement("div");
-		divBox.className = "SchoolClass";
-		var inputSchoolName = document.createElement("input");
-		inputSchoolName.setAttribute("type", "text");
-		inputSchoolName.setAttribute("name", "[" + boxNumber + "]" + ".SchoolName");
-		var inputCampus = document.createElement("input");
-		inputCampus.setAttribute("type", "text");
-		inputCampus.setAttribute("name", "[" + boxNumber + "]" + ".Campus");
-		var inputSchoolNameLable = document.createElement("p");
-		inputSchoolNameLable.innerText = "School Name " + boxNumber;
-		var inputCampusLable = document.createElement("p");
-		inputCampusLable.innerText = "Campus " + boxNumber;
-		divBox.appendChild(inputSchoolNameLable);
-		divBox.appendChild(inputSchoolName);
-		divBox.appendChild(inputCampusLable);
-		divBox.appendChild(inputCampus);
-		var last = schoolselectbox[boxNumber - 1];
-		last.append(divBox);
+	function AddSchoolProfile() {
+		
+		var schoolElements = document.getElementsByClassName("SchoolClass");
+		var schoolElementsNumber = schoolElements.length;
+		var schoolDiv = document.getElementById("SchoolsDiv");
+		if (schoolElementsNumber >= 5) 
+		{
+			alert("At most can you add 5 schools");
+			return;
+		}
+		
+		//1. Create new div for new skill
+        var divBox = document.createElement("div");
+        divBox.className = "SchoolClass";
+        divBox.id = "SchoolClassId"+schoolElementsNumber;
+		//1.1 Create space
+		var space = document.createElement("p");
+		space.innerText = "";
+		//1.2 Data List for School
+		var dataList = document.createElement("datalist");
+		dataList.setAttribute("id", "schoolList");
+		//1.2.1 Data List for Campus
+		var dataLis = document.createElement("datalist");
+		dataLis.setAttribute("id", "campusList");
+        //1.2.2 Data List for Postcode
+		var data = document.createElement("datalist");
+		data.setAttribute("id", "campusPostCodeList");
+		//1.3 Create School name box
+        var inputSchoolName = document.createElement("input");
+        inputSchoolName.setAttribute("type","text");
+        inputSchoolName.setAttribute("name","["+schoolElementsNumber+"]"+ ".SchoolName");
+        inputSchoolName.onkeyup = function() { getSchoolName(this.value) };
+        inputSchoolName.setAttribute("list","schoolList");
+		inputSchoolName.style.border = "1px solid #ff4000";
+        //1.4 Create Campus Location input box
+        var inputCampusLocation = document.createElement("input");
+        inputCampusLocation.setAttribute("type","text");
+        inputCampusLocation.setAttribute("name","["+schoolElementsNumber+"]"+ ".CampusName");
+		inputCampusLocation.onkeyup = function() { getSchoolPostCode(this.value) };
+		inputCampusLocation.setAttribute("list", "campusList");
+		inputCampusLocation.style.border = "1px solid #ff4000";
+		//1.5 Create Campus Postcode input box
+		var inputCampusLocationPostCode = document.createElement("input");
+		inputCampusLocationPostCode.setAttribute("type", "text");
+		inputCampusLocationPostCode.setAttribute("name","["+schoolElementsNumber+"]"+ ".CampusPostCode");
+		inputCampusLocationPostCode.setAttribute("list", "campusPostCodeList");
+		inputCampusLocationPostCode.style.border = "1px solid #ff4000";
+        //1.6 Create School name label
+        var inputSchoolNameLabel = document.createElement("p");
+        inputSchoolNameLabel.innerText = "Campus Name "+ schoolElementsNumber;
+        //1.7 Create Campus Location label
+        var inputCampusLocationLabel = document.createElement("p");
+        inputCampusLocationLabel.innerText = "Location "+ schoolElementsNumber;
+		inputCampusLocationLabel.style.marginTop = "5px";
+		//1.8 Create Campus Postcode label
+		var inputCampusLocationPostCodeLabel = document.createElement("p");
+		inputCampusLocationPostCodeLabel.innerText = "Postcode " + schoolElementsNumber;
+		inputCampusLocationPostCodeLabel.style.marginTop = "5px";
+        //1.9 Create remove button
+        var buttonSchoolButton = document.createElement("button");
+        buttonSchoolButton.type = "button";
+        buttonSchoolButton.textContent = "Remove";
+		buttonSchoolButton.style.marginTop = "5px";
+		buttonSchoolButton.style.marginBottom = "20px";
+        buttonSchoolButton.onclick = function() {RemoveLocation(this)};
+        //2. Append sub elements of new skill div
+		divBox.appendChild(inputSchoolNameLabel);
+		divBox.appendChild(dataList);
+        divBox.appendChild(inputSchoolName);
+        divBox.appendChild(inputCampusLocationLabel);
+		divBox.appendChild(dataLis);
+        divBox.appendChild(inputCampusLocation);
+		divBox.appendChild(inputCampusLocationPostCodeLabel);
+		divBox.appendChild(data);
+		divBox.appendChild(inputCampusLocationPostCode);
+		divBox.appendChild(space);
+        divBox.appendChild(buttonSchoolButton);
+		//var last = locationElements[locationElementsNumber - 1];
+		//last.append(divBox)
+        schoolDiv.append(divBox);
 	}
 
 	function getSkillName(skillName) {
@@ -583,7 +648,7 @@
         xmlHttp.send();
     }
 	
-	function RemoveSkill(element) {
+	@*function RemoveSkill(element) {
 		var all = document.getElementsByClassName('SkillClass');
 		if (all.length === 1) {
 			alert("At Least have 1 skill");
@@ -614,18 +679,19 @@
 	}
 	
 	function RemoveSchool(element) {
-		var all = document.getElementsByClassName('LocationClass');
+		var all = document.getElementsByClassName('SchoolClass');
 		
-		var locationDiv = element.parentNode;
-		locationDiv.remove(locationDiv);
-		var remain = document.getElementsByClassName('LocationClass');
+		var schoolDiv = element.parentNode;
+		schoolDiv.remove(schoolDiv);
+		var remain = document.getElementsByClassName('SchoolClass');
 		for (var i = 0; i < remain.length; i++) {
-			remain[i].id = "LocationClassId" + i;
-			remain[i].children[1].name = "[" + i + "]" + ".LocationName";
-			remain[i].children[3].name = "[" + i + "]" + ".PostCode";
+			remain[i].id = "SchoolClassId" + i;
+			remain[i].children[1].name = "[" + i + "]" + ".SchoolName";
+			remain[i].children[3].name = "[" + i + "]" + ".CampusName";
+			remain[i].children[5].name = "[" + i + "]" + ".CampusPostCode";
 		}
 	}
-</script>
+</script>*@
 </form>
 
 </div>

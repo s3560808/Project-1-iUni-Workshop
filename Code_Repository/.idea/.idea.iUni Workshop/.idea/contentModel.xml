@@ -341,12 +341,15 @@
           </e>
           <e p="js" t="Include">
             <e p="_AddSchool.js" t="Include" />
+            <e p="Add_Buttons_EditJobProfile.js" t="Include" />
+            <e p="Ajax_EditJobProfile.js" t="Include" />
             <e p="breakpoints.js" t="Include" />
             <e p="browser.min.js" t="Include" />
             <e p="jquery.min.js" t="Include" />
             <e p="label-has-javascript.js" t="Include" />
             <e p="main.js" t="Include" />
             <e p="no-javascript.js" t="Include" />
+            <e p="Remove_Buttons_EditJobProfile.js" t="Include" />
             <e p="site.js" t="Include" />
             <e p="site.min.js" t="Include" />
             <e p="toggleSidebar.js" t="Include" />
