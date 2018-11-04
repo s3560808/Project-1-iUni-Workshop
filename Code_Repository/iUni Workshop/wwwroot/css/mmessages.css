@@ -1,3 +1,7 @@
+#cent{
+    transition: 1.5s;
+}
+
 #mm{
     margin-left: 40px;
     padding-left: 35px;
@@ -6,6 +10,7 @@
 
 #mm h2{
     padding-left: 5px;
+    
 }
 
 #mm table{
@@ -63,37 +68,29 @@
     width: 850%;
 }
 
-#con #mainBottom{
-    transition: 1.5s;
-    margin-left: 65px;
-    padding-left: 0px;
-    position: absolute;
+#about{
+    margin-left: 10px;
 }
 
-#about h2, h3, p{
+#about h2{
     margin-left: 40px;
-    margin-bottom: 0px;
-    padding: 0px 100px 12px 25px;
+    padding-left: 25px;
 }
 
-#about h2 {
-    margin-bottom: 10px;
-
+#about .row{
+    padding-left: 10px;
+    padding-right: 80px;
+    margin-left: 40px;
+    margin-right: 20px;
 }
 
-#about p {
-    margin-right: 30px;
-}
-
-
-#about #mainBottom{
-    transition: 1.5s;
+#about hr, #con hr{
     margin-left: 0px;
-    padding-left: 0px;
-    position: absolute;
+    width: 92%;
 }
 
-#about hr{
-    width: 390%;
-    margin-left: 60px;
+#about #mainBottom, #con #mainBottom{
+    margin-left: 40px;
+    padding-left: 25px;
+    padding-right: 10px;
 }

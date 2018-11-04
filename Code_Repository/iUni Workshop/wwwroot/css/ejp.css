@@ -1,18 +1,19 @@
+#cent{
+    transition: margin-left 1.5s;
+}
+
+
 #ejpp, .page{
     transition: margin-left 1.5s;
     margin-left: 40px;
     padding-left: 25px;
-    
-}
 
-.page{
-    padding-left: 40px;
 }
 
 hr{
     width: 90%;
 }
- 
+
 #ejpp div p {
     margin-bottom: 0px;
     font-weight: bold;
@@ -22,7 +23,7 @@ hr{
     border: 1px solid #ff4000;
 }
 
-#ejpp button{
+#ejpp button, #epi button {
     background-color: white;
     color: #ff4000;
     padding: 5px;
@@ -31,3 +32,71 @@ hr{
     font-size: 14px;
 }
 
+#ejpp h2{
+    margin-left: 0px;
+    padding-left: 10px;
+    
+}
+
+#emeeindex{
+    margin-left: 40px;
+    margin-right: 100px;
+    padding-left: 35px;
+}
+
+#epi{
+    margin-left: 40px;
+    margin-right: 70px;
+    padding-left: 35px;
+}
+
+#emeeindex h2, #epi h2, #myinv h2, .reqaddsk h2{
+    color: #ff4000;
+}
+
+#epi hr{
+    width: 95%;
+}
+
+#epi .btn1, .reqaddsk input{
+    border: 1px solid #ff4000;
+    font-weight: normal;
+}
+
+#epi p, #epi .col-md-3, .reqaddsk p{
+    font-weight: bold;
+}
+
+#epi input{
+    padding-left: 5px;
+}
+
+#myinv {
+    margin-left: 40px;
+    margin-right: 80px;
+    padding-left: 35px;
+}
+
+.reqaddsk{
+    margin-left: 40px;
+    margin-right: 80px;
+    padding-left: 35px;
+}
+
+.reqaddsk input{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.reqaddsk button{
+    background-color: white;
+    color: #ff4000;
+    padding: 5px;
+    border: 1.5px solid #ff4000;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.reqaddsk hr{
+    width: 95%;
+}

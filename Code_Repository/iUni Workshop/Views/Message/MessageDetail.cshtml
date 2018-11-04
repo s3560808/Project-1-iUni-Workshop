@@ -9,76 +9,82 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
+
+<link rel="stylesheet" href="~/css/mdetails.css"/>
+
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
-<h2>title</h2>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Messages.First().SenderName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Messages.First().SentTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Messages.First().Detail)
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @{
-        if (@Model.Messages!=null)
-        {
-            foreach (var message in Model.Messages)
+
+<div id="md">
+    <h2>Reply to message</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Messages.First().SenderName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Messages.First().SentTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Messages.First().Detail)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            if (@Model.Messages != null)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(model => message.SenderName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => message.SentTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => message.Detail)
-                    </td>
-                </tr>
+                foreach (var message in Model.Messages)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => message.SenderName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => message.SentTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => message.Detail)
+                        </td>
+                    </tr>
+                }
             }
         }
-    }
-    @{
-        if(@Model.Type != MessageType.System)
-        {
-            <form asp-controller="Message" asp-action="SendMessage" method="post">
-                <textarea name = "MessageDetail"></textarea>
-                <input type = "text" name="ConversationId" value="@Model.ConversationId" hidden>
-                @{
-                    if (Model.InvitationId == null)
-                    {
-                        Model.InvitationId = 0;
+        @{
+            if (@Model.Type != MessageType.System)
+            {
+                <form asp-controller="Message" asp-action="SendMessage" method="post">
+                    <textarea name = "MessageDetail" placeholder="Write reply here"></textarea><br>
+                    <input type="text" name="ConversationId" value="@Model.ConversationId" hidden>
+                    @{
+                        if (Model.InvitationId == null)
+                        {
+                            Model.InvitationId = 0;
+                        }
                     }
-                }
-                <input type = "number" name="InvitationId" value="@Model.InvitationId" hidden>
-                <button type="submit" >Post</button>
-            </form>
+                    <input type="number" name="InvitationId" value="@Model.InvitationId" hidden>
+                    <button id="btn" type="submit">Reply</button><br/><br/><br/>
+                </form>
+            }
+            else
+            {
+                <p>This is system message cannot reply</p>
+            }
         }
-        else
-        {
-            <p>This is system message cannot reply</p>
-        }
+
+
+        <tr>
+
+            
+        </tr>
+
+        </tbody>
+
+    </table>
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
     }
-        
 
-    <tr>
-
-        <td></td>
-    </tr>
-
-    </tbody>
-
-</table>
-
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
-
+</div>

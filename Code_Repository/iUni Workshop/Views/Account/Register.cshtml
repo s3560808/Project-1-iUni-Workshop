@@ -4,14 +4,17 @@
     Layout = "_Layout";
 }
 
+@* Style for page is found via this link under id reg*@
 <link rel="stylesheet" href="~/css/reg.css"/> 
 
+@*Identifier for css page*@
 <div id="reg">
-    
 
     <h2>@ViewData["Title"]</h2>
-
+    
+    @*Split into rows for cleaner layout*@
     <div class="row">
+        @*Main content in one column / before button*@
         <div class="col-md-4">
             <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
                 <h4>Create a new account.</h4>
@@ -32,7 +35,11 @@
                     <input placeholder="Retype password" asp-for="ConfirmPassword" class="form-control"/>
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div><br>
-                <button type="submit" class="btn">Register</button>
+                <button id="btn" type="submit">Register</button>
+                
+                @*Main content after button*@
+                <br><br>
+                <p><a asp-action="Login">Already Registered?</a></p>
             </form>
         </div>
     </div>

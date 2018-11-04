@@ -2,8 +2,9 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic|Roboto+Slab:400,700");
 
 /* Navigation bar to left */
+
 #side-menu{
-	overflow: hidden;
+	overflow: auto;
 }
 
 .side-nav{
@@ -14,8 +15,7 @@
 	top: 0;
 	left: 0;
 	background-color: #f2f2f2;
-	overflow-x: hidden;
-	overflow-y: hidden;
+	overflow: auto;
 	padding-top: 60px;
 	transition:1.5s;
 }
@@ -32,7 +32,7 @@
 	text-transform: uppercase;
 	border-bottom: solid 1px rgba(210, 215, 217, 0.75);
 	width: 75%;
-}	
+}
 
 
 .side-nav a:hover{
@@ -96,10 +96,12 @@
 	padding: 20px 0px 20px 30px;
 	overflow-x: hidden;
 	width: 100%;
+	
 }
 
 #main header{
 	padding: 5px 0px 10px 40px;
+	
 }
 
 body{
@@ -227,7 +229,7 @@ h3{
 }
 
 
-/* Type */		
+/* Type */
 #footer .copyright {
 	color: #9fa3a6;
 	font-size: 0.9em;
@@ -240,7 +242,7 @@ table tr td{
 	font-weight: bold;
 	border-bottom: solid 1px rgba(210, 215, 217, 0.75);
 	border-width: 1.5px;
-	
+
 }
 
 table{
@@ -250,11 +252,11 @@ table{
 #link123{
 	background-color: white;
 }
-	
+
 #link123:hover{
 	background-color:#ff4000;
 	color: white;
-}	
+}
 
 li a.active{
 	background-color: #eaeae1
@@ -277,9 +279,13 @@ h2 a{
 
 .login1 a:hover{
 	color:#ff4000;
-	
+
 }
 
 .login1 {
 	text-decoration: none;
+}
+
+#cent{
+	transition: margin-left 1.5s;
 }

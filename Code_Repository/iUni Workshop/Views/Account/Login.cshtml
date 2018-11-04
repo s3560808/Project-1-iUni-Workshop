@@ -6,15 +6,20 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 @{
-    ViewData["Title"] = "Log in";
+    ViewData["Title"] = "Login";
 }
 
-<link rel="stylesheet" href="~/css/log.css"/>
+@* Style for page is found via this link under id log*@
+<link rel="stylesheet" href="~/css/log.css">
 
+@*Identifier for css page*@
 <div id="log">
     
     <h2>@ViewData["Title"]</h2>
+    
+    @*Split into rows for cleaner layout*@
     <div class="row">
+        @*Main content in one column / before button*@
         <div class="col-md-4">
             <section>
                 <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
@@ -23,12 +28,12 @@
                     <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="form-group">
                         <label asp-for="Email"></label>
-                        <input asp-for="Email" class="form-control"/>
+                        <input asp-for="Email" class="form-control" placeholder="test@test.com"/>
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Password"></label>
-                        <input asp-for="Password" class="form-control"/>
+                        <input asp-for="Password" class="form-control" placeholder="Type password"/>
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -40,8 +45,10 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-default">Log in</button>
+                        <button id="bn" type="submit">Login</button>
                     </div>
+                    
+                    @*Main content after button*@
                     <br>
                     <div class="form-group">
                         <p>
@@ -55,8 +62,10 @@
             </section>
         </div>
         <br>
-        @*
-         <div class="col-md-4">
+        @***Commented out as I don't know if this is needed
+        If this section is required it has not been styled*@
+        
+        @* <div class="col-md-4">
             <section>
                 <h4>Use another service to log in.</h4>
                 <hr/>

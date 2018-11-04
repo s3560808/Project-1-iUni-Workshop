@@ -5,67 +5,70 @@
     Layout = "_Layout";
 }
 
+<link rel="stylesheet" href="~/css/admin.css"/>
 
-<h2>title</h2>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Field)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastUpdateTime)
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @{
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Field)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastUpdateTime)
-                </td>
-                <td>
-   
-                <td>
-                    <form asp-controller="Employer" asp-action="EditJobProfile" asp-route-JobProfileId ="@item.Id" method="get" >
-                        <button type="submit" class="btn btn-sm btn-success" >Edit</button>
-                    </form>
-                        
-                </td>
-                <td>
-                    <form asp-controller="Employer" asp-action="SearchApplicants" asp-route-JobProfileId ="@item.Id" method="get" >
-                        <button type="submit" class="btn btn-sm btn-success" >Search Applications</button>
-                    </form>
-                        
-                </td>
-            </tr>
+<div id="jp">
+    <h2>Job Profiles</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Field)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastUpdateTime)
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Field)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastUpdateTime)
+                    </td>
+                    <td>
+
+                    <td>
+                        <form asp-controller="Employer" asp-action="EditJobProfile" asp-route-JobProfileId="@item.Id" method="get">
+                            <button class="btn2" type="submit" >Edit</button>
+                        </form>
+
+                    </td>
+                    <td>
+                        <form asp-controller="Employer" asp-action="SearchApplicants" asp-route-JobProfileId="@item.Id" method="get">
+                            <button class="btn2" type="submit" >Search Applications</button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
         }
+        <button id="btn1"><a asp-action="EditJobProfile">New Job Profile</a></button>
+        </tbody>
+
+    </table>
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
     }
-        <button ><a asp-action="EditJobProfile">New Job Profile</a></button>
-    </tbody>
 
-</table>
-
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
-
+</div>
 

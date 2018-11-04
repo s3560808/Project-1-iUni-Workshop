@@ -1,3 +1,7 @@
+#cent{
+    transition: margin-left 1.5s;
+}
+
 #log h2, .row {
     margin-left: 40px;
     padding-left: 365px;
@@ -14,5 +18,14 @@
     color: #2e6da4;
 }
 
+
+#log #bn{
+    background-color: white;
+    color: #ff4000;
+    padding: 5px;
+    border: 1.5px solid #ff4000;
+    font-weight: bold;
+    font-size: 14px;
+}
 
 

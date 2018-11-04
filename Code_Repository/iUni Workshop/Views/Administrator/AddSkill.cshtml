@@ -7,107 +7,146 @@
     Layout = "_Layout";
 }
 
-<link rel="stylesheet" href="~/css/admin.css"/>
+<link rel="stylesheet" href="~/css/mdetails.css"/>
+
+<style>
+    #addsk .btn {
+        background-color: white;
+        color: #ff4000;
+        padding: 5px;
+        border: 1.5px solid #ff4000;
+        font-weight: bold;
+        font-size: 12px;
+    }
+</style>
 
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 
 <div id="addsk">
-<h2>title</h2>
-<form method="post" asp-action="AddSkillAction">
-    <table class="table">
-        <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>
-                <input type="text" name="Name">
-            </td>
-        </tr>
-        </tbody>
+    
+    <h2>Add Skill</h2>
+    <form method="post" asp-action="AddSkillAction">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <input type="text" name="Name">
+                </td>
+                <td>
+                    <select name="Status">
+                        <option value="@FieldStatus.InUse" selected="selected">In Use</option>
+                        <option value="@FieldStatus.InRequest">In Request</option>
+                        <option value="@FieldStatus.NoLongerUsed">No Longer Used</option>
+                    </select>
+                </td>
+            </tr>
+            </tbody>
 
-    </table>
-    <button type="submit" class="btn btn-sm btn-success">Confirm</button>
-</form>
+        </table>
+        <button type="submit" id="btn1">Confirm</button>
+    </form>
 
-@{
-    var inUse = new List<UpdateSkill>();
-    var inReq = new List<UpdateSkill>();
-    var baned = new List<UpdateSkill>();
-    foreach (var model in Model)
-    {
-        switch (model.Status)
+    @{
+        var inUse = new List<UpdateSkill>();
+        var inReq = new List<UpdateSkill>();
+        var baned = new List<UpdateSkill>();
+        foreach (var model in Model)
         {
-            case FieldStatus.InUse:
-                inUse.Add(model);
-                break;
-            case FieldStatus.InRequest:
-                inReq.Add(model);
-                break;
-            case FieldStatus.NoLongerUsed:
-                baned.Add(model);
-                break;
-            default:
-                break;
+            switch (model.Status)
+            {
+                case FieldStatus.InUse:
+                    inUse.Add(model);
+                    break;
+                case FieldStatus.InRequest:
+                    inReq.Add(model);
+                    break;
+                case FieldStatus.NoLongerUsed:
+                    baned.Add(model);
+                    break;
+                default:
+                    break;
+            }
         }
     }
-}
 
 
-<p>In use field</p>
-@{
-    foreach (var use in inUse)
-    {
-        <form asp-action="UpdateSkillAction" method="post">
-            <input type="text" name="Name" value="@use.Name">
-            <select name="Status">
-                <option value="@FieldStatus.InUse" selected="selected">In Use</option>
-                <option value="@FieldStatus.InRequest">In Request</option>
-                <option value="@FieldStatus.NoLongerUsed">No Longer Used</option>
-            </select>
-            <button type="submit" name = "Id" value="@use.Id"></button>
-        </form>
+    <p>In use field</p>
+    @{
+        foreach (var use in inUse)
+        {
+            <form asp-action="UpdateSkillAction" method="post">
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" name="Name" value="@use.Name">
+                    </div>
+                    <div class="col-md-4">
+                        <select name="Status">
+                            <option value="@FieldStatus.InUse" selected="selected">In Use</option>
+                            <option value="@FieldStatus.InRequest">In Request</option>
+                            <option value="@FieldStatus.NoLongerUsed">No Longer Used</option>
+                        </select>
+                        <button class="btn" type="submit" name="Id" value="@use.Id">Update</button>
+                    </div>
+                </div>
+            </form>
+        }
     }
-}
-<p>In request</p>
-@{
-    foreach (var use in inReq)
-    {
-        <form asp-action="UpdateSkillAction" method="post">
-            <input type="text" name="Name" value="@use.Name">
-            <select name="Status">
-                <option value="@FieldStatus.InUse">In Use</option>
-                <option value="@FieldStatus.InRequest"  selected="selected">In Request</option>
-                <option value="@FieldStatus.NoLongerUsed">No Longer Used</option>
-            </select>
-            <button type="submit" name = "Id" value="@use.Id"></button>
-        </form>
+    <p>In request</p>
+    @{
+        foreach (var use in inReq)
+        {
+            <form asp-action="UpdateSkillAction" method="post">
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" name="Name" value="@use.Name">
+                    </div>
+                    <div class="col-md-4">
+                        <select name="Status">
+                            <option value="@FieldStatus.InUse">In Use</option>
+                            <option value="@FieldStatus.InRequest" selected="selected">In Request</option>
+                            <option value="@FieldStatus.NoLongerUsed">No Longer Used</option>
+                        </select>
+                        <button class="btn" type="submit" name="Id" value="@use.Id">Change Status</button>
+                    </div>
+                </div>
+            </form>
+        }
     }
-}
-<p>No longer used</p>
-@{
-    foreach (var use in baned)
-    {
-        <form asp-action="UpdateSkillAction" method="post">
-            <input type="text" name="Name" value="@use.Name">
-            <select name="Status">
-                <option value="@FieldStatus.InUse">In Use</option>
-                <option value="@FieldStatus.InRequest" >In Request</option>
-                <option value="@FieldStatus.NoLongerUsed" selected="selected">No Longer Used</option>
-            </select>
-            <button type="submit" name = "Id" value="@use.Id"></button>
-        </form>
+    <p>No longer used</p>
+    @{
+        foreach (var use in baned)
+        {
+            <form asp-action="UpdateSkillAction" method="post">
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" name="Name" value="@use.Name">
+                    </div>
+                    <div class="col-md-4">
+                        <select name="Status">
+                            <option value="@FieldStatus.InUse">In Use</option>
+                            <option value="@FieldStatus.InRequest">In Request</option>
+                            <option value="@FieldStatus.NoLongerUsed" selected="selected">No Longer Used</option>
+                        </select>
+                        <button class="btn" type="submit" name="Id" value="@use.Id">Change Status</button>
+                    </div>
+                </div>
+            </form>
+        }
     }
-}
 
 
-@section Scripts {
-    @await Html.PartialAsync("_ValidationScriptsPartial")
-}
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
 
 </div>

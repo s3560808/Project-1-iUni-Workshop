@@ -6,6 +6,12 @@
 
 <link rel="stylesheet" href="~/css/editcominfo.css"/>
 
+<style>
+    #eci h2 {
+        color: #ff4500;
+    }
+</style>
+
 @await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 <script>
     function GetSuburbName(str) {
@@ -62,106 +68,106 @@
     }
 </script>
 <div id="eci">
-    
     <body onload="Check()"></body>
     <h2>Edit Information</h2>
     <form method="post" asp-action="EditCompanyInfoAction">
         <p>Name:
-       @{
-            string name = "";
-            bool readOnlyFlag = Model.Certificated;
-            if (Model.Name != null)
-            {
-                name = @Model.Name;
+            @{
+                string name = "";
+                bool readOnlyFlag = Model.Certificated;
+                if (Model.Name != null)
+                {
+                    name = @Model.Name;
+                }
+                <input type="text" name="Name" value="@name" class="CoreInfo">
             }
-            <input type="text" name="Name" value="@name" class="CoreInfo">
-        }
-        </p>
-        <br/>
-        
-        <p>Phone Number:
-        @{
-            string phoneNumber = "";
-            if (Model.PhoneNumber != null)
-            {
-                phoneNumber = @Model.PhoneNumber;
-            }
-            <input type="text" name="PhoneNumber" value="@phoneNumber" class="CoreInfo">
-        }
-        </p>
-        <br/>
-        
-        <p>Contact Email:
-        @{
-            string email = "";
-            if (Model.ContactEmail != null)
-            {
-                email = @Model.ContactEmail;
-            }
-            <input type="text" name="ContactEmail" value="@email" class="CoreInfo">
-        }
         </p>
         <br/>
 
-        <p>Address: 
-        @{
-            string address = "";
-            if (Model.Address != null)
-            {
-                address = @Model.Address;
+        <p>Phone Number:
+            @{
+                string phoneNumber = "";
+                if (Model.PhoneNumber != null)
+                {
+                    phoneNumber = @Model.PhoneNumber;
+                }
+                <input type="text" name="PhoneNumber" value="@phoneNumber" class="CoreInfo">
             }
-            <input type="text" name="Address" value="@address" class="CoreInfo">
-        }
+        </p>
+        <br/>
+
+        <p>Contact Email:
+            @{
+                string email = "";
+                if (Model.ContactEmail != null)
+                {
+                    email = @Model.ContactEmail;
+                }
+                <input type="text" name="ContactEmail" value="@email" class="CoreInfo">
+            }
+        </p>
+        <br/>
+
+        <p>Address:
+            @{
+                string address = "";
+                if (Model.Address != null)
+                {
+                    address = @Model.Address;
+                }
+                <input type="text" name="Address" value="@address" class="CoreInfo">
+            }
         </p>
         <br/>
 
         <p>Brief Description:
-        @{
-            string briefDescription = "";
-            if (Model.BriefDescription != null)
-            {
-                briefDescription = @Model.BriefDescription;
+            @{
+                string briefDescription = "";
+                if (Model.BriefDescription != null)
+                {
+                    briefDescription = @Model.BriefDescription;
+                }
+                <br>
+                <textarea id="bd" name="BriefDescription" class="CoreInfo1" >@briefDescription</textarea>
             }
-            <br> <textarea id="bd" name="BriefDescription" class="CoreInfo1" >@briefDescription</textarea>
-        }
         </p>
         <br/>
 
         <p>Postcode:
-        @{
-            string postcode = "";
-            if (Model.PostCode != null)
-            {
-                postcode = @Model.PostCode.ToString();
+            @{
+                string postcode = "";
+                if (Model.PostCode != null)
+                {
+                    postcode = @Model.PostCode.ToString();
+                }
+                <input type="text" name="PostCode" value="@postcode" list="PostCodeList" class="CoreInfo">
+                <datalist id="PostCodeList"></datalist>
             }
-            <input type="text" name="PostCode" value="@postcode" list="PostCodeList" class="CoreInfo">
-            <datalist id="PostCodeList"></datalist>
-        }
         </p>
         <br/>
 
-        <p>Suburb Name: 
-        @{
-            string suburbName = "";
-            if (Model.SuburbName != null)
-            {
-                suburbName = @Model.SuburbName;
+        <p>Suburb Name:
+            @{
+                string suburbName = "";
+                if (Model.SuburbName != null)
+                {
+                    suburbName = @Model.SuburbName;
+                }
+                <input type="text" name="SuburbName" value="@suburbName" list="SurburbNameList" onkeyup="GetSuburbName(this.value)" class="CoreInfo">
+                <datalist id="SurburbNameList"></datalist>
             }
-            <input type="text" name="SuburbName" value="@suburbName" list="SurburbNameList" onkeyup="GetSuburbName(this.value)" class="CoreInfo">
-            <datalist id="SurburbNameList"></datalist>
-        }
         </p>
         <br/>
 
         <p>ABN:
-        @{
-            string abn = "";
-            if (Model.ABN != null)
-            {
-                abn = @Model.ABN;
+            @{
+                string abn = "";
+                if (Model.ABN != null)
+                {
+                    abn = @Model.ABN;
+                }
+                <input type="text" name="ABN" value="@abn" class="CoreInfo">
             }
-            <input type="text" name="ABN" value="@abn" class="CoreInfo">
-        }
         </p>
         <br/>
 
@@ -171,6 +177,6 @@
     @section Scripts {
         @await Html.PartialAsync("_ValidationScriptsPartial")
     }
- 
+
 
 </div>

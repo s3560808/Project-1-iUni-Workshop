@@ -1,403 +1,696 @@
+@using iUni_Workshop.Models.AdministratorModels
+@using iUni_Workshop.Models.SchoolModels
+
 @using Microsoft.EntityFrameworkCore.Internal
 @model iUniWorkshop.Models.EmployerModels.JobProfile
 @*If profile already send invitation then the profile cannot change*@
+@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
 
 @{
-    ViewBag.Title = "title";
+    ViewBag.Title = "Edit Job Profile";
     Layout = "_Layout";
 }
 
-@await Html.PartialAsync("Shared/_Validation_Area_From_Backend")
+<style>
+    
+	#ejpp h2{
+		color: #ff4000;
+	}
+	
+	#ejpp #bbb{
+		margin-top: 0px;
+		margin-bottom: 20px;
+		margin-left: 110px;
+	}
+</style>
+
+<link rel="stylesheet" href="~/css/ejp.css"/>    
+<script src="~/js/_AddSchool.js" type="text/javascript"></script>
+
 
 @*UPdate date*@
-<h2>title</h2>
+<div id="content">
+
+<div id="ejpp">
+
+<h2 class="page">@ViewBag.Title</h2>
+
+
+
+<form asp-action="EditJobProfileAction" method="post">
+@*Profiled id(if not a new profield)*@
+<div id="ProfileIdDiv">
+	@if (@Model != null)
+	{
+		<input type="text" hidden name="ProfileId" id="ProfileId" value="@Model.ProfileId" class="ejpinput">
+		<p>@Model.UpdateDate</p>
+	}
+	<hr/>
+</div>
+
+@*Field of Job Profile*@
+<div id="FieldDiv">
+	@{
+		string FieldName = "";
+		if (@Model != null)
+		{
+			FieldName = Model.FieldName;
+		}
+	}
+	<p>Select a Field Name:</p>
+	<select name="FieldName" value="@FieldName" id="fieldList">
+	</select>
+	<hr/>
+</div>
+
+@*Title of Job Profile*@
+<div id="TitleDiv">
+	@{
+		string Title = "";
+		if (@Model != null)
+		{
+			Title = Model.Title;
+		}
+	}
+	<p>Title of Job Profile / Name:</p> <input class="ejpinput" type="text" name="Title" maxlength="30" value="@Title">
+	<hr/>
+</div>
+
+@*Description of Job Profile*@
+<div id="DescriptionDiv">
+	@{
+		string description = "";
+		if (@Model != null)
+		{
+			description = Model.Description;
+		}
+	}
+	<p>Description of Job Profile:</p><textarea name="Description" placeholder="Write Description" style="width: 80%; height: 200px; resize: none;"  >@description</textarea>
+
+	<hr/>
+</div>
+
+@*Job Experience Required? of Job Profile*@
+<div id="ExperienceDiv">
+	@{
+		bool requireJobExperience = false;
+		if (@Model != null)
+		{
+			requireJobExperience = Model.RequireJobExperience;
+		}
+	}
+	<p>Experience Required: </p><input id="ch"type="checkbox" name="RequireJobExperience" onclick="return myFun()" checked="@requireJobExperience" value="true">Yes<br>
+	<br>
+
+	<div>
+		<p  id="note" style="display: none;">Experience Required Selected &#x2713</p>
+	</div>
+
+	<script type="text/javascript">
+		function myFun() {
+			var checkbox = document.getElementById("ch");
+			var text = document.getElementById("note");
+
+			if (checkbox.checked) {
+				text.style.display = "block";
+				text.style.color = "greenyellow";
+			}
+			else {
+				text.style.display = "none";
+			}
+		}
+
+
+	</script>
+	<hr/>
+</div>
+
+@*Max work day of Job Profile*@
+<div id="MaxDayDiv">
+	@{
+		int? max = null;
+		if (@Model != null)
+		{
+			max = Model.MaxDay;
+		}
+	}
+	<p>Max amount of days for the Job:</p> <input class="ejpinput" type="number" name="MaxDay" value="@max" min="0" max="7" style="width: 150px;">
+	<hr/>
+</div>
+
+@*Min work day of Job Profile*@
+<div id="MinDayDiv">
+	@{
+		int? min = null;
+		if (@Model != null)
+		{
+			min = Model.MinDay;
+		}
+	}
+	<p>Minimum amount of days for the Job:</p><input class="ejpinput" type="number" name="MinDay" value="@min" min="0" max="7" style="width: 150px;">
+	<hr/>
+</div>
+
+
+@*Salary of Job Profile*@
+<div id="SalaryDiv">
+	@{
+		float? salary = null;
+		if (@Model != null)
+		{
+			salary = Model.Salary;
+		}
+	}
+	<p>Salary for Job:</p><input class="ejpinput" type="number" name="Salary" value="@salary" step="0.01" min="1" max="999999.99" placeholder="$amount" style="width: 150px;">
+	<hr/>
+</div>
+
+@*Skills of Job Profile*@
+<div id="SkillsDiv">
+	@{
+		if (@Model == null || !@Model.JobProfileSkills.Any())
+		{
+			int i = 0;
+			string skillName = "[" + 0 + "]" + ".SkillName";
+			string skillRequired = "[" + 0 + "]" + ".SkillRequired";
+			<div class="SkillClass">
+				<p>Skill Name @i</p>
+				<input class="ejpinput" type="text" name="@skillName" list="skillList" onkeyup="getSkillName(this.value)"><br>
+				<datalist id="skillList"></datalist>
+				<p>Required @i
+					<p><input class="ejpinput" type="checkbox" name="@skillRequired" value="true"></p>
+				<button id="bbb"onclick="RemoveSkill(this)" type="button">Remove</button>
+				</p>
+			</div>
+		}
+		else
+		{
+			if (@Model != null)
+			{
+				for (int i = 0; i < @Model.JobProfileSkills.Count; i++)
+				{
+					string skillName = "[" + i + "]" + ".SkillName";
+					string skillRequired = "[" + i + "]" + ".SkillRequired";
+					<div class="SkillClass">
+						<p>Skill Name @i</p>
+						<input class="ejpinput" type="text" name="@skillName" list="skillList" onkeyup="getSkillName(this.value)" value="@Model.JobProfileSkills[i].SkillName">
+						<datalist id="skillList"></datalist>
+						<p>Required @i</p>
+						@*Value = true?*@
+						<div class="row">
+							<div class="col-sm-1">
+								<input class="ejpinput" type="checkbox" name="@skillRequired" checked="@Model.JobProfileSkills[i].SkillRequired" value="true">
+							</div>
+							<div class="col-md-2">
+								<button onclick="RemoveSkill(this)" type="button">Remove</button>
+							</div>
+						</div>
+					</div>
+				}
+			}
+		}
+		
+	}
+
+</div>
+<br/><button type="button" onclick="AddSkillController()">Add Skill</button>
+<hr/>
+
+
+@*Required Locations of Job Profile*@
+<div id="LocationDiv">
+	@{
+		if (@Model == null || @Model.JobProfileRequiredLocation.Any())
+		{
+			
+		}
+		else
+		{
+			for (int i = 0; i < @Model.JobProfileRequiredLocation.Count; i++)
+			{
+
+				{
+					string locationName = "[" + i + "]" + ".LocationName";
+					string postCode = "[" + i + "]" + ".PostCode";
+					<div class="LocationClass">
+						<p>Location Name @i</p>
+						<input class="ejpinput" type="text" name="@locationName" value="@Model.JobProfileRequiredLocation[i].LocationName">
+						
+						<p>Postcode @i</p>
+						@*Value = true?*@
+						<input class="ejpinput" type="text" name="@postCode" value="@Model.JobProfileRequiredLocation[i].PostCode">
+						<button onclick="RemoveLocation(this)" type="button">Remove</button>
+					</div>
+				}
+
+			}
+		}
+	}
+</div>
+<br><button type="button" onclick="AddLocationToProfile()">Add Location</button>
+<hr>
+
+@*Required Schools of Job Profile*@
+<div id="SchoolsDiv">
+	@{
+		if (@Model == null || @Model.EmployerRequiredSchools.Count() == 0)
+		{
+			
+		}
+		else
+		{
+			for (int i = 0; i < @Model.EmployerRequiredSchools.Count; i++)
+			{
+
+				{
+					string schoolName = "[" + i + "]" + ".SchoolName";
+					string campus = "[" + i + "]" + ".Campus";
+					string postcode = "[" + i + "]" + ".CampusPostCode";
+					<div class="SchoolClass">
+						<p>School Name @i</p>
+						<input class="ejpinput" type="text" name="@schoolName" id="SchoolName" value="@Model.EmployerRequiredSchools[i].SchoolName">
+						<p>Location @i</p>
+						@*Value = true?*@
+						<input class="ejpinput" type="text" name="@campus" id="Campus" value="@Model.EmployerRequiredSchools[i].CampusName">
+						<p>Postcode @i</p>
+						<input class="ejpinput" type="text" name="@postcode" id="CampusPostCode" value="@Model.EmployerRequiredSchools[i].CampusPostCode">
+						<button onclick="RemoveSchool(this)" type="button">Remove</button>
+					</div>
+				}
+			}
+		}
+	}
+</div>
+<br><button type="button" onclick="AddSchoolProfile()">Add School</button>
+<hr/>
+
+@*Complusory work day*@
+<div id="ComplusoryWorkDay">
+	@{
+		bool Mon = false;
+		bool Tue = false;
+		bool Wed = false;
+		bool Thu = false;
+		bool Fri = false;
+		bool Sat = false;
+		bool Sun = false;
+
+		if (Model == null || Model.JobProfileComplusoryWorkDays == null)
+		{
+		}
+		else
+		{
+			for (int i = 0; i < @Model.JobProfileComplusoryWorkDays.Count; i++)
+			{
+				switch (@Model.JobProfileComplusoryWorkDays[i].Day)
+				{
+					case 1:
+						Mon = true;
+						break;
+					case 2:
+						Tue = true;
+						break;
+					case 3:
+						Wed = true;
+						break;
+					case 4:
+						Thu = true;
+						break;
+					case 5:
+						Fri = true;
+						break;
+					case 6:
+						Sat = true;
+						break;
+					case 7:
+						Sun = true;
+						break;
+				}
+			}
+		}
+	}
+	<p>Compulsory Work Day(s):</p><br>
+	<p>Monday <input type="checkbox" name="[0].Day" value="1" checked="@Mon"></p><br>
+	<p>Tuesday <input type="checkbox" name="[1].Day" value="2" checked="@Tue"></p><br>
+	<p>Wednesday <input type="checkbox" name="[2].Day" value="3" checked="@Wed"></p><br>
+	<p>Thursday <input type="checkbox" name="[3].Day" value="4" checked="@Thu"></p><br>
+	<p>Friday <input type="checkbox" name="[4].Day" value="5" checked="@Fri"></p><br>
+	<p>Saturday <input type="checkbox" name="[5].Day" value="6" checked="@Sat"></p><br>
+	<p>Sunday <input type="checkbox" name="[6].Day" value="7" checked="@Sun"></p><br>
+	<hr/>
+</div>
+
+
+<button type="submit">Submit</button>
+
 
 
 <script>
-            function AddSkillController() {
-                var suburbselectbox = document.getElementsByClassName("SkillClass");
-                var boxNumber = suburbselectbox.length;
-                var divBox = document.createElement("div");
-                divBox.className = "SkillClass";
-                var inputSkillName = document.createElement("input");
-                inputSkillName.setAttribute("type","text");
-                inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".SkillName");
-                var inputSkillLink = document.createElement("input");
-                inputSkillLink.setAttribute("type","text");
-                inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".CertificationLink");
-                var inputSkillNameLable = document.createElement("p");
-                inputSkillNameLable.innerText = "Skill Name "+boxNumber;
-                var inputSkillLinkLable = document.createElement("p");
-                inputSkillLinkLable.innerText = "Skill Certification Link "+boxNumber;
-                divBox.appendChild(inputSkillNameLable);
-                divBox.appendChild(inputSkillName);
-                divBox.appendChild(inputSkillLinkLable);
-                divBox.appendChild(inputSkillLink);
-                var last = suburbselectbox[boxNumber-1];
-                last.append(divBox);
-            }
+	function AddSkillController() {
+		
+     	var skillElements = document.getElementsByClassName("SkillClass");
+        var skillElementsNumber = skillElements.length;
+        var skillDiv = document.getElementById("SkillsDiv");
+        if (skillElementsNumber >= 10) {
+            alert("At most can you add 10 skills");
+            return;
+        }
+        
+		//1. Create new div for new skill
+        var divBox = document.createElement("div");
+        divBox.className = "SkillClass";
+        divBox.id = "SkillClassId"+skillElementsNumber;
+		//1.1 Create space
+		var space = document.createElement("p");
+		space.innerText = "";
+		//1.2 Create skill name box
+        var inputSkillName = document.createElement("input");
+        inputSkillName.setAttribute("type","text");
+        inputSkillName.setAttribute("name","["+skillElementsNumber+"]"+ ".SkillName");
+        inputSkillName.onkeyup = function() { getSkillName(this.value) };
+        inputSkillName.setAttribute("list","skillList");
+		inputSkillName.style.border = "1px solid #ff4000";
+        //1.2.1 Data List
+        var dataList = document.createElement("datalist");
+        dataList.setAttribute("id", "skillList");
+        //1.3 Create Required checkbox
+        var inputSkillRequired = document.createElement("input");
+        inputSkillRequired.setAttribute("type","checkbox");
+        inputSkillRequired.setAttribute("name","["+skillElementsNumber+"]"+ ".SkillRequired");
+        //1.4 Create Skill name label
+        var inputSkillNameLabel = document.createElement("p");
+        inputSkillNameLabel.innerText = "Skill Name "+skillElementsNumber;
+        //1.5 Create Required label
+        var inputSkillLinkLabel = document.createElement("p");
+        inputSkillLinkLabel.innerText = "Required "+skillElementsNumber;
+		inputSkillLinkLabel.style.marginTop = "5px";
+        //1.6 Create remove button
+        var buttonSkillButtonR = document.createElement("button");
+        buttonSkillButtonR.type = "button";
+        buttonSkillButtonR.textContent = "Remove";
+		buttonSkillButtonR.style.marginTop = "0px";
+		buttonSkillButtonR.style.marginBottom = "20px";
+		buttonSkillButtonR.style.marginLeft = "110px";
+        buttonSkillButtonR.onclick = function() {RemoveSkill(this)};
+        //2. Append sub elements of new skill div
+		divBox.appendChild(space);
+        divBox.appendChild(inputSkillNameLabel);
+        divBox.appendChild(inputSkillName);
+        divBox.appendChild(inputSkillLinkLabel);
+        divBox.appendChild(inputSkillRequired);
+		divBox.appendChild(space);
+		divBox.appendChild(buttonSkillButtonR);
+        skillDiv.append(divBox);
+		
 
-            function AddMeterialController() {
-                var suburbselectbox = document.getElementsByClassName("MaterialClass");
-                var boxNumber = suburbselectbox.length;
-                var divBox = document.createElement("div");
-                divBox.className = "MaterialClass";
-                var inputSkillName = document.createElement("input");
-                inputSkillName.setAttribute("type","text");
-                inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".ExternalMeterialName");
-                var inputSkillLink = document.createElement("input");
-                inputSkillLink.setAttribute("type","text");
-                inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".ExternalMeterialLink");
-                var inputSkillNameLable = document.createElement("p");
-                inputSkillNameLable.innerText = "External Meterial Name "+boxNumber;
-                var inputSkillLinkLable = document.createElement("p");
-                inputSkillLinkLable.innerText = "External Meterial Link "+boxNumber;
-                divBox.appendChild(inputSkillNameLable);
-                divBox.appendChild(inputSkillName);
-                divBox.appendChild(inputSkillLinkLable);
-                divBox.appendChild(inputSkillLink);
-                var last = suburbselectbox[boxNumber-1];
-                last.append(divBox);
-            }
+	}
+	
+	function AddLocationToProfile() {
+		
+		var locationElements = document.getElementsByClassName("LocationClass");
+		var locationElementsNumber = locationElements.length;
+		var locationDiv = document.getElementById("LocationDiv");
+		if (locationElementsNumber >= 5) {
+			alert("At most can you add 5 locations");
+			return;
+		}
+		
+		//1. Create new div for new skill
+        var divBox = document.createElement("div");
+        divBox.className = "LocationClass";
+        divBox.id = "LocationClassId"+locationElementsNumber;
+		//1.1 Create space
+		var space = document.createElement("p");
+		space.innerText = "";
+		//1.2 Data List for Location
+		var dataList = document.createElement("datalist");
+		dataList.setAttribute("id", "SuburbNameList");
+		//1.2.1 Data List for Postcode
+		var dataLis = document.createElement("datalist");
+		dataLis.setAttribute("id", "PostCodeList");
+        //1.2.2 Create Location name box
+        var inputLocationName = document.createElement("input");
+        inputLocationName.setAttribute("type","text");
+        inputLocationName.setAttribute("name","["+locationElementsNumber+"]"+ ".LocationName");
+        inputLocationName.onkeyup = function() { GetSuburbName(this.value) };
+        inputLocationName.setAttribute("list","SuburbNameList");
+		inputLocationName.style.border = "1px solid #ff4000";
+        //1.3 Create Postcode input box
+        var inputPostcode = document.createElement("input");
+        inputPostcode.setAttribute("type","text");
+        inputPostcode.setAttribute("name","["+locationElementsNumber+"]"+ ".PostCode");
+		inputPostcode.setAttribute("list", "PostCodeList");
+		inputPostcode.style.border = "1px solid #ff4000";
+        //1.4 Create Skill name label
+        var inputLocationNameLabel = document.createElement("p");
+        inputLocationNameLabel.innerText = "Location Name "+locationElementsNumber;
+        //1.5 Create Skill Certification Link label
+        var inputPostcodeLabel = document.createElement("p");
+        inputPostcodeLabel.innerText = "Postcode "+locationElementsNumber;
+		inputPostcodeLabel.style.marginTop = "5px";
+        //1.6 Create remove button
+        var buttonLocationButton = document.createElement("button");
+        buttonLocationButton.type = "button";
+        buttonLocationButton.textContent = "Remove";
+		buttonLocationButton.style.marginTop = "5px";
+		buttonLocationButton.style.marginBottom = "20px";
+        buttonLocationButton.onclick = function() {RemoveLocation(this)};
+        //2. Append sub elements of new skill div
+		divBox.appendChild(inputLocationNameLabel);
+		divBox.appendChild(dataList);
+        divBox.appendChild(inputLocationName);
+        divBox.appendChild(inputPostcodeLabel);
+		divBox.appendChild(dataLis);
+        divBox.appendChild(inputPostcode);
+		divBox.appendChild(space);
+        divBox.appendChild(buttonLocationButton);
+		locationDiv.append(divBox);
+	}
+	
+	function AddSchoolProfile() {
+		
+		var schoolElements = document.getElementsByClassName("SchoolClass");
+		var schoolElementsNumber = schoolElements.length;
+		var schoolDiv = document.getElementById("SchoolsDiv");
+		if (schoolElementsNumber >= 5) 
+		{
+			alert("At most can you add 5 schools");
+			return;
+		}
+		
+		//1. Create new div for new skill
+        var divBox = document.createElement("div");
+        divBox.className = "SchoolClass";
+        divBox.id = "SchoolClassId"+schoolElementsNumber;
+		//1.1 Create space
+		var space = document.createElement("p");
+		space.innerText = "";
+		//1.2 Data List for School
+		var dataList = document.createElement("datalist");
+		dataList.setAttribute("id", "schoolList");
+		//1.2.1 Data List for Campus
+		var dataLis = document.createElement("datalist");
+		dataLis.setAttribute("id", "campusList");
+        //1.2.2 Data List for Postcode
+		var data = document.createElement("datalist");
+		data.setAttribute("id", "campusPostCodeList");
+		//1.3 Create School name box
+        var inputSchoolName = document.createElement("input");
+        inputSchoolName.setAttribute("type","text");
+        inputSchoolName.setAttribute("name","["+schoolElementsNumber+"]"+ ".SchoolName");
+        inputSchoolName.onkeyup = function() { getSchoolName(this.value) };
+        inputSchoolName.setAttribute("list","schoolList");
+		inputSchoolName.style.border = "1px solid #ff4000";
+        //1.4 Create Campus Location input box
+        var inputCampusLocation = document.createElement("input");
+        inputCampusLocation.setAttribute("type","text");
+        inputCampusLocation.setAttribute("name","["+schoolElementsNumber+"]"+ ".CampusName");
+		inputCampusLocation.onkeyup = function() { getSchoolPostCode(this.value) };
+		inputCampusLocation.setAttribute("list", "campusList");
+		inputCampusLocation.style.border = "1px solid #ff4000";
+		//1.5 Create Campus Postcode input box
+		var inputCampusLocationPostCode = document.createElement("input");
+		inputCampusLocationPostCode.setAttribute("type", "text");
+		inputCampusLocationPostCode.setAttribute("name","["+schoolElementsNumber+"]"+ ".CampusPostCode");
+		inputCampusLocationPostCode.setAttribute("list", "campusPostCodeList");
+		inputCampusLocationPostCode.style.border = "1px solid #ff4000";
+        //1.6 Create School name label
+        var inputSchoolNameLabel = document.createElement("p");
+        inputSchoolNameLabel.innerText = "Campus Name "+ schoolElementsNumber;
+        //1.7 Create Campus Location label
+        var inputCampusLocationLabel = document.createElement("p");
+        inputCampusLocationLabel.innerText = "Location "+ schoolElementsNumber;
+		inputCampusLocationLabel.style.marginTop = "5px";
+		//1.8 Create Campus Postcode label
+		var inputCampusLocationPostCodeLabel = document.createElement("p");
+		inputCampusLocationPostCodeLabel.innerText = "Postcode " + schoolElementsNumber;
+		inputCampusLocationPostCodeLabel.style.marginTop = "5px";
+        //1.9 Create remove button
+        var buttonSchoolButton = document.createElement("button");
+        buttonSchoolButton.type = "button";
+        buttonSchoolButton.textContent = "Remove";
+		buttonSchoolButton.style.marginTop = "5px";
+		buttonSchoolButton.style.marginBottom = "20px";
+        buttonSchoolButton.onclick = function() {RemoveLocation(this)};
+        //2. Append sub elements of new skill div
+		divBox.appendChild(inputSchoolNameLabel);
+		divBox.appendChild(dataList);
+        divBox.appendChild(inputSchoolName);
+        divBox.appendChild(inputCampusLocationLabel);
+		divBox.appendChild(dataLis);
+        divBox.appendChild(inputCampusLocation);
+		divBox.appendChild(inputCampusLocationPostCodeLabel);
+		divBox.appendChild(data);
+		divBox.appendChild(inputCampusLocationPostCode);
+		divBox.appendChild(space);
+        divBox.appendChild(buttonSchoolButton);
+		//var last = locationElements[locationElementsNumber - 1];
+		//last.append(divBox)
+        schoolDiv.append(divBox);
+	}
 
-            function AddJobHisotryController() {
-                var suburbselectbox = document.getElementsByClassName("HistoryClass");
-                var boxNumber = suburbselectbox.length;
-                var divBox = document.createElement("div");
-                divBox.className = "HistoryClass";
-                var inputSkillName = document.createElement("input");
-                inputSkillName.setAttribute("type","text");
-                inputSkillName.setAttribute("name","["+boxNumber+"]"+ ".JobHistoryName");
-                var inputSkillLink = document.createElement("input");
-                inputSkillLink.setAttribute("type","text");
-                inputSkillLink.setAttribute("name","["+boxNumber+"]"+ ".JobHistoryShortDescription");
-                var inputSkillNameLable = document.createElement("p");
-                inputSkillNameLable.innerText = "Job History Name "+boxNumber;
-                var inputSkillLinkLable = document.createElement("p");
-                inputSkillLinkLable.innerText = "Job History Short Description "+boxNumber;
-                divBox.appendChild(inputSkillNameLable);
-                divBox.appendChild(inputSkillName);
-                divBox.appendChild(inputSkillLinkLable);
-                divBox.appendChild(inputSkillLink);
-                var last = suburbselectbox[boxNumber-1];
-                last.append(divBox);
-                
-            }
-            
-            function getSkillName(skillName) {
-                var postCodeSelectBox = document.getElementById("skillList");
-                postCodeSelectBox.innerHTML = "";
-                var xmlHttp = new XMLHttpRequest();
-                xmlHttp.onreadystatechange = function() {
-                    if (this.readyState === 4 && this.status === 200) {
-                        var skills = JSON.parse(this.responseText);
-                        for (var i = 0; i < skills.length; i++) {
-                            var skill = document.createElement("OPTION");
-                            skill.value = skills[i];
-                            postCodeSelectBox.appendChild(skill);
-                        }
+	function getSkillName(skillName) {
+		var postCodeSelectBox = document.getElementById("skillList");
+		postCodeSelectBox.innerHTML = "";
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.onreadystatechange = function() {
+			if (this.readyState === 4 && this.status === 200) {
+				var skills = JSON.parse(this.responseText);
+				for (var i = 0; i < skills.length; i++) {
+					var skill = document.createElement("OPTION");
+					skill.value = skills[i];
+					postCodeSelectBox.appendChild(skill);
+				}
+			}
+		};
+		xmlHttp.open("GET", "/Skill/GetSkillName/" + skillName, true);
+		xmlHttp.send();
+	}
+
+	window.onload = function getFieldName() {
+		var postCodeSelectBox = document.getElementById("fieldList");
+		postCodeSelectBox.innerHTML = "";
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.onreadystatechange = function() {
+			if (this.readyState === 4 && this.status === 200) {
+				var fields = JSON.parse(this.responseText);
+				for (var i = 0; i < fields.length; i++) {
+					var field = document.createElement("OPTION");
+					field.value = fields[i];
+					field.innerText = fields[i];
+					postCodeSelectBox.appendChild(field);
+				}
+			}
+		};
+		xmlHttp.open("GET", "/Field/GetAllFields/", true);
+		xmlHttp.send();
+	}
+	
+	function getSchoolName(schoolName) {
+        var schoolSelectBox = document.getElementById("schoolList");
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var suburbs = JSON.parse(this.responseText);
+                schoolSelectBox.innerHTML="";
+                for (var i = 0; i < suburbs.length; i++) {
+                    var btn = document.createElement("OPTION");
+                    btn.value = suburbs[i];
+                    if (schoolName == suburbs[i]) {
+                        getSchoolSuburb(schoolName);
                     }
-                };
-                xmlHttp.open("GET", "/Skill/GetSkillName/" + skillName, true);
-                xmlHttp.send();
-            }
-            
-            window.onload = function getFieldName() {
-                var postCodeSelectBox = document.getElementById("fieldList");
-                postCodeSelectBox.innerHTML = "";
-                var xmlHttp = new XMLHttpRequest();
-                xmlHttp.onreadystatechange = function() {
-                    if (this.readyState === 4 && this.status === 200) {
-                        var fields = JSON.parse(this.responseText);
-                        for (var i = 0; i < fields.length; i++) {
-                            var field = document.createElement("OPTION");
-                            field.value = fields[i];
-                            field.innerText = fields[i];
-                            postCodeSelectBox.appendChild(field);
-                        }
-                    }
-                };
-                xmlHttp.open("GET", "/Field/GetAllFields/", true);
-                xmlHttp.send();
-            }
-    </script>
-
-<form asp-action="EditJobProfileAction" method="post">
-    @*Profiled id(if not a new profield)*@
-    <div id="ProfileIdDiv">
-        @if (@Model != null)
-        {
-            <input type="text" hidden name="ProfileId" id="ProfileId" value="@Model.ProfileId">
-            <p>@Model.UpdateDate</p>
-        }
-        <hr />
-    </div>
-
-    @*Field of Job Profile*@
-    <div id="FieldDiv">
-        @{
-            string FieldName = "";
-            if (@Model != null)
-            {
-                FieldName = Model.FieldName;
-            }
-        }
-        <select name="FieldName" value="@FieldName" id="fieldList">
-        </select>
-        <hr />
-    </div>
-
-    @*Title of Job Profile*@
-    <div id="TitleDiv">
-        @{
-            string Title = "";
-            if (@Model != null)
-            {
-                Title = Model.Title;
-            }
-        }
-        TitleName <input type="text" name="Title" value="@Title">
-        <hr />
-    </div>
-
-    @*Description of Job Profile*@
-    <div id="DescriptionDiv">
-        @{
-            string description = "";
-            if (@Model != null)
-            {
-                description = Model.Description;
-            }
-        }
-        <textarea name="Description">@description</textarea>
-
-        <hr />
-    </div>
-
-    @*Job Experience Required? of Job Profile*@
-    <div id="ExperienceDiv">
-        @{
-            bool requireJobExperience = false;
-            if (@Model != null)
-            {
-                requireJobExperience = Model.RequireJobExperience;
-            }
-        }
-        <input type="checkbox" name="RequireJobExperience" checked="@requireJobExperience" value="true">
-        <hr />
-    </div>
-
-    @*Max work day of Job Profile*@
-    <div id="MaxDayDiv">
-        @{
-            int? max = null;
-            if (@Model != null)
-            {
-                max = Model.MaxDay;
-            }
-        }
-        <input type="number" name="MaxDay" value="@max" min="0" max="7">
-        <hr />
-    </div>
-
-    @*Min work day of Job Profile*@
-    <div id="MinDayDiv">
-        @{
-            int? min = null;
-            if (@Model != null)
-            {
-                min = Model.MinDay;
-            }
-        }
-        <input type="number" name="MinDay" value="@min" min="0" max="7">
-        <hr />
-    </div>
-
-
-    @*Salary of Job Profile*@
-    <div id="SalaryDiv">
-        @{
-            float? salary = null;
-            if (@Model != null)
-            {
-                salary = Model.Salary;
-            }
-        }
-        <input type="number" name="Salary" value="@salary" step="0.1">
-        <hr />
-    </div>
-
-    @*Skills of Job Profile*@
-    <div id="SkillsDiv">
-        @{
-            if (@Model == null || !@Model.JobProfileSkills.Any())
-            {
-                int i = 0;
-                string skillName = "[" + 0 + "]" + ".SkillName";
-                string skillRequired = "[" + 0 + "]" + ".SkillRequired";
-                <div class="SkillClass">
-                    <p>Skill Name @i</p>
-                    <input type="text" name="@skillName" list="skillList" onkeyup="getSkillName(this.value)">
-                    <datalist id="skillList"></datalist>
-                    <p>Required @i</p>
-                    <input type="checkbox" name="@skillRequired" value="true">
-                </div>
-            }
-            else
-            {
-                for (int i = 0; i < @Model.JobProfileSkills.Count; i++)
-                {
-
-                    {
-                        string skillName = "[" + i + "]" + ".SkillName";
-                        string skillRequired = "[" + i + "]" + ".SkillRequired";
-                        <div class="SkillClass">
-                            <p>Skill Name @i</p>
-                            <input type="text" name="@skillName" value="@Model.JobProfileSkills[i].SkillName"  list="skillList" onkeyup="getSkillName(this.value)">
-                            <datalist id="skillList"></datalist>
-                            <p>Required @i</p>
-                            @*Value = true?*@
-                            <input type="checkbox" name="@skillRequired" checked="@Model.JobProfileSkills[i].SkillRequired" value="true">
-                        </div>
-                    }
+                    schoolSelectBox.appendChild(btn);
                 }
             }
-            <button type="button" onclick="AddSkillController()">Add Skill</button>
-        }
-        <hr />
-    </div>
-
-    @*Required Locations of Job Profile*@
-    <div id="LocationDiv">
-        @{
-            if (@Model == null || @Model.JobProfileRequiredLocation.Count() == 0)
-            {
-                var locationName = "[" + 0 + "]" + ".LocationName";
-                var postCode = "[" + 0 + "]" + ".PostCode";
-                <div class="LocationClass">
-                    <p>Location Name 1</p>
-                    <input type="text" name="@locationName">
-                    <p>Post COde 1</p>
-                    <input type="number" name="@postCode">
-                </div>
-            }
-            else
-            {
-                for (int i = 0; i < @Model.JobProfileRequiredLocation.Count; i++)
-                {
-
-                    {
-                        string locationName = "[" + i + "]" + ".LocationName";
-                        string postCode = "[" + i + "]" + ".PostCode";
-                        <div class="LocationClass">
-                            <p>Skill Name 1</p>
-                            <input type="text" name="@locationName" value="@Model.JobProfileRequiredLocation[i].LocationName">
-                            <p>Required 1</p>
-                            @*Value = true?*@
-                            <input type="text" name="@postCode" value="@Model.JobProfileRequiredLocation[i].PostCode">
-                        </div>
-                    }
-
-                }
-            }
-
-            <button type="button" onclick="AddSkillController()">Add Location</button>
-        }
-        <hr />
-    </div>
-
-    @*Required Schools of Job Profile*@
-    <div id="SchoolsDiv">
-        @{
-            if (@Model == null || @Model.EmployerRequiredSchools.Count() == 0)
-            {
-                string schoolName = "[" + 0 + "]" + ".SchoolName";
-                string campus = "[" + 0 + "]" + ".Campus";
-                <div class="SchoolClass">
-                    <p>School Name 1</p>
-                    <input type="text" name="@schoolName">
-                    <p>Campus 1</p>
-                    <input type="text" name="@campus">
-                </div>
-            }
-            else
-            {
-                for (int i = 0; i < @Model.EmployerRequiredSchools.Count; i++)
-                {
-
-                    {
-                        string schoolName = "[" + i + "]" + ".SchoolName";
-                        string campus = "[" + i + "]" + ".Campus";
-                        <div class="SchoolClass">
-                            <p>School Name @i</p>
-                            <input type="text" name="@schoolName" value="@Model.EmployerRequiredSchools[i].SchoolName">
-                            <p>Campus@i</p>
-                            @*Value = true?*@
-                            <input type="text" name="@campus" value="@Model.EmployerRequiredSchools[i].CampusName">
-                        </div>
-                    }
-                }
-            }
-            <button type="button" onclick="AddSkillController()">Add School</button>
-        }
-        <hr />
-    </div>
-
-    @*Complusory work day*@
-    <div id="ComplusoryWorkDay">
-        @{
-        bool Mon = false;
-        bool Tue = false;
-        bool Wed = false;
-        bool Thu = false;
-        bool Fri = false;
-        bool Sat = false;
-        bool Sun = false;
-
-        if (Model == null || Model.JobProfileComplusoryWorkDays == null)
-        {
-        }
-        else
-        {
-            for (int i = 0; i < @Model.JobProfileComplusoryWorkDays.Count; i++)
-            {
-                switch (@Model.JobProfileComplusoryWorkDays[i].Day)
-                {
-                    case 1:
-                        Mon = true;
-                        break;
-                    case 2:
-                        Tue = true;
-                        break;
-                    case 3:
-                        Wed = true;
-                        break;
-                    case 4:
-                        Thu = true;
-                        break;
-                    case 5:
-                        Fri = true;
-                        break;
-                    case 6:
-                        Sat = true;
-                        break;
-                    case 7:
-                        Sun = true;
-                        break;
-                }
-            }
-        }
-        }
-        Monday         <input type="checkbox" name="[0].Day" value="1" checked="@Mon">
-        Tuesday        <input type="checkbox" name="[1].Day" value="2" checked="@Tue">
-        Wednesday      <input type="checkbox" name="[2].Day" value="3" checked="@Wed">
-        Thursday       <input type="checkbox" name="[3].Day" value="4" checked="@Thu">
-        Friday         <input type="checkbox" name="[4].Day" value="5" checked="@Fri">
-        Saturday       <input type="checkbox" name="[5].Day" value="6" checked="@Sat">
-        Sunday         <input type="checkbox" name="[6].Day" value="7" checked="@Sun">
-        <hr />
-    </div>
+        };
+        xmlHttp.open("GET", "/School/GetSchoolName/" + schoolName, true);
+        xmlHttp.send();
+    }
     
-    <button type="submit">Submit</button>
+    function getSchoolSuburb(schoolName) {
+        var schoolSelectBox = document.getElementById("campusList");
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var suburbs = JSON.parse(this.responseText);
+                schoolSelectBox.innerHTML="";
+                for (var i = 0; i < suburbs.length; i++) {
+                    var btn = document.createElement("OPTION");
+                    btn.value = suburbs[i].suburbName;
+                    schoolSelectBox.appendChild(btn);
+                }
+            }
+        };
+        xmlHttp.open("GET", "/School/GetCampus/" + schoolName, true);
+        xmlHttp.send();
+    }
+    
+    function getSchoolPostCode(suburbName) {
+        var schoolName = document.getElementById("SchoolName").value;
+        var postCode = document.getElementById("CampusPostCode");
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                var suburbs = JSON.parse(this.responseText);
+                for (var i = 0; i < suburbs.length; i++) {
+                    var btn = document.createElement("OPTION");
+                    btn.value = suburbs[i].suburbName;
+                    if (suburbName == suburbs[i].suburbName) {
+                        postCode.value = suburbs[i].postCode;
+                    }
+//                    schoolSelectBox.appendChild(btn);
+                }
+            }
+        };
+        xmlHttp.open("GET", "/School/GetCampus/" + schoolName, true);
+        xmlHttp.send();
+    }
+	
+	function RemoveSkill(element) {
+		var all = document.getElementsByClassName('SkillClass');
+		if (all.length === 1) {
+			alert("At Least have 1 skill");
+			return;
+		}
+            
+		var skillDiv = element.parentNode;
+		skillDiv.remove(skillDiv);
+		var remains = document.getElementsByClassName('SkillClass');
+		for (var i = 0; i < remains.length; i++) {
+			remains[i].id = "SkillClassId" + i;
+			remains[i].children[1].name = "[" + i + "]" + ".SkillName";
+			remains[i].children[3].name = "[" + i + "]" + ".CertificationLink";
+		}
+	}
+	
+	function RemoveLocation(element) {
+		var all = document.getElementsByClassName('LocationClass');
+		
+		var locationDiv = element.parentNode;
+		locationDiv.remove(locationDiv);
+		var remain = document.getElementsByClassName('LocationClass');
+		for (var i = 0; i < remain.length; i++) {
+			remain[i].id = "LocationClassId" + i;
+			remain[i].children[1].name = "[" + i + "]" + ".LocationName";
+			remain[i].children[3].name = "[" + i + "]" + ".PostCode";
+		}
+	}
+	
+	function RemoveSchool(element) {
+		var all = document.getElementsByClassName('SchoolClass');
+		
+		var schoolDiv = element.parentNode;
+		schoolDiv.remove(schoolDiv);
+		var remain = document.getElementsByClassName('SchoolClass');
+		for (var i = 0; i < remain.length; i++) {
+			remain[i].id = "SchoolClassId" + i;
+			remain[i].children[1].name = "[" + i + "]" + ".SchoolName";
+			remain[i].children[3].name = "[" + i + "]" + ".CampusName";
+			remain[i].children[5].name = "[" + i + "]" + ".CampusPostCode";
+		}
+	}
+</script>
 </form>
 
+</div>
+</div>

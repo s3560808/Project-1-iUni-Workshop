@@ -14,7 +14,7 @@
 
 <div id="addf">
     
-    <h2>title</h2>
+    <h2>Add Field</h2>
     <form method="post" asp-action="AddFieldAction">
         <table class="table">
             <thead>
@@ -33,13 +33,23 @@
             <tbody>
             <tr>
                 <td>
+                    <input type="text" name="Id">
+                </td>
+                <td>
                     <input type="text" name="Name">
+                </td>
+                <td>
+                    <select name="Status">
+                        <option value="@FieldStatus.InUse" selected="selected">In Use</option>
+                        <option value="@FieldStatus.InRequest">In Request</option>
+                        <option value="@FieldStatus.NoLongerUsed">No Longer Used</option>
+                    </select>
                 </td>
             </tr>
             </tbody>
 
         </table>
-        <button type="submit" class="btn btn-sm btn-success">Confirm</button>
+        <button type="submit" id="btn4">Confirm</button>
     </form>
     @{
         var inUse = new List<UpdateField>();
@@ -67,13 +77,19 @@
         foreach (var use in inUse)
         {
             <form asp-action="UpdateFieldAction" method="post">
-                <input type="text" name="Name" value="@use.Name">
-                <select name="Status">
-                    <option value="@FieldStatus.InUse" selected="selected">In Use</option>
-                    <option value="@FieldStatus.InRequest">In Request</option>
-                    <option value="@FieldStatus.NoLongerUsed">No Longer Used</option>
-                </select>
-                <button type="submit" name="Id" value="@use.Id"></button>
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" name="Name" value="@use.Name">
+                    </div>
+                    <div class="col-md-4">
+                        <select name="Status">
+                            <option value="@FieldStatus.InUse" selected="selected">In Use</option>
+                            <option value="@FieldStatus.InRequest">In Request</option>
+                            <option value="@FieldStatus.NoLongerUsed">No Longer Used</option>
+                        </select>
+                        <button class="btn1" type="submit" name="Id" value="@use.Id">Update</button>
+                    </div>
+                </div>
             </form>
         }
     }
@@ -82,13 +98,19 @@
         foreach (var use in inReq)
         {
             <form asp-action="UpdateFieldAction" method="post">
-                <input type="text" name="Name" value="@use.Name">
-                <select name="Status">
-                    <option value="@FieldStatus.InUse">In Use</option>
-                    <option value="@FieldStatus.InRequest" selected="selected">In Request</option>
-                    <option value="@FieldStatus.NoLongerUsed">No Longer Used</option>
-                </select>
-                <button type="submit" name="Id" value="@use.Id"></button>
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" name="Name" value="@use.Name">
+                    </div>
+                    <div class="col-md-4">
+                        <select name="Status">
+                            <option value="@FieldStatus.InUse">In Use</option>
+                            <option value="@FieldStatus.InRequest" selected="selected">In Request</option>
+                            <option value="@FieldStatus.NoLongerUsed">No Longer Used</option>
+                        </select>
+                        <button class="btn1" type="submit" name="Id" value="@use.Id">Change Status</button>
+                    </div>
+                </div>
             </form>
         }
     }
@@ -97,13 +119,19 @@
         foreach (var use in baned)
         {
             <form asp-action="UpdateFieldAction" method="post">
-                <input type="text" name="Name" value="@use.Name">
-                <select name="Status">
-                    <option value="@FieldStatus.InUse">In Use</option>
-                    <option value="@FieldStatus.InRequest">In Request</option>
-                    <option value="@FieldStatus.NoLongerUsed" selected="selected">No Longer Used</option>
-                </select>
-                <button type="submit" name="Id" value="@use.Id"></button>
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="text" name="Name" value="@use.Name">
+                    </div>
+                    <div class="col-md-4">
+                        <select name="Status">
+                            <option value="@FieldStatus.InUse">In Use</option>
+                            <option value="@FieldStatus.InRequest">In Request</option>
+                            <option value="@FieldStatus.NoLongerUsed" selected="selected">No Longer Used</option>
+                        </select>
+                        <button class="btn1" type="submit" name="Id" value="@use.Id">Change Status</button>
+                    </div>
+                </div>
             </form>
         }
     }
