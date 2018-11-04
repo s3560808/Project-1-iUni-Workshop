@@ -13,6 +13,7 @@ using iUni_Workshop.Models.SchoolModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace iUni_Workshop.Controllers
@@ -673,11 +674,14 @@ namespace iUni_Workshop.Controllers
                 }
             }
             //6.6 Update job profile field
-            if (newJobProfile.FieldId != newFieldId)
+            var oldFiledName = _context.Fields.First(a => a.Id == newJobProfile.Id).Name;
+            
+            if (!oldFiledName.Equals(jobProfile.FieldName))
             {
                 try
                 {
-                    newJobProfile.MaxDayForAWeek =jobProfile.MaxDay;
+                    var newId = _context.Fields.First(a => a.Name == jobProfile.FieldName).Id;
+                    newJobProfile.FieldId =newId;
                     _context.EmployerJobProfiles.Update(newJobProfile);
                     _context.SaveChanges();
                     AddToTempDataSuccess("Job Profile's \"Field\" changed!");

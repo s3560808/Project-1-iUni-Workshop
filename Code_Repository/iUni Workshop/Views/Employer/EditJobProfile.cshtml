@@ -252,36 +252,37 @@
 
 @*Required Schools of Job Profile*@
 <div id="SchoolsDiv">
-	@{
-		if (@Model == null || @Model.EmployerRequiredSchools.Count() == 0)
-		{
-			
-		}
-		else
-		{
-			for (int i = 0; i < @Model.EmployerRequiredSchools.Count; i++)
-			{
-
-				{
-					string schoolName = "[" + i + "]" + ".SchoolName";
-					string campus = "[" + i + "]" + ".Campus";
-					string postcode = "[" + i + "]" + ".CampusPostCode";
-					<div class="SchoolClass">
-						<p>School Name @i</p>
-						<input class="ejpinput" type="text" name="@schoolName" id="SchoolName" value="@Model.EmployerRequiredSchools[i].SchoolName">
-						<p>Location @i</p>
-						@*Value = true?*@
-						<input class="ejpinput" type="text" name="@campus" id="Campus" value="@Model.EmployerRequiredSchools[i].CampusName">
-						<p>Postcode @i</p>
-						<input class="ejpinput" type="text" name="@postcode" id="CampusPostCode" value="@Model.EmployerRequiredSchools[i].CampusPostCode">
-						<button onclick="RemoveSchool(this)" type="button">Remove</button>
-					</div>
-				}
-			}
-		}
-	}
+@* 	@{ *@
+@* 		if (@Model == null || @Model.EmployerRequiredSchools.Count() == 0) *@
+@* 		{ *@
+@* 			 *@
+@* 		} *@
+@* 		else *@
+@* 		{ *@
+@* 			for (int i = 0; i < @Model.EmployerRequiredSchools.Count; i++) *@
+@* 			{ *@
+@* *@
+@* 				{ *@
+@* 					string schoolName = "[" + i + "]" + ".SchoolName"; *@
+@* 					string campus = "[" + i + "]" + ".Campus"; *@
+@* 					string postcode = "[" + i + "]" + ".CampusPostCode"; *@
+@* 					<div class="SchoolClass"> *@
+@* 						<p>School Name @i</p> *@
+@* 						<input class="ejpinput" type="text" name="@schoolName" id="SchoolName" value="@Model.EmployerRequiredSchools[i].SchoolName"> *@
+@* 						<p>Location @i</p> *@
+@* 						$1$Value = true?#1# *@
+@* 						<input class="ejpinput" type="text" name="@campus" id="Campus" value="@Model.EmployerRequiredSchools[i].CampusName"> *@
+@* 						<p>Postcode @i</p> *@
+@* 						<input class="ejpinput" type="text" name="@postcode" id="CampusPostCode" value="@Model.EmployerRequiredSchools[i].CampusPostCode"> *@
+@* 						<button onclick="RemoveSchool(this)" type="button">Remove</button> *@
+@* 					</div> *@
+@* 				} *@
+@* 			} *@
+@* 		} *@
+	@* 	} *@
+	<p class="text-danger">School Filter will come soon!</p>
 </div>
-<br><button type="button" onclick="AddSchoolProfile()">Add School</button>
+@* <br><button type="button" onclick="AddSchoolProfile()">Add School</button> *@
 <hr/>
 
 @*Complusory work day*@
