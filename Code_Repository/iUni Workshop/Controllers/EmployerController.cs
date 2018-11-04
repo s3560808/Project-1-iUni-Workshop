@@ -694,7 +694,7 @@ namespace iUni_Workshop.Controllers
                 var newEnumerable = newSkills.Select(a => new {a.Required, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
                 var oldEnumerable = oldSkills.Select(a => new {a.Required, Id = a.SkillId}).OrderBy(a => a.Id).ToList();
                 
-                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>=0)
                 {
                     try
                     {
@@ -720,7 +720,7 @@ namespace iUni_Workshop.Controllers
                 var oldDays = _context.EmployerComplusoryWorkDays.Where(a => a.EmployerJobProfileId == jobProfileId);
                 var newEnumerable = newDays.Select(a => new {a.Day}).OrderBy(a => a.Day).ToList();
                 var oldEnumerable = oldDays.Select(a => new {a.Day}).OrderBy(a => a.Day).ToList();
-                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>=0)
                 {
                     try
                     {
@@ -750,15 +750,14 @@ namespace iUni_Workshop.Controllers
                 var oldRequiredLocations = _context.EmployerWorkLocations.Where(a => a.EmployerJobProfileId == jobProfileId);
                 var newEnumerable = newRequiredLocations.Select(a => new {a.SuburbId}).OrderBy(a => a.SuburbId).ToList();
                 var oldEnumerable = oldRequiredLocations.Select(a => new {a.SuburbId}).OrderBy(a => a.SuburbId).ToList();
-                if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>=0)
                 {
                     try
                     {
                     
                         _context.EmployerWorkLocations.RemoveRange(oldRequiredLocations);     
-                                                                                             
-                            _context.EmployerWorkLocations.AddRange(newRequiredLocations);    
-                                                                                               
+                        _context.SaveChanges();                                                                     
+                        _context.EmployerWorkLocations.AddRange(newRequiredLocations);                                                                       
                         _context.SaveChanges();                                                   
                         AddToTempDataSuccess("Job Profile's compulsory work location updated!");                 
                     }
@@ -780,7 +779,7 @@ namespace iUni_Workshop.Controllers
                 var oldRequiredSchools = _context.EmployerRequiredSchools.Where(a => a.EmployerJobProfileId == jobProfileId);
                 var newEnumerable = newRequiredSchools.Select(a => new {a.SchoolId}).OrderBy(a => a.SchoolId).ToList();
                 var oldEnumerable = oldRequiredSchools.Select(a => new {a.SchoolId}).OrderBy(a => a.SchoolId).ToList();
-                if (newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>0)
+                if (!newEnumerable.SequenceEqual(oldEnumerable) && newEnumerable.Count>=0)
                 {
                     try
                     {

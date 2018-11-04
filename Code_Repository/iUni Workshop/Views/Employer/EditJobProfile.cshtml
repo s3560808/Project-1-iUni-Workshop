@@ -220,7 +220,7 @@
 @*Required Locations of Job Profile*@
 <div id="LocationDiv">
 	@{
-		if (@Model == null || @Model.JobProfileRequiredLocation.Any())
+		if (@Model == null || !@Model.JobProfileRequiredLocation.Any())
 		{
 			
 		}
