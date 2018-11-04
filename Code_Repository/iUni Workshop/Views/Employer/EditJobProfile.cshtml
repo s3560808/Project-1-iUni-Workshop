@@ -25,7 +25,7 @@
 </style>
 
 <link rel="stylesheet" href="~/css/ejp.css"/>    
-<script src="~/js/_AddSchool.js" type="text/javascript"></script>
+@* <script src="~/js/_AddSchool.js" type="text/javascript"></script> *@
 
 
 @*UPdate date*@
@@ -346,6 +346,8 @@
 
 
 
+
+</form>
 <script>
 	function AddSkillController() {
 		
@@ -652,9 +654,8 @@
 		if (all.length === 1) {
 			alert("At Least have 1 skill");
 			return;
-		}
-            
-		var skillDiv = element.parentNode;
+		}  
+		var skillDiv = element.parentNode.parentNode.parentNode;
 		skillDiv.remove(skillDiv);
 		var remains = document.getElementsByClassName('SkillClass');
 		for (var i = 0; i < remains.length; i++) {
@@ -691,7 +692,5 @@
 		}
 	}
 </script>
-</form>
-
 </div>
 </div>
