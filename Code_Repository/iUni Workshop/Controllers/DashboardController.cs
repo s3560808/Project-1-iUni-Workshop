@@ -34,6 +34,10 @@ namespace iUni_Workshop.Controllers
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
+            if (user.EmailConfirmed == false)
+            {
+                return RedirectToAction("Index", "Manage");
+            }
             var userRoleList = await _userManager.GetRolesAsync(user);
             var adminNum = (await _userManager.GetUsersInRoleAsync(Roles.Administrator)).Count();
             if (userRoleList.ToArray().Count() != 0)
