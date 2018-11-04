@@ -35,9 +35,6 @@ namespace iUni_Workshop.Data.Seeds
                 new Field{Id = 28, Name = "Self Employment", NormalizedName = "Self Employment".ToUpper(), Status = FieldStatus.InUse},
                 new Field{Id = 29, Name = "Sport & Recreation", NormalizedName = "Sport & Recreation".ToUpper(), Status = FieldStatus.InUse},
                 new Field{Id = 30, Name = "Trades & Services", NormalizedName = "Trades & Services".ToUpper(), Status = FieldStatus.InUse},
-                new Field{Id = 31, Name = "InRequest1", NormalizedName = "InRequest1".ToUpper(), Status = FieldStatus.InRequest},
-                new Field{Id = 32, Name = "InRequest2", NormalizedName = "InRequest2".ToUpper(), Status = FieldStatus.InRequest},
-                new Field{Id = 33, Name = "NoLongerUsed1", NormalizedName = "NoLongerUsed1".ToUpper(), Status = FieldStatus.NoLongerUsed}
             };
     }
 }

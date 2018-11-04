@@ -28,16 +28,16 @@ namespace iUni_Workshop
                     //                    
                     //                    StateSeed.Initialize(services);
                     RoleSeed.Initialize(services, logger).Wait();
-                    UserSeed.Initialize(services, logger).Wait();
-                    
-                    EmployeeCvSeed.Initialize(services, logger).Wait();
-                    EmployeeCvExternalMaterialSeed.Initialize(services, logger).Wait();
-                    EmployeeCvJobHisotriesSeed.Initialize(services, logger).Wait();
-                    EmployeeCvSkillSeed.Initialize(services, logger).Wait();
-                    EmployeeCvWorkDaySeed.Initialize(services, logger).Wait();
-
-                    EmployerJobProfileSeed.Initialize(services, logger).Wait();
-                    EmployerJobSkillSeed.Initialize(services, logger).Wait();
+//                    UserSeed.Initialize(services, logger).Wait();
+//                    
+//                    EmployeeCvSeed.Initialize(services, logger).Wait();
+//                    EmployeeCvExternalMaterialSeed.Initialize(services, logger).Wait();
+//                    EmployeeCvJobHisotriesSeed.Initialize(services, logger).Wait();
+//                    EmployeeCvSkillSeed.Initialize(services, logger).Wait();
+//                    EmployeeCvWorkDaySeed.Initialize(services, logger).Wait();
+//
+//                    EmployerJobProfileSeed.Initialize(services, logger).Wait();
+//                    EmployerJobSkillSeed.Initialize(services, logger).Wait();
                 }
                 catch (Exception ex) {
                     services.GetRequiredService<ILogger<Program>>().LogError(ex, "An error occurred while seeding the database");
